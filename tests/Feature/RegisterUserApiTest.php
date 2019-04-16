@@ -2,12 +2,11 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
-class RegistUserApiTest extends TestCase
+class RegisterUserApiTest extends TestCase
 {
     use RefreshDatabase;
 
