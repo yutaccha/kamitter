@@ -17,10 +17,10 @@ class RegistUserApiTest extends TestCase
     public function should_新しいユーザーを作成して返却する()
     {
         $data = [
-            'name' => 'vuesplash user',
-            'email' => 'dummy@email.com',
-            'password' => 'test1234',
-            'password_confirmation' => 'test1234',
+            'name' => 'kamitter',
+            'email' => 'kamitter@email.com',
+            'password' => 'kamitter1',
+            'password_confirmation' => 'kamitter1',
         ];
 
         $response = $this->json('POST', route('register'), $data);
