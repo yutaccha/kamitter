@@ -1,0 +1,30 @@
+// ==================================
+// p-tab
+// ==================================
+.p-tab{
+  width: 100%;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  &__list{
+    display: flex;
+  }
+  &__item{
+    font-size: $font-size_m;
+    color: $color-default-parent;
+    padding: 10px;
+    text-align: center;
+    box-sizing: border-box;
+    border-bottom: 3px solid $color-default-parent;
+    &:hover {
+      cursor: pointer;
+    }
+    &:last-of-type{
+      margin-left: 20px;
+    }
+
+    &--active{
+      color: $color-default;
+      border-bottom: 3px solid $color-default;
+    }
+  }
+}

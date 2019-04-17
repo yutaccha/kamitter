@@ -1,0 +1,38 @@
+// ==================================
+// base
+// ==================================
+html, body {
+  width: 100%;
+  color: $color-default;
+  font-size: $font-size_default;
+  line-height: 1.6;
+  font-family: $font-family;
+  text-size-adjust: 100%;
+}
+
+.l-body{
+  margin: 0;
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+}
+
+.l-main{
+  flex: 1;
+}
+
+p, a {
+  font-smoothing: antialiased;
+}
+
+a {
+  color: $color-default;
+  text-decoration: none;
+  transition: .7s;
+}
+
+
+img {
+  width: 100%;
+  vertical-align: bottom;
+}
