@@ -1,5 +1,399 @@
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+@charset "UTF-8";
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html,
+body {
+  width: 100%;
+  color: #333;
+  font-size: 14px;
+  line-height: 1.6;
+  font-family: "Crimson Text", "\30D2\30E9\30AE\30CE\89D2\30B4\30B7\30C3\30AF   Pro", "Hiragino Kaku Gothic Pro", "Noto Sans JP", sans-serif;
+  -webkit-text-size-adjust: 100%;
+     -moz-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+}
+
+.l-body {
+  margin: 0;
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+}
+
+.l-main {
+  flex: 1;
+}
+
+p,
+a {
+  font-smoothing: antialiased;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+  transition: 0.7s;
+}
+
+img {
+  width: 100%;
+  vertical-align: bottom;
+}
+
+.l-contents {
+  padding: 120px 10%;
+  display: flex;
+  justify-content: center;
+}
+
+.c-button {
+  border: 1px solid 14px;
+  border-radius: 0.25rem;
+  color: #333;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  outline: none;
+  padding: 0.7rem 0.9rem;
+  text-decoration: none;
+}
+
+.c-button--inverse {
+  background: #222;
+  border-color: #222;
+  color: #fff;
+}
+
+.c-card {
+  padding: 10px;
+  border: 1px solid #3335;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.c-foot {
+  padding: 10px 0;
+}
+
+.c-foot__p {
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.p-contents__area {
+  width: 980px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.p-contents__area--narrow {
+  width: 450px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.p-contents__head {
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.p-form {
+  width: 100%;
+}
+
+.p-form__label {
+  font-size: 16px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.p-form__item {
+  font-size: 16px;
+  width: 100%;
+  height: 40px;
+  font-weight: 100;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 30px;
+  line-height: 25px;
+  border: 1px solid #3335;
+  border-radius: 5px;
+}
+
+.p-form__button {
+  text-align: right;
+  transition: 0.3s;
+}
+
+.p-form__button:hover {
+  opacity: 0.8;
+}
+
+.p-navbar {
+  height: 50px;
+  padding: 0 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #63513b63;
+  box-shadow: 0px 4px 8px -1px #42544caa;
+}
+
+.p-navbar__title_link {
+  font-size: 24px;
+}
+
+.p-tab {
+  width: 100%;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+.p-tab__list {
+  display: flex;
+}
+
+.p-tab__item {
+  font-size: 16px;
+  color: #3335;
+  padding: 10px;
+  text-align: center;
+  box-sizing: border-box;
+  border-bottom: 3px solid #3335;
+}
+
+.p-tab__item:hover {
+  cursor: pointer;
+}
+
+.p-tab__item:last-of-type {
+  margin-left: 20px;
+}
+
+.p-tab__item--active {
+  color: #333;
+  border-bottom: 3px solid #333;
+}
+
+.c-icon--twitter {
+  color: #55acee;
+}
+
+.c-icon--gray {
+  color: #6c757d;
+}
+
+.p-twitter {
+  width: 100%;
+}
+
+.p-twitter__card {
+  height: 70px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.p-twitter__card:hover {
+  cursor: pointer;
+}
+
+.p-twitter__create {
+  font-size: 18px;
+  line-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.p-twitter__profile {
+  width: 70%;
+  float: left;
+  overflow: hidden;
+}
+
+.p-twitter__action {
+  width: 15%;
+  text-align: right;
+  float: right;
+  height: inherit;
+  line-height: 50px;
+}
+
+.p-twitter__img {
+  background: #63513b63;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-right: 30px;
+  float: left;
+}
+
+.p-twitter__ids {
+  float: left;
+  line-height: 25px;
+}
+
+.p-twitter__id {
+  font-weight: bold;
+}
+
+.p-twitter__icon {
+  margin-right: 5px;
+  font-size: 18px;
+  padding: 5px;
+}
+
+.p-twitter__icon--create {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.p-login__panel {
+  padding: 40px;
+  border: 1px solid #3335;
+  border-radius: 5px;
 }
 

@@ -23,7 +23,7 @@ class TwitterAuthController extends Controller
      */
     public function redirectToProvider()
     {
-        return Socialite::driver('twitter')->redirect();
+        return Socialite::driver('twitter')->redirect()->getTargetUrl();
     }
 
     public function handleProviderCallback()
