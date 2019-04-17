@@ -10,8 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::view('/twi', 'twi');
-//Route::view('/login', 'login');
+//Route::view('/twi', 'twi');
+////Route::view('/login', 'login');
 // 他のルートに該当しない場合indexを返す
 Route::get('/{any?}', function () {
     return view('index');

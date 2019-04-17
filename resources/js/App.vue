@@ -1,15 +1,17 @@
 <template>
-    <div>
-        <header>
-            <Navbar />
+    <div class="l-body">
+        <header class="l-header">
+            <Navbar/>
         </header>
-        <main>
+        <main class="l-main">
             <div class="container">
                 <!--<Message />-->
-                <RouterView />
+                <RouterView/>
             </div>
         </main>
-        <Footer />
+        <footer class="c-foot">
+            <Footer/>
+        </footer>
     </div>
 </template>
 

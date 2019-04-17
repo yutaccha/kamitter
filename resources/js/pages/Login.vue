@@ -5,35 +5,50 @@
             <div class="p-contents__area--narrow">
                 <section class="p-tab">
                     <ul class="p-tab__list">
-                        <li class="p-tab__item p-tab__item--active">ログイン</li>
-                        <li class="p-tab__item">新規登録</li>
+                        <li
+                                class="p-tab__item"
+                                :class="{'p-tab__item--active': tab ===1}"
+                                @click="tab = 1"
+                        >ログイン
+                        </li>
+                        <li
+                                class="p-tab__item"
+                                :class="{'p-tab__item--active': tab ===2}"
+                                @click="tab = 2"
+
+                        >新規登録
+                        </li>
                     </ul>
                 </section>
 
                 <section class="p-login">
-                    <div class="p-login__panel">
-                        <form class="p-form">
+                    <div class="p-login__panel" v-show="tab === 1">
+                        <!--@submit に続く .prevent はイベント修飾子と呼ばれます。.prevent を記述することは、
+                        イベントハンドラで event.preventDefault() を呼び出すのと同じ効果があります。-->
+                        <form class="p-form" @submit.prevent="login">
                             <label class="p-form__label" for="login-email">メールアドレス</label>
-                            <input type="text" class="p-form__item" id="login-email">
+                            <input type="text" class="p-form__item" id="login-email" v-model="loginForm.email">
                             <label class="p-form__label" for="login-password">パスワード</label>
-                            <input type="password" class="p-form__item" id="login-password">
+                            <input type="password" class="p-form__item" id="login-password"
+                                   v-model="loginForm.password">
                             <div class="p-form__button">
                                 <button type="submit" class="c-button c-button--inverse">ログイン</button>
                             </div>
                         </form>
                     </div>
-                    <div class="p-login--panel">
-                        <div class="p-login__panel" v-show="tab === 2">
+                    <div class="p-login--panel" v-show="tab === 2">
+                        <div class="p-login__panel">
                             <form class="p-form" @submit.prevent="register">
-                                <label class="p-form__label" for="username">Name</label>
-                                <input type="text" class="p-form__item" id="username">
-                                <label class="p-form__label" for="email">Email</label>
-                                <input type="text" class="p-form__item" id="email">
-                                <label class="p-form__label" for="password">Password</label>
-                                <input type="password" class="p-form__item" id="password">
-                                <label class="p-form__label" for="password-confirmation">Password (confirm)</label>
+                                <label class="p-form__label" for="username">ニックネーム</label>
+                                <input type="text" class="p-form__item" id="username" v-model="registerForm.name">
+                                <label class="p-form__label" for="email">メールアドレス</label>
+                                <input type="text" class="p-form__item" id="email" v-model="registerForm.email">
+                                <label class="p-form__label" for="password">パスワード</label>
+                                <input type="password" class="p-form__item" id="password"
+                                       v-model="registerForm.password">
+                                <label class="p-form__label" for="password-confirmation">パスワード(確認)</label>
                                 <input type="password" class="p-form__item" id="password-confirmation"
-                                      >
+                                       v-model="registerForm.password_confirmation">
                                 <div class="p-form__button">
                                     <button type="submit" class="c-button c-button--inverse">登録</button>
                                 </div>
@@ -48,5 +63,32 @@
 
 <script>
     export default {
+        data() {
+            return {
+                tab: 1,
+                loginForm: {
+                    email: '',
+                    password: ''
+                },
+                registerForm: {
+                    name: '',
+                    email: '',
+                    password: '',
+                    password_confirmation: ''
+                }
+            }
+        },
+        methods: {
+            async login() {
+                await this.$store.dispatch('auth/login', this.loginForm)
+                this.$router.push('/twitter')
+            },
+            async register() {
+                // dispatchでauthストアのregisterアクションを呼ぶ
+                //this.$storeでストアを参照できる
+                await this.$store.dispatch('auth/register', this.registerForm)
+                this.$router.push('/twitter')
+            }
+        }
     }
 </script>

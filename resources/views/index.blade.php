@@ -12,7 +12,7 @@
     <script src="{{ mix('js/app.js') }}" defer></script>
 
 </head>
-<body class="l-body">
+<body>
 <div id="app"></div>
 {{--<a href="{{ route('twitter.provide') }}">認証リンクはこちら</a>--}}
 </body>

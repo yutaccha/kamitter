@@ -1,13 +1,29 @@
 <template>
     <nav class="p-navbar">
         <h1 class="p-navbar__title">
-            <a href="#" class="p-navbar__title_link">神ったー</a>
+            <RouterLink class="p-navbar__title_link" to="/">神ったー</RouterLink>
         </h1>
 
-        <a href="#" class="p-navbar__login">ログイン/新規登録</a>
+        <span v-if="isLogin" class="navbar__item">
+            {{ username }}<i class="c-icon fas fa-caret-down"></i>
+        </span>
+        <div v-else class="navbar__item">
+            <RouterLink class="button button--link" to="/login">
+                ログイン/新規登録
+            </RouterLink>
+        </div>
     </nav>
 </template>
 
 <script>
-    export default {}
+    export default {
+        computed: {
+            isLogin () {
+                return this.$store.getters['auth/check']
+            },
+            username () {
+                return this.$store.getters['auth/username']
+            }
+        }
+    }
 </script>
