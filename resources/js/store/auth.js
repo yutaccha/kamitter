@@ -1,8 +1,14 @@
+import {CREATED, OK, UNPROCESSABLE_ENTRY } from '../utility'
+
+
 //データの入れ物、中身を直接編集できない
 const state = {
     //ユーザの認証状態を保存
     user: null,
-    twitterId: null
+    twitterId: null,
+    apiStatus: null,
+    loginErrorMessages: null,
+    registerErrorMessages: null
 }
 
 //stateの算出プロパティ
@@ -19,34 +25,102 @@ const mutations = {
     },
     setTwitterUser(state, id) {
         state.twitterId = id;
+    },
+    setApiStatus(state, status) {
+        state.apiStatus = status
+    },
+    setLoginErrorMessages (state, messages) {
+        state.loginErrorMessages = messages
+    },
+    setRegisterErrorMessages (state, messages) {
+        state.registerErrorMessages = messages
     }
 }
 
 //stateを非同期処理で更新するメソッドAPIの通史語など
 const actions = {
-    async register(context, data) {
+    // 会員登録
+    async register (context, data) {
+        context.commit('setApiStatus', null)
         const response = await axios.post('/api/register', data)
-        //commitはミューテーションを呼び出すメソッド
-        context.commit('setUser', response.data)
+
+        if (response.status === CREATED) {
+            context.commit('setApiStatus', true)
+            context.commit('setUser', response.data)
+            return false
+        }
+
+        context.commit('setApiStatus', false)
+        if (response.status === UNPROCESSABLE_ENTRY) {
+            context.commit('setRegisterErrorMessages', response.data.errors)
+        } else {
+            context.commit('error/setCode', response.status, { root: true })
+        }
     },
-    async login(context, data) {
+
+    // ログイン
+    async login (context, data) {
+        context.commit('setApiStatus', null)
         const response = await axios.post('/api/login', data)
-        //commitはミューテーションを呼び出すメソッド
-        context.commit('setUser', response.data)
+
+        if (response.status === OK) {
+            context.commit('setApiStatus', true)
+            context.commit('setUser', response.data)
+            return false
+        }
+
+        context.commit('setApiStatus', false)
+        if (response.status === UNPROCESSABLE_ENTRY) {
+            context.commit('setLoginErrorMessages', response.data.errors)
+        } else {
+            context.commit('error/setCode', response.status, { root: true })
+        }
     },
-    async logout(context, data) {
-        const response = await axios.post('/api/logout', data)
-        context.commit('setUser', null)
+
+    // ログアウト
+    async logout (context) {
+        context.commit('setApiStatus', null)
+        const response = await axios.post('/api/logout')
+
+        if (response.status === OK) {
+            context.commit('setApiStatus', true)
+            context.commit('setUser', null)
+            return false
+        }
+
+        context.commit('setApiStatus', false)
+        context.commit('error/setCode', response.status, { root: true })
     },
-    async currentUser(context) {
+
+    // ログインユーザーチェック
+    async currentUser (context) {
+        context.commit('setApiStatus', null)
         const response = await axios.get('/api/user')
         const user = response.data || null
-        context.commit('setUser', user)
+
+        if (response.status === OK) {
+            context.commit('setApiStatus', true)
+            context.commit('setUser', user)
+            return false
+        }
+
+        context.commit('setApiStatus', false)
+        context.commit('error/setCode', response.status, { root: true })
     },
+
     async currentTwitterUser(context) {
+        context.commit('setApiStatus', null)
         const response = await axios.get('/api/twitter/id')
         const id = response.data || null
-        context.commit('setTwitterUser', id)
+
+        if (response.status === OK) {
+            context.commit('setApiStatus', true)
+            context.commit('setTwitterUser', id)
+            return false
+        }
+
+        context.commit('setApiStatus', false)
+        context.commit('error/setCode', response.status, { root: true })
     }
 }
 

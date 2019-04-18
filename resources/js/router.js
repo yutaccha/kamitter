@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 // ページコンポーネントをインポートする
 import Twitter from './pages/Twitter.vue'
 import Login from './pages/Login.vue'
+import SystemError from './pages/System.vue'
 
 import store from './store'
 
@@ -30,16 +31,17 @@ const routes = [
             console.log(auth)
 
             if (auth && store.getters['auth/checkTwitterId']) {
-                console.log('aa');
                 next('/dashboard')
             } else if (auth) {
-                console.log('b');
                 next()
             } else {
-                console.log('c');
                 next('login')
             }
         }
+    },
+    {
+      path: '/500',
+      component: SystemError,
     },
 ]
 

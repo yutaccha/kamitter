@@ -26,6 +26,14 @@
                         <!--@submit に続く .prevent はイベント修飾子と呼ばれます。.prevent を記述することは、
                         イベントハンドラで event.preventDefault() を呼び出すのと同じ効果があります。-->
                         <form class="p-form" @submit.prevent="login">
+                            <div v-if="loginErrors" class="errors">
+                                <ul v-if="loginErrors.email">
+                                    <li v-for="msg in loginErrors.email" :key="msg">{{ msg }}</li>
+                                </ul>
+                                <ul v-if="loginErrors.password">
+                                    <li v-for="msg in loginErrors.password" :key="msg">{{ msg }}</li>
+                                </ul>
+                            </div>
                             <label class="p-form__label" for="login-email">メールアドレス</label>
                             <input type="text" class="p-form__item" id="login-email" v-model="loginForm.email">
                             <label class="p-form__label" for="login-password">パスワード</label>
@@ -39,7 +47,18 @@
                     <div class="p-login--panel" v-show="tab === 2">
                         <div class="p-login__panel">
                             <form class="p-form" @submit.prevent="register">
-                                <label class="p-form__label" for="username">ニックネーム</label>
+                                <div v-if="registerErrors" class="errors">
+                                    <ul v-if="registerErrors.name">
+                                        <li v-for="msg in registerErrors.name" :key="msg">{{ msg }}</li>
+                                    </ul>
+                                    <ul v-if="registerErrors.email">
+                                        <li v-for="msg in registerErrors.email" :key="msg">{{ msg }}</li>
+                                    </ul>
+                                    <ul v-if="registerErrors.password">
+                                        <li v-for="msg in registerErrors.password" :key="msg">{{ msg }}</li>
+                                    </ul>
+                                </div>
+                                <label class="p-form__label" for="username">ユーザー名</label>
                                 <input type="text" class="p-form__item" id="username" v-model="registerForm.name">
                                 <label class="p-form__label" for="email">メールアドレス</label>
                                 <input type="text" class="p-form__item" id="email" v-model="registerForm.email">
@@ -62,6 +81,8 @@
 </template>
 
 <script>
+    import {mapState} from 'vuex'
+
     export default {
         data() {
             return {
@@ -78,17 +99,39 @@
                 }
             }
         },
+        computed: {
+            ...mapState({
+                apiStatus: state => state.auth.apiStatus,
+                loginErrors: state => state.auth.loginErrorMessages,
+                registerErrors: state => state.auth.registerErrorMessages
+            })
+        },
         methods: {
             async login() {
+                // authストアのloginアクションを呼び出す
                 await this.$store.dispatch('auth/login', this.loginForm)
-                this.$router.push('/twitter')
+
+                if (this.apiStatus) {
+                    // トップページに移動する
+                    this.$router.push('/twitter')
+                }
             },
             async register() {
-                // dispatchでauthストアのregisterアクションを呼ぶ
-                //this.$storeでストアを参照できる
+                // authストアのresigterアクションを呼び出す
                 await this.$store.dispatch('auth/register', this.registerForm)
-                this.$router.push('/twitter')
+
+                if (this.apiStatus) {
+                    // トップページに移動する
+                    this.$router.push('/twitter')
+                }
+            },
+            clearError() {
+                this.$store.commit('auth/setLoginErrorMessages', null)
+                this.$store.commit('auth/setRegisterErrorMessages', null)
             }
+        },
+        created() {
+            this.clearError()
         }
     }
 </script>

@@ -14,3 +14,10 @@ window.axios.interceptors.request.use(config => {
 
     return config
 })
+
+
+//エラーが帰ってきた場合は、エラーのレスポンスオブジェクトを取得する
+window.axios.interceptors.response.use(
+    response => response,
+    error => error.response || error
+)
