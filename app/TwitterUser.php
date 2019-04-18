@@ -12,6 +12,10 @@ class TwitterUser extends Model
         'user_id', 'token', 'token_secret'
     ];
 
+    protected $visible = [
+        'id'
+    ];
+
     /**
      * リレーションシップ -usersテーブル
      */

@@ -25,6 +25,7 @@
 
 <script>
     import TwitterCard from '../components/TwitterCard.vue'
+    import { OK } from '../utility'
 
     export default {
         components: {
@@ -33,26 +34,29 @@
         data() {
             return {
                 users: [],
+                accountNum: 0
             }
         },
         methods: {
-            async twitterOauthUrl() {
-                const response = await axios.get('/api/twitter/oauth_url')
-                this.oauthUrl = response.data
-            },
             async fetchTwitterUsers() {
-                const response = await axios.get('/api/twitter/users')
-
+                const response = await axios.get('/api/twitter/user/list')
+                console.log(response);
                 if (response.status !== OK) {
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
+
+                this.users = response.data.twitter_accounts
+                this.accountNum = response.data.account_num
+                // // console.log(users);
+                // // console.log(accountNum);
+
             },
         },
         watch: {
             $route: {
                 async handler() {
-                    await this.twitterOauthUrl()
+                    await this.fetchTwitterUsers()
                 },
                 immediate: true
             }

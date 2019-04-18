@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Http\Components\TwitterApi;
 
 class TwitterUserController extends Controller
 {
@@ -21,5 +22,13 @@ class TwitterUserController extends Controller
         return response([
             'twitter_accounts' => $my_twitter_accounts,
             'account_num' => $account_num], 200);
+    }
+
+    public function info(int $id){
+        return response($id, 200);
+    }
+
+    public function test(){
+        return TwitterApi::sayHello();
     }
 }

@@ -1890,6 +1890,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -1909,10 +1917,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    user: {
+    item: {
       type: Object,
       required: true
     }
+  },
+  data: function data() {
+    return {
+      twitterAccount: null
+    };
+  },
+  methods: {
+    fetchTwitterUser: function () {
+      var _fetchTwitterUser = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get('/api/twitter/user/info/' + this.item.id);
+
+              case 2:
+                response = _context.sent;
+                console.log(response);
+
+                if (!(response.status !== OK)) {
+                  _context.next = 7;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context.abrupt("return", false);
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function fetchTwitterUser() {
+        return _fetchTwitterUser.apply(this, arguments);
+      }
+
+      return fetchTwitterUser;
+    }()
+  },
+  created: function created() {
+    this.fetchTwitterUser();
   }
 });
 
@@ -2154,6 +2210,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_TwitterCard_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/TwitterCard.vue */ "./resources/js/components/TwitterCard.vue");
+/* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utility */ "./resources/js/utility.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2186,18 +2243,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     TwitterCard: _components_TwitterCard_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
-      users: []
+      users: [],
+      accountNum: 0
     };
   },
   methods: {
-    twitterOauthUrl: function () {
-      var _twitterOauthUrl = _asyncToGenerator(
+    fetchTwitterUsers: function () {
+      var _fetchTwitterUsers = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var response;
@@ -2206,55 +2265,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get('/api/twitter/oauth_url');
+                return axios.get('/api/twitter/user/list');
 
               case 2:
                 response = _context.sent;
-                this.oauthUrl = response.data;
+                console.log(response);
 
-              case 4:
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_2__["OK"])) {
+                  _context.next = 7;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context.abrupt("return", false);
+
+              case 7:
+                this.users = response.data.twitter_accounts;
+                this.accountNum = response.data.account_num; // // console.log(users);
+                // // console.log(accountNum);
+
+              case 9:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee, this);
-      }));
-
-      function twitterOauthUrl() {
-        return _twitterOauthUrl.apply(this, arguments);
-      }
-
-      return twitterOauthUrl;
-    }(),
-    fetchTwitterUsers: function () {
-      var _fetchTwitterUsers = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios.get('/api/twitter/users');
-
-              case 2:
-                response = _context2.sent;
-
-                if (!(response.status !== OK)) {
-                  _context2.next = 6;
-                  break;
-                }
-
-                this.$store.commit('error/setCode', response.status);
-                return _context2.abrupt("return", false);
-
-              case 6:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
       }));
 
       function fetchTwitterUsers() {
@@ -2269,20 +2304,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       handler: function () {
         var _handler = _asyncToGenerator(
         /*#__PURE__*/
-        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
             while (1) {
-              switch (_context3.prev = _context3.next) {
+              switch (_context2.prev = _context2.next) {
                 case 0:
-                  _context3.next = 2;
-                  return this.twitterOauthUrl();
+                  _context2.next = 2;
+                  return this.fetchTwitterUsers();
 
                 case 2:
                 case "end":
-                  return _context3.stop();
+                  return _context2.stop();
               }
             }
-          }, _callee3, this);
+          }, _callee2, this);
         }));
 
         function handler() {
@@ -20653,7 +20688,6 @@ var routes = [{
   component: _pages_Twitter_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
   beforeEnter: function beforeEnter(to, from, next) {
     var auth = _store__WEBPACK_IMPORTED_MODULE_5__["default"].getters['auth/check'];
-    console.log(auth);
 
     if (auth && _store__WEBPACK_IMPORTED_MODULE_5__["default"].getters['auth/checkTwitterId']) {
       next('/dashboard');

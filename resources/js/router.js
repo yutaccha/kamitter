@@ -28,8 +28,6 @@ const routes = [
         component: Twitter,
         beforeEnter(to, from, next) {
             const auth = store.getters['auth/check']
-            console.log(auth)
-
             if (auth && store.getters['auth/checkTwitterId']) {
                 next('/dashboard')
             } else if (auth) {

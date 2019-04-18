@@ -176,6 +176,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /**
+         * My app
+         */
+        \App\Providers\TwitterApiServiceProvider::class,
+
     ],
 
     /*
@@ -227,6 +232,11 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Socialite' => Laravel\Socialite\SocialiteServiceProvider::class,
+
+        /*
+         * My app
+         */
+
 
     ],
 

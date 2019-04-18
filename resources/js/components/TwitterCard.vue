@@ -18,10 +18,32 @@
 <script>
     export default {
         props: {
-            user: {
+            item: {
                 type: Object,
                 required: true
             }
+        },
+        data() {
+            return {
+                twitterAccount: null
+            }
+        },
+        methods: {
+            async fetchTwitterUser() {
+                const response = await axios.get('/api/twitter/user/info/' + this.item.id)
+                console.log(response);
+                if (response.status !== OK) {
+                    this.$store.commit('error/setCode', response.status)
+                    return false
+                }
+
+                // // console.log(users);
+                // // console.log(accountNum);
+
+            },
+        },
+        created() {
+            this.fetchTwitterUser()
         }
     }
 </script>
