@@ -8,3 +8,5 @@ Route::get('/user', function (){
 
 Route::get('/twitter/id', 'TwitterAuthController@getId')->name('twitter.id');
 Route::get('/twitter/logout', 'TwitterAuthController@logout')->name('twitter.logout');
+
+Route::get('/twitter/user/list', 'TwitterUserController@list')->name('twitter.list');
