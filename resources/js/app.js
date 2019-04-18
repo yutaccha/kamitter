@@ -7,6 +7,7 @@ import App from './App.vue'
 
 const createApp = async () => {
     await store.dispatch('auth/currentUser')
+    await store.dispatch('auth/currentTwitterUser')
 
     new Vue({
         el: '#app',

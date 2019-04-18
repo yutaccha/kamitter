@@ -2028,6 +2028,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2060,7 +2068,77 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      oauthUrl: ''
+    };
+  },
+  methods: {
+    twitterOauthUrl: function () {
+      var _twitterOauthUrl = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get('/api/twitter/oauth_url');
+
+              case 2:
+                response = _context.sent;
+                this.oauthUrl = response.data;
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function twitterOauthUrl() {
+        return _twitterOauthUrl.apply(this, arguments);
+      }
+
+      return twitterOauthUrl;
+    }()
+  },
+  watch: {
+    $route: {
+      handler: function () {
+        var _handler = _asyncToGenerator(
+        /*#__PURE__*/
+        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  _context2.next = 2;
+                  return this.twitterOauthUrl();
+
+                case 2:
+                case "end":
+                  return _context2.stop();
+              }
+            }
+          }, _callee2, this);
+        }));
+
+        function handler() {
+          return _handler.apply(this, arguments);
+        }
+
+        return handler;
+      }(),
+      immediate: true
+    }
+  }
+});
 
 /***/ }),
 
@@ -3381,8 +3459,8 @@ var render = function() {
       [
         _c(
           "RouterLink",
-          { staticClass: "p-navbar__title_link", attrs: { to: "/" } },
-          [_vm._v("神ったー")]
+          { staticClass: "p-navbar__title_link", attrs: { to: "/twitter" } },
+          [_vm._v("twitter")]
         )
       ],
       1
@@ -3806,12 +3884,14 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("ul", { staticClass: "p-twitter" }, [
             _c("li", { staticClass: "c-card p-twitter__card" }, [
-              _c("p", { staticClass: "p-twitter__create" }, [
-                _c("i", {
-                  staticClass:
-                    "c-icon--twitter p-twitter__icon--create far fa-plus-square"
-                }),
-                _vm._v("Twitterアカウントの追加\n                    ")
+              _c("a", { attrs: { href: "auth/twitter/oauth" } }, [
+                _c("p", { staticClass: "p-twitter__create" }, [
+                  _c("i", {
+                    staticClass:
+                      "c-icon--twitter p-twitter__icon--create far fa-plus-square"
+                  }),
+                  _vm._v("Twitterアカウントの追加\n                        ")
+                ])
               ])
             ]),
             _vm._v(" "),
@@ -19768,6 +19848,10 @@ function () {
             return _store__WEBPACK_IMPORTED_MODULE_4__["default"].dispatch('auth/currentUser');
 
           case 2:
+            _context.next = 4;
+            return _store__WEBPACK_IMPORTED_MODULE_4__["default"].dispatch('auth/currentTwitterUser');
+
+          case 4:
             new vue__WEBPACK_IMPORTED_MODULE_2___default.a({
               el: '#app',
               router: _router__WEBPACK_IMPORTED_MODULE_3__["default"],
@@ -19778,7 +19862,7 @@ function () {
               template: '<App />'
             });
 
-          case 3:
+          case 5:
           case "end":
             return _context.stop();
         }
@@ -20132,7 +20216,22 @@ var routes = [{
   }
 }, {
   path: '/twitter',
-  component: _pages_Twitter_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  component: _pages_Twitter_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+  beforeEnter: function beforeEnter(to, from, next) {
+    var auth = _store__WEBPACK_IMPORTED_MODULE_4__["default"].getters['auth/check'];
+    console.log(auth);
+
+    if (auth && _store__WEBPACK_IMPORTED_MODULE_4__["default"].getters['auth/checkTwitterId']) {
+      console.log('aa');
+      next('/dashboard');
+    } else if (auth) {
+      console.log('b');
+      next();
+    } else {
+      console.log('c');
+      next('login');
+    }
+  }
 }]; // VueRouterインスタンスを作成する
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
@@ -20165,7 +20264,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //データの入れ物、中身を直接編集できない
 var state = {
   //ユーザの認証状態を保存
-  user: null //stateの算出プロパティ
+  user: null,
+  twitterId: null //stateの算出プロパティ
 
 };
 var getters = {
@@ -20174,12 +20274,18 @@ var getters = {
   },
   username: function username(state) {
     return state.user ? state.user.name : '';
+  },
+  checkTwitterId: function checkTwitterId(state) {
+    return !!state.twitterId;
   } //stateを同期処理で更新するメソッド
 
 };
 var mutations = {
   setUser: function setUser(state, user) {
     state.user = user;
+  },
+  setTwitterUser: function setTwitterUser(state, id) {
+    state.twitterId = id;
   }
 }; //stateを非同期処理で更新するメソッドAPIの通史語など
 
@@ -20306,6 +20412,37 @@ var actions = {
     }
 
     return currentUser;
+  }(),
+  currentTwitterUser: function () {
+    var _currentTwitterUser = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(context) {
+      var response, id;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              _context5.next = 2;
+              return axios.get('/api/twitter/id');
+
+            case 2:
+              response = _context5.sent;
+              id = response.data || null;
+              context.commit('setTwitterUser', id);
+
+            case 5:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5);
+    }));
+
+    function currentTwitterUser(_x8) {
+      return _currentTwitterUser.apply(this, arguments);
+    }
+
+    return currentTwitterUser;
   }()
 };
 /* harmony default export */ __webpack_exports__["default"] = ({

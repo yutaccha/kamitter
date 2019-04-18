@@ -6,9 +6,11 @@
                 <h2 class="p-contents__head"><i class="c-icon--twitter fab fa-twitter"></i>利用するTwitterアカウントを選択する</h2>
                 <ul class="p-twitter">
                     <li class="c-card p-twitter__card">
-                        <p class="p-twitter__create">
-                            <i class="c-icon--twitter p-twitter__icon--create far fa-plus-square"></i>Twitterアカウントの追加
-                        </p>
+                        <a href="auth/twitter/oauth">
+                            <p class="p-twitter__create">
+                                <i class="c-icon--twitter p-twitter__icon--create far fa-plus-square"></i>Twitterアカウントの追加
+                            </p>
+                        </a>
                     </li>
                     <li class="c-card p-twitter__card">
                         <div class="p-twitter__profile">
@@ -32,6 +34,25 @@
 
 <script>
     export default {
+        data() {
+            return {
+                oauthUrl: '',
+            }
+        },
+        methods: {
+            async twitterOauthUrl() {
+                const response = await axios.get('/api/twitter/oauth_url')
+                this.oauthUrl = response.data
+            },
+        },
+        watch: {
+            $route: {
+                async handler () {
+                    await this.twitterOauthUrl()
+                },
+                immediate: true
+            }
+        }
     }
 </script>
 

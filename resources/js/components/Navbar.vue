@@ -1,7 +1,7 @@
 <template>
     <nav class="p-navbar">
         <h1 class="p-navbar__title">
-            <RouterLink class="p-navbar__title_link" to="/">神ったー</RouterLink>
+            <RouterLink class="p-navbar__title_link" to="/twitter">twitter</RouterLink>
         </h1>
 
         <span v-if="isLogin" class="navbar__item">

@@ -6,6 +6,5 @@ Route::get('/user', function (){
     return Auth::user();
 })->name('user');
 
-Route::get('auth/twitter/provider', 'TwitterAuthController@redirectToProvider')->name('twitter.provide');
-Route::get('auth/twitter/callback', 'TwitterAuthController@handleProviderCallback')->name('twitter.callback');
-Route::get('auth/twitter/logout', 'TwitterAuthController@logout')->name('twitter.logout');
+Route::get('/twitter/id', 'TwitterAuthController@getId')->name('twitter.id');
+Route::get('/twitter/logout', 'TwitterAuthController@logout')->name('twitter.logout');

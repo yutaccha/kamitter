@@ -15,17 +15,32 @@ const routes = [
         path: '/login',
         component: Login,
         beforeEnter(to, from, next) {
-            if(store.getters['auth/check']) {
+            if (store.getters['auth/check']) {
                 next('/twitter')
-            }else{
+            } else {
                 next()
             }
         }
     },
     {
         path: '/twitter',
-        component: Twitter
-    }
+        component: Twitter,
+        beforeEnter(to, from, next) {
+            const auth = store.getters['auth/check']
+            console.log(auth)
+
+            if (auth && store.getters['auth/checkTwitterId']) {
+                console.log('aa');
+                next('/dashboard')
+            } else if (auth) {
+                console.log('b');
+                next()
+            } else {
+                console.log('c');
+                next('login')
+            }
+        }
+    },
 ]
 
 // VueRouterインスタンスを作成する
