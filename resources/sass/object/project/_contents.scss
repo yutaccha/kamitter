@@ -1,0 +1,23 @@
+// ==================================
+// p-contents
+// ==================================
+.p-contents {
+  &__area{
+    width: 980px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    &--narrow{
+      width: 450px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+  }
+
+  &__head{
+    font-size: $font-size_l;
+    text-align: center;
+    margin-bottom: 50px;
+  }
+}

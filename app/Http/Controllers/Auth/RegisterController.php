@@ -49,10 +49,18 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        /*
+         * make メソッドの第一引数は検証するデータ、第二引数がルール定義、第三引数がメッセージ定義、第四引数が項目名定義です。
+         * メッセージは validation.php で定義するので空の配列を渡し、第四引数で日本語の項目名を定義しています。
+         */
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ], [], [
+            'name' => 'ユーザー名',
+            'email' => 'メールアドレス',
+            'password' => 'パスワード',
         ]);
     }
 

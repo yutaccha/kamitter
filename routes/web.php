@@ -11,6 +11,17 @@
 |
 */
 
+
+Route::get('dashboard' ,function() {
+    return view('dashboard');
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('auth/twitter/oauth', 'TwitterAuthController@oauth')->name('twitter.oauth');
+    Route::get('auth/twitter/callback', 'TwitterAuthController@handleProviderCallback')->name('twitter.callback');
+});
+
+// 他のルートに該当しない場合indexを返す
 Route::get('/{any?}', function () {
-    return view('welcome');
+    return view('index');
 })->where('any', '.+');

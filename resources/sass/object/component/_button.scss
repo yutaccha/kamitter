@@ -1,0 +1,21 @@
+// ==================================
+// c-button
+// ==================================
+.c-button{
+  border: 1px solid $font-size_default;
+  border-radius: 0.25rem;
+  color: $color-default;
+  cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  outline: none;
+  padding: 0.7rem 0.9rem;
+  text-decoration: none;
+  &--inverse{
+    background: #222;
+    border-color: #222;
+    color: #fff;
+  }
+}

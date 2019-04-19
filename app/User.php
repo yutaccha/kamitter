@@ -24,8 +24,8 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
+    protected $visible = [
+        'id', 'name'
     ];
 
     /**
@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * リレーションシップ　- TwitterUsersテーブル
+     */
+    public function twitter()
+    {
+        return $this->hasMany('App\TwitterUser');
+    }
 }

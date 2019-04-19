@@ -1,0 +1,8 @@
+// ==================================
+// l-contents
+// ==================================
+.l-contents{
+  padding: calc(120px + #{$header_height}) 10%;
+  display: flex;
+  justify-content: center;
+}

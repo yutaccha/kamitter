@@ -1,14 +1,42 @@
+//foundation
+@import "foundation/reset";
+@import "foundation/variable";
+@import "foundation/breakpoint";
+@import "foundation/base";
+//layout
+@import "layout/**";
+//component
+@import "object/component/**";
+//project
+@import "object/project/**";
 
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+//utility
+@import "object/utility/**";
 
-// Variables
-@import 'variables';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
-
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+// ==================================
+// c-icon
+// ==================================
+.c-icon {
+  &--twitter {
+    color: $color-twitter;
+  }
+  &--gray{
+    color: $color-icon-gray;
+  }
 }
+
+
+
+
+// ==================================
+// p-login
+// ==================================
+.p-login {
+  &__panel {
+    padding: 40px;
+    border: 1px solid $color-default-parent;
+    border-radius: 5px;
+  }
+}
+
