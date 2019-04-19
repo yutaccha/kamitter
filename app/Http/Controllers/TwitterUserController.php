@@ -27,9 +27,14 @@ class TwitterUserController extends Controller
             'account_num' => $account_num], 200);
     }
 
+
     public function info(int $id)
     {
-        $twitter_user = TwitterUser::select('token', 'token_secret')->where('id', $id)->first();
+        $user_id = Auth::id();
+        $twitter_user = TwitterUser::where('id', $id)->first();
+        if ($user_id !== $twitter_user->user_id){
+            abort(404);
+        }
         $token = $twitter_user->token;
         $token_secret = $twitter_user->token_secret;
 
@@ -42,6 +47,7 @@ class TwitterUserController extends Controller
 
         return $twitter_users_data;
     }
+
 
     public function test()
     {

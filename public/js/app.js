@@ -1775,9 +1775,17 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utility */ "./resources/js/utility.js");
-/* harmony import */ var _components_Navbar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Navbar.vue */ "./resources/js/components/Navbar.vue");
-/* harmony import */ var _components_Footer_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Footer.vue */ "./resources/js/components/Footer.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utility */ "./resources/js/utility.js");
+/* harmony import */ var _components_Navbar_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Navbar.vue */ "./resources/js/components/Navbar.vue");
+/* harmony import */ var _components_Footer_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Footer.vue */ "./resources/js/components/Footer.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -1800,8 +1808,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    Navbar: _components_Navbar_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Footer: _components_Footer_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    Navbar: _components_Navbar_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Footer: _components_Footer_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   computed: {
     errorCode: function errorCode() {
@@ -1811,15 +1819,42 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     errorCode: {
       handler: function handler(val) {
-        if (val === _utility__WEBPACK_IMPORTED_MODULE_0__["INTERNAL_SERVER_ERROR"]) {
+        if (val === _utility__WEBPACK_IMPORTED_MODULE_1__["INTERNAL_SERVER_ERROR"]) {
           this.$router.push('/500');
         }
       },
       immediate: true
     },
-    $route: function $route() {
-      this.$store.commit('error/setCode', null);
-    }
+    $route: function () {
+      var _$route = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.$store.commit('error/setCode', null);
+                _context.next = 3;
+                return this.$store.dispatch('auth/currentUser');
+
+              case 3:
+                _context.next = 5;
+                return this.$store.dispatch('auth/currentTwitterUser');
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function $route() {
+        return _$route.apply(this, arguments);
+      }
+
+      return $route;
+    }()
   }
 });
 
@@ -1916,6 +1951,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -1975,6 +2011,46 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return fetchTwitterUser;
+    }(),
+    setTwitterId: function () {
+      var _setTwitterId = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.post("/api/twitter/".concat(this.item.id));
+
+              case 2:
+                response = _context2.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context2.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context2.abrupt("return", false);
+
+              case 6:
+                this.$router.push('/dashboard');
+
+              case 7:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function setTwitterId() {
+        return _setTwitterId.apply(this, arguments);
+      }
+
+      return setTwitterId;
     }()
   },
   created: function created() {
@@ -2308,35 +2384,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return fetchTwitterUsers;
     }()
   },
-  watch: {
-    $route: {
-      handler: function () {
-        var _handler = _asyncToGenerator(
-        /*#__PURE__*/
-        _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  _context2.next = 2;
-                  return this.fetchTwitterUsers();
-
-                case 2:
-                case "end":
-                  return _context2.stop();
-              }
-            }
-          }, _callee2, this);
-        }));
-
-        function handler() {
-          return _handler.apply(this, arguments);
-        }
-
-        return handler;
-      }(),
-      immediate: true
+  computed: {
+    isMaximumAccount: function isMaximumAccount() {
+      return this.accountNum <= 10;
     }
+  },
+  created: function created() {
+    this.fetchTwitterUsers();
   }
 });
 
@@ -3595,7 +3649,12 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "l-body" }, [
-    _c("header", { staticClass: "l-header" }, [_c("Navbar")], 1),
+    _c(
+      "header",
+      { staticClass: "l-header u-color__bg--white" },
+      [_c("Navbar")],
+      1
+    ),
     _vm._v(" "),
     _c("main", { staticClass: "l-main" }, [
       _c("div", { staticClass: "container" }, [_c("RouterView")], 1)
@@ -3707,26 +3766,40 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("li", { staticClass: "c-card p-twitter__card" }, [
-    _c("div", { staticClass: "p-twitter__profile" }, [
-      _c("figure", [
-        _c("img", {
-          staticClass: "p-twitter__img",
-          attrs: { src: _vm.thumbnail, alt: "" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "p-twitter__ids" }, [
-        _c("p", { staticClass: "p-twitter__id" }, [
-          _vm._v("@" + _vm._s(_vm.screenName))
+  return _c(
+    "li",
+    {
+      staticClass: "c-card p-twitter__card",
+      on: {
+        click: function($event) {
+          $event.preventDefault()
+          return _vm.setTwitterId($event)
+        }
+      }
+    },
+    [
+      _c("div", { staticClass: "p-twitter__profile" }, [
+        _c("figure", [
+          _c("img", {
+            staticClass: "p-twitter__img",
+            attrs: { src: _vm.thumbnail, alt: "" }
+          })
         ]),
         _vm._v(" "),
-        _c("p", { staticClass: "p-twitter__name" }, [_vm._v(_vm._s(_vm.name))])
-      ])
-    ]),
-    _vm._v(" "),
-    _vm._m(0)
-  ])
+        _c("div", { staticClass: "p-twitter__ids" }, [
+          _c("p", { staticClass: "p-twitter__name" }, [
+            _vm._v(_vm._s(_vm.name))
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "p-twitter__id" }, [
+            _vm._v("@" + _vm._s(_vm.screenName))
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(0)
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -4218,7 +4291,21 @@ var render = function() {
       _c("div", { staticClass: "p-contents__area--narrow" }, [
         _vm._m(0),
         _vm._v(" "),
-        _vm._m(1),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isMaximumAccount,
+                expression: "isMaximumAccount"
+              }
+            ],
+            staticClass: "c-card p-twitter__card"
+          },
+          [_vm._m(1)]
+        ),
         _vm._v(" "),
         _c(
           "ul",
@@ -4246,15 +4333,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "c-card p-twitter__card" }, [
-      _c("a", { attrs: { href: "auth/twitter/oauth" } }, [
-        _c("p", { staticClass: "p-twitter__create" }, [
-          _c("i", {
-            staticClass:
-              "c-icon--twitter p-twitter__icon--create far fa-plus-square"
-          }),
-          _vm._v("Twitterアカウントの追加\n                    ")
-        ])
+    return _c("a", { attrs: { href: "auth/twitter/oauth" } }, [
+      _c("p", { staticClass: "p-twitter__create" }, [
+        _c("i", {
+          staticClass:
+            "c-icon--twitter p-twitter__icon--create far fa-plus-square"
+        }),
+        _vm._v("Twitterアカウントの追加\n                    ")
       ])
     ])
   }
@@ -20710,6 +20795,19 @@ var routes = [{
     }
   }
 }, {
+  path: '/',
+  beforeEnter: function beforeEnter(to, from, next) {
+    var auth = _store__WEBPACK_IMPORTED_MODULE_5__["default"].getters['auth/check'];
+
+    if (auth && _store__WEBPACK_IMPORTED_MODULE_5__["default"].getters['auth/checkTwitterId']) {
+      next('/dashboard');
+    } else if (auth) {
+      next('/twitter');
+    } else {
+      next('login');
+    }
+  }
+}, {
   path: '/500',
   component: _pages_System_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
 }]; // VueRouterインスタンスを作成する
@@ -20851,9 +20949,10 @@ var actions = {
 
             case 3:
               response = _context2.sent;
+              console.log(response);
 
               if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
-                _context2.next = 8;
+                _context2.next = 9;
                 break;
               }
 
@@ -20861,7 +20960,7 @@ var actions = {
               context.commit('setUser', response.data);
               return _context2.abrupt("return", false);
 
-            case 8:
+            case 9:
               context.commit('setApiStatus', false);
 
               if (response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["UNPROCESSABLE_ENTRY"]) {
@@ -20872,7 +20971,7 @@ var actions = {
                 });
               }
 
-            case 10:
+            case 11:
             case "end":
               return _context2.stop();
           }

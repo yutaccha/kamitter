@@ -62,6 +62,7 @@ const actions = {
     async login (context, data) {
         context.commit('setApiStatus', null)
         const response = await axios.post('/api/login', data)
+        console.log(response);
 
         if (response.status === OK) {
             context.commit('setApiStatus', true)

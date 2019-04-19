@@ -1,6 +1,6 @@
 <template>
     <div class="l-body">
-        <header class="l-header">
+        <header class="l-header u-color__bg--white">
             <Navbar/>
         </header>
         <main class="l-main">
@@ -40,8 +40,10 @@
                 },
                 immediate: true
             },
-            $route () {
+            async $route () {
                 this.$store.commit('error/setCode', null)
+                await this.$store.dispatch('auth/currentUser')
+                await this.$store.dispatch('auth/currentTwitterUser')
             }
         },
     }

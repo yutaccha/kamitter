@@ -1,12 +1,13 @@
 <template>
-    <li class="c-card p-twitter__card">
+    <li class="c-card p-twitter__card" @click.prevent="setTwitterId">
         <div class="p-twitter__profile">
             <figure>
                 <img class="p-twitter__img" :src="thumbnail" alt="">
             </figure>
             <div class="p-twitter__ids">
-                <p class="p-twitter__id">@{{screenName}}</p>
                 <p class="p-twitter__name">{{name}}</p>
+                <p class="p-twitter__id">@{{screenName}}</p>
+
             </div>
         </div>
         <div class="p-twitter__action">
@@ -48,6 +49,14 @@
                 // // console.log(accountNum);
 
             },
+            async setTwitterId() {
+                const response = await axios.post(`/api/twitter/${this.item.id}`)
+                if (response.status !== OK) {
+                    this.$store.commit('error/setCode', response.status)
+                    return false
+                }
+                this.$router.push('/dashboard')
+            }
         },
         created() {
             this.fetchTwitterUser()

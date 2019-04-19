@@ -2,7 +2,7 @@
 // p-navbar
 // ==================================
 .p-navbar{
-  height: 50px;
+  height: $header_height;
   padding: 0 10%;
   display: flex;
   justify-content: space-between;

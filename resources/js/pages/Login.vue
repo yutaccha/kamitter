@@ -132,6 +132,6 @@
         },
         created() {
             this.clearError()
-        }
+        },
     }
 </script>

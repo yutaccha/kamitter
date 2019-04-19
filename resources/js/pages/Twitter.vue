@@ -4,7 +4,7 @@
 
             <div class="p-contents__area--narrow">
                 <h2 class="p-contents__head"><i class="c-icon--twitter fab fa-twitter"></i>利用するTwitterアカウントを選択する</h2>
-                <div class="c-card p-twitter__card">
+                <div v-show="isMaximumAccount" class="c-card p-twitter__card">
                     <a href="auth/twitter/oauth">
                         <p class="p-twitter__create">
                             <i class="c-icon--twitter p-twitter__icon--create far fa-plus-square"></i>Twitterアカウントの追加
@@ -13,9 +13,9 @@
                 </div>
                 <ul class="p-twitter">
                     <TwitterCard
-                        v-for="user in users"
-                        :key="user.id"
-                        :item="user"
+                            v-for="user in users"
+                            :key="user.id"
+                            :item="user"
                     />
                 </ul>
             </div>
@@ -25,7 +25,7 @@
 
 <script>
     import TwitterCard from '../components/TwitterCard.vue'
-    import { OK } from '../utility'
+    import {OK} from '../utility'
 
     export default {
         components: {
@@ -52,14 +52,14 @@
 
             },
         },
-        watch: {
-            $route: {
-                async handler() {
-                    await this.fetchTwitterUsers()
-                },
-                immediate: true
+        computed: {
+            isMaximumAccount () {
+                return this.accountNum <= 10
             }
-        }
+        },
+        created() {
+            this.fetchTwitterUsers()
+        },
     }
 </script>
 

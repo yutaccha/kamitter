@@ -42,7 +42,9 @@ class TwitterAuthController extends Controller
         $existed_user = DB::table('twitter_users')->where('token', $auth_user->token)->first();
 
         if (null !== $existed_user){
-            $request->session()->put('twitter_id', $existed_user->id);
+            if (Auth::id() === $existed_user->user_id) {
+                $request->session()->put('twitter_id', $existed_user->id);
+            }
             return redirect('/twitter');
         }
 
@@ -60,7 +62,13 @@ class TwitterAuthController extends Controller
     }
 
     public function getId(){
-        return session()->get('twitter_id') ?? '';
+        return response(session()->get('twitter_id') ?? '', 200);
+    }
+
+    public function setId(){
+        $twitter_id = Auth::id();
+        session()->put('twitter_id', $twitter_id);
+        return Response(200);
     }
 
     public function logout()

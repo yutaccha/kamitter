@@ -38,6 +38,19 @@ const routes = [
         }
     },
     {
+        path: '/',
+        beforeEnter(to, from, next) {
+            const auth = store.getters['auth/check']
+            if (auth && store.getters['auth/checkTwitterId']) {
+                next('/dashboard')
+            } else if (auth) {
+                next('/twitter')
+            } else {
+                next('login')
+            }
+        }
+    },
+    {
       path: '/500',
       component: SystemError,
     },

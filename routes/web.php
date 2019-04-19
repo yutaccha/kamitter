@@ -12,6 +12,10 @@
 */
 
 
+Route::get('dashboard' ,function() {
+    return view('dashboard');
+});
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('auth/twitter/oauth', 'TwitterAuthController@oauth')->name('twitter.oauth');
     Route::get('auth/twitter/callback', 'TwitterAuthController@handleProviderCallback')->name('twitter.callback');

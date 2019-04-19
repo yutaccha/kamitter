@@ -178,9 +178,15 @@ img {
 }
 
 .l-contents {
-  padding: 120px 10%;
+  padding: calc(120px + 50px) 10%;
   display: flex;
   justify-content: center;
+}
+
+.l-header {
+  width: 100%;
+  position: fixed;
+  top: 0;
 }
 
 .c-button {
@@ -318,14 +324,6 @@ img {
   border-bottom: 3px solid #333;
 }
 
-.c-icon--twitter {
-  color: #55acee;
-}
-
-.c-icon--gray {
-  color: #6c757d;
-}
-
 .p-twitter {
   width: 100%;
 }
@@ -334,9 +332,12 @@ img {
   height: 70px;
   overflow: hidden;
   margin-bottom: 15px;
+  transition: 0.5s;
 }
 
 .p-twitter__card:hover {
+  -webkit-transform: translate(-10px, -5px);
+          transform: translate(-10px, -5px);
   cursor: pointer;
 }
 
@@ -376,7 +377,7 @@ img {
   line-height: 25px;
 }
 
-.p-twitter__id {
+.p-twitter__name {
   font-weight: bold;
 }
 
@@ -389,6 +390,18 @@ img {
 .p-twitter__icon--create {
   font-size: 24px;
   margin-right: 10px;
+}
+
+.u-color__bg--white {
+  background: #fff;
+}
+
+.c-icon--twitter {
+  color: #55acee;
+}
+
+.c-icon--gray {
+  color: #6c757d;
 }
 
 .p-login__panel {
