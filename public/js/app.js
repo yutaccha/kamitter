@@ -1892,6 +1892,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utility */ "./resources/js/utility.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -1915,6 +1916,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     item: {
@@ -1924,7 +1926,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      twitterAccount: null
+      screenName: "",
+      name: "",
+      thumbnail: ''
     };
   },
   methods: {
@@ -1944,7 +1948,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 response = _context.sent;
                 console.log(response);
 
-                if (!(response.status !== OK)) {
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
                   _context.next = 7;
                   break;
                 }
@@ -1953,6 +1957,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context.abrupt("return", false);
 
               case 7:
+                this.screenName = response.data.screen_name;
+                this.name = response.data.name;
+                this.thumbnail = response.data.thumbnail; // // console.log(users);
+                // // console.log(accountNum);
+
+              case 10:
               case "end":
                 return _context.stop();
             }
@@ -2269,22 +2279,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context.sent;
-                console.log(response);
 
                 if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_2__["OK"])) {
-                  _context.next = 7;
+                  _context.next = 6;
                   break;
                 }
 
                 this.$store.commit('error/setCode', response.status);
                 return _context.abrupt("return", false);
 
-              case 7:
+              case 6:
                 this.users = response.data.twitter_accounts;
                 this.accountNum = response.data.account_num; // // console.log(users);
                 // // console.log(accountNum);
 
-              case 9:
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -3698,31 +3707,34 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("li", { staticClass: "c-card p-twitter__card" }, [
+    _c("div", { staticClass: "p-twitter__profile" }, [
+      _c("figure", [
+        _c("img", {
+          staticClass: "p-twitter__img",
+          attrs: { src: _vm.thumbnail, alt: "" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "p-twitter__ids" }, [
+        _c("p", { staticClass: "p-twitter__id" }, [
+          _vm._v("@" + _vm._s(_vm.screenName))
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "p-twitter__name" }, [_vm._v(_vm._s(_vm.name))])
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "c-card p-twitter__card" }, [
-      _c("div", { staticClass: "p-twitter__profile" }, [
-        _c("figure", { staticClass: "p-twitter__img" }, [
-          _c("img", { attrs: { src: "", alt: "" } })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "p-twitter__ids" }, [
-          _c("p", { staticClass: "p-twitter__id" }, [_vm._v("@Front1111")]),
-          _vm._v(" "),
-          _c("p", { staticClass: "p-twitter__name" }, [_vm._v("ふふふろん")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "p-twitter__action" }, [
-        _c("i", {
-          staticClass: "c-icon--gray p-twitter__icon fas fa-trash-alt"
-        })
-      ])
+    return _c("div", { staticClass: "p-twitter__action" }, [
+      _c("i", { staticClass: "c-icon--gray p-twitter__icon fas fa-trash-alt" })
     ])
   }
 ]

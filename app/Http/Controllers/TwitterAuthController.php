@@ -16,6 +16,14 @@ class TwitterAuthController extends Controller
 {
     use AuthenticatesUsers;
 
+    public function __construct()
+    {
+        // 認証が必要
+        //indexは認証しなくても見れるようにする
+        $this->middleware('auth');
+    }
+
+
     /**
      * ユーザーをTwitterの認証ページにリダイレクトする
      *

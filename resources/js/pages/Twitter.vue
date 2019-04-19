@@ -40,7 +40,6 @@
         methods: {
             async fetchTwitterUsers() {
                 const response = await axios.get('/api/twitter/user/list')
-                console.log(response);
                 if (response.status !== OK) {
                     this.$store.commit('error/setCode', response.status)
                     return false
