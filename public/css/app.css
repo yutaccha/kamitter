@@ -202,6 +202,8 @@ img {
   padding: 0.7rem 0.9rem;
   text-decoration: none;
   transition: all 0.2s;
+  -webkit-filter: drop-shadow(0px 3px 5px #3335);
+          filter: drop-shadow(0px 3px 5px #3335);
 }
 
 .c-button:hover {
@@ -443,8 +445,8 @@ img {
 }
 
 .page-enter {
-  -webkit-transform: translate(100px, 0);
-          transform: translate(100px, 0);
+  -webkit-transform: translate(10%, 0);
+          transform: translate(10%, 0);
   opacity: 0;
 }
 
@@ -463,8 +465,8 @@ img {
 }
 
 .page-leave-to {
-  -webkit-transform: translate(-100px, 0);
-          transform: translate(-100px, 0);
+  -webkit-transform: translate(-10%, 0);
+          transform: translate(-10%, 0);
   opacity: 0;
 }
 
@@ -473,8 +475,8 @@ img {
 }
 
 .tab-enter {
-  -webkit-transform: translate(-100px, 0);
-          transform: translate(-100px, 0);
+  -webkit-transform: translate(-10%, 0);
+          transform: translate(-10%, 0);
   opacity: 0;
 }
 
@@ -493,8 +495,8 @@ img {
 }
 
 .tab-leave-to {
-  -webkit-transform: translate(100px, 0);
-          transform: translate(100px, 0);
+  -webkit-transform: translate(10%, 0);
+          transform: translate(10%, 0);
   opacity: 0;
 }
 
@@ -527,6 +529,34 @@ img {
   display: none;
 }
 
+.t-dashboard_panel-enter {
+  -webkit-transform: translate(10%, 0);
+          transform: translate(10%, 0);
+  opacity: 0;
+}
+
+.t-dashboard_panel-enter-to {
+  opacity: 1;
+}
+
+.t-dashboard_panel-enter-active {
+  transition: all 0.7s 0s ease;
+}
+
+.t-dashboard_panel-leave {
+  -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
+  opacity: 1;
+}
+
+.t-dashboard_panel-leave-to {
+  opacity: 0;
+}
+
+.t-dashboard_panel-leave-active {
+  display: none;
+}
+
 .c-panel {
   padding: 40px;
   border: 1px solid #3335;
@@ -555,8 +585,8 @@ img {
 }
 
 .p-profile__img {
-  height: 150px;
-  width: 150px;
+  height: 100px;
+  width: 100px;
   background: #55acee;
   border-radius: 50%;
   margin-right: 50px;
@@ -564,7 +594,7 @@ img {
 
 .p-profile__info {
   font-size: 18px;
-  line-height: 40px;
+  line-height: 33px;
   text-align: center;
 }
 

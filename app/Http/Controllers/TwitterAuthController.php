@@ -61,13 +61,21 @@ class TwitterAuthController extends Controller
          return redirect('/twitter');
     }
 
+
     public function getId(){
         return response(session()->get('twitter_id') ?? '', 200);
     }
 
-    public function setId(){
-        $twitter_id = Auth::id();
-        session()->put('twitter_id', $twitter_id);
+
+    public function setId($id){
+        $user_id = Auth::id();
+        $twitter_user = TwitterUser::where('id', $id)->first();
+
+        if ($twitter_user->user_id === $user_id){
+            session()->put('twitter_id', $id);
+        }else{
+            abort(404);
+        }
         return Response(200);
     }
 

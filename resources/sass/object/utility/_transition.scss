@@ -1,6 +1,6 @@
 //page
 .page-enter {
-  transform: translate(100px, 0);
+  transform: translate(10%, 0);
   opacity: 0;
 }
 .page-enter-to {
@@ -14,7 +14,7 @@
   opacity: 1;
 }
 .page-leave-to {
-  transform: translate(-100px, 0);
+  transform: translate(-10%, 0);
   opacity: 0;
 }
 .page-leave-active {
@@ -24,7 +24,7 @@
 
 //tab
 .tab-enter {
-  transform: translate(-100px, 0);
+  transform: translate(-10%, 0);
   opacity: 0;
 }
 .tab-enter-to {
@@ -38,7 +38,7 @@
   opacity: 1;
 }
 .tab-leave-to {
-  transform: translate(100px, 0);
+  transform: translate(10%, 0);
   opacity: 0;
 }
 .tab-leave-active {
@@ -46,7 +46,7 @@
 }
 
 
-//t-del-
+//t-del
 .t-del-enter {
   opacity: 0;
 }
@@ -64,5 +64,28 @@
 }
 .t-del-leave-active {
   transition: all 0s 0s;
+  display: none;
+}
+
+//dash-panel
+.t-dashboard_panel-enter {
+  transform: translate(10%, 0);
+  opacity: 0;
+}
+.t-dashboard_panel-enter-to {
+  opacity: 1;
+}
+.t-dashboard_panel-enter-active {
+  transition: all .7s 0s ease;
+}
+.t-dashboard_panel-leave {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+.t-dashboard_panel-leave-to {
+  //transform: translate(-100%, 0);
+  opacity: 0;
+}
+.t-dashboard_panel-leave-active {
   display: none;
 }

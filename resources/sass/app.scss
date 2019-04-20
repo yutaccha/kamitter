@@ -49,8 +49,8 @@
   align-items: center;
 
   &__img {
-    height: 150px;
-    width: 150px;
+    height: 100px;
+    width: 100px;
     background: $color-twitter;
     border-radius: 50%;
     margin-right: 50px;
@@ -58,7 +58,7 @@
 
   &__info {
     font-size: $font-size_l;
-    line-height: 40px;
+    line-height: 33px;
     text-align: center;
   }
 

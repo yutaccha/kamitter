@@ -19,8 +19,8 @@ class TwitterUser extends Model
     /**
      * リレーションシップ -usersテーブル
      */
-    public function owner()
+    public function user()
     {
-        return $this->belongsTo('App\User', 'user_id', 'id', 'users');
+        return $this->belongsTo('App\User', 'user_id');
     }
 }

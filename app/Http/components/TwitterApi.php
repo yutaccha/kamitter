@@ -9,7 +9,7 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 
 class TwitterApi
 {
-    public static function useTwitterApi(String $method = "", $url = 0, $options = 0, $token, $token_secret){
+    public static function useTwitterApi(String $method = "", $url = 0, $options = [], $token, $token_secret){
         $api_key = config('services.twitter')['client_id'];
         $api_secret = config('services.twitter')['client_secret'];
 

@@ -40,8 +40,8 @@ class User extends Authenticatable
     /**
      * リレーションシップ　- TwitterUsersテーブル
      */
-    public function twitter()
+    public function twitterUsers()
     {
-        return $this->hasMany('App\TwitterUser');
+        return $this->hasMany('App\TwitterUser', 'user_id');
     }
 }
