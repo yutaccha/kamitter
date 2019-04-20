@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 // ページコンポーネントをインポートする
 import Twitter from './pages/Twitter.vue'
 import Login from './pages/Login.vue'
+import Dashboard from './pages/Dashboard.vue'
 import SystemError from './pages/System.vue'
 
 import store from './store'
@@ -36,6 +37,10 @@ const routes = [
                 next('login')
             }
         }
+    },
+    {
+        path: '/dashboard',
+        component: Dashboard,
     },
     {
         path: '/',

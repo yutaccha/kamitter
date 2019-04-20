@@ -4,7 +4,7 @@
 
             <div class="p-contents__area--narrow">
                 <h2 class="p-contents__head"><i class="c-icon--twitter fab fa-twitter"></i>利用するTwitterアカウントを選択する</h2>
-                <div v-show="isMaximumAccount" class="c-card p-twitter__card">
+                <div v-show="isMaximumAccount" class="c-card p-twitter__card u-color__bg--white">
                     <a href="auth/twitter/oauth">
                         <p class="p-twitter__create">
                             <i class="c-icon--twitter p-twitter__icon--create far fa-plus-square"></i>Twitterアカウントの追加

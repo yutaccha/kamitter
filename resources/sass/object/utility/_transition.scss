@@ -1,0 +1,68 @@
+//page
+.page-enter {
+  transform: translate(100px, 0);
+  opacity: 0;
+}
+.page-enter-to {
+  opacity: 1;
+}
+.page-enter-active {
+  transition: all 1s 0s ease;
+}
+.page-leave {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+.page-leave-to {
+  transform: translate(-100px, 0);
+  opacity: 0;
+}
+.page-leave-active {
+  transition: all .3s 0s ease;
+}
+
+
+//tab
+.tab-enter {
+  transform: translate(-100px, 0);
+  opacity: 0;
+}
+.tab-enter-to {
+  opacity: 1;
+}
+.tab-enter-active {
+  transition: all 1s .1s ease;
+}
+.tab-leave {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+.tab-leave-to {
+  transform: translate(100px, 0);
+  opacity: 0;
+}
+.tab-leave-active {
+  transition: all .5s 0s ease;
+}
+
+
+//t-del-
+.t-del-enter {
+  opacity: 0;
+}
+.t-del-enter-to {
+  opacity: 1;
+}
+.t-del-enter-active {
+  transition: all .5s 0s ease-out;
+}
+.t-del-leave {
+  opacity: 1;
+}
+.t-del-leave-to {
+  opacity: 0;
+}
+.t-del-leave-active {
+  transition: all 0s 0s;
+  display: none;
+}

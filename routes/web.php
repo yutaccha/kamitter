@@ -12,9 +12,9 @@
 */
 
 
-Route::get('dashboard' ,function() {
-    return view('dashboard');
-});
+//Route::get('dashboard' ,function() {
+//    return view('dashboard');
+//});
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('auth/twitter/oauth', 'TwitterAuthController@oauth')->name('twitter.oauth');

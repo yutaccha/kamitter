@@ -6,7 +6,9 @@
         <main class="l-main">
             <div class="container">
                 <!--<Message />-->
-                <RouterView/>
+                <transition name="page" mode="out-in">
+                    <RouterView/>
+                </transition>
             </div>
         </main>
         <footer class="c-foot">
@@ -16,7 +18,7 @@
 </template>
 
 <script>
-    import { OK, INTERNAL_SERVER_ERROR } from './utility'
+    import {INTERNAL_SERVER_ERROR} from './utility'
 
     import Navbar from './components/Navbar.vue'
     import Footer from './components/Footer.vue'
@@ -27,20 +29,20 @@
             Footer,
         },
         computed: {
-            errorCode () {
+            errorCode() {
                 return this.$store.state.error.code
             }
         },
         watch: {
             errorCode: {
-                handler (val) {
+                handler(val) {
                     if (val === INTERNAL_SERVER_ERROR) {
                         this.$router.push('/500')
                     }
                 },
                 immediate: true
             },
-            async $route () {
+            async $route() {
                 this.$store.commit('error/setCode', null)
                 await this.$store.dispatch('auth/currentUser')
                 await this.$store.dispatch('auth/currentTwitterUser')

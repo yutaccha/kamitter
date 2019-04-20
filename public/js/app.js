@@ -1803,6 +1803,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 
@@ -1952,6 +1954,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -1962,6 +1967,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      del: 1,
       screenName: "",
       name: "",
       thumbnail: ''
@@ -1982,23 +1988,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context.sent;
-                console.log(response);
 
                 if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
-                  _context.next = 7;
+                  _context.next = 6;
                   break;
                 }
 
                 this.$store.commit('error/setCode', response.status);
                 return _context.abrupt("return", false);
 
-              case 7:
+              case 6:
                 this.screenName = response.data.screen_name;
                 this.name = response.data.name;
                 this.thumbnail = response.data.thumbnail; // // console.log(users);
                 // // console.log(accountNum);
 
-              case 10:
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -2055,6 +2060,200 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   created: function created() {
     this.fetchTwitterUser();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Dashboard.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Dashboard.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      tab: 1
+    };
   }
 });
 
@@ -3657,7 +3856,19 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("main", { staticClass: "l-main" }, [
-      _c("div", { staticClass: "container" }, [_c("RouterView")], 1)
+      _c(
+        "div",
+        { staticClass: "container" },
+        [
+          _c(
+            "transition",
+            { attrs: { name: "page", mode: "out-in" } },
+            [_c("RouterView")],
+            1
+          )
+        ],
+        1
+      )
     ]),
     _vm._v(" "),
     _c("footer", { staticClass: "c-foot" }, [_c("Footer")], 1)
@@ -3769,7 +3980,7 @@ var render = function() {
   return _c(
     "li",
     {
-      staticClass: "c-card p-twitter__card",
+      staticClass: "c-card p-twitter__card u-color__bg--white",
       on: {
         click: function($event) {
           $event.preventDefault()
@@ -3797,17 +4008,580 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(0)
+      _c(
+        "div",
+        { staticClass: "p-twitter__action" },
+        [
+          _c("transition-group", { attrs: { name: "t-del", mode: "out-in" } }, [
+            _c("i", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.del === 1,
+                  expression: "del===1"
+                }
+              ],
+              key: "box",
+              staticClass: "c-icon--gray p-twitter__icon fas fa-trash-alt",
+              on: {
+                click: function($event) {
+                  $event.stopPropagation()
+                  _vm.del = 2
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.del === 2,
+                    expression: "del===2"
+                  }
+                ],
+                key: "del",
+                staticClass: "p-twitter_delete c-button c-button--danger",
+                on: {
+                  click: function($event) {
+                    $event.stopPropagation()
+                    _vm.del = 1
+                  }
+                }
+              },
+              [_vm._v("削除")]
+            )
+          ])
+        ],
+        1
+      )
     ]
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Dashboard.vue?vue&type=template&id=82704d4a&":
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Dashboard.vue?vue&type=template&id=82704d4a& ***!
+  \*******************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("main", { staticClass: "l-main" }, [
+    _c("div", { staticClass: "l-contents" }, [
+      _c("div", { staticClass: "p-contents__area" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("section", { staticClass: "c-tab" }, [
+          _c("ul", { staticClass: "c-tab__list" }, [
+            _c(
+              "li",
+              {
+                staticClass: "c-tab__item c-tab__item--active",
+                on: {
+                  click: function($event) {
+                    _vm.tab = 1
+                  }
+                }
+              },
+              [_vm._v("自動フォロー")]
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                staticClass: "c-tab__item",
+                on: {
+                  click: function($event) {
+                    _vm.tab = 2
+                  }
+                }
+              },
+              [_vm._v("自動アンフォロー")]
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                staticClass: "c-tab__item",
+                on: {
+                  click: function($event) {
+                    _vm.tab = 3
+                  }
+                }
+              },
+              [_vm._v("自動いいね")]
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                staticClass: "c-tab__item",
+                on: {
+                  click: function($event) {
+                    _vm.tab = 4
+                  }
+                }
+              },
+              [_vm._v("自動ツイート")]
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                staticClass: "c-tab__item",
+                on: {
+                  click: function($event) {
+                    _vm.tab = 5
+                  }
+                }
+              },
+              [_vm._v("キーワード登録")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("section", { staticClass: "p-dashboard" }, [
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tab === 1,
+                  expression: "tab===1"
+                }
+              ],
+              staticClass: "c-panel u-color__bg--white"
+            },
+            [_vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3)]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tab === 2,
+                  expression: "tab===2"
+                }
+              ],
+              staticClass: "p-dashboard__panel"
+            },
+            [_vm._m(4)]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tab === 3,
+                  expression: "tab===3"
+                }
+              ],
+              staticClass: "p-dashboard__panel"
+            },
+            [_vm._m(5), _vm._v(" "), _vm._m(6)]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tab === 4,
+                  expression: "tab===4"
+                }
+              ],
+              staticClass: "p-dashboard__panel"
+            },
+            [_vm._m(7), _vm._v(" "), _vm._m(8)]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tab === 5,
+                  expression: "tab===5"
+                }
+              ],
+              staticClass: "p-dashboard__panel"
+            },
+            [_vm._m(9)]
+          )
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-twitter__action" }, [
-      _c("i", { staticClass: "c-icon--gray p-twitter__icon fas fa-trash-alt" })
+    return _c("section", { staticClass: "p-profile" }, [
+      _c("figure", [
+        _c("div", {
+          staticClass: "p-profile__img",
+          attrs: { src: "", alt: "" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "p-profile__info" }, [
+        _c("p", { staticClass: "p-profile__name" }, [
+          _vm._v("あやとまるるるるるるるるるる")
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "p-profile__screen" }, [
+          _vm._v("@ayatomarururururu")
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "p-profile__follow" }, [
+          _vm._v("\n                        フォロー: "),
+          _c("span", { staticClass: "p-profile__number" }, [_vm._v("2011")]),
+          _vm._v("\n                        フォロワー: "),
+          _c("span", { staticClass: "p-profile__number" }, [_vm._v("5890")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "c-status" }, [
+      _c("p", { staticClass: "c-status__show" }, [_vm._v("稼働中")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "c-status__button c-button c-button--success" },
+        [_vm._v("サービス開始")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "c-status__button c-button c-button--cancel" },
+        [_vm._v("停止")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "c-table__title" }, [
+      _c("h2", { staticClass: "c-table__caption" }, [
+        _vm._v("○フォロワーターゲット")
+      ]),
+      _vm._v(" "),
+      _c("button", { staticClass: "c-button c-button--twitter" }, [
+        _c("i", { staticClass: "c-icon c-icon--white fas fa-plus" }),
+        _vm._v(
+          "\n                            フォロワーターゲットを追加\n                        "
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("table", { staticClass: "c-table" }, [
+      _c("tr", { staticClass: "c-table__head" }, [
+        _c("th", { staticClass: "c-table__th" }, [_vm._v("ステータス")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "c-table__th" }, [_vm._v("ターゲット")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "c-table__th" }, [_vm._v("条件")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "c-table__th" }, [_vm._v("操作")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("[実行中]")]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("@sample1234")]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [
+          _vm._v("プログラミング Boot")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("編集/削除")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("td", { staticClass: "c-table__td" }, [
+          _vm._v("@fn103fdsafdasfasdfa1")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [
+          _vm._v("プログラミング OR アーキテクチャ")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("[待機中]")]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("編集/削除")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("@fteeewitn")]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [
+          _vm._v("フロントエンジニア 単価 -SES")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("[待機中]")]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("編集/削除")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "c-status" }, [
+      _c("p", { staticClass: "c-status__show" }, [_vm._v("稼働中")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "c-status__button c-button c-button--start" },
+        [_vm._v("サービス開始")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "c-status__button c-button c-button--cancel" },
+        [_vm._v("停止")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "c-status" }, [
+      _c("p", { staticClass: "c-status__show" }, [_vm._v("稼働中")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "c-status__button c-button c-button--start" },
+        [_vm._v("サービス開始")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "c-status__button c-button c-button--cancel" },
+        [_vm._v("停止")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("table", { staticClass: "c-table" }, [
+      _c("caption", { staticClass: "c-table__caption" }, [
+        _vm._v("○いいね設定")
+      ]),
+      _vm._v(" "),
+      _c("tr", { staticClass: "c-table__head" }, [
+        _c("th", { staticClass: "c-table__th" }, [_vm._v("条件")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "c-table__th" }, [_vm._v("操作")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("td", { staticClass: "c-table__td" }, [
+          _vm._v("プログラミング Boot")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("編集/削除")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "c-status" }, [
+      _c("p", { staticClass: "c-status__show" }, [_vm._v("稼働中")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "c-status__button c-button c-button--start" },
+        [_vm._v("サービス開始")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "c-status__button c-button c-button--cancel" },
+        [_vm._v("停止")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("table", { staticClass: "c-table" }, [
+      _c("caption", { staticClass: "c-table__caption" }, [
+        _vm._v("○自動ツイートリスト")
+      ]),
+      _vm._v(" "),
+      _c("tr", { staticClass: "c-table__head" }, [
+        _c("th", { staticClass: "c-table__th" }, [_vm._v("ステータス")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "c-table__th" }, [_vm._v("内容")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "c-table__th" }, [_vm._v("時刻")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "c-table__th" }, [_vm._v("操作")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("[ツイート済]")]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [
+          _vm._v(
+            "吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ"
+          )
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [
+          _vm._v("2019年03月19日 21:51:13")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("編集/削除")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("[ツイート済]")]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [
+          _vm._v(
+            "吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ"
+          )
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [
+          _vm._v("2019年03月19日 21:51:13")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("編集/削除")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("[ツイート済]")]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [
+          _vm._v(
+            "吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ"
+          )
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [
+          _vm._v("2019年03月19日 21:51:13")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("編集/削除")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("table", { staticClass: "c-table" }, [
+      _c("caption", { staticClass: "c-table__caption" }, [
+        _vm._v("○キーワードリスト")
+      ]),
+      _vm._v(" "),
+      _c("tr", { staticClass: "c-table__head" }, [
+        _c("th", { staticClass: "c-table__th" }, [_vm._v("ステータス")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "c-table__th" }, [_vm._v("内容")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "c-table__th" }, [_vm._v("時刻")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "c-table__th" }, [_vm._v("操作")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("[ツイート済]")]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [
+          _vm._v(
+            "吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ"
+          )
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [
+          _vm._v("2019年03月19日 21:51:13")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("編集/削除")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("[ツイート済]")]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [
+          _vm._v(
+            "吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ"
+          )
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [
+          _vm._v("2019年03月19日 21:51:13")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("編集/削除")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("[ツイート済]")]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [
+          _vm._v(
+            "吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ"
+          )
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [
+          _vm._v("2019年03月19日 21:51:13")
+        ]),
+        _vm._v(" "),
+        _c("td", { staticClass: "c-table__td" }, [_vm._v("編集/削除")])
+      ])
     ])
   }
 ]
@@ -3835,13 +4609,13 @@ var render = function() {
   return _c("main", { staticClass: "l-main" }, [
     _c("div", { staticClass: "l-contents" }, [
       _c("div", { staticClass: "p-contents__area--narrow" }, [
-        _c("section", { staticClass: "p-tab" }, [
-          _c("ul", { staticClass: "p-tab__list" }, [
+        _c("section", { staticClass: "c-tab" }, [
+          _c("ul", { staticClass: "c-tab__list" }, [
             _c(
               "li",
               {
-                staticClass: "p-tab__item",
-                class: { "p-tab__item--active": _vm.tab === 1 },
+                staticClass: "c-tab__item",
+                class: { "c-tab__item--active": _vm.tab === 1 },
                 on: {
                   click: function($event) {
                     _vm.tab = 1
@@ -3854,8 +4628,8 @@ var render = function() {
             _c(
               "li",
               {
-                staticClass: "p-tab__item",
-                class: { "p-tab__item--active": _vm.tab === 2 },
+                staticClass: "c-tab__item",
+                class: { "c-tab__item--active": _vm.tab === 2 },
                 on: {
                   click: function($event) {
                     _vm.tab = 2
@@ -3867,380 +4641,394 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("section", { staticClass: "p-login" }, [
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.tab === 1,
-                  expression: "tab === 1"
-                }
-              ],
-              staticClass: "p-login__panel"
-            },
-            [
+        _c(
+          "section",
+          { staticClass: "p-login" },
+          [
+            _c("transition-group", { attrs: { name: "tab" } }, [
               _c(
-                "form",
+                "div",
                 {
-                  staticClass: "p-form",
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.login($event)
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.tab === 1,
+                      expression: "tab === 1"
                     }
-                  }
+                  ],
+                  key: "login",
+                  staticClass: "c-panel p-login__panel u-color__bg--white"
                 },
                 [
-                  _vm.loginErrors
-                    ? _c("div", { staticClass: "errors" }, [
-                        _vm.loginErrors.email
-                          ? _c(
-                              "ul",
-                              _vm._l(_vm.loginErrors.email, function(msg) {
-                                return _c("li", { key: msg }, [
-                                  _vm._v(_vm._s(msg))
-                                ])
-                              }),
-                              0
+                  _c(
+                    "form",
+                    {
+                      staticClass: "p-form",
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.login($event)
+                        }
+                      }
+                    },
+                    [
+                      _vm.loginErrors
+                        ? _c("div", { staticClass: "errors" }, [
+                            _vm.loginErrors.email
+                              ? _c(
+                                  "ul",
+                                  _vm._l(_vm.loginErrors.email, function(msg) {
+                                    return _c("li", { key: msg }, [
+                                      _vm._v(_vm._s(msg))
+                                    ])
+                                  }),
+                                  0
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.loginErrors.password
+                              ? _c(
+                                  "ul",
+                                  _vm._l(_vm.loginErrors.password, function(
+                                    msg
+                                  ) {
+                                    return _c("li", { key: msg }, [
+                                      _vm._v(_vm._s(msg))
+                                    ])
+                                  }),
+                                  0
+                                )
+                              : _vm._e()
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "p-form__label",
+                          attrs: { for: "login-email" }
+                        },
+                        [_vm._v("メールアドレス")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.loginForm.email,
+                            expression: "loginForm.email"
+                          }
+                        ],
+                        staticClass: "p-form__item",
+                        attrs: { type: "text", id: "login-email" },
+                        domProps: { value: _vm.loginForm.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.loginForm,
+                              "email",
+                              $event.target.value
                             )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.loginErrors.password
-                          ? _c(
-                              "ul",
-                              _vm._l(_vm.loginErrors.password, function(msg) {
-                                return _c("li", { key: msg }, [
-                                  _vm._v(_vm._s(msg))
-                                ])
-                              }),
-                              0
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "p-form__label",
+                          attrs: { for: "login-password" }
+                        },
+                        [_vm._v("パスワード")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.loginForm.password,
+                            expression: "loginForm.password"
+                          }
+                        ],
+                        staticClass: "p-form__item",
+                        attrs: { type: "password", id: "login-password" },
+                        domProps: { value: _vm.loginForm.password },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.loginForm,
+                              "password",
+                              $event.target.value
                             )
-                          : _vm._e()
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "p-form__button" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "c-button c-button--inverse",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("ログイン")]
+                        )
                       ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "label",
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
                     {
-                      staticClass: "p-form__label",
-                      attrs: { for: "login-email" }
-                    },
-                    [_vm._v("メールアドレス")]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.loginForm.email,
-                        expression: "loginForm.email"
-                      }
-                    ],
-                    staticClass: "p-form__item",
-                    attrs: { type: "text", id: "login-email" },
-                    domProps: { value: _vm.loginForm.email },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.loginForm, "email", $event.target.value)
-                      }
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.tab === 2,
+                      expression: "tab === 2"
                     }
-                  }),
-                  _vm._v(" "),
+                  ],
+                  key: "register",
+                  staticClass: "c-panel p-login__panel u-color__bg--white"
+                },
+                [
                   _c(
-                    "label",
+                    "form",
                     {
-                      staticClass: "p-form__label",
-                      attrs: { for: "login-password" }
-                    },
-                    [_vm._v("パスワード")]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.loginForm.password,
-                        expression: "loginForm.password"
-                      }
-                    ],
-                    staticClass: "p-form__item",
-                    attrs: { type: "password", id: "login-password" },
-                    domProps: { value: _vm.loginForm.password },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                      staticClass: "p-form",
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.register($event)
                         }
-                        _vm.$set(_vm.loginForm, "password", $event.target.value)
                       }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm._m(0)
+                    },
+                    [
+                      _vm.registerErrors
+                        ? _c("div", { staticClass: "errors" }, [
+                            _vm.registerErrors.name
+                              ? _c(
+                                  "ul",
+                                  _vm._l(_vm.registerErrors.name, function(
+                                    msg
+                                  ) {
+                                    return _c("li", { key: msg }, [
+                                      _vm._v(_vm._s(msg))
+                                    ])
+                                  }),
+                                  0
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.registerErrors.email
+                              ? _c(
+                                  "ul",
+                                  _vm._l(_vm.registerErrors.email, function(
+                                    msg
+                                  ) {
+                                    return _c("li", { key: msg }, [
+                                      _vm._v(_vm._s(msg))
+                                    ])
+                                  }),
+                                  0
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.registerErrors.password
+                              ? _c(
+                                  "ul",
+                                  _vm._l(_vm.registerErrors.password, function(
+                                    msg
+                                  ) {
+                                    return _c("li", { key: msg }, [
+                                      _vm._v(_vm._s(msg))
+                                    ])
+                                  }),
+                                  0
+                                )
+                              : _vm._e()
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "p-form__label",
+                          attrs: { for: "username" }
+                        },
+                        [_vm._v("ユーザー名")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.registerForm.name,
+                            expression: "registerForm.name"
+                          }
+                        ],
+                        staticClass: "p-form__item",
+                        attrs: { type: "text", id: "username" },
+                        domProps: { value: _vm.registerForm.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.registerForm,
+                              "name",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "p-form__label",
+                          attrs: { for: "email" }
+                        },
+                        [_vm._v("メールアドレス")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.registerForm.email,
+                            expression: "registerForm.email"
+                          }
+                        ],
+                        staticClass: "p-form__item",
+                        attrs: { type: "text", id: "email" },
+                        domProps: { value: _vm.registerForm.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.registerForm,
+                              "email",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "p-form__label",
+                          attrs: { for: "password" }
+                        },
+                        [_vm._v("パスワード")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.registerForm.password,
+                            expression: "registerForm.password"
+                          }
+                        ],
+                        staticClass: "p-form__item",
+                        attrs: { type: "password", id: "password" },
+                        domProps: { value: _vm.registerForm.password },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.registerForm,
+                              "password",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "p-form__label",
+                          attrs: { for: "password-confirmation" }
+                        },
+                        [_vm._v("パスワード(確認)")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.registerForm.password_confirmation,
+                            expression: "registerForm.password_confirmation"
+                          }
+                        ],
+                        staticClass: "p-form__item",
+                        attrs: {
+                          type: "password",
+                          id: "password-confirmation"
+                        },
+                        domProps: {
+                          value: _vm.registerForm.password_confirmation
+                        },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.registerForm,
+                              "password_confirmation",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "p-form__button" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "c-button c-button--inverse",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("登録")]
+                        )
+                      ])
+                    ]
+                  )
                 ]
               )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.tab === 2,
-                  expression: "tab === 2"
-                }
-              ],
-              staticClass: "p-login--panel"
-            },
-            [
-              _c("div", { staticClass: "p-login__panel" }, [
-                _c(
-                  "form",
-                  {
-                    staticClass: "p-form",
-                    on: {
-                      submit: function($event) {
-                        $event.preventDefault()
-                        return _vm.register($event)
-                      }
-                    }
-                  },
-                  [
-                    _vm.registerErrors
-                      ? _c("div", { staticClass: "errors" }, [
-                          _vm.registerErrors.name
-                            ? _c(
-                                "ul",
-                                _vm._l(_vm.registerErrors.name, function(msg) {
-                                  return _c("li", { key: msg }, [
-                                    _vm._v(_vm._s(msg))
-                                  ])
-                                }),
-                                0
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.registerErrors.email
-                            ? _c(
-                                "ul",
-                                _vm._l(_vm.registerErrors.email, function(msg) {
-                                  return _c("li", { key: msg }, [
-                                    _vm._v(_vm._s(msg))
-                                  ])
-                                }),
-                                0
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.registerErrors.password
-                            ? _c(
-                                "ul",
-                                _vm._l(_vm.registerErrors.password, function(
-                                  msg
-                                ) {
-                                  return _c("li", { key: msg }, [
-                                    _vm._v(_vm._s(msg))
-                                  ])
-                                }),
-                                0
-                              )
-                            : _vm._e()
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "p-form__label",
-                        attrs: { for: "username" }
-                      },
-                      [_vm._v("ユーザー名")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.registerForm.name,
-                          expression: "registerForm.name"
-                        }
-                      ],
-                      staticClass: "p-form__item",
-                      attrs: { type: "text", id: "username" },
-                      domProps: { value: _vm.registerForm.name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.registerForm,
-                            "name",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      { staticClass: "p-form__label", attrs: { for: "email" } },
-                      [_vm._v("メールアドレス")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.registerForm.email,
-                          expression: "registerForm.email"
-                        }
-                      ],
-                      staticClass: "p-form__item",
-                      attrs: { type: "text", id: "email" },
-                      domProps: { value: _vm.registerForm.email },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.registerForm,
-                            "email",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "p-form__label",
-                        attrs: { for: "password" }
-                      },
-                      [_vm._v("パスワード")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.registerForm.password,
-                          expression: "registerForm.password"
-                        }
-                      ],
-                      staticClass: "p-form__item",
-                      attrs: { type: "password", id: "password" },
-                      domProps: { value: _vm.registerForm.password },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.registerForm,
-                            "password",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "p-form__label",
-                        attrs: { for: "password-confirmation" }
-                      },
-                      [_vm._v("パスワード(確認)")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.registerForm.password_confirmation,
-                          expression: "registerForm.password_confirmation"
-                        }
-                      ],
-                      staticClass: "p-form__item",
-                      attrs: { type: "password", id: "password-confirmation" },
-                      domProps: {
-                        value: _vm.registerForm.password_confirmation
-                      },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.registerForm,
-                            "password_confirmation",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _vm._m(1)
-                  ]
-                )
-              ])
-            ]
-          )
-        ])
+            ])
+          ],
+          1
+        )
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-form__button" }, [
-      _c(
-        "button",
-        {
-          staticClass: "c-button c-button--inverse",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("ログイン")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-form__button" }, [
-      _c(
-        "button",
-        {
-          staticClass: "c-button c-button--inverse",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("登録")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -4302,7 +5090,7 @@ var render = function() {
                 expression: "isMaximumAccount"
               }
             ],
-            staticClass: "c-card p-twitter__card"
+            staticClass: "c-card p-twitter__card u-color__bg--white"
           },
           [_vm._m(1)]
         ),
@@ -20537,6 +21325,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/pages/Dashboard.vue":
+/*!******************************************!*\
+  !*** ./resources/js/pages/Dashboard.vue ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Dashboard_vue_vue_type_template_id_82704d4a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Dashboard.vue?vue&type=template&id=82704d4a& */ "./resources/js/pages/Dashboard.vue?vue&type=template&id=82704d4a&");
+/* harmony import */ var _Dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Dashboard.vue?vue&type=script&lang=js& */ "./resources/js/pages/Dashboard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Dashboard_vue_vue_type_template_id_82704d4a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Dashboard_vue_vue_type_template_id_82704d4a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/Dashboard.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/Dashboard.vue?vue&type=script&lang=js&":
+/*!*******************************************************************!*\
+  !*** ./resources/js/pages/Dashboard.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Dashboard.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Dashboard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/Dashboard.vue?vue&type=template&id=82704d4a&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/pages/Dashboard.vue?vue&type=template&id=82704d4a& ***!
+  \*************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_82704d4a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Dashboard.vue?vue&type=template&id=82704d4a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Dashboard.vue?vue&type=template&id=82704d4a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_82704d4a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_82704d4a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/pages/Login.vue":
 /*!**************************************!*\
   !*** ./resources/js/pages/Login.vue ***!
@@ -20758,10 +21615,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _pages_Twitter_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/Twitter.vue */ "./resources/js/pages/Twitter.vue");
 /* harmony import */ var _pages_Login_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/Login.vue */ "./resources/js/pages/Login.vue");
-/* harmony import */ var _pages_System_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/System.vue */ "./resources/js/pages/System.vue");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var _pages_Dashboard_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/Dashboard.vue */ "./resources/js/pages/Dashboard.vue");
+/* harmony import */ var _pages_System_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/System.vue */ "./resources/js/pages/System.vue");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
 
  // ページコンポーネントをインポートする
+
 
 
 
@@ -20774,7 +21633,7 @@ var routes = [{
   path: '/login',
   component: _pages_Login_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
   beforeEnter: function beforeEnter(to, from, next) {
-    if (_store__WEBPACK_IMPORTED_MODULE_5__["default"].getters['auth/check']) {
+    if (_store__WEBPACK_IMPORTED_MODULE_6__["default"].getters['auth/check']) {
       next('/twitter');
     } else {
       next();
@@ -20784,9 +21643,9 @@ var routes = [{
   path: '/twitter',
   component: _pages_Twitter_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
   beforeEnter: function beforeEnter(to, from, next) {
-    var auth = _store__WEBPACK_IMPORTED_MODULE_5__["default"].getters['auth/check'];
+    var auth = _store__WEBPACK_IMPORTED_MODULE_6__["default"].getters['auth/check'];
 
-    if (auth && _store__WEBPACK_IMPORTED_MODULE_5__["default"].getters['auth/checkTwitterId']) {
+    if (auth && _store__WEBPACK_IMPORTED_MODULE_6__["default"].getters['auth/checkTwitterId']) {
       next('/dashboard');
     } else if (auth) {
       next();
@@ -20795,11 +21654,14 @@ var routes = [{
     }
   }
 }, {
+  path: '/dashboard',
+  component: _pages_Dashboard_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+}, {
   path: '/',
   beforeEnter: function beforeEnter(to, from, next) {
-    var auth = _store__WEBPACK_IMPORTED_MODULE_5__["default"].getters['auth/check'];
+    var auth = _store__WEBPACK_IMPORTED_MODULE_6__["default"].getters['auth/check'];
 
-    if (auth && _store__WEBPACK_IMPORTED_MODULE_5__["default"].getters['auth/checkTwitterId']) {
+    if (auth && _store__WEBPACK_IMPORTED_MODULE_6__["default"].getters['auth/checkTwitterId']) {
       next('/dashboard');
     } else if (auth) {
       next('/twitter');
@@ -20809,7 +21671,7 @@ var routes = [{
   }
 }, {
   path: '/500',
-  component: _pages_System_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+  component: _pages_System_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
 }]; // VueRouterインスタンスを作成する
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({

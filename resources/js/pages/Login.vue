@@ -3,17 +3,17 @@
         <div class="l-contents">
 
             <div class="p-contents__area--narrow">
-                <section class="p-tab">
-                    <ul class="p-tab__list">
+                <section class="c-tab">
+                    <ul class="c-tab__list">
                         <li
-                                class="p-tab__item"
-                                :class="{'p-tab__item--active': tab ===1}"
+                                class="c-tab__item"
+                                :class="{'c-tab__item--active': tab ===1}"
                                 @click="tab = 1"
                         >ログイン
                         </li>
                         <li
-                                class="p-tab__item"
-                                :class="{'p-tab__item--active': tab ===2}"
+                                class="c-tab__item"
+                                :class="{'c-tab__item--active': tab ===2}"
                                 @click="tab = 2"
 
                         >新規登録
@@ -22,30 +22,30 @@
                 </section>
 
                 <section class="p-login">
-                    <div class="p-login__panel" v-show="tab === 1">
-                        <!--@submit に続く .prevent はイベント修飾子と呼ばれます。.prevent を記述することは、
-                        イベントハンドラで event.preventDefault() を呼び出すのと同じ効果があります。-->
-                        <form class="p-form" @submit.prevent="login">
-                            <div v-if="loginErrors" class="errors">
-                                <ul v-if="loginErrors.email">
-                                    <li v-for="msg in loginErrors.email" :key="msg">{{ msg }}</li>
-                                </ul>
-                                <ul v-if="loginErrors.password">
-                                    <li v-for="msg in loginErrors.password" :key="msg">{{ msg }}</li>
-                                </ul>
-                            </div>
-                            <label class="p-form__label" for="login-email">メールアドレス</label>
-                            <input type="text" class="p-form__item" id="login-email" v-model="loginForm.email">
-                            <label class="p-form__label" for="login-password">パスワード</label>
-                            <input type="password" class="p-form__item" id="login-password"
-                                   v-model="loginForm.password">
-                            <div class="p-form__button">
-                                <button type="submit" class="c-button c-button--inverse">ログイン</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="p-login--panel" v-show="tab === 2">
-                        <div class="p-login__panel">
+                    <transition-group name="tab">
+                        <div class="c-panel p-login__panel u-color__bg--white" v-show="tab === 1" key="login">
+                            <!--@submit に続く .prevent はイベント修飾子と呼ばれます。.prevent を記述することは、
+                            イベントハンドラで event.preventDefault() を呼び出すのと同じ効果があります。-->
+                            <form class="p-form" @submit.prevent="login">
+                                <div v-if="loginErrors" class="errors">
+                                    <ul v-if="loginErrors.email">
+                                        <li v-for="msg in loginErrors.email" :key="msg">{{ msg }}</li>
+                                    </ul>
+                                    <ul v-if="loginErrors.password">
+                                        <li v-for="msg in loginErrors.password" :key="msg">{{ msg }}</li>
+                                    </ul>
+                                </div>
+                                <label class="p-form__label" for="login-email">メールアドレス</label>
+                                <input type="text" class="p-form__item" id="login-email" v-model="loginForm.email">
+                                <label class="p-form__label" for="login-password">パスワード</label>
+                                <input type="password" class="p-form__item" id="login-password"
+                                       v-model="loginForm.password">
+                                <div class="p-form__button">
+                                    <button type="submit" class="c-button c-button--inverse">ログイン</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="c-panel p-login__panel u-color__bg--white" v-show="tab === 2" key="register">
                             <form class="p-form" @submit.prevent="register">
                                 <div v-if="registerErrors" class="errors">
                                     <ul v-if="registerErrors.name">
@@ -73,7 +73,7 @@
                                 </div>
                             </form>
                         </div>
-                    </div>
+                    </transition-group>
                 </section>
             </div>
         </div>

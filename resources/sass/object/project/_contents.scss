@@ -4,14 +4,16 @@
 .p-contents {
   &__area{
     width: 980px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    min-width: 980px;
+    //display: flex;
+    //justify-content: center;
+    //flex-direction: column;
     &--narrow{
       width: 450px;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
+      min-width: 450px;
+      //display: flex;
+      //justify-content: center;
+      //flex-direction: column;
     }
   }
 

@@ -1,0 +1,14 @@
+// ==================================
+// c-icon
+// ==================================
+.c-icon {
+  &--twitter {
+    color: $color-twitter;
+  }
+  &--gray{
+    color: $color-icon-gray;
+  }
+  &--white{
+    color: $color-white;
+  }
+}
