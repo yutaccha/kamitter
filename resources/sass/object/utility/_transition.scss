@@ -83,9 +83,21 @@
   opacity: 1;
 }
 .t-dashboard_panel-leave-to {
-  //transform: translate(-100%, 0);
+  transform: translate(-100%, 0);
   opacity: 0;
 }
 .t-dashboard_panel-leave-active {
   display: none;
+}
+
+//twitter-card
+.t-twitter_card-leave {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+.t-twitter_card-leave-to {
+  opacity: 0;
+}
+.t-twitter_card-leave-active {
+  transition: all 1s;
 }

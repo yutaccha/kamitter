@@ -1,5 +1,5 @@
 <template>
-    <li class="c-card p-twitter__card u-color__bg--white" @click.prevent="setTwitterId">
+    <li class="c-card p-twitter__card u-color__bg--white" @click="setTwitterId">
         <div class="p-twitter__profile">
             <figure>
                 <img class="p-twitter__img" :src="thumbnail" alt="">
@@ -13,7 +13,7 @@
         <div class="p-twitter__action">
             <transition-group name="t-del" mode="out-in">
                 <i class="c-icon--gray p-twitter__icon fas fa-trash-alt" @click.stop="del = 2" v-show="del===1" key="box"></i>
-                <button class="p-twitter_delete c-button c-button--danger" @click.stop="del = 1" v-show="del===2" key="del">削除</button>
+                <button class="p-twitter_delete c-button c-button--danger" @click.stop="deleteTwitterUser" v-show="del===2" key="del">削除</button>
             </transition-group>
         </div>
     </li>
@@ -58,8 +58,32 @@
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
+
+                await this.$store.dispatch('auth/currentTwitterUser')
+                if (this.apiStatus){
+                    this.$router.push('/')
+                }
+
                 this.$router.push('/dashboard')
+            },
+            async deleteTwitterUser() {
+                await this.$store.dispatch('auth/twitterUserLogout')
+                if (this.apiStatus) {
+                    const response = await axios.delete(`/api/twitter/${this.item.id}`)
+                    if (response.status !== OK) {
+                        this.$store.commit('error/setCode', response.status)
+                        return false
+                    }
+                }
+                this.$emit('delUser', {
+                    id: this.index,
+                })
             }
+        },
+        computed: {
+            apiStatus() {
+                return this.$store.state.auth.apiStatus
+            },
         },
         created() {
             this.fetchTwitterUser()

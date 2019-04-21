@@ -12,11 +12,14 @@
                     </a>
                 </div>
                 <ul class="p-twitter">
-                    <TwitterCard
-                            v-for="user in users"
-                            :key="user.id"
-                            :item="user"
-                    />
+                    <transition-group name="t-twitter_card">
+                        <TwitterCard
+                                v-for="(user, index) in users"
+                                :key="user.id"
+                                :item="user"
+                                @delUser="removeCard"
+                        />
+                    </transition-group>
                 </ul>
             </div>
         </div>
@@ -44,22 +47,22 @@
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
-
                 this.users = response.data.twitter_accounts
                 this.accountNum = response.data.account_num
-                // // console.log(users);
-                // // console.log(accountNum);
 
             },
+            removeCard(id) {
+                this.users.splice(id, 1)
+            }
         },
         computed: {
-            isMaximumAccount () {
+            isMaximumAccount() {
                 return this.accountNum <= 10
             }
         },
-        created() {
-            this.fetchTwitterUsers()
-        },
+        async created() {
+            await this.fetchTwitterUsers()
+        }
     }
 </script>
 

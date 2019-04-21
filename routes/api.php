@@ -6,10 +6,14 @@ Route::get('/user', function (){
     return Auth::user();
 })->name('user');
 
-Route::get('/twitter/id', 'TwitterAuthController@getId')->name('twitter.id');
+Route::post('/twitter/logout', 'TwitterAuthController@logout')->name('twitter.logout');
+Route::delete('/twitter/{id}', 'TwitterAuthController@delete')->name('twitter.delete');
+Route::get('/twitter/id', 'TwitterAuthController@getId')->name('twitter.getId');
 Route::post('/twitter/{id}', 'TwitterAuthController@setId')->name('twitter.setId');
-Route::get('/twitter/logout', 'TwitterAuthController@logout')->name('twitter.logout');
 
 Route::get('/twitter/user/list', 'TwitterUserController@list')->name('twitter.list');
 Route::get('/twitter/user/info/{id}', 'TwitterUserController@info')->name('twitter.info');
-Route::get('/twitter/test', 'TwitterUserController@test');
+
+Route::post('/filter', 'FilterWordController@add')->name('filter.add');
+Route::get('/filter', 'FilterWordController@show')->name('filter.show');
+Route::get('/filter/{id}', 'FilterWordController@showOneFilter')->name('filter.showOne');

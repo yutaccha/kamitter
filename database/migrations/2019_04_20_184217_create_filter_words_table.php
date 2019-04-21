@@ -17,12 +17,12 @@ class CreateFilterWordsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->integer('type')->default(1);
-            $table->string('and', 100);
-            $table->string('or', 100);
-            $table->string('not', 100);
+            $table->string('and', 100)->nullable();
+            $table->string('or', 100)->nullable();
+            $table->string('not', 100)->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

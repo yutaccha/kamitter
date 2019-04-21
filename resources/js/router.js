@@ -4,9 +4,10 @@ import VueRouter from 'vue-router'
 import Twitter from './pages/Twitter.vue'
 import Login from './pages/Login.vue'
 import Dashboard from './pages/Dashboard.vue'
-import SystemError from './pages/System.vue'
+import S from './pages/System.vue'
 
 import store from './store'
+import System from "./pages/System";
 
 // VueRouterプラグインを使用する
 // これによって<RouterView />コンポーネントなどを使うことができる
@@ -41,6 +42,19 @@ const routes = [
     {
         path: '/dashboard',
         component: Dashboard,
+        beforeEnter(to, from, next) {
+            const auth = store.getters['auth/check']
+            const twitterAuth = store.getters['auth/checkTwitterId']
+            if (auth && twitterAuth) {
+                next()
+            } else if (auth) {
+                console.log('twitter');
+                next('/twitter')
+            } else {
+                next('/login')
+            }
+        }
+
     },
     {
         path: '/',
@@ -56,8 +70,8 @@ const routes = [
         }
     },
     {
-      path: '/500',
-      component: SystemError,
+        path: '/500',
+        component: System,
     },
 ]
 

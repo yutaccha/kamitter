@@ -20,7 +20,7 @@ class CreateTwitterUsersTable extends Migration
             $table->string('token_secret', 100);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
         });
     }
 

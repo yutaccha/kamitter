@@ -44,4 +44,13 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\TwitterUser', 'user_id');
     }
+
+    /**
+     * リレーションシップ　- FilterWordsテーブル
+     */
+    public function filterWords()
+    {
+        return $this->hasMany('App\FilterWord', 'user_id');
+    }
+
 }

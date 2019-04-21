@@ -4,10 +4,18 @@
             <RouterLink class="p-navbar__title_link" to="/twitter">twitter</RouterLink>
         </h1>
 
-        <span v-if="isLogin" class="navbar__item">
+        <div class="p-navbar__item" v-if="isLogin">
+        <span  class="p-navbar__item">
             {{ username }}<i class="c-icon fas fa-caret-down"></i>
         </span>
-        <div v-else class="navbar__item">
+            <span class="p-navbar__item" v-on:click.stop="changeTwitterUser">
+                アカウント切り替え
+            </span>
+            <span class="p-navbar__item" v-on:click.stop="logout">
+                ログアウト
+            </span>
+        </div>
+        <div v-else class="p-navbar__item">
             <RouterLink class="button button--link" to="/login">
                 ログイン/新規登録
             </RouterLink>
@@ -18,11 +26,28 @@
 <script>
     export default {
         computed: {
-            isLogin () {
+            isLogin() {
                 return this.$store.getters['auth/check']
             },
-            username () {
+            username() {
                 return this.$store.getters['auth/username']
+            },
+            apiStatus() {
+                return this.$store.state.auth.apiStatus
+            },
+        },
+        methods: {
+            async logout() {
+                await this.$store.dispatch('auth/logout')
+                if (this.apiStatus){
+                    this.$router.push('/')
+                }
+            },
+            async changeTwitterUser() {
+                await this.$store.dispatch('auth/twitterUserLogout')
+                if (this.apiStatus) {
+                    this.$router.push('/twitter')
+                }
             }
         }
     }
