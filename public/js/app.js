@@ -4695,7 +4695,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-dashboard__panel" }, [
+    return _c("div", { staticClass: "c-panel u-color__bg--white" }, [
       _c("div", { staticClass: "c-status" }, [
         _c("p", { staticClass: "c-status__show" }, [_vm._v("稼働中")]),
         _vm._v(" "),
