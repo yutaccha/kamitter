@@ -19,3 +19,5 @@ Route::get('/filter', 'FilterWordController@show')->name('filter.show');
 Route::get('/filter/{id}', 'FilterWordController@showOneFilter')->name('filter.showOne');
 Route::put('/filter/{id}', 'FilterWordController@editFilter')->name('edit.filter');
 Route::delete('/filter/{id}', 'FilterWordController@deleteFilter')->name('filter.delete');
+
+Route::post('/tweet', 'AutomaticTweetController@add')->name('tweet.add');

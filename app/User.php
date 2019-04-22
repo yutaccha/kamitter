@@ -53,4 +53,12 @@ class User extends Authenticatable
         return $this->hasMany('App\FilterWord', 'user_id');
     }
 
+    /**
+     * リレーションシップ　- AutomaticTweetsテーブル
+     */
+    public function automaticTweets()
+    {
+        return $this->hasMany('App\AutomaticTweet', 'user_id');
+    }
+
 }

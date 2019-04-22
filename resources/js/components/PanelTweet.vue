@@ -9,7 +9,7 @@
 
         <div class="p-table__title">
             <h2 class="p-table__caption">○自動ツイートリスト</h2>
-            <button class="c-button c-button--twitter" @click="viewModal = ! viewModal">
+            <button class="c-button c-button--twitter" @click="newModal = ! newModal">
                 <i class="c-icon c-icon--white fas fa-plus"></i>
                 ツイートを追加
             </button>
@@ -31,6 +31,9 @@
                 <td class="p-table__td">編集/削除</td>
             </tr>
         </table>
+
+
+
     </div>
 </template>
 

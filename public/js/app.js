@@ -2509,6 +2509,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PanelTweet"
 });
@@ -5217,7 +5220,7 @@ var staticRenderFns = [
           staticClass: "c-button c-button--twitter",
           attrs: { type: "submit" }
         },
-        [_vm._v("追加")]
+        [_vm._v("編集")]
       )
     ])
   }
@@ -5471,7 +5474,7 @@ var render = function() {
           staticClass: "c-button c-button--twitter",
           on: {
             click: function($event) {
-              _vm.viewModal = !_vm.viewModal
+              _vm.newModal = !_vm.newModal
             }
           }
         },

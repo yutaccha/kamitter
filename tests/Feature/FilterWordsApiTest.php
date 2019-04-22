@@ -26,15 +26,14 @@ class FilterWordsApiTest extends TestCase
     {
         $data = [
             'type' => 1,
-            'and' => 'ウェブカツ かみったー',
-            'or' => '',
-            'not' => '',
+            'word' => 'ウェブカツ かみったー',
+            'remove' => '',
         ];
         $response = $this->actingAs($this->user)
             ->json('POST', route('filter.add', $data));
 
         $response->assertStatus(201);
-        $this->assertEquals($data['and'], FilterWord::first()->and);
+        $this->assertEquals($data['word'], FilterWord::first()->word);
 
     }
 }
