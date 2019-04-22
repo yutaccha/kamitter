@@ -29,10 +29,9 @@ class AddFilterWord extends FormRequest
 
         return [
 
-            'type' => 'required|' . $type_rule,  // 'type' => 'required|in(1, 2, 3)', となる
-            'and' => 'max:100',
-            'or' => 'max:100',
-            'not' => 'max:100',
+            'type' => 'required|' . $type_rule,  // 'type' => 'required|in(1, 2)', となる
+            'word' => 'max:50',
+            'remove' => 'max:50',
         ];
     }
 }
