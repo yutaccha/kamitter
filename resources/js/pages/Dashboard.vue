@@ -101,7 +101,7 @@
                 this.$router.push('/dashboard')
             }
         },
-        created() {
+        async created() {
             this.fetchTwitterUser()
         }
     }

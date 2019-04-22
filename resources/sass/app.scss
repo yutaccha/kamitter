@@ -16,13 +16,11 @@
 // ==================================
 // c-panel
 // ==================================
-.c-panel{
+.c-panel {
   padding: 40px;
   border: 1px solid $color-default-parent;
   border-radius: 5px;
-  filter: drop-shadow(0px 5px 3px $color-default-parent);
-  position: relative;
-  z-index: 1;
+  box-shadow: 0px 5px 3px $color-default-parent;
 }
 
 
@@ -31,6 +29,7 @@
 // ==================================
 .p-login {
   position: relative;
+
   &__panel {
     position: absolute;
     width: 100%;
@@ -51,8 +50,8 @@
   align-items: center;
 
   &__img {
-    height: 100px;
-    width: 100px;
+    height: 120px;
+    width: 120px;
     background: $color-twitter;
     border-radius: 50%;
     margin-right: 50px;
@@ -60,7 +59,7 @@
 
   &__info {
     font-size: $font-size_l;
-    line-height: 33px;
+    line-height: 40px;
     text-align: center;
   }
 
@@ -83,14 +82,14 @@
 
 
 // ==================================
-// c-table
+// p-table
 // ==================================
-.c-table {
+.p-table {
   width: 100%;
   text-align: left;
   box-sizing: border-box;
 
-  &__title{
+  &__title {
     margin-bottom: 20px;
     width: 100%;
     display: flex;
@@ -98,13 +97,14 @@
     align-items: center;
   }
 
-  &__caption{
+  &__caption {
     font-weight: bold;
     font-size: $font-size_l;
     text-align: left;
     display: inline-block;
   }
-  &__button{
+
+  &__button {
     display: inline-block;
 
   }
@@ -118,13 +118,20 @@
     padding: 10px;
     border-bottom: 3px solid $color-twitter;
     margin-right: 10px;
-    &:nth-child(1), &:nth-child(4) {
-      width: 15%;
+    box-sizing: border-box;
+    &--filter{
+      &:nth-child(1){
+        width: 20%;
+      }
+
+      &:nth-child(2) , &:nth-child(3){
+        width: 30%;
+      }
+      &:nth-child(4){
+        width: 20%;
+      }
     }
 
-    &:nth-child(2) , &:nth-child(3){
-      width: 30%;
-    }
   }
 
   &__td {
@@ -134,17 +141,68 @@
 }
 
 // ==================================
-// c-status
+// p-status
 // ==================================
-.c-status{
+.p-status {
   display: flex;
   align-items: center;
   margin-bottom: 30px;
-  &__show{
+
+  &__show {
     font-size: $font-size_xl;
     margin-right: 40px;
   }
-  &__button{
+
+  &__button {
     margin-right: 10px;
   }
+}
+
+// ==================================
+// p-modal
+// ==================================
+.p-modal {
+  background: $color-default-parent;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
+  opacity: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+
+  &__contents {
+    position: relative;
+    background: $color-white;
+    width: 450px;
+    padding: 40px;
+    box-sizing: border-box;
+  }
+
+  &__cancel {
+    position: absolute;
+    z-index: 201;
+    right: -10px;
+    top: -10px;
+    border-radius: 50%;
+  }
+
+  &__icon {
+    font-size: $font-size_l;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    border: 2px solid $color-default-parent;
+
+  }
+
 }

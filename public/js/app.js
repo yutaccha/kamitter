@@ -2008,6 +2008,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utility */ "./resources/js/utility.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2046,8 +2055,305 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "PanelFilter"
+  data: function data() {
+    return {
+      filters: [],
+      newModal: false,
+      editModal: false,
+      editIndex: null,
+      errors: null,
+      filterForm: {
+        type: 1,
+        word: '',
+        remove: ''
+      },
+      editForm: {
+        id: null,
+        type: '',
+        word: '',
+        remove: ''
+      }
+    };
+  },
+  methods: {
+    fetchFilters: function () {
+      var _fetchFilters = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get('/api/filter', this.filterForm);
+
+              case 2:
+                response = _context.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context.abrupt("return", false);
+
+              case 6:
+                this.filters = response.data;
+                console.log(this.filters);
+
+              case 8:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function fetchFilters() {
+        return _fetchFilters.apply(this, arguments);
+      }
+
+      return fetchFilters;
+    }(),
+    addFilter: function () {
+      var _addFilter = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response, addedFilter;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.post('/api/filter', this.filterForm);
+
+              case 2:
+                response = _context2.sent;
+
+                if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["UNPROCESSABLE_ENTRY"])) {
+                  _context2.next = 6;
+                  break;
+                }
+
+                this.errors = response.data.errors;
+                return _context2.abrupt("return", false);
+
+              case 6:
+                this.resetFilterForm();
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["CREATED"])) {
+                  _context2.next = 10;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context2.abrupt("return", false);
+
+              case 10:
+                addedFilter = response.data;
+                this.filters.push(addedFilter);
+                this.newModal = false;
+
+              case 13:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function addFilter() {
+        return _addFilter.apply(this, arguments);
+      }
+
+      return addFilter;
+    }(),
+    showEditModal: function () {
+      var _showEditModal = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(filter, index) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                this.editModal = true;
+                this.editForm.id = filter.id;
+                this.editForm.type = filter.type;
+                this.editForm.word = filter.word;
+                this.editForm.remove = filter.remove;
+                this.editIndex = index;
+
+              case 6:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function showEditModal(_x, _x2) {
+        return _showEditModal.apply(this, arguments);
+      }
+
+      return showEditModal;
+    }(),
+    editFilter: function () {
+      var _editFilter = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios.put("/api/filter/".concat(this.editForm.id), this.editForm);
+
+              case 2:
+                response = _context4.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context4.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context4.abrupt("return", false);
+
+              case 6:
+                this.filters.splice(this.editIndex, 1, response.data);
+                this.resetEditForm();
+
+              case 8:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function editFilter() {
+        return _editFilter.apply(this, arguments);
+      }
+
+      return editFilter;
+    }(),
+    removeFilter: function () {
+      var _removeFilter = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(id, index) {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
+                return axios["delete"]("/api/filter/".concat(id));
+
+              case 2:
+                response = _context5.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context5.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context5.abrupt("return", false);
+
+              case 6:
+                this.filters.splice(index, 1);
+
+              case 7:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
+
+      function removeFilter(_x3, _x4) {
+        return _removeFilter.apply(this, arguments);
+      }
+
+      return removeFilter;
+    }(),
+    resetFilterForm: function resetFilterForm() {
+      this.filterForm.type = 1;
+      this.filterForm.word = '';
+      this.filterForm.remove = '';
+    },
+    resetEditForm: function resetEditForm() {
+      this.editModal = false;
+      this.editForm.id = null;
+      this.editForm.type = '';
+      this.editForm.word = '';
+      this.editForm.remove = '';
+      this.editIndex = null;
+    }
+  },
+  created: function created() {
+    this.fetchFilters();
+  }
 });
 
 /***/ }),
@@ -2061,6 +2367,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -2143,6 +2450,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PanelLike"
 });
@@ -2158,14 +2473,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2630,9 +2937,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return setTwitterId;
     }()
   },
-  created: function created() {
-    this.fetchTwitterUser();
-  }
+  created: function () {
+    var _created = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              this.fetchTwitterUser();
+
+            case 1:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, this);
+    }));
+
+    function created() {
+      return _created.apply(this, arguments);
+    }
+
+    return created;
+  }()
 });
 
 /***/ }),
@@ -4340,7 +4668,7 @@ var render = function() {
       [
         _c(
           "RouterLink",
-          { staticClass: "p-navbar__title_link", attrs: { to: "/twitter" } },
+          { staticClass: "p-navbar__title_link", attrs: { to: "/" } },
           [_vm._v("twitter")]
         )
       ],
@@ -4418,77 +4746,479 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "c-panel u-color__bg--white" }, [
+    _c("div", { staticClass: "p-table__title" }, [
+      _c("h2", { staticClass: "p-table__caption" }, [
+        _vm._v("○キーワードリスト")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          on: {
+            click: function($event) {
+              _vm.newModal = !_vm.newModal
+            }
+          }
+        },
+        [
+          _c("i", { staticClass: "c-icon c-icon--white fas fa-plus" }),
+          _vm._v("\n            キーワードを追加\n        ")
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "table",
+      { staticClass: "p-table" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.filters, function(filter, index) {
+          return _c("tr", [
+            _c("td", { staticClass: "p-table__td" }, [
+              _vm._v(_vm._s(filter.type_label))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "p-table__td" }, [
+              _vm._v(_vm._s(filter.word))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "p-table__td" }, [
+              _vm._v(_vm._s(filter.remove))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "p-table__td" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "c-button c-button--twitter",
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      return _vm.showEditModal(filter, index)
+                    }
+                  }
+                },
+                [_vm._v("編集\n                ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "c-button c-button--danger",
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      return _vm.removeFilter(filter.id, index)
+                    }
+                  }
+                },
+                [_vm._v("削除\n                ")]
+              )
+            ])
+          ])
+        })
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-modal__wrapper" }, [
+      _c(
+        "section",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.newModal,
+              expression: "newModal"
+            }
+          ],
+          staticClass: "p-modal p-modal--opened"
+        },
+        [
+          _c("div", { staticClass: "p-modal__contents" }, [
+            _c(
+              "span",
+              {
+                staticClass: "p-modal__cancel u-color__bg--white",
+                on: {
+                  click: function($event) {
+                    _vm.newModal = !_vm.newModal
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "c-icon--gray p-modal__icon fas fa-times"
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                staticClass: "p-form",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addFilter($event)
+                  }
+                }
+              },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "add-filter" }
+                  },
+                  [_vm._v("条件タイプ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.filterForm.type,
+                        expression: "filterForm.type"
+                      }
+                    ],
+                    staticClass: "p-form__select",
+                    attrs: { id: "add-filter" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.filterForm,
+                          "type",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "1" } }, [
+                      _vm._v("次のワードを含む")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "2" } }, [
+                      _vm._v("いずれかのワードを含む")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  { staticClass: "p-form__label", attrs: { for: "keyword" } },
+                  [_vm._v("キーワード")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.filterForm.word,
+                      expression: "filterForm.word"
+                    }
+                  ],
+                  staticClass: "p-form__item",
+                  attrs: { type: "text", id: "keyword" },
+                  domProps: { value: _vm.filterForm.word },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.filterForm, "word", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "remove_word" }
+                  },
+                  [_vm._v("除外ワード")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.filterForm.remove,
+                      expression: "filterForm.remove"
+                    }
+                  ],
+                  staticClass: "p-form__item",
+                  attrs: { type: "text", id: "remove_word" },
+                  domProps: { value: _vm.filterForm.remove },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.filterForm, "remove", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("p", { staticClass: "p-form__notion" }, [
+                  _vm._v(
+                    "※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。"
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(1)
+              ]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.editModal,
+              expression: "editModal"
+            }
+          ],
+          staticClass: "p-modal p-modal--opened"
+        },
+        [
+          _c("div", { staticClass: "p-modal__contents" }, [
+            _c(
+              "span",
+              {
+                staticClass: "p-modal__cancel u-color__bg--white",
+                on: {
+                  click: function($event) {
+                    _vm.editModal = !_vm.editModal
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "c-icon--gray p-modal__icon fas fa-times"
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                staticClass: "p-form",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.editFilter($event)
+                  }
+                }
+              },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "edit-filter" }
+                  },
+                  [_vm._v("条件タイプ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.editForm.type,
+                        expression: "editForm.type"
+                      }
+                    ],
+                    staticClass: "p-form__select",
+                    attrs: { id: "edit-filter" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.editForm,
+                          "type",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "1" } }, [
+                      _vm._v("次のワードを含む")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "2" } }, [
+                      _vm._v("いずれかのワードを含む")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "edit-keyword" }
+                  },
+                  [_vm._v("キーワード")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.editForm.word,
+                      expression: "editForm.word"
+                    }
+                  ],
+                  staticClass: "p-form__item",
+                  attrs: { type: "text", id: "edit-keyword" },
+                  domProps: { value: _vm.editForm.word },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.editForm, "word", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "edit-remove_keyword" }
+                  },
+                  [_vm._v("除外ワード")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.editForm.remove,
+                      expression: "editForm.remove"
+                    }
+                  ],
+                  staticClass: "p-form__item",
+                  attrs: { type: "text", id: "edit-remove_keyword" },
+                  domProps: { value: _vm.editForm.remove },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.editForm, "remove", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("p", { staticClass: "p-form__notion" }, [
+                  _vm._v(
+                    "※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。"
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(2)
+              ]
+            )
+          ])
+        ]
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-dashboard__panel" }, [
-      _c("table", { staticClass: "c-table" }, [
-        _c("caption", { staticClass: "c-table__caption" }, [
-          _vm._v("○キーワードリスト")
-        ]),
-        _vm._v(" "),
-        _c("tr", { staticClass: "c-table__head" }, [
-          _c("th", { staticClass: "c-table__th" }, [_vm._v("ステータス")]),
-          _vm._v(" "),
-          _c("th", { staticClass: "c-table__th" }, [_vm._v("内容")]),
-          _vm._v(" "),
-          _c("th", { staticClass: "c-table__th" }, [_vm._v("時刻")]),
-          _vm._v(" "),
-          _c("th", { staticClass: "c-table__th" }, [_vm._v("操作")])
-        ]),
-        _vm._v(" "),
-        _c("tr", [
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("[ツイート済]")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [
-            _vm._v(
-              "\n                吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ\n            "
-            )
-          ]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [
-            _vm._v("2019年03月19日 21:51:13")
-          ]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("編集/削除")])
-        ]),
-        _vm._v(" "),
-        _c("tr", [
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("[ツイート済]")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [
-            _vm._v(
-              "\n                吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ\n            "
-            )
-          ]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [
-            _vm._v("2019年03月19日 21:51:13")
-          ]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("編集/削除")])
-        ]),
-        _vm._v(" "),
-        _c("tr", [
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("[ツイート済]")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [
-            _vm._v(
-              "\n                吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ\n            "
-            )
-          ]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [
-            _vm._v("2019年03月19日 21:51:13")
-          ]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("編集/削除")])
-        ])
+    return _c("tr", { staticClass: "p-table__head" }, [
+      _c("th", { staticClass: "p-table__th p-table__th--filter" }, [
+        _vm._v("条件タイプ")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "p-table__th p-table__th--filter" }, [
+        _vm._v("単語")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "p-table__th p-table__th--filter" }, [
+        _vm._v("除外ワード")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "p-table__th p-table__th--filter" }, [
+        _vm._v("操作")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-form__button" }, [
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("追加")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-form__button" }, [
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("追加")]
+      )
     ])
   }
 ]
@@ -4513,89 +5243,106 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "c-panel u-color__bg--white" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-table__title" }, [
+      _c("h2", { staticClass: "p-table__caption" }, [
+        _vm._v("○フォロワーターゲット")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          on: {
+            click: function($event) {
+              _vm.viewModal = !_vm.viewModal
+            }
+          }
+        },
+        [
+          _c("i", { staticClass: "c-icon c-icon--white fas fa-plus" }),
+          _vm._v("\n            フォロワーターゲットを追加\n        ")
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(1)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "c-panel u-color__bg--white" }, [
-      _c("div", { staticClass: "c-status" }, [
-        _c("p", { staticClass: "c-status__show" }, [_vm._v("稼働中")]),
+    return _c("div", { staticClass: "p-status" }, [
+      _c("p", { staticClass: "p-status__show" }, [_vm._v("稼働中")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "p-status__button c-button c-button--success" },
+        [_vm._v("サービス開始")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "p-status__button c-button c-button--danger" },
+        [_vm._v("停止")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("table", { staticClass: "p-table" }, [
+      _c("tr", { staticClass: "p-table__head" }, [
+        _c("th", { staticClass: "p-table__th" }, [_vm._v("ステータス")]),
         _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "c-status__button c-button c-button--success" },
-          [_vm._v("サービス開始")]
-        ),
+        _c("th", { staticClass: "p-table__th" }, [_vm._v("ターゲット")]),
         _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "c-status__button c-button c-button--danger" },
-          [_vm._v("停止")]
-        )
+        _c("th", { staticClass: "p-table__th" }, [_vm._v("条件")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "p-table__th" }, [_vm._v("操作")])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "c-table__title" }, [
-        _c("h2", { staticClass: "c-table__caption" }, [
-          _vm._v("○フォロワーターゲット")
+      _c("tr", [
+        _c("td", { staticClass: "p-table__td" }, [_vm._v("[実行中]")]),
+        _vm._v(" "),
+        _c("td", { staticClass: "p-table__td" }, [_vm._v("@sample1234")]),
+        _vm._v(" "),
+        _c("td", { staticClass: "p-table__td" }, [
+          _vm._v("プログラミング Boot")
         ]),
         _vm._v(" "),
-        _c("button", { staticClass: "c-button c-button--twitter" }, [
-          _c("i", { staticClass: "c-icon c-icon--white fas fa-plus" }),
-          _vm._v("\n            フォロワーターゲットを追加\n        ")
-        ])
+        _c("td", { staticClass: "p-table__td" }, [_vm._v("編集/削除")])
       ]),
       _vm._v(" "),
-      _c("table", { staticClass: "c-table" }, [
-        _c("tr", { staticClass: "c-table__head" }, [
-          _c("th", { staticClass: "c-table__th" }, [_vm._v("ステータス")]),
-          _vm._v(" "),
-          _c("th", { staticClass: "c-table__th" }, [_vm._v("ターゲット")]),
-          _vm._v(" "),
-          _c("th", { staticClass: "c-table__th" }, [_vm._v("条件")]),
-          _vm._v(" "),
-          _c("th", { staticClass: "c-table__th" }, [_vm._v("操作")])
+      _c("tr", [
+        _c("td", { staticClass: "p-table__td" }, [
+          _vm._v("@fn103fdsafdasfasdfa1")
         ]),
         _vm._v(" "),
-        _c("tr", [
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("[実行中]")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("@sample1234")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [
-            _vm._v("プログラミング Boot")
-          ]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("編集/削除")])
+        _c("td", { staticClass: "p-table__td" }, [
+          _vm._v("プログラミング OR アーキテクチャ")
         ]),
         _vm._v(" "),
-        _c("tr", [
-          _c("td", { staticClass: "c-table__td" }, [
-            _vm._v("@fn103fdsafdasfasdfa1")
-          ]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [
-            _vm._v("プログラミング OR アーキテクチャ")
-          ]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("[待機中]")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("編集/削除")])
+        _c("td", { staticClass: "p-table__td" }, [_vm._v("[待機中]")]),
+        _vm._v(" "),
+        _c("td", { staticClass: "p-table__td" }, [_vm._v("編集/削除")])
+      ]),
+      _vm._v(" "),
+      _c("tr", [
+        _c("td", { staticClass: "p-table__td" }, [_vm._v("@fteeewitn")]),
+        _vm._v(" "),
+        _c("td", { staticClass: "p-table__td" }, [
+          _vm._v("フロントエンジニア 単価 -SES")
         ]),
         _vm._v(" "),
-        _c("tr", [
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("@fteeewitn")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [
-            _vm._v("フロントエンジニア 単価 -SES")
-          ]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("[待機中]")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("編集/削除")])
-        ])
+        _c("td", { staticClass: "p-table__td" }, [_vm._v("[待機中]")]),
+        _vm._v(" "),
+        _c("td", { staticClass: "p-table__td" }, [_vm._v("編集/削除")])
       ])
     ])
   }
@@ -4621,48 +5368,70 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "c-panel u-color__bg--white" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-table__title" }, [
+      _c("h2", { staticClass: "p-table__caption" }, [_vm._v("○いいね設置")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          on: {
+            click: function($event) {
+              _vm.viewModal = !_vm.viewModal
+            }
+          }
+        },
+        [
+          _c("i", { staticClass: "c-icon c-icon--white fas fa-plus" }),
+          _vm._v("\n            いいね設定を追加\n        ")
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(1)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-dashboard__panel" }, [
-      _c("div", { staticClass: "c-status" }, [
-        _c("p", { staticClass: "c-status__show" }, [_vm._v("稼働中")]),
+    return _c("div", { staticClass: "p-status" }, [
+      _c("p", { staticClass: "p-status__show" }, [_vm._v("稼働中")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "p-status__button c-button c-button--success" },
+        [_vm._v("サービス開始")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "p-status__button c-button c-button--danger" },
+        [_vm._v("停止")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("table", { staticClass: "p-table" }, [
+      _c("tr", { staticClass: "p-table__head" }, [
+        _c("th", { staticClass: "p-table__th" }, [_vm._v("条件")]),
         _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "c-status__button c-button c-button--start" },
-          [_vm._v("サービス開始")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "c-status__button c-button c-button--cancel" },
-          [_vm._v("停止")]
-        )
+        _c("th", { staticClass: "p-table__th" }, [_vm._v("操作")])
       ]),
       _vm._v(" "),
-      _c("table", { staticClass: "c-table" }, [
-        _c("caption", { staticClass: "c-table__caption" }, [
-          _vm._v("○いいね設定")
+      _c("tr", [
+        _c("td", { staticClass: "p-table__td" }, [
+          _vm._v("プログラミング Boot")
         ]),
         _vm._v(" "),
-        _c("tr", { staticClass: "c-table__head" }, [
-          _c("th", { staticClass: "c-table__th" }, [_vm._v("条件")]),
-          _vm._v(" "),
-          _c("th", { staticClass: "c-table__th" }, [_vm._v("操作")])
-        ]),
-        _vm._v(" "),
-        _c("tr", [
-          _c("td", { staticClass: "c-table__td" }, [
-            _vm._v("プログラミング Boot")
-          ]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("編集/削除")])
-        ])
+        _c("td", { staticClass: "p-table__td" }, [_vm._v("編集/削除")])
       ])
     ])
   }
@@ -4688,92 +5457,84 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "c-panel u-color__bg--white" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-table__title" }, [
+      _c("h2", { staticClass: "p-table__caption" }, [
+        _vm._v("○自動ツイートリスト")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          on: {
+            click: function($event) {
+              _vm.viewModal = !_vm.viewModal
+            }
+          }
+        },
+        [
+          _c("i", { staticClass: "c-icon c-icon--white fas fa-plus" }),
+          _vm._v("\n            ツイートを追加\n        ")
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(1)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "c-panel u-color__bg--white" }, [
-      _c("div", { staticClass: "c-status" }, [
-        _c("p", { staticClass: "c-status__show" }, [_vm._v("稼働中")]),
+    return _c("div", { staticClass: "p-status" }, [
+      _c("p", { staticClass: "p-status__show" }, [_vm._v("稼働中")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "p-status__button c-button c-button--success" },
+        [_vm._v("サービス開始")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "p-status__button c-button c-button--danger" },
+        [_vm._v("停止")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("table", { staticClass: "p-table" }, [
+      _c("tr", { staticClass: "p-table__head" }, [
+        _c("th", { staticClass: "p-table__th" }, [_vm._v("ステータス")]),
         _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "c-status__button c-button c-button--start" },
-          [_vm._v("サービス開始")]
-        ),
+        _c("th", { staticClass: "p-table__th" }, [_vm._v("内容")]),
         _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "c-status__button c-button c-button--cancel" },
-          [_vm._v("停止")]
-        )
+        _c("th", { staticClass: "p-table__th" }, [_vm._v("時刻")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "p-table__th" }, [_vm._v("操作")])
       ]),
       _vm._v(" "),
-      _c("table", { staticClass: "c-table" }, [
-        _c("caption", { staticClass: "c-table__caption" }, [
-          _vm._v("○自動ツイートリスト")
+      _c("tr", [
+        _c("td", { staticClass: "p-table__td" }, [_vm._v("[ツイート済]")]),
+        _vm._v(" "),
+        _c("td", { staticClass: "p-table__td" }, [
+          _vm._v(
+            "\n                吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ\n            "
+          )
         ]),
         _vm._v(" "),
-        _c("tr", { staticClass: "c-table__head" }, [
-          _c("th", { staticClass: "c-table__th" }, [_vm._v("ステータス")]),
-          _vm._v(" "),
-          _c("th", { staticClass: "c-table__th" }, [_vm._v("内容")]),
-          _vm._v(" "),
-          _c("th", { staticClass: "c-table__th" }, [_vm._v("時刻")]),
-          _vm._v(" "),
-          _c("th", { staticClass: "c-table__th" }, [_vm._v("操作")])
+        _c("td", { staticClass: "p-table__td" }, [
+          _vm._v("2019年03月19日 21:51:13")
         ]),
         _vm._v(" "),
-        _c("tr", [
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("[ツイート済]")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [
-            _vm._v(
-              "\n                吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ\n            "
-            )
-          ]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [
-            _vm._v("2019年03月19日 21:51:13")
-          ]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("編集/削除")])
-        ]),
-        _vm._v(" "),
-        _c("tr", [
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("[ツイート済]")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [
-            _vm._v(
-              "\n                吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ\n            "
-            )
-          ]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [
-            _vm._v("2019年03月19日 21:51:13")
-          ]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("編集/削除")])
-        ]),
-        _vm._v(" "),
-        _c("tr", [
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("[ツイート済]")]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [
-            _vm._v(
-              "\n                吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ\n            "
-            )
-          ]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [
-            _vm._v("2019年03月19日 21:51:13")
-          ]),
-          _vm._v(" "),
-          _c("td", { staticClass: "c-table__td" }, [_vm._v("編集/削除")])
-        ])
+        _c("td", { staticClass: "p-table__td" }, [_vm._v("編集/削除")])
       ])
     ])
   }
@@ -4806,19 +5567,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-dashboard__panel" }, [
-      _c("div", { staticClass: "c-status" }, [
-        _c("p", { staticClass: "c-status__show" }, [_vm._v("稼働中")]),
+    return _c("div", { staticClass: "c-panel u-color__bg--white" }, [
+      _c("div", { staticClass: "p-status" }, [
+        _c("p", { staticClass: "p-status__show" }, [_vm._v("稼働中")]),
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "c-status__button c-button c-button--start" },
+          { staticClass: "p-status__button c-button c-button--success" },
           [_vm._v("サービス開始")]
         ),
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "c-status__button c-button c-button--cancel" },
+          { staticClass: "c-status__button c-button c-button--danger" },
           [_vm._v("停止")]
         )
       ])
@@ -22563,8 +23324,10 @@ var routes = [{
     var auth = _store__WEBPACK_IMPORTED_MODULE_6__["default"].getters['auth/check'];
 
     if (auth && _store__WEBPACK_IMPORTED_MODULE_6__["default"].getters['auth/checkTwitterId']) {
+      console.log('tw.dash');
       next('/dashboard');
     } else if (auth) {
+      console.log('tw.tw');
       next();
     } else {
       next('login');
@@ -22576,11 +23339,13 @@ var routes = [{
   beforeEnter: function beforeEnter(to, from, next) {
     var auth = _store__WEBPACK_IMPORTED_MODULE_6__["default"].getters['auth/check'];
     var twitterAuth = _store__WEBPACK_IMPORTED_MODULE_6__["default"].getters['auth/checkTwitterId'];
+    console.log(twitterAuth);
 
     if (auth && twitterAuth) {
+      console.log('router.dash');
       next();
     } else if (auth) {
-      console.log('twitter');
+      console.log('router.twitter');
       next('/twitter');
     } else {
       next('/login');
@@ -22592,8 +23357,10 @@ var routes = [{
     var auth = _store__WEBPACK_IMPORTED_MODULE_6__["default"].getters['auth/check'];
 
     if (auth && _store__WEBPACK_IMPORTED_MODULE_6__["default"].getters['auth/checkTwitterId']) {
+      console.log('/.dash');
       next('/dashboard');
     } else if (auth) {
+      console.log('/.twi');
       next('/twitter');
     } else {
       next('login');
@@ -22794,21 +23561,22 @@ var actions = {
               response = _context3.sent;
 
               if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
-                _context3.next = 8;
+                _context3.next = 9;
                 break;
               }
 
               context.commit('setApiStatus', true);
               context.commit('setUser', null);
+              context.commit('setTwitterUser', null);
               return _context3.abrupt("return", false);
 
-            case 8:
+            case 9:
               context.commit('setApiStatus', false);
               context.commit('error/setCode', response.status, {
                 root: true
               });
 
-            case 10:
+            case 11:
             case "end":
               return _context3.stop();
           }

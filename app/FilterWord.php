@@ -7,9 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class FilterWord extends Model
 {
     const TYPE = [
-        1 => ['label' => '〜を含む'],
-        2 => ['label' => '〜のいずれかを含む'],
-        3 => ['label' => '〜を除く'],
+        1 => ['label' => '次のワードを含む'],
+        2 => ['label' => 'いずれかのワードを含む'],
     ];
 
     protected $appends = [

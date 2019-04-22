@@ -84,6 +84,7 @@ const actions = {
         if (response.status === OK) {
             context.commit('setApiStatus', true)
             context.commit('setUser', null)
+            context.commit('setTwitterUser', null)
             return false
         }
 

@@ -88,105 +88,133 @@
                             <td class="c-table__td">編集/削除</td>
                         </tr>
                     </table>
+
+                    <div class="p-modal__wrapper">
+                        <section class="p-modal p-modal--opened" v-show="viewModal">
+                            <div class="p-modal__contents">
+                            <span class="p-modal__cancel u-color__bg--white" @click="viewModal = ! viewModal">
+                                <i class="c-icon--gray p-modal__icon fas fa-times"></i>
+                            </span>
+                                <form class="p-form" @submit.prevent="addFilter">
+
+
+                                    <label class="p-form__label" for="add-filter">条件タイプ</label>
+                                    <select name="" class="p-form__select" id="add-filter">
+                                        <option value="1">〜を含む</option>
+                                        <option value="2">〜のいずれかを含む</option>
+                                    </select>
+                                    <label class="p-form__label" for="keyword">キーワード</label>
+                                    <input type="text" class="p-form__item" id="keyword" name="keyword">
+
+                                    <label class="p-form__label" for="remove_word">除外ワード</label>
+                                    <input type="text" class="p-form__item" id="remove_word" name="remove_word">
+                                    <p class="p-form__notion">※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。</p>
+                                    <div class="p-form__button">
+                                        <button type="submit" class="c-button c-button--twitter">追加</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
                 </div>
 
                 {{--自動フォロー--}}
-                <div class="p-dashboard__panel">
-                    <div class="c-status">
-                        <p class="c-status__show">稼働中</p>
-                        <button class="c-status__button c-button c-button--start">サービス開始</button>
-                        <button class="c-status__button c-button c-button--cancel">停止</button>
-                    </div>
-                </div>
+                {{--<div class="p-dashboard__panel">--}}
+                {{--<div class="c-status">--}}
+                {{--<p class="c-status__show">稼働中</p>--}}
+                {{--<button class="c-status__button c-button c-button--start">サービス開始</button>--}}
+                {{--<button class="c-status__button c-button c-button--cancel">停止</button>--}}
+                {{--</div>--}}
+                {{--</div>--}}
 
                 {{--いいね--}}
-                <div class="p-dashboard__panel">
-                    <div class="c-status">
-                        <p class="c-status__show">稼働中</p>
-                        <button class="c-status__button c-button c-button--start">サービス開始</button>
-                        <button class="c-status__button c-button c-button--cancel">停止</button>
-                    </div>
+                {{--<div class="p-dashboard__panel">--}}
+                {{--<div class="c-status">--}}
+                {{--<p class="c-status__show">稼働中</p>--}}
+                {{--<button class="c-status__button c-button c-button--start">サービス開始</button>--}}
+                {{--<button class="c-status__button c-button c-button--cancel">停止</button>--}}
+                {{--</div>--}}
 
-                    <table class="c-table">
-                        <caption class="c-table__caption">○いいね設定</caption>
-                        <tr class="c-table__head">
-                            <th class="c-table__th">条件</th>
-                            <th class="c-table__th">操作</th>
-                        </tr>
-                        <tr>
-                            <td class="c-table__td">プログラミング Boot</td>
-                            <td class="c-table__td">編集/削除</td>
-                        </tr>
-                    </table>
-                </div>
-
-                {{--自動ツイート--}}
-                <div class="p-dashboard__panel">
-                    <div class="c-status">
-                        <p class="c-status__show">稼働中</p>
-                        <button class="c-status__button c-button c-button--start">サービス開始</button>
-                        <button class="c-status__button c-button c-button--cancel">停止</button>
-                    </div>
-
-                    <table class="c-table">
-                        <caption class="c-table__caption">○自動ツイートリスト</caption>
-                        <tr class="c-table__head">
-                            <th class="c-table__th">ステータス</th>
-                            <th class="c-table__th">内容</th>
-                            <th class="c-table__th">時刻</th>
-                            <th class="c-table__th">操作</th>
-                        </tr>
-                        <tr>
-                            <td class="c-table__td">[ツイート済]</td>
-                            <td class="c-table__td">吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ</td>
-                            <td class="c-table__td">2019年03月19日 21:51:13</td>
-                            <td class="c-table__td">編集/削除</td>
-                        </tr>
-                        <tr>
-                            <td class="c-table__td">[ツイート済]</td>
-                            <td class="c-table__td">吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ</td>
-                            <td class="c-table__td">2019年03月19日 21:51:13</td>
-                            <td class="c-table__td">編集/削除</td>
-                        </tr>
-                        <tr>
-                            <td class="c-table__td">[ツイート済]</td>
-                            <td class="c-table__td">吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ</td>
-                            <td class="c-table__td">2019年03月19日 21:51:13</td>
-                            <td class="c-table__td">編集/削除</td>
-                        </tr>
-                    </table>
-                </div>
+                {{--<table class="c-table">--}}
+                {{--<caption class="c-table__caption">○いいね設定</caption>--}}
+                {{--<tr class="c-table__head">--}}
+                {{--<th class="c-table__th">条件</th>--}}
+                {{--<th class="c-table__th">操作</th>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                {{--<td class="c-table__td">プログラミング Boot</td>--}}
+                {{--<td class="c-table__td">編集/削除</td>--}}
+                {{--</tr>--}}
+                {{--</table>--}}
+                {{--</div>--}}
 
                 {{--自動ツイート--}}
-                <div class="p-dashboard__panel">
-                    <table class="c-table">
-                        <caption class="c-table__caption">○キーワードリスト</caption>
-                        <tr class="c-table__head">
-                            <th class="c-table__th">ステータス</th>
-                            <th class="c-table__th">内容</th>
-                            <th class="c-table__th">時刻</th>
-                            <th class="c-table__th">操作</th>
-                        </tr>
-                        <tr>
-                            <td class="c-table__td">[ツイート済]</td>
-                            <td class="c-table__td">吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ</td>
-                            <td class="c-table__td">2019年03月19日 21:51:13</td>
-                            <td class="c-table__td">編集/削除</td>
-                        </tr>
-                        <tr>
-                            <td class="c-table__td">[ツイート済]</td>
-                            <td class="c-table__td">吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ</td>
-                            <td class="c-table__td">2019年03月19日 21:51:13</td>
-                            <td class="c-table__td">編集/削除</td>
-                        </tr>
-                        <tr>
-                            <td class="c-table__td">[ツイート済]</td>
-                            <td class="c-table__td">吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ</td>
-                            <td class="c-table__td">2019年03月19日 21:51:13</td>
-                            <td class="c-table__td">編集/削除</td>
-                        </tr>
-                    </table>
-                </div>
+                {{--<div class="p-dashboard__panel">--}}
+                {{--<div class="c-status">--}}
+                {{--<p class="c-status__show">稼働中</p>--}}
+                {{--<button class="c-status__button c-button c-button--start">サービス開始</button>--}}
+                {{--<button class="c-status__button c-button c-button--cancel">停止</button>--}}
+                {{--</div>--}}
+
+                {{--<table class="c-table">--}}
+                {{--<caption class="c-table__caption">○自動ツイートリスト</caption>--}}
+                {{--<tr class="c-table__head">--}}
+                {{--<th class="c-table__th">ステータス</th>--}}
+                {{--<th class="c-table__th">内容</th>--}}
+                {{--<th class="c-table__th">時刻</th>--}}
+                {{--<th class="c-table__th">操作</th>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                {{--<td class="c-table__td">[ツイート済]</td>--}}
+                {{--<td class="c-table__td">吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ</td>--}}
+                {{--<td class="c-table__td">2019年03月19日 21:51:13</td>--}}
+                {{--<td class="c-table__td">編集/削除</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                {{--<td class="c-table__td">[ツイート済]</td>--}}
+                {{--<td class="c-table__td">吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ</td>--}}
+                {{--<td class="c-table__td">2019年03月19日 21:51:13</td>--}}
+                {{--<td class="c-table__td">編集/削除</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                {{--<td class="c-table__td">[ツイート済]</td>--}}
+                {{--<td class="c-table__td">吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ</td>--}}
+                {{--<td class="c-table__td">2019年03月19日 21:51:13</td>--}}
+                {{--<td class="c-table__td">編集/削除</td>--}}
+                {{--</tr>--}}
+                {{--</table>--}}
+                {{--</div>--}}
+
+                {{--自動ツイート--}}
+                {{--<div class="p-dashboard__panel">--}}
+                {{--<table class="c-table">--}}
+                {{--<caption class="c-table__caption">○キーワードリスト</caption>--}}
+                {{--<tr class="c-table__head">--}}
+                {{--<th class="c-table__th">ステータス</th>--}}
+                {{--<th class="c-table__th">内容</th>--}}
+                {{--<th class="c-table__th">時刻</th>--}}
+                {{--<th class="c-table__th">操作</th>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                {{--<td class="c-table__td">[ツイート済]</td>--}}
+                {{--<td class="c-table__td">吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ</td>--}}
+                {{--<td class="c-table__td">2019年03月19日 21:51:13</td>--}}
+                {{--<td class="c-table__td">編集/削除</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                {{--<td class="c-table__td">[ツイート済]</td>--}}
+                {{--<td class="c-table__td">吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ</td>--}}
+                {{--<td class="c-table__td">2019年03月19日 21:51:13</td>--}}
+                {{--<td class="c-table__td">編集/削除</td>--}}
+                {{--</tr>--}}
+                {{--<tr>--}}
+                {{--<td class="c-table__td">[ツイート済]</td>--}}
+                {{--<td class="c-table__td">吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれ</td>--}}
+                {{--<td class="c-table__td">2019年03月19日 21:51:13</td>--}}
+                {{--<td class="c-table__td">編集/削除</td>--}}
+                {{--</tr>--}}
+                {{--</table>--}}
+                {{--</div>--}}
 
             </section>
 

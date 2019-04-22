@@ -17,9 +17,8 @@ class CreateFilterWordsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->integer('type')->default(1);
-            $table->string('and', 100)->nullable();
-            $table->string('or', 100)->nullable();
-            $table->string('not', 100)->nullable();
+            $table->string('word', 100)->nullable();
+            $table->string('remove', 100)->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

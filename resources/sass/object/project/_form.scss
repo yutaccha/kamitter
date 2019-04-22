@@ -27,4 +27,20 @@
       opacity: .8;
     }
   }
+
+  &__select{
+    font-size: $font-size_m;
+    height: 40px;
+    font-weight: 100;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    line-height: 25px;
+    border: 1px solid $color-default-parent;
+    border-radius: 5px;
+  }
+
+  &__notion{
+    font-size: $font-size_default;
+  }
 }

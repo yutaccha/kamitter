@@ -55,6 +55,9 @@
   }
 
   &__icon{
+    display: flex;
+    justify-content: right;
+    align-items: center;
     font-size: $font-size_xl;
     height: 50px;
     padding: 15px;

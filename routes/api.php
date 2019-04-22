@@ -17,3 +17,5 @@ Route::get('/twitter/user/info/{id}', 'TwitterUserController@info')->name('twitt
 Route::post('/filter', 'FilterWordController@add')->name('filter.add');
 Route::get('/filter', 'FilterWordController@show')->name('filter.show');
 Route::get('/filter/{id}', 'FilterWordController@showOneFilter')->name('filter.showOne');
+Route::put('/filter/{id}', 'FilterWordController@editFilter')->name('edit.filter');
+Route::delete('/filter/{id}', 'FilterWordController@deleteFilter')->name('filter.delete');

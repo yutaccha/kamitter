@@ -13,14 +13,19 @@ class FilterWordController extends Controller
         $filter = new FilterWord();
 
         $filter->type = $request->type;
-        $filter->and = $request->and;
-        $filter->or = $request->or;
-        $filter->not = $request->not;
+        $filter->word = $this->adjustWordStyle($request->word);
+        $filter->remove = $this->adjustWordStyle($request->remove);
 
 
         Auth::user()->filterWords()->save($filter);
         $new_filter = FilterWord::where('id', $filter->id)->with('user')->first();
         return response($new_filter, 201);
+    }
+
+    private function adjustWordStyle($preAdjustWord){
+        $adjustedWord = mb_convert_kana($preAdjustWord, 's', 'UTF-8');
+        $adjustedWord = preg_replace('/\s+/', ' ', $adjustedWord);
+        return $adjustedWord;
     }
 
     public function show()
@@ -35,18 +40,26 @@ class FilterWordController extends Controller
         return $user_filter ?? abort(404);
     }
 
-    public function update(int $id, AddFilterWord $request)
+    public function editFilter(int $id, AddFilterWord $request)
     {
         $user_filter = Auth::user()->filterWords()->where('id', $id)->first();
         if (! $user_filter){
             abort(404);
         }
+
         $user_filter->type = $request->type;
-        $user_filter->and = $request->and;
-        $user_filter->or = $request->or;
-        $user_filter->not = $request->not;
+        $user_filter->word = $request->word;
+        $user_filter->remove = $request->remove;
         $user_filter->save();
 
-        return response($user_filter, 201);
+        return response($user_filter, 200);
+    }
+
+    public function deleteFilter(int $id){
+        $user_filter = Auth::user()->filterWords()->where('id', $id)->first();
+        if (! $user_filter){
+            abort(404);
+        }
+        $user_filter->delete();
     }
 }
