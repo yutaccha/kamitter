@@ -28,7 +28,6 @@ class AddAutomaticTweet extends FormRequest
         $status_rule = Rule::in(array_keys(AutomaticTweet::STATUS));
 
         return [
-            'status' => 'required|' . $status_rule,  // 'type' => 'required|in(1, 2)', となる
             'tweet' => 'required|max:140',
             'date' => 'required|date',
             'time' => 'required|date_format:H:i',

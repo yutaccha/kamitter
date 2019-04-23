@@ -351,6 +351,28 @@ img {
   border-radius: 5px;
 }
 
+.p-form__item--date {
+  width: 30%;
+}
+
+.p-form__item--textarea {
+  height: 150px;
+  letter-spacing: 0.05em;
+}
+
+.p-form__date {
+  font-size: 16px;
+  width: 45%;
+  height: 40px;
+  font-weight: 100;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 30px;
+  line-height: 25px;
+  border: 1px solid #3335;
+  border-radius: 5px;
+}
+
 .p-form__button {
   text-align: right;
   transition: 0.3s;
@@ -464,6 +486,12 @@ img {
 
 .u-color__bg--white {
   background: #fff;
+}
+
+.u-display__flex--left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .page-enter {
@@ -696,6 +724,19 @@ img {
   width: 20%;
 }
 
+.p-table__th--tweet:nth-child(1) {
+  width: 15%;
+}
+
+.p-table__th--tweet:nth-child(3),
+.p-table__th--tweet:nth-child(4) {
+  width: 17.5%;
+}
+
+.p-table__th--tweet:nth-child(2) {
+  width: 40%;
+}
+
 .p-table__td {
   padding: 10px;
   border-bottom: 1px dotted #3335;
@@ -737,7 +778,7 @@ img {
 .p-modal__contents {
   position: relative;
   background: #fff;
-  width: 450px;
+  width: 600px;
   padding: 40px;
   box-sizing: border-box;
 }

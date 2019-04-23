@@ -19,7 +19,28 @@
     line-height: 25px;
     border: 1px solid $color-default-parent;
     border-radius: 5px;
+    &--date{
+      width: 30%;
+    }
+    &--textarea{
+      height: 150px;
+      letter-spacing: 0.05em;
+    }
   }
+
+  &__date{
+    font-size: $font-size_m;
+    width: 45%;
+    height: 40px;
+    font-weight: 100;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    line-height: 25px;
+    border: 1px solid $color-default-parent;
+    border-radius: 5px;
+  }
+
   &__button{
     text-align: right;
     transition: 0.3s;

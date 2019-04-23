@@ -12,7 +12,7 @@
         <table class="p-table">
             <tr class="p-table__head">
                 <th class="p-table__th p-table__th--filter">条件タイプ</th>
-                <th class="p-table__th p-table__th--filter">単語</th>
+                <th class="p-table__th p-table__th--filter">キーワード</th>
                 <th class="p-table__th p-table__th--filter">除外ワード</th>
                 <th class="p-table__th p-table__th--filter">操作</th>
             </tr>
@@ -22,11 +22,11 @@
                 <td class="p-table__td">{{filter.remove}}</td>
                 <td class="p-table__td">
                     <button class="c-button c-button--twitter"
-                    @click.stop="showEditModal(filter, index)"
+                            @click.stop="showEditModal(filter, index)"
                     >編集
                     </button>
                     <button class="c-button c-button--danger"
-                    @click.stop="removeFilter(filter.id, index)"
+                            @click.stop="removeFilter(filter.id, index)"
                     >削除
                     </button>
                 </td>
@@ -44,15 +44,15 @@
 
 
                         <label class="p-form__label" for="add-filter">条件タイプ</label>
-                        <select class="p-form__select" id="add-filter" v-model="filterForm.type">
+                        <select class="p-form__select" id="add-filter" v-model="addForm.type">
                             <option value="1">次のワードを含む</option>
                             <option value="2">いずれかのワードを含む</option>
                         </select>
                         <label class="p-form__label" for="keyword">キーワード</label>
-                        <input type="text" class="p-form__item" id="keyword" v-model="filterForm.word">
+                        <input type="text" class="p-form__item" id="keyword" v-model="addForm.word">
 
                         <label class="p-form__label" for="remove_word">除外ワード</label>
-                        <input type="text" class="p-form__item" id="remove_word" v-model="filterForm.remove">
+                        <input type="text" class="p-form__item" id="remove_word" v-model="addForm.remove">
                         <p class="p-form__notion">※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。</p>
                         <div class="p-form__button">
                             <button type="submit" class="c-button c-button--twitter">追加</button>
@@ -102,7 +102,7 @@
                 editModal: false,
                 editIndex: null,
                 errors: null,
-                filterForm: {
+                addForm: {
                     type: 1,
                     word: '',
                     remove: ''
@@ -117,23 +117,22 @@
         },
         methods: {
             async fetchFilters() {
-                const response = await axios.get('/api/filter', this.filterForm)
+                const response = await axios.get('/api/filter', this.addForm)
                 if (response.status !== OK) {
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
 
                 this.filters = response.data
-                console.log(this.filters);
             },
             async addFilter() {
-                const response = await axios.post('/api/filter', this.filterForm)
+                const response = await axios.post('/api/filter', this.addForm)
                 if (response.status === UNPROCESSABLE_ENTRY) {
                     this.errors = response.data.errors
                     return false
                 }
 
-                this.resetFilterForm()
+                this.resetAddForm()
 
                 if (response.status !== CREATED) {
                     this.$store.commit('error/setCode', response.status)
@@ -143,7 +142,7 @@
                 this.filters.push(addedFilter)
                 this.newModal = false
             },
-            async showEditModal(filter, index) {
+            showEditModal(filter, index) {
                 this.editModal = true
                 this.editForm.id = filter.id
                 this.editForm.type = filter.type
@@ -152,7 +151,7 @@
                 this.editIndex = index
 
             },
-            async editFilter(){
+            async editFilter() {
                 const response = await axios.put(`/api/filter/${this.editForm.id}`, this.editForm)
                 if (response.status !== OK) {
                     this.$store.commit('error/setCode', response.status)
@@ -162,7 +161,7 @@
                 this.resetEditForm()
             },
             async removeFilter(id, index) {
-                const response = await axios.delete(`/api/filter/${id}`);
+                const response = await axios.delete(`/api/filter/${id}`)
                 if (response.status !== OK) {
                     this.$store.commit('error/setCode', response.status)
                     return false
@@ -171,10 +170,10 @@
                 this.filters.splice(index, 1)
             },
 
-            resetFilterForm() {
-                this.filterForm.type = 1
-                this.filterForm.word = ''
-                this.filterForm.remove = ''
+            resetAddForm() {
+                this.addForm.type = 1
+                this.addForm.word = ''
+                this.addForm.remove = ''
             },
             resetEditForm() {
                 this.editModal = false

@@ -21,3 +21,6 @@ Route::put('/filter/{id}', 'FilterWordController@editFilter')->name('edit.filter
 Route::delete('/filter/{id}', 'FilterWordController@deleteFilter')->name('filter.delete');
 
 Route::post('/tweet', 'AutomaticTweetController@add')->name('tweet.add');
+Route::get('/tweet', 'AutomaticTweetController@show')->name('tweet.show');
+Route::put('/tweet/{id}', 'AutomaticTweetController@edit')->name('tweet.edit');
+Route::delete('/tweet/{id}', 'AutomaticTweetController@delete')->name('tweet.delete');

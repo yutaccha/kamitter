@@ -8,15 +8,15 @@ class AutomaticTweet extends Model
 {
     const STATUS = [
         1 => ['label' => '未送信'],
-        2 => ['label' => '送信済'],
+        2 => ['label' => 'ツイート済'],
     ];
 
     protected $appends = [
-      'status_label',
+      'status_label', 'formatted_date'
     ];
 
     protected $hidden = [
-        'created_at', 'updated_at'
+        'created_at', 'updated_at', 'submit_date'
     ];
 
     public function user()
@@ -39,4 +39,12 @@ class AutomaticTweet extends Model
 
         return self::STATUS[$status]['label'];
     }
+
+    public function getFormattedDateAttribute()
+    {
+        $submit_date = $this->attributes['submit_date'];
+        $date = new \DateTime($submit_date);
+        return $date->format('Y-m-d H:i');
+    }
 }
+
