@@ -2110,6 +2110,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2348,6 +2352,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utility */ "./resources/js/utility.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2394,8 +2407,296 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "PanelFollow"
+  data: function data() {
+    return {
+      followTargets: [],
+      filters: [],
+      newModal: false,
+      editModal: false,
+      editIndex: null,
+      errors: null,
+      addForm: {
+        target: null,
+        filter_word_id: null
+      },
+      editForm: {
+        id: null,
+        target: null,
+        filter_word_id: null
+      }
+    };
+  },
+  computed: {
+    dashChange: function dashChange() {
+      return this.$store.state.dashboard.isChange;
+    }
+  },
+  methods: {
+    fetchFollowTargets: function () {
+      var _fetchFollowTargets = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get('/api/follow');
+
+              case 2:
+                response = _context.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context.abrupt("return", false);
+
+              case 6:
+                this.followTargets = response.data;
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function fetchFollowTargets() {
+        return _fetchFollowTargets.apply(this, arguments);
+      }
+
+      return fetchFollowTargets;
+    }(),
+    fetchFilters: function () {
+      var _fetchFilters = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.get('/api/filter');
+
+              case 2:
+                response = _context2.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context2.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context2.abrupt("return", false);
+
+              case 6:
+                this.filters = response.data;
+
+              case 7:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function fetchFilters() {
+        return _fetchFilters.apply(this, arguments);
+      }
+
+      return fetchFilters;
+    }(),
+    addFollowTarget: function () {
+      var _addFollowTarget = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios.post('/api/follow', this.addForm);
+
+              case 2:
+                response = _context3.sent;
+
+                if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["UNPROCESSABLE_ENTRY"])) {
+                  _context3.next = 6;
+                  break;
+                }
+
+                this.errors = response.data.errors;
+                return _context3.abrupt("return", false);
+
+              case 6:
+                this.resetAddForm();
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["CREATED"])) {
+                  _context3.next = 10;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context3.abrupt("return", false);
+
+              case 10:
+                console.log(response.data);
+                this.followTargets.push(response.data);
+                this.newModal = false;
+
+              case 13:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function addFollowTarget() {
+        return _addFollowTarget.apply(this, arguments);
+      }
+
+      return addFollowTarget;
+    }(),
+    showEditModal: function showEditModal(followTarget, index) {
+      this.editModal = true;
+      this.editForm.id = followTarget.id;
+      this.editForm.target = followTarget.target;
+      this.editForm.filter_word_id = followTarget.filter_word_id;
+      this.editIndex = index;
+    },
+    editFollowTarget: function () {
+      var _editFollowTarget = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios.put("/api/follow/".concat(this.editForm.id), this.editForm);
+
+              case 2:
+                response = _context4.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context4.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context4.abrupt("return", false);
+
+              case 6:
+                this.followTargets.splice(this.editIndex, 1, response.data);
+                this.resetEditForm();
+                this.$store.commit('dashboard/setChange', true);
+
+              case 9:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function editFollowTarget() {
+        return _editFollowTarget.apply(this, arguments);
+      }
+
+      return editFollowTarget;
+    }(),
+    resetAddForm: function resetAddForm() {
+      this.addForm.target = null;
+      this.addForm.filter_word_id = null;
+    },
+    resetEditForm: function resetEditForm() {
+      this.editModal = null;
+      this.editForm.id = null;
+      this.editForm.target = null;
+      this.editForm.filter_word_id = null;
+      this.editIndex = null;
+    }
+  },
+  created: function created() {
+    this.fetchFollowTargets();
+    this.fetchFilters();
+  },
+  watch: {
+    dashChange: {
+      handler: function handler(val) {
+        if (val === true) {
+          this.fetchFollowTargets();
+          this.fetchFilters();
+          this.$store.commit('dashboard/setChange', null);
+        }
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -2510,11 +2811,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    refresh: {
-      type: String
-    }
-  },
   data: function data() {
     return {
       likes: [],
@@ -2930,6 +3226,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: {
     addTextCount: function addTextCount() {
       return this.addForm.tweet.length;
+    },
+    editTextCount: function editTextCount() {
+      return this.editForm.tweet.length;
     },
     getCurrentYYYYMMDD: function getCurrentYYYYMMDD() {
       var date = new Date();
@@ -5571,7 +5870,7 @@ var render = function() {
                 _c(
                   "label",
                   { staticClass: "p-form__label", attrs: { for: "keyword" } },
-                  [_vm._v("キーワード")]
+                  [_vm._v("キーワード *必須")]
                 ),
                 _vm._v(" "),
                 _c("input", {
@@ -5584,7 +5883,12 @@ var render = function() {
                     }
                   ],
                   staticClass: "p-form__item",
-                  attrs: { type: "text", id: "keyword" },
+                  attrs: {
+                    type: "text",
+                    id: "keyword",
+                    required: "",
+                    maxlength: "50"
+                  },
                   domProps: { value: _vm.addForm.word },
                   on: {
                     input: function($event) {
@@ -5615,7 +5919,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "p-form__item",
-                  attrs: { type: "text", id: "remove_word" },
+                  attrs: { type: "text", id: "remove_word", maxlength: "50" },
                   domProps: { value: _vm.addForm.remove },
                   on: {
                     input: function($event) {
@@ -5743,67 +6047,15 @@ var render = function() {
                     staticClass: "p-form__label",
                     attrs: { for: "edit-keyword" }
                   },
-                  [_vm._v("キーワード")]
+                  [_vm._v("キーワード ※必須")]
                 ),
                 _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.editForm.word,
-                      expression: "editForm.word"
-                    }
-                  ],
-                  staticClass: "p-form__item",
-                  attrs: { type: "text", id: "edit-keyword" },
-                  domProps: { value: _vm.editForm.word },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.editForm, "word", $event.target.value)
-                    }
-                  }
-                }),
+                _vm._v('" for="edit-remove_keyword">除外ワード'),
                 _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "p-form__label",
-                    attrs: { for: "edit-remove_keyword" }
-                  },
-                  [_vm._v("除外ワード")]
+                _vm._v(
+                  '">※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。'
                 ),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.editForm.remove,
-                      expression: "editForm.remove"
-                    }
-                  ],
-                  staticClass: "p-form__item",
-                  attrs: { type: "text", id: "edit-remove_keyword" },
-                  domProps: { value: _vm.editForm.remove },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.editForm, "remove", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("p", { staticClass: "p-form__notion" }, [
-                  _vm._v(
-                    "※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。"
-                  )
-                ]),
+                _c("p"),
                 _vm._v(" "),
                 _vm._m(2)
               ]
@@ -5894,7 +6146,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "p-table__title" }, [
       _c("h2", { staticClass: "p-table__caption" }, [
-        _vm._v("○フォロワーターゲットリスト")
+        _vm._v("○ターゲットアカウントリスト")
       ]),
       _vm._v(" "),
       _c(
@@ -5903,18 +6155,361 @@ var render = function() {
           staticClass: "c-button c-button--twitter",
           on: {
             click: function($event) {
-              _vm.viewModal = !_vm.viewModal
+              _vm.newModal = !_vm.newModal
             }
           }
         },
         [
           _c("i", { staticClass: "c-icon c-icon--white fas fa-plus" }),
-          _vm._v("\n            フォロワーターゲットを追加\n        ")
+          _vm._v("\n            ターゲットアカウントを追加\n        ")
         ]
       )
     ]),
     _vm._v(" "),
-    _vm._m(1)
+    _c(
+      "table",
+      { staticClass: "p-table" },
+      [
+        _vm._m(1),
+        _vm._v(" "),
+        _vm._l(_vm.followTargets, function(followTarget, index) {
+          return _c("tr", [
+            _c("th", { staticClass: "p-table__td" }, [
+              _vm._v(_vm._s(followTarget.status_label))
+            ]),
+            _vm._v(" "),
+            _c("th", { staticClass: "p-table__td" }, [
+              _vm._v("@" + _vm._s(followTarget.target))
+            ]),
+            _vm._v(" "),
+            _c("th", { staticClass: "p-table__td" }, [
+              _vm._v(_vm._s(followTarget.filter_word.merged_word))
+            ]),
+            _vm._v(" "),
+            _c("th", { staticClass: "p-table__td" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "c-button c-button--twitter",
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      return _vm.showEditModal(followTarget, index)
+                    }
+                  }
+                },
+                [_vm._v("編集\n                ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "c-button c-button--danger",
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      return _vm.removeFollowTarget(followTarget.id, index)
+                    }
+                  }
+                },
+                [_vm._v("削除\n                ")]
+              )
+            ])
+          ])
+        })
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-modal__wrapper" }, [
+      _c(
+        "section",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.newModal,
+              expression: "newModal"
+            }
+          ],
+          staticClass: "p-modal p-modal--opened"
+        },
+        [
+          _c("div", { staticClass: "p-modal__contents" }, [
+            _c(
+              "span",
+              {
+                staticClass: "p-modal__cancel u-color__bg--white",
+                on: {
+                  click: function($event) {
+                    _vm.newModal = !_vm.newModal
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "c-icon--gray p-modal__icon fas fa-times"
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                staticClass: "p-form",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addFollowTarget($event)
+                  }
+                }
+              },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "add-target" }
+                  },
+                  [_vm._v("ターゲット名 *必須")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.addForm.target,
+                      expression: "addForm.target"
+                    }
+                  ],
+                  staticClass: "p-form__item",
+                  attrs: {
+                    type: "text",
+                    id: "add-target",
+                    required: "",
+                    maxlength: "15",
+                    placeholder: "例) kamitter_1234"
+                  },
+                  domProps: { value: _vm.addForm.target },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.addForm, "target", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "add-target_filter_id" }
+                  },
+                  [_vm._v("フォロー条件の選択 *必須")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.addForm.filter_word_id,
+                        expression: "addForm.filter_word_id"
+                      }
+                    ],
+                    staticClass: "p-form__select",
+                    attrs: { id: "add-target_filter_id", required: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.addForm,
+                          "filter_word_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.filters, function(filter) {
+                    return _c("option", { domProps: { value: filter.id } }, [
+                      _vm._v(_vm._s(filter.merged_word))
+                    ])
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c("p", { staticClass: "p-form__notion" }, [
+                  _vm._v(
+                    "※条件のキーワードは、「キーワード登録」から登録することができます。"
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(2)
+              ]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.editModal,
+              expression: "editModal"
+            }
+          ],
+          staticClass: "p-modal p-modal--opened"
+        },
+        [
+          _c("div", { staticClass: "p-modal__contents" }, [
+            _c(
+              "span",
+              {
+                staticClass: "p-modal__cancel u-color__bg--white",
+                on: {
+                  click: function($event) {
+                    _vm.editModal = !_vm.editModal
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "c-icon--gray p-modal__icon fas fa-times"
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                staticClass: "p-form",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.editFollowTarget($event)
+                  }
+                }
+              },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "edit-target" }
+                  },
+                  [_vm._v("ターゲット名 *必須")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.editForm.target,
+                      expression: "editForm.target"
+                    }
+                  ],
+                  staticClass: "p-form__item",
+                  attrs: {
+                    type: "text",
+                    id: "edit-target",
+                    required: "",
+                    maxlength: "15",
+                    placeholder: "例) kamitter_1234"
+                  },
+                  domProps: { value: _vm.editForm.target },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.editForm, "target", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "eidt-target_filter_id" }
+                  },
+                  [_vm._v("キーワード条件の選択 *必須")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.editForm.filter_word_id,
+                        expression: "editForm.filter_word_id"
+                      }
+                    ],
+                    staticClass: "p-form__select",
+                    attrs: { id: "eidt-target_filter_id", required: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.editForm,
+                          "filter_word_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.filters, function(filter) {
+                    return _c("option", { domProps: { value: filter.id } }, [
+                      _vm._v(_vm._s(filter.merged_word))
+                    ])
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c("p", { staticClass: "p-form__notion" }, [
+                  _vm._v(
+                    "※条件のキーワードは、「キーワード登録」から登録することができます。"
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(3)
+              ]
+            )
+          ])
+        ]
+      )
+    ])
   ])
 }
 var staticRenderFns = [
@@ -5942,54 +6537,44 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("table", { staticClass: "p-table" }, [
-      _c("tr", { staticClass: "p-table__head" }, [
-        _c("th", { staticClass: "p-table__th" }, [_vm._v("ステータス")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "p-table__th" }, [_vm._v("ターゲット")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "p-table__th" }, [_vm._v("条件")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "p-table__th" }, [_vm._v("操作")])
-      ]),
+    return _c("tr", { staticClass: "p-table__head" }, [
+      _c("th", { staticClass: "p-table__th" }, [_vm._v("ステータス")]),
       _vm._v(" "),
-      _c("tr", [
-        _c("td", { staticClass: "p-table__td" }, [_vm._v("[実行中]")]),
-        _vm._v(" "),
-        _c("td", { staticClass: "p-table__td" }, [_vm._v("@sample1234")]),
-        _vm._v(" "),
-        _c("td", { staticClass: "p-table__td" }, [
-          _vm._v("プログラミング Boot")
-        ]),
-        _vm._v(" "),
-        _c("td", { staticClass: "p-table__td" }, [_vm._v("編集/削除")])
-      ]),
+      _c("th", { staticClass: "p-table__th" }, [_vm._v("ターゲット")]),
       _vm._v(" "),
-      _c("tr", [
-        _c("td", { staticClass: "p-table__td" }, [
-          _vm._v("@fn103fdsafdasfasdfa1")
-        ]),
-        _vm._v(" "),
-        _c("td", { staticClass: "p-table__td" }, [
-          _vm._v("プログラミング OR アーキテクチャ")
-        ]),
-        _vm._v(" "),
-        _c("td", { staticClass: "p-table__td" }, [_vm._v("[待機中]")]),
-        _vm._v(" "),
-        _c("td", { staticClass: "p-table__td" }, [_vm._v("編集/削除")])
-      ]),
+      _c("th", { staticClass: "p-table__th" }, [_vm._v("条件")]),
       _vm._v(" "),
-      _c("tr", [
-        _c("td", { staticClass: "p-table__td" }, [_vm._v("@fteeewitn")]),
-        _vm._v(" "),
-        _c("td", { staticClass: "p-table__td" }, [
-          _vm._v("フロントエンジニア 単価 -SES")
-        ]),
-        _vm._v(" "),
-        _c("td", { staticClass: "p-table__td" }, [_vm._v("[待機中]")]),
-        _vm._v(" "),
-        _c("td", { staticClass: "p-table__td" }, [_vm._v("編集/削除")])
-      ])
+      _c("th", { staticClass: "p-table__th" }, [_vm._v("操作")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-form__button" }, [
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("追加")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-form__button" }, [
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("編集")]
+      )
     ])
   }
 ]
@@ -6135,7 +6720,7 @@ var render = function() {
                   "label",
                   {
                     staticClass: "p-form__label",
-                    attrs: { for: "add-filter" }
+                    attrs: { for: "add-like-filter" }
                   },
                   [_vm._v("いいね条件の選択")]
                 ),
@@ -6152,7 +6737,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "p-form__select",
-                    attrs: { id: "add-filter", required: "" },
+                    attrs: { id: "add-like-filter", required: "" },
                     on: {
                       change: function($event) {
                         var $$selectedVal = Array.prototype.filter
@@ -6183,7 +6768,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("p", { staticClass: "p-form__notion" }, [
                   _vm._v(
-                    "※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。"
+                    "※条件のキーワードは、「キーワード登録」から登録することができます。"
                   )
                 ]),
                 _vm._v(" "),
@@ -6242,7 +6827,7 @@ var render = function() {
                   "label",
                   {
                     staticClass: "p-form__label",
-                    attrs: { for: "edit-filter" }
+                    attrs: { for: "edit-like-filter" }
                   },
                   [_vm._v("いいね条件の選択")]
                 ),
@@ -6259,7 +6844,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "p-form__select",
-                    attrs: { id: "edit-filter", required: "" },
+                    attrs: { id: "edit-like-filter", required: "" },
                     on: {
                       change: function($event) {
                         var $$selectedVal = Array.prototype.filter
@@ -6290,7 +6875,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("p", { staticClass: "p-form__notion" }, [
                   _vm._v(
-                    "※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。"
+                    "※※条件のキーワードは、「キーワード登録」から登録することができます。"
                   )
                 ]),
                 _vm._v(" "),
@@ -6517,8 +7102,12 @@ var render = function() {
               [
                 _c(
                   "label",
-                  { staticClass: "p-form__label", attrs: { for: "addTweet" } },
-                  [_vm._v("ツイート内容 " + _vm._s(_vm.addTextCount) + "/140")]
+                  { staticClass: "p-form__label", attrs: { for: "add-tweet" } },
+                  [
+                    _vm._v(
+                      "ツイート内容 " + _vm._s(_vm.addTextCount) + "/140 ※必須"
+                    )
+                  ]
                 ),
                 _vm._v(" "),
                 _c("textarea", {
@@ -6532,7 +7121,7 @@ var render = function() {
                   ],
                   staticClass: "p-form__item p-form__item--textarea",
                   attrs: {
-                    id: "addTweet",
+                    id: "add-tweet",
                     rows: "5",
                     cols: "40",
                     required: "",
@@ -6550,7 +7139,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("label", { staticClass: "p-form__label" }, [
-                  _vm._v("予定日時")
+                  _vm._v("ツイート予定日時")
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "u-display__flex--left" }, [
@@ -6656,8 +7245,15 @@ var render = function() {
               [
                 _c(
                   "label",
-                  { staticClass: "p-form__label", attrs: { for: "editTweet" } },
-                  [_vm._v("ツイート内容 " + _vm._s(_vm.addTextCount) + "/140")]
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "edit-tweet" }
+                  },
+                  [
+                    _vm._v(
+                      "ツイート内容 " + _vm._s(_vm.editTextCount) + "/140 ※必須"
+                    )
+                  ]
                 ),
                 _vm._v(" "),
                 _c("textarea", {
@@ -6671,7 +7267,7 @@ var render = function() {
                   ],
                   staticClass: "p-form__item p-form__item--textarea",
                   attrs: {
-                    id: "editTweet",
+                    id: "edit-tweet",
                     rows: "5",
                     cols: "40",
                     required: "",

@@ -27,22 +27,12 @@ Route::get('/twitter/user/list', 'TwitterUserController@list')->name('twitter.li
 Route::get('/twitter/user/info/{id}', 'TwitterUserController@info')->name('twitter.info');
 
 /**
- * 条件キーワードの管理API
+ * フォローターゲット管理API
  */
-Route::post('/filter', 'FilterWordController@add')->name('filter.add');
-Route::get('/filter', 'FilterWordController@show')->name('filter.show');
-Route::get('/filter/{id}', 'FilterWordController@showOneFilter')->name('filter.showOne');
-Route::put('/filter/{id}', 'FilterWordController@editFilter')->name('edit.filter');
-Route::delete('/filter/{id}', 'FilterWordController@deleteFilter')->name('filter.delete');
-
-
-/**
- * 自動ツイートの管理API
- */
-Route::post('/tweet', 'AutomaticTweetController@add')->name('tweet.add');
-Route::get('/tweet', 'AutomaticTweetController@show')->name('tweet.show');
-Route::put('/tweet/{id}', 'AutomaticTweetController@edit')->name('tweet.edit');
-Route::delete('/tweet/{id}', 'AutomaticTweetController@delete')->name('tweet.delete');
+Route::post('/follow', 'FollowTargetController@add')->name('follow.add');
+Route::get('/follow', 'FollowTargetController@show')->name('follow.show');
+Route::put('/follow/{id}', 'FollowTargetController@edit')->name('follow.edit');
+Route::delete('/follow/{id}', 'FollowTargetController@delete')->name('follow.delete');
 
 
 /**
@@ -53,3 +43,19 @@ Route::get('/like','AutomaticLikeController@show')->name('like.show');
 Route::put('/like/{id}','AutomaticLikeController@edit')->name('like.edit');
 Route::delete('/like/{id}','AutomaticLikeController@delete')->name('like.delete');
 
+/**
+ * 自動ツイートの管理API
+ */
+Route::post('/tweet', 'AutomaticTweetController@add')->name('tweet.add');
+Route::get('/tweet', 'AutomaticTweetController@show')->name('tweet.show');
+Route::put('/tweet/{id}', 'AutomaticTweetController@edit')->name('tweet.edit');
+Route::delete('/tweet/{id}', 'AutomaticTweetController@delete')->name('tweet.delete');
+
+/**
+ * 条件キーワードの管理API
+ */
+Route::post('/filter', 'FilterWordController@add')->name('filter.add');
+Route::get('/filter', 'FilterWordController@show')->name('filter.show');
+Route::get('/filter/{id}', 'FilterWordController@showOneFilter')->name('filter.showOne');
+Route::put('/filter/{id}', 'FilterWordController@editFilter')->name('edit.filter');
+Route::delete('/filter/{id}', 'FilterWordController@deleteFilter')->name('filter.delete');

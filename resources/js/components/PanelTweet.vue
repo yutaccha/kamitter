@@ -49,12 +49,12 @@
                     <form class="p-form" @submit.prevent="addAutoTweet">
 
 
-                        <label class="p-form__label" for="addTweet">ツイート内容 {{addTextCount}}/140</label>
-                        <textarea class="p-form__item p-form__item--textarea" id="addTweet"
+                        <label class="p-form__label" for="add-tweet">ツイート内容 {{addTextCount}}/140 ※必須</label>
+                        <textarea class="p-form__item p-form__item--textarea" id="add-tweet"
                                   rows="5" cols="40" v-model="addForm.tweet" required maxlength="140">
                         </textarea>
 
-                        <label class="p-form__label">予定日時</label>
+                        <label class="p-form__label">ツイート予定日時</label>
                         <div class="u-display__flex--left">
                             <input type="date" class="p-form__date"
                                    :min="getCurrentYYYYMMDD"
@@ -77,8 +77,8 @@
                     <form class="p-form" @submit.prevent="editAutoTweet">
 
 
-                        <label class="p-form__label" for="editTweet">ツイート内容 {{addTextCount}}/140</label>
-                        <textarea class="p-form__item p-form__item--textarea" id="editTweet"
+                        <label class="p-form__label" for="edit-tweet">ツイート内容 {{editTextCount}}/140 ※必須</label>
+                        <textarea class="p-form__item p-form__item--textarea" id="edit-tweet"
                                   rows="5" cols="40" v-model="editForm.tweet" required maxlength="140">
                         </textarea>
 
@@ -128,6 +128,9 @@
         computed: {
             addTextCount: function () {
                 return this.addForm.tweet.length
+            },
+            editTextCount: function () {
+                return this.editForm.tweet.length
             },
             getCurrentYYYYMMDD: function () {
                 const date = new Date()

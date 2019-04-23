@@ -44,14 +44,14 @@
                     <form class="p-form" @submit.prevent="addLike">
 
 
-                        <label class="p-form__label" for="add-filter">いいね条件の選択</label>
-                        <select class="p-form__select" id="add-filter"
+                        <label class="p-form__label" for="add-like-filter">いいね条件の選択</label>
+                        <select class="p-form__select" id="add-like-filter"
                                 v-model="addForm.filter_word_id"
                                 required
                         >
                             <option v-for="filter in filters" :value="filter.id">{{filter.merged_word}}</option>
                         </select>
-                        <p class="p-form__notion">※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。</p>
+                        <p class="p-form__notion">※条件のキーワードは、「キーワード登録」から登録することができます。</p>
                         <div class="p-form__button">
                             <button type="submit" class="c-button c-button--twitter">追加</button>
                         </div>
@@ -67,14 +67,14 @@
                     <form class="p-form" @submit.prevent="editLike">
 
 
-                        <label class="p-form__label" for="edit-filter">いいね条件の選択</label>
-                        <select class="p-form__select" id="edit-filter"
+                        <label class="p-form__label" for="edit-like-filter">いいね条件の選択</label>
+                        <select class="p-form__select" id="edit-like-filter"
                                 v-model="editForm.filter_word_id"
                                 required
                         >
                             <option v-for="filter in filters" :value="filter.id">{{filter.merged_word}}</option>
                         </select>
-                        <p class="p-form__notion">※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。</p>
+                        <p class="p-form__notion">※※条件のキーワードは、「キーワード登録」から登録することができます。</p>
                         <div class="p-form__button">
                             <button type="submit" class="c-button c-button--twitter">変更</button>
                         </div>
@@ -89,14 +89,9 @@
 </template>
 
 <script>
-    import {CREATED, OK, UNPROCESSABLE_ENTRY} from "../utility";
+    import {CREATED, OK, UNPROCESSABLE_ENTRY} from "../utility"
 
     export default {
-        props: {
-            refresh: {
-                type: String,
-            }
-        },
         data() {
             return {
                 likes: [],

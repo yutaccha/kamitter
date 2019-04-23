@@ -12,7 +12,6 @@ class AutomaticLikeController extends Controller
 {
     public function add(AddAutomaticLike $request)
     {
-        $user_id = Auth::id();
         $twitter_id = session()->get('twitter_id');
 
         $auto_like = new AutomaticLike();
@@ -28,7 +27,7 @@ class AutomaticLikeController extends Controller
     {
         $twitter_id = session()->get('twitter_id');
         $auto_likes = AutomaticLike::where('twitter_user_id', $twitter_id)->with('filterWord')->get();
-        return response($auto_likes);
+        return response($auto_likes, 200);
     }
 
     public function edit(int $id, AddAutomaticLike $request)

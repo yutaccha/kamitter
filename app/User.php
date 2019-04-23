@@ -66,4 +66,10 @@ class User extends Authenticatable
         return $this->hasMany('App\AutomaticLike', 'user_id');
     }
 
+    public function followTargets()
+    {
+        return $this->hasMany('App\FollowTarget', 'user_id');
+
+    }
+
 }

@@ -3,10 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-use App\FilterWord;
+use App\FollowTarget;
 
-class AddFilterWord extends FormRequest
+class AddFollowTarget extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +24,9 @@ class AddFilterWord extends FormRequest
      */
     public function rules()
     {
-        $type_rule = Rule::in(array_keys(FilterWord::TYPE));
-
         return [
-            'type' => 'required|' . $type_rule,  // 'type' => 'required|in(1, 2)', となる
-            'word' => 'max:50|required',
-            'remove' => 'max:50',
+            'target' => 'required|max:15|alpha_dash',
+            'filter_word_id' => 'required',
         ];
     }
 }

@@ -48,11 +48,13 @@
                             <option value="1">次のワードを含む</option>
                             <option value="2">いずれかのワードを含む</option>
                         </select>
-                        <label class="p-form__label" for="keyword">キーワード</label>
-                        <input type="text" class="p-form__item" id="keyword" v-model="addForm.word">
+                        <label class="p-form__label" for="keyword">キーワード *必須</label>
+                        <input type="text" class="p-form__item" id="keyword"
+                               v-model="addForm.word" required maxlength="50">
 
                         <label class="p-form__label" for="remove_word">除外ワード</label>
-                        <input type="text" class="p-form__item" id="remove_word" v-model="addForm.remove">
+                        <input type="text" class="p-form__item" id="remove_word"
+                               v-model="addForm.remove" maxlength="50">
                         <p class="p-form__notion">※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。</p>
                         <div class="p-form__button">
                             <button type="submit" class="c-button c-button--twitter">追加</button>
@@ -74,11 +76,13 @@
                             <option value="1">次のワードを含む</option>
                             <option value="2">いずれかのワードを含む</option>
                         </select>
-                        <label class="p-form__label" for="edit-keyword">キーワード</label>
-                        <input type="text" class="p-form__item" id="edit-keyword" v-model="editForm.word">
+                        <label class="p-form__label" for="edit-keyword">キーワード ※必須</label>
+                        <input type="text" class="p-form__item" id="edit-keyword"
+                               v-model="editForm.word" required maxlength="50>
 
                         <label class="p-form__label" for="edit-remove_keyword">除外ワード</label>
-                        <input type="text" class="p-form__item" id="edit-remove_keyword" v-model="editForm.remove">
+                        <input type="text" class="p-form__item" id="edit-remove_keyword"
+                               v-model="editForm.remove" maxlength="50>
                         <p class="p-form__notion">※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。</p>
                         <div class="p-form__button">
                             <button type="submit" class="c-button c-button--twitter">変更</button>
@@ -92,7 +96,7 @@
 </template>
 
 <script>
-    import {CREATED, OK, UNPROCESSABLE_ENTRY} from "../utility";
+    import {CREATED, OK, UNPROCESSABLE_ENTRY} from "../utility"
 
     export default {
         data() {
