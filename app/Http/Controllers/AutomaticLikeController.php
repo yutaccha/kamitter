@@ -31,10 +31,9 @@ class AutomaticLikeController extends Controller
         return response($auto_likes);
     }
 
-    public function edit(int $id)
+    public function edit(int $id, AddAutomaticLike $request)
     {
-
-        $auto_like = AutomaticLike::with('id', $id)->first();
+        $auto_like = AutomaticLike::where('id', $id)->first();
         if (! $auto_like){
             abort(404);
         }
@@ -46,7 +45,7 @@ class AutomaticLikeController extends Controller
 
     public function delete(int $id)
     {
-        $auto_like = AutomaticLike::with('id', $id)->first();
+        $auto_like = AutomaticLike::where('id', $id)->first();
         if (! $auto_like){
             abort(404);
         }

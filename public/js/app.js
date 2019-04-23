@@ -2211,8 +2211,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 addedFilter = response.data;
                 this.filters.push(addedFilter);
                 this.newModal = false;
+                this.$store.commit('dashboard/setChange', true);
 
-              case 13:
+              case 14:
               case "end":
                 return _context2.stop();
             }
@@ -2260,8 +2261,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 6:
                 this.filters.splice(this.editIndex, 1, response.data);
                 this.resetEditForm();
+                this.$store.commit('dashboard/setChange', true);
 
-              case 8:
+              case 9:
               case "end":
                 return _context3.stop();
             }
@@ -2483,6 +2485,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2538,9 +2563,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 6:
                 this.likes = response.data;
-                console.log(this.likes);
 
-              case 8:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -2645,7 +2669,101 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return addLike;
-    }()
+    }(),
+    showEditModal: function showEditModal(like, index) {
+      this.editModal = true;
+      this.editForm.id = like.id;
+      this.editForm.filter_word_id = like.filter_word_id;
+      this.editIndex = index;
+    },
+    editLike: function () {
+      var _editLike = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios.put("/api/like/".concat(this.editForm.id), this.editForm);
+
+              case 2:
+                response = _context4.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context4.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context4.abrupt("return", false);
+
+              case 6:
+                this.likes.splice(this.editIndex, 1, response.data);
+                this.resetEditForm();
+                this.$store.commit('dashboard/setChange', true);
+
+              case 9:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function editLike() {
+        return _editLike.apply(this, arguments);
+      }
+
+      return editLike;
+    }(),
+    removeLike: function () {
+      var _removeLike = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(id, index) {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
+                return axios["delete"]("/api/like/".concat(id));
+
+              case 2:
+                response = _context5.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context5.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context5.abrupt("return", false);
+
+              case 6:
+                this.likes.splice(index, 1);
+
+              case 7:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
+
+      function removeLike(_x, _x2) {
+        return _removeLike.apply(this, arguments);
+      }
+
+      return removeLike;
+    }(),
+    resetEditForm: function resetEditForm() {
+      this.editModal = false;
+      this.editForm.id = null;
+      this.editForm.filter_word_id = null;
+      this.editIndex = null;
+    }
   },
   created: function created() {
     this.fetchLikes();
@@ -5901,7 +6019,9 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "p-table__title" }, [
-      _c("h2", { staticClass: "p-table__caption" }, [_vm._v("○いいね設定")]),
+      _c("h2", { staticClass: "p-table__caption" }, [
+        _vm._v("○自動いいね設定")
+      ]),
       _vm._v(" "),
       _c(
         "button",
@@ -5940,7 +6060,7 @@ var render = function() {
                   on: {
                     click: function($event) {
                       $event.stopPropagation()
-                      return _vm.showEditModal(_vm.autoLike, index)
+                      return _vm.showEditModal(like, index)
                     }
                   }
                 },
@@ -5954,7 +6074,7 @@ var render = function() {
                   on: {
                     click: function($event) {
                       $event.stopPropagation()
-                      return _vm.removeAutoLike(_vm.autoLike.id, index)
+                      return _vm.removeLike(like.id, index)
                     }
                   }
                 },
@@ -6073,6 +6193,113 @@ var render = function() {
             )
           ])
         ]
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.editModal,
+              expression: "editModal"
+            }
+          ],
+          staticClass: "p-modal p-modal--opened"
+        },
+        [
+          _c("div", { staticClass: "p-modal__contents" }, [
+            _c(
+              "span",
+              {
+                staticClass: "p-modal__cancel u-color__bg--white",
+                on: {
+                  click: function($event) {
+                    _vm.editModal = !_vm.editModal
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "c-icon--gray p-modal__icon fas fa-times"
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                staticClass: "p-form",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.editLike($event)
+                  }
+                }
+              },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "edit-filter" }
+                  },
+                  [_vm._v("いいね条件の選択")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.editForm.filter_word_id,
+                        expression: "editForm.filter_word_id"
+                      }
+                    ],
+                    staticClass: "p-form__select",
+                    attrs: { id: "edit-filter", required: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.editForm,
+                          "filter_word_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.filters, function(filter) {
+                    return _c("option", { domProps: { value: filter.id } }, [
+                      _vm._v(_vm._s(filter.merged_word))
+                    ])
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c("p", { staticClass: "p-form__notion" }, [
+                  _vm._v(
+                    "※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。"
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(3)
+              ]
+            )
+          ])
+        ]
       )
     ])
   ])
@@ -6110,6 +6337,21 @@ var staticRenderFns = [
       _c("th", { staticClass: "p-table__th p-table__th--like" }, [
         _vm._v("操作")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-form__button" }, [
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("追加")]
+      )
     ])
   },
   function() {

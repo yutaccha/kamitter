@@ -141,6 +141,7 @@
                 const addedFilter = response.data;
                 this.filters.push(addedFilter)
                 this.newModal = false
+                this.$store.commit('dashboard/setChange', true)
             },
             showEditModal(filter, index) {
                 this.editModal = true
@@ -149,7 +150,6 @@
                 this.editForm.word = filter.word
                 this.editForm.remove = filter.remove
                 this.editIndex = index
-
             },
             async editFilter() {
                 const response = await axios.put(`/api/filter/${this.editForm.id}`, this.editForm)
@@ -159,6 +159,7 @@
                 }
                 this.filters.splice(this.editIndex, 1, response.data)
                 this.resetEditForm()
+                this.$store.commit('dashboard/setChange', true)
             },
             async removeFilter(id, index) {
                 const response = await axios.delete(`/api/filter/${id}`)
@@ -168,7 +169,6 @@
                 }
 
                 this.filters.splice(index, 1)
-
                 this.$store.commit('dashboard/setChange', true)
             },
 

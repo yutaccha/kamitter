@@ -8,7 +8,7 @@
 
 
         <div class="p-table__title">
-            <h2 class="p-table__caption">○いいね設定</h2>
+            <h2 class="p-table__caption">○自動いいね設定</h2>
             <button class="c-button c-button--twitter" @click="newModal = ! newModal">
                 <i class="c-icon c-icon--white fas fa-plus"></i>
                 いいね設定を追加
@@ -24,11 +24,11 @@
                 <td class="p-table__td">{{like.filter_word.merged_word}}</td>
                 <td class="p-table__td">
                     <button class="c-button c-button--twitter"
-                            @click.stop="showEditModal(autoLike, index)"
+                            @click.stop="showEditModal(like, index)"
                     >編集
                     </button>
                     <button class="c-button c-button--danger"
-                            @click.stop="removeAutoLike(autoLike.id, index)"
+                            @click.stop="removeLike(like.id, index)"
                     >削除
                     </button>
                 </td>
@@ -47,6 +47,29 @@
                         <label class="p-form__label" for="add-filter">いいね条件の選択</label>
                         <select class="p-form__select" id="add-filter"
                                 v-model="addForm.filter_word_id"
+                                required
+                        >
+                            <option v-for="filter in filters" :value="filter.id">{{filter.merged_word}}</option>
+                        </select>
+                        <p class="p-form__notion">※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。</p>
+                        <div class="p-form__button">
+                            <button type="submit" class="c-button c-button--twitter">追加</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section class="p-modal p-modal--opened" v-show="editModal">
+                <div class="p-modal__contents">
+                            <span class="p-modal__cancel u-color__bg--white" @click="editModal = ! editModal">
+                                <i class="c-icon--gray p-modal__icon fas fa-times"></i>
+                            </span>
+                    <form class="p-form" @submit.prevent="editLike">
+
+
+                        <label class="p-form__label" for="edit-filter">いいね条件の選択</label>
+                        <select class="p-form__select" id="edit-filter"
+                                v-model="editForm.filter_word_id"
                                 required
                         >
                             <option v-for="filter in filters" :value="filter.id">{{filter.merged_word}}</option>
@@ -104,8 +127,6 @@
                     return false
                 }
                 this.likes = response.data
-                console.log(this.likes)
-
             },
             async fetchFilters() {
                 const response = await axios.get('/api/filter')
@@ -129,6 +150,36 @@
                 }
                 this.likes.push(response.data)
                 this.newModal = false
+            },
+            showEditModal(like, index) {
+                this.editModal = true
+                this.editForm.id = like.id
+                this.editForm.filter_word_id = like.filter_word_id
+                this.editIndex = index
+            },
+            async editLike() {
+                const response = await axios.put(`/api/like/${this.editForm.id}`, this.editForm)
+                if (response.status !== OK) {
+                    this.$store.commit('error/setCode', response.status)
+                    return false
+                }
+                this.likes.splice(this.editIndex, 1, response.data)
+                this.resetEditForm()
+                this.$store.commit('dashboard/setChange', true)
+            },
+            async removeLike(id, index) {
+                const response = await axios.delete(`/api/like/${id}`)
+                if (response.status !== OK) {
+                    this.$store.commit('error/setCode', response.status)
+                    return false
+                }
+                this.likes.splice(index, 1)
+            },
+            resetEditForm() {
+                this.editModal = false
+                this.editForm.id = null
+                this.editForm.filter_word_id = null
+                this.editIndex = null
             }
 
         },
