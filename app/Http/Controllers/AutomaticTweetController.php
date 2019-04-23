@@ -28,9 +28,6 @@ class AutomaticTweetController extends Controller
     {
         $twitter_id = session()->get('twitter_id');
         $auto_tweets = AutomaticTweet::where('twitter_user_id', $twitter_id)->get();
-        if (! $auto_tweets){
-            abort(404);
-        }
         return response($auto_tweets, 200);
     }
 

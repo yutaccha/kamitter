@@ -383,6 +383,7 @@ img {
 }
 
 .p-form__select {
+  width: 100%;
   font-size: 16px;
   height: 40px;
   font-weight: 100;
@@ -724,17 +725,25 @@ img {
   width: 20%;
 }
 
-.p-table__th--tweet:nth-child(1) {
-  width: 15%;
+.p-table__th--tweet:nth-child(1),
+.p-table__th--tweet:nth-child(4) {
+  width: 20%;
 }
 
-.p-table__th--tweet:nth-child(3),
-.p-table__th--tweet:nth-child(4) {
-  width: 17.5%;
+.p-table__th--tweet:nth-child(3) {
+  width: 25%;
 }
 
 .p-table__th--tweet:nth-child(2) {
-  width: 40%;
+  width: 35%;
+}
+
+.p-table__th--like:nth-child(1) {
+  width: 80%;
+}
+
+.p-table__th--like:nth-child(2) {
+  width: 20%;
 }
 
 .p-table__td {

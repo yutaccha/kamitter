@@ -117,7 +117,7 @@
         },
         methods: {
             async fetchFilters() {
-                const response = await axios.get('/api/filter', this.addForm)
+                const response = await axios.get('/api/filter')
                 if (response.status !== OK) {
                     this.$store.commit('error/setCode', response.status)
                     return false
@@ -168,6 +168,8 @@
                 }
 
                 this.filters.splice(index, 1)
+
+                this.$store.commit('dashboard/setChange', true)
             },
 
             resetAddForm() {
@@ -186,6 +188,6 @@
         },
         created() {
             this.fetchFilters();
-        }
+        },
     }
 </script>

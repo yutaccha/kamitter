@@ -12,7 +12,7 @@ class FilterWord extends Model
     ];
 
     protected $appends = [
-        'type_label',
+        'type_label', 'merged_word'
     ];
 
     protected $hidden = [
@@ -24,6 +24,12 @@ class FilterWord extends Model
         return $this->belongsTo('App\User' ,'user_id');
     }
 
+    public function automaticLikes()
+    {
+        return $this->hasMany('App\AutomaticLike', 'filter_word_id');
+    }
+
+
     public function getTypeLabelAttribute()
     {
         $type = $this->attributes['type'];
@@ -33,5 +39,19 @@ class FilterWord extends Model
         }
 
         return self::TYPE[$type]['label'];
+    }
+
+    public function getMergedWordAttribute()
+    {
+        $type = $this->attributes['type'];
+        if(!isset(self::TYPE[$type])){
+            return '';
+        }
+        $type_string = self::TYPE[$type]['label'];
+
+        $word = $this->attributes['word'];
+        $remove = $this->attributes['remove'];
+
+        return "$type_string ： [$word] 、 除外ワード：[$remove]";
     }
 }

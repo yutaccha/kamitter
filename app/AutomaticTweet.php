@@ -12,7 +12,7 @@ class AutomaticTweet extends Model
     ];
 
     protected $appends = [
-      'status_label', 'formatted_date'
+      'status_label', 'formatted_date','japanese_formatted_date'
     ];
 
     protected $hidden = [
@@ -45,6 +45,13 @@ class AutomaticTweet extends Model
         $submit_date = $this->attributes['submit_date'];
         $date = new \DateTime($submit_date);
         return $date->format('Y-m-d H:i');
+    }
+
+    public function getJapaneseFormattedDateAttribute()
+    {
+        $submit_date = $this->attributes['submit_date'];
+        $date = new \DateTime($submit_date);
+        return $date->format('Y年m月d日 H時i分');
     }
 }
 

@@ -20,19 +20,24 @@
                     <ul class="c-tab__list">
                         <li class="c-tab__item"
                             :class="{'c-tab__item--active': tab ===1}"
-                            @click="tab=1">自動フォロー</li>
+                            @click="tab=1">自動フォロー
+                        </li>
                         <li class="c-tab__item"
                             :class="{'c-tab__item--active': tab ===2}"
-                            @click="tab=2">自動アンフォロー</li>
+                            @click="tab=2">自動アンフォロー
+                        </li>
                         <li class="c-tab__item"
                             :class="{'c-tab__item--active': tab ===3}"
-                            @click="tab=3">自動いいね</li>
+                            @click="tab=3">自動いいね
+                        </li>
                         <li class="c-tab__item"
                             :class="{'c-tab__item--active': tab ===4}"
-                            @click="tab=4">自動ツイート</li>
+                            @click="tab=4">自動ツイート
+                        </li>
                         <li class="c-tab__item"
                             :class="{'c-tab__item--active': tab ===5}"
-                            @click="tab=5">キーワード登録</li>
+                            @click="tab=5">キーワード登録
+                        </li>
                     </ul>
                 </section>
 
@@ -58,7 +63,7 @@
 </template>
 
 <script>
-    import { OK } from '../utility'
+    import {OK} from '../utility'
     import PanelFollow from '../components/PanelFollow'
     import PanelUnfollow from '../components/PanelUnfollow'
     import PanelLike from '../components/PanelLike'
@@ -67,16 +72,17 @@
 
     export default {
         components: {
-          PanelFollow,
-          PanelUnfollow,
-          PanelLike,
-          PanelTweet,
-          PanelFilter
+            PanelFollow,
+            PanelUnfollow,
+            PanelLike,
+            PanelTweet,
+            PanelFilter
         },
         data() {
             return {
                 tab: 1,
-                twitterUser: []
+                twitterUser: [],
+                refreshFlg: null
             }
         },
         methods: {
@@ -99,10 +105,10 @@
                     return false
                 }
                 this.$router.push('/dashboard')
-            }
+            },
         },
         async created() {
             this.fetchTwitterUser()
-        }
+        },
     }
 </script>

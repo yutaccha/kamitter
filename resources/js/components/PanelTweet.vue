@@ -25,7 +25,7 @@
             <tr v-for="(autoTweet, index) in autoTweets">
                 <td class="p-table__td">{{autoTweet.status_label}}</td>
                 <td class="p-table__td">{{autoTweet.tweet}}</td>
-                <td class="p-table__td">{{autoTweet.formatted_date}}</td>
+                <td class="p-table__td">{{autoTweet.japanese_formatted_date}}</td>
                 <td class="p-table__td">
                     <button class="c-button c-button--twitter"
                             @click.stop="showEditModal(autoTweet, index)"

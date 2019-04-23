@@ -61,4 +61,9 @@ class User extends Authenticatable
         return $this->hasMany('App\AutomaticTweet', 'user_id');
     }
 
+    public function automaticLikes()
+    {
+        return $this->hasMany('App\AutomaticLike', 'user_id');
+    }
+
 }
