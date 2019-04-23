@@ -76,7 +76,7 @@
                         </select>
                         <p class="p-form__notion">※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。</p>
                         <div class="p-form__button">
-                            <button type="submit" class="c-button c-button--twitter">追加</button>
+                            <button type="submit" class="c-button c-button--twitter">変更</button>
                         </div>
                     </form>
                 </div>

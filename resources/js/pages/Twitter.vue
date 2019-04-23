@@ -1,30 +1,28 @@
 <template>
-    <main class="l-main">
-        <div class="l-contents">
+    <div class="l-contents">
 
-            <div class="p-contents__area--narrow">
-                <h2 class="p-contents__head"><i class="c-icon--twitter fab fa-twitter"></i>利用するTwitterアカウントを選択する</h2>
-                <div v-show="isMaximumAccount" class="c-card p-twitter__card u-color__bg--white">
-                    <a href="auth/twitter/oauth">
-                        <p class="p-twitter__create">
-                            <i class="c-icon--twitter p-twitter__icon--create far fa-plus-square"></i>Twitterアカウントの追加
-                        </p>
-                    </a>
-                </div>
-                <ul class="p-twitter">
-                    <transition-group name="t-twitter_card">
-                        <TwitterCard
-                                v-for="(user, index) in users"
-                                :key="user.id"
-                                :item="user"
-                                :index="index"
-                                @delUser="removeCard"
-                        />
-                    </transition-group>
-                </ul>
+        <div class="p-contents__area--narrow">
+            <h2 class="p-contents__head"><i class="c-icon--twitter fab fa-twitter"></i>利用するTwitterアカウントを選択する</h2>
+            <div v-show="isMaximumAccount" class="c-card p-twitter__card u-color__bg--white">
+                <a href="auth/twitter/oauth">
+                    <p class="p-twitter__create">
+                        <i class="c-icon--twitter p-twitter__icon--create far fa-plus-square"></i>Twitterアカウントの追加
+                    </p>
+                </a>
             </div>
+            <ul class="p-twitter">
+                <transition-group name="t-twitter_card">
+                    <TwitterCard
+                            v-for="(user, index) in users"
+                            :key="user.id"
+                            :item="user"
+                            :index="index"
+                            @delUser="removeCard"
+                    />
+                </transition-group>
+            </ul>
         </div>
-    </main>
+    </div>
 </template>
 
 <script>

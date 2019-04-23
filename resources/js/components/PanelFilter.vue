@@ -81,7 +81,7 @@
                         <input type="text" class="p-form__item" id="edit-remove_keyword" v-model="editForm.remove">
                         <p class="p-form__notion">※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。</p>
                         <div class="p-form__button">
-                            <button type="submit" class="c-button c-button--twitter">編集</button>
+                            <button type="submit" class="c-button c-button--twitter">変更</button>
                         </div>
                     </form>
                 </div>
