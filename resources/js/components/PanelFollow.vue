@@ -8,7 +8,7 @@
 
 
         <div class="p-table__title">
-            <h2 class="p-table__caption">○フォロワーターゲット</h2>
+            <h2 class="p-table__caption">○フォロワーターゲットリスト</h2>
             <button class="c-button c-button--twitter" @click="viewModal = ! viewModal">
                 <i class="c-icon c-icon--white fas fa-plus"></i>
                 フォロワーターゲットを追加

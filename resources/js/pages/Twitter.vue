@@ -17,6 +17,7 @@
                                 v-for="(user, index) in users"
                                 :key="user.id"
                                 :item="user"
+                                :index="index"
                                 @delUser="removeCard"
                         />
                     </transition-group>
@@ -51,8 +52,8 @@
                 this.accountNum = response.data.account_num
 
             },
-            removeCard(id) {
-                this.users.splice(id, 1)
+            removeCard(emitObject) {
+                this.users.splice(emitObject.index, 1)
             }
         },
         computed: {

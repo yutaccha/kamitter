@@ -24,7 +24,7 @@ class AddAutomaticLike extends FormRequest
     public function rules()
     {
         return [
-            'filter_word_id' => 'required|unique:automatic_likes'
+            'filter_word_id' => 'required'
         ];
     }
 }

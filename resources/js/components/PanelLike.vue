@@ -8,7 +8,7 @@
 
 
         <div class="p-table__title">
-            <h2 class="p-table__caption">○自動いいね設定</h2>
+            <h2 class="p-table__caption">○自動いいねリスト</h2>
             <button class="c-button c-button--twitter" @click="newModal = ! newModal">
                 <i class="c-icon c-icon--white fas fa-plus"></i>
                 いいね設定を追加

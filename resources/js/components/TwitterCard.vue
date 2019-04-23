@@ -27,6 +27,10 @@
             item: {
                 type: Object,
                 required: true
+            },
+            index: {
+                type: Number,
+                required: true
             }
         },
         data() {
@@ -76,7 +80,7 @@
                     }
                 }
                 this.$emit('delUser', {
-                    id: this.index,
+                    index: this.index,
                 })
             }
         },

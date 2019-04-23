@@ -3226,6 +3226,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     item: {
       type: Object,
       required: true
+    },
+    index: {
+      type: Number,
+      required: true
     }
   },
   data: function data() {
@@ -3362,7 +3366,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 9:
                 this.$emit('delUser', {
-                  id: this.index
+                  index: this.index
                 });
 
               case 10:
@@ -3889,6 +3893,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3943,8 +3948,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return fetchTwitterUsers;
     }(),
-    removeCard: function removeCard(id) {
-      this.users.splice(id, 1);
+    removeCard: function removeCard(emitObject) {
+      this.users.splice(emitObject.index, 1);
     }
   },
   computed: {
@@ -5895,7 +5900,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "p-table__title" }, [
       _c("h2", { staticClass: "p-table__caption" }, [
-        _vm._v("○フォロワーターゲット")
+        _vm._v("○フォロワーターゲットリスト")
       ]),
       _vm._v(" "),
       _c(
@@ -6020,7 +6025,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "p-table__title" }, [
       _c("h2", { staticClass: "p-table__caption" }, [
-        _vm._v("○自動いいね設定")
+        _vm._v("○自動いいねリスト")
       ]),
       _vm._v(" "),
       _c(
@@ -7714,7 +7719,7 @@ var render = function() {
               _vm._l(_vm.users, function(user, index) {
                 return _c("TwitterCard", {
                   key: user.id,
-                  attrs: { item: user },
+                  attrs: { item: user, index: index },
                   on: { delUser: _vm.removeCard }
                 })
               }),
