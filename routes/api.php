@@ -59,3 +59,10 @@ Route::get('/filter', 'FilterWordController@show')->name('filter.show');
 Route::get('/filter/{id}', 'FilterWordController@showOneFilter')->name('filter.showOne');
 Route::put('/filter/{id}', 'FilterWordController@editFilter')->name('edit.filter');
 Route::delete('/filter/{id}', 'FilterWordController@deleteFilter')->name('filter.delete');
+
+/**
+ * システムON/OFF操作API
+ */
+Route::get('/system/status', 'SystemManagerController@show')->name('system.show');
+Route::post('/system/run', 'SystemManagerController@run')->name('system.run');
+Route::post('/system/stop', 'SystemManagerController@stop')->name('system.stop');

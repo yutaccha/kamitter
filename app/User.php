@@ -38,7 +38,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * リレーションシップ　- TwitterUsersテーブル
+     * リレーションシップ　- twitter_usersテーブル
      */
     public function twitterUsers()
     {
@@ -46,7 +46,7 @@ class User extends Authenticatable
     }
 
     /**
-     * リレーションシップ　- FilterWordsテーブル
+     * リレーションシップ　- filter_wordsテーブル
      */
     public function filterWords()
     {
@@ -54,21 +54,36 @@ class User extends Authenticatable
     }
 
     /**
-     * リレーションシップ　- AutomaticTweetsテーブル
+     * リレーションシップ　- automatic_tweetsテーブル
      */
     public function automaticTweets()
     {
         return $this->hasMany('App\AutomaticTweet', 'user_id');
     }
 
+    /**
+     * リレーションシップ　- automatic_likesテーブル
+     */
     public function automaticLikes()
     {
         return $this->hasMany('App\AutomaticLike', 'user_id');
     }
 
+    /**
+     * リレーションシップ　- follow_targetsテーブル
+     */
     public function followTargets()
     {
         return $this->hasMany('App\FollowTarget', 'user_id');
+
+    }
+
+    /**
+     * リレーションシップ　- system_managersテーブル
+     */
+    public function systemManagers()
+    {
+        return $this->hasMany('App\SystemManages', 'user_id');
 
     }
 

@@ -2464,6 +2464,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2473,6 +2474,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       newModal: false,
       editModal: false,
       editIndex: null,
+      serviceStatus: null,
       errors: null,
       addForm: {
         target: null,
@@ -2656,9 +2658,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 6:
                 this.followTargets.splice(this.editIndex, 1, response.data);
                 this.resetEditForm();
-                this.$store.commit('dashboard/setChange', true);
 
-              case 9:
+              case 8:
               case "end":
                 return _context4.stop();
             }
@@ -2672,6 +2673,46 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return editFollowTarget;
     }(),
+    removeFollowTarget: function () {
+      var _removeFollowTarget = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(id, index) {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
+                return axios["delete"]("/api/follow/".concat(id));
+
+              case 2:
+                response = _context5.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context5.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context5.abrupt("return", false);
+
+              case 6:
+                this.followTargets.splice(index, 1);
+
+              case 7:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
+
+      function removeFollowTarget(_x, _x2) {
+        return _removeFollowTarget.apply(this, arguments);
+      }
+
+      return removeFollowTarget;
+    }(),
     resetAddForm: function resetAddForm() {
       this.addForm.target = null;
       this.addForm.filter_word_id = null;
@@ -2682,11 +2723,140 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.editForm.target = null;
       this.editForm.filter_word_id = null;
       this.editIndex = null;
-    }
+    },
+    fetchServiceStatus: function () {
+      var _fetchServiceStatus = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                _context6.next = 2;
+                return axios.get('/api/system/status');
+
+              case 2:
+                response = _context6.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context6.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context6.abrupt("return", false);
+
+              case 6:
+                this.serviceStatus = response.data.status_labels.auto_follow;
+
+              case 7:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+
+      function fetchServiceStatus() {
+        return _fetchServiceStatus.apply(this, arguments);
+      }
+
+      return fetchServiceStatus;
+    }(),
+    runFollowService: function () {
+      var _runFollowService = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+        var serviceType, data, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                serviceType = 1;
+                data = {
+                  type: serviceType
+                };
+                _context7.next = 4;
+                return axios.post('/api/system/run', data);
+
+              case 4:
+                response = _context7.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context7.next = 8;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context7.abrupt("return", false);
+
+              case 8:
+                this.serviceStatus = response.data.status_labels.auto_follow;
+
+              case 9:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, this);
+      }));
+
+      function runFollowService() {
+        return _runFollowService.apply(this, arguments);
+      }
+
+      return runFollowService;
+    }(),
+    stopFollowService: function () {
+      var _stopFollowService = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
+        var serviceType, data, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                serviceType = 1;
+                data = {
+                  type: serviceType
+                };
+                _context8.next = 4;
+                return axios.post('/api/system/stop', data);
+
+              case 4:
+                response = _context8.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context8.next = 8;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context8.abrupt("return", false);
+
+              case 8:
+                this.serviceStatus = response.data.status_labels.auto_follow;
+
+              case 9:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8, this);
+      }));
+
+      function stopFollowService() {
+        return _stopFollowService.apply(this, arguments);
+      }
+
+      return stopFollowService;
+    }()
   },
   created: function created() {
     this.fetchFollowTargets();
     this.fetchFilters();
+    this.fetchServiceStatus();
   },
   watch: {
     dashChange: {
@@ -6205,7 +6375,39 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "c-panel u-color__bg--white" }, [
-    _vm._m(0),
+    _c("div", { staticClass: "p-status" }, [
+      _c("p", { staticClass: "p-status__show" }, [
+        _vm._v(_vm._s(_vm.serviceStatus))
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "p-status__button c-button c-button--success",
+          on: {
+            click: function($event) {
+              $event.stopPropagation()
+              return _vm.runFollowService($event)
+            }
+          }
+        },
+        [_vm._v("サービス開始")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "p-status__button c-button c-button--danger",
+          on: {
+            click: function($event) {
+              $event.stopPropagation()
+              return _vm.stopFollowService($event)
+            }
+          }
+        },
+        [_vm._v("停止")]
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "p-table__title" }, [
       _c("h2", { staticClass: "p-table__caption" }, [
@@ -6233,7 +6435,7 @@ var render = function() {
       "table",
       { staticClass: "p-table" },
       [
-        _vm._m(1),
+        _vm._m(0),
         _vm._v(" "),
         _vm._l(_vm.followTargets, function(followTarget, index) {
           return _c("tr", [
@@ -6422,7 +6624,7 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _vm._m(2)
+                _vm._m(1)
               ]
             )
           ])
@@ -6566,7 +6768,7 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _vm._m(3)
+                _vm._m(2)
               ]
             )
           ])
@@ -6576,26 +6778,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-status" }, [
-      _c("p", { staticClass: "p-status__show" }, [_vm._v("稼働中")]),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "p-status__button c-button c-button--success" },
-        [_vm._v("サービス開始")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "p-status__button c-button c-button--danger" },
-        [_vm._v("停止")]
-      )
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

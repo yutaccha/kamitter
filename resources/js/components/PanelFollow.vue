@@ -1,9 +1,10 @@
 <template>
     <div class="c-panel u-color__bg--white">
+
         <div class="p-status">
-            <p class="p-status__show">稼働中</p>
-            <button class="p-status__button c-button c-button--success">サービス開始</button>
-            <button class="p-status__button c-button c-button--danger">停止</button>
+            <p class="p-status__show">{{serviceStatus}}</p>
+            <button class="p-status__button c-button c-button--success" @click.stop="runFollowService">サービス開始</button>
+            <button class="p-status__button c-button c-button--danger" @click.stop="stopFollowService">停止</button>
         </div>
 
 
@@ -109,6 +110,7 @@
                 newModal: false,
                 editModal: false,
                 editIndex: null,
+                serviceStatus: null,
                 errors: null,
                 addForm: {
                     target: null,
@@ -173,7 +175,14 @@
                 }
                 this.followTargets.splice(this.editIndex, 1, response.data)
                 this.resetEditForm()
-                this.$store.commit('dashboard/setChange', true)
+            },
+            async removeFollowTarget(id, index) {
+                const response = await axios.delete(`/api/follow/${id}`)
+                if (response.status !== OK) {
+                    this.$store.commit('error/setCode', response.status)
+                    return false
+                }
+                this.followTargets.splice(index, 1)
             },
             resetAddForm() {
                 this.addForm.target = null
@@ -185,11 +194,41 @@
                 this.editForm.target = null
                 this.editForm.filter_word_id = null
                 this.editIndex = null
+            },
+            async fetchServiceStatus() {
+                const response = await axios.get('/api/system/status')
+                if (response.status !== OK) {
+                    this.$store.commit('error/setCode', response.status)
+                    return false
+                }
+                this.serviceStatus = response.data.status_labels.auto_follow
+            },
+            async runFollowService() {
+                const serviceType = 1
+                const data = {type: serviceType}
+                const response = await axios.post('/api/system/run', data)
+                if (response.status !== OK) {
+                    this.$store.commit('error/setCode', response.status)
+                    return false
+                }
+                this.serviceStatus = response.data.status_labels.auto_follow
+            },
+            async stopFollowService() {
+                const serviceType = 1
+                const data = {type: serviceType}
+                const response = await axios.post('/api/system/stop', data)
+                if (response.status !== OK) {
+                    this.$store.commit('error/setCode', response.status)
+                    return false
+                }
+                this.serviceStatus = response.data.status_labels.auto_follow
             }
+
         },
         created() {
             this.fetchFollowTargets()
             this.fetchFilters()
+            this.fetchServiceStatus()
         },
         watch: {
             dashChange: {
