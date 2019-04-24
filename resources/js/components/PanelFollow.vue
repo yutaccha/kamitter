@@ -123,7 +123,7 @@
         },
         computed: {
             dashChange() {
-                return this.$store.state.dashboard.isChange
+                return this.$store.state.dashboard.noticeToTweet
             },
         },
         methods: {
@@ -155,7 +155,6 @@
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
-                console.log(response.data)
                 this.followTargets.push(response.data)
                 this.newModal = false
             },
@@ -198,7 +197,7 @@
                     if (val === true) {
                         this.fetchFollowTargets()
                         this.fetchFilters()
-                        this.$store.commit('dashboard/setChange', null)
+                        this.$store.commit('dashboard/setNoticeToTweet', null)
                     }
                 }
             },

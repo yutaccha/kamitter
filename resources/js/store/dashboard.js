@@ -1,10 +1,14 @@
 const state = {
-    isChange: null
+    noticeToLike: null,
+    noticeToTweet: null,
 }
 
 const mutations = {
-    setChange (state, isChange) {
-        state.isChange = isChange
+    setNoticeToLike (state, noticeToLike) {
+        state.noticeToLike = noticeToLike
+    },
+    setNoticeToTweet (state, noticeToTweet){
+        state.noticeToTweet= noticeToTweet
     }
 }
 

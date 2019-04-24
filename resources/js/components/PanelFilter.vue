@@ -78,11 +78,11 @@
                         </select>
                         <label class="p-form__label" for="edit-keyword">キーワード ※必須</label>
                         <input type="text" class="p-form__item" id="edit-keyword"
-                               v-model="editForm.word" required maxlength="50>
+                               v-model="editForm.word" required maxlength="50">
 
                         <label class="p-form__label" for="edit-remove_keyword">除外ワード</label>
                         <input type="text" class="p-form__item" id="edit-remove_keyword"
-                               v-model="editForm.remove" maxlength="50>
+                               v-model="editForm.remove" maxlength="50">
                         <p class="p-form__notion">※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。</p>
                         <div class="p-form__button">
                             <button type="submit" class="c-button c-button--twitter">変更</button>
@@ -145,7 +145,8 @@
                 const addedFilter = response.data;
                 this.filters.push(addedFilter)
                 this.newModal = false
-                this.$store.commit('dashboard/setChange', true)
+                this.$store.commit('dashboard/setNoticeToTweet', true)
+                this.$store.commit('dashboard/setNoticeToLike', true)
             },
             showEditModal(filter, index) {
                 this.editModal = true
@@ -163,7 +164,8 @@
                 }
                 this.filters.splice(this.editIndex, 1, response.data)
                 this.resetEditForm()
-                this.$store.commit('dashboard/setChange', true)
+                this.$store.commit('dashboard/setNoticeToTweet', true)
+                this.$store.commit('dashboard/setNoticeToLike', true)
             },
             async removeFilter(id, index) {
                 const response = await axios.delete(`/api/filter/${id}`)
@@ -173,7 +175,8 @@
                 }
 
                 this.filters.splice(index, 1)
-                this.$store.commit('dashboard/setChange', true)
+                this.$store.commit('dashboard/setNoticeToTweet', true)
+                this.$store.commit('dashboard/setNoticeToLike', true)
             },
 
             resetAddForm() {

@@ -2215,9 +2215,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 addedFilter = response.data;
                 this.filters.push(addedFilter);
                 this.newModal = false;
-                this.$store.commit('dashboard/setChange', true);
+                this.$store.commit('dashboard/setNoticeToTweet', true);
+                this.$store.commit('dashboard/setNoticeToLike', true);
 
-              case 14:
+              case 15:
               case "end":
                 return _context2.stop();
             }
@@ -2265,9 +2266,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 6:
                 this.filters.splice(this.editIndex, 1, response.data);
                 this.resetEditForm();
-                this.$store.commit('dashboard/setChange', true);
+                this.$store.commit('dashboard/setNoticeToTweet', true);
+                this.$store.commit('dashboard/setNoticeToLike', true);
 
-              case 9:
+              case 10:
               case "end":
                 return _context3.stop();
             }
@@ -2306,9 +2308,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 6:
                 this.filters.splice(index, 1);
-                this.$store.commit('dashboard/setChange', true);
+                this.$store.commit('dashboard/setNoticeToTweet', true);
+                this.$store.commit('dashboard/setNoticeToLike', true);
 
-              case 8:
+              case 9:
               case "end":
                 return _context4.stop();
             }
@@ -2484,7 +2487,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   computed: {
     dashChange: function dashChange() {
-      return this.$store.state.dashboard.isChange;
+      return this.$store.state.dashboard.noticeToTweet;
     }
   },
   methods: {
@@ -2603,11 +2606,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context3.abrupt("return", false);
 
               case 10:
-                console.log(response.data);
                 this.followTargets.push(response.data);
                 this.newModal = false;
 
-              case 13:
+              case 12:
               case "end":
                 return _context3.stop();
             }
@@ -2692,7 +2694,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         if (val === true) {
           this.fetchFollowTargets();
           this.fetchFilters();
-          this.$store.commit('dashboard/setChange', null);
+          this.$store.commit('dashboard/setNoticeToTweet', null);
         }
       }
     }
@@ -2830,7 +2832,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   computed: {
     dashChange: function dashChange() {
-      return this.$store.state.dashboard.isChange;
+      return this.$store.state.dashboard.noticeToLike;
     }
   },
   methods: {
@@ -3071,7 +3073,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         if (val === true) {
           this.fetchLikes();
           this.fetchFilters();
-          this.$store.commit('dashboard/setChange', null);
+          this.$store.commit('dashboard/setNoticeToLike', null);
         }
       }
     }
@@ -6050,12 +6052,73 @@ var render = function() {
                   [_vm._v("キーワード ※必須")]
                 ),
                 _vm._v(" "),
-                _vm._v('" for="edit-remove_keyword">除外ワード'),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.editForm.word,
+                      expression: "editForm.word"
+                    }
+                  ],
+                  staticClass: "p-form__item",
+                  attrs: {
+                    type: "text",
+                    id: "edit-keyword",
+                    required: "",
+                    maxlength: "50"
+                  },
+                  domProps: { value: _vm.editForm.word },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.editForm, "word", $event.target.value)
+                    }
+                  }
+                }),
                 _vm._v(" "),
-                _vm._v(
-                  '">※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。'
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "edit-remove_keyword" }
+                  },
+                  [_vm._v("除外ワード")]
                 ),
-                _c("p"),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.editForm.remove,
+                      expression: "editForm.remove"
+                    }
+                  ],
+                  staticClass: "p-form__item",
+                  attrs: {
+                    type: "text",
+                    id: "edit-remove_keyword",
+                    maxlength: "50"
+                  },
+                  domProps: { value: _vm.editForm.remove },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.editForm, "remove", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("p", { staticClass: "p-form__notion" }, [
+                  _vm._v(
+                    "※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。"
+                  )
+                ]),
                 _vm._v(" "),
                 _vm._m(2)
               ]
@@ -25611,11 +25674,15 @@ var actions = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var state = {
-  isChange: null
+  noticeToLike: null,
+  noticeToTweet: null
 };
 var mutations = {
-  setChange: function setChange(state, isChange) {
-    state.isChange = isChange;
+  setNoticeToLike: function setNoticeToLike(state, noticeToLike) {
+    state.noticeToLike = noticeToLike;
+  },
+  setNoticeToTweet: function setNoticeToTweet(state, noticeToTweet) {
+    state.noticeToTweet = noticeToTweet;
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({

@@ -111,7 +111,7 @@
         },
         computed: {
             dashChange() {
-                return this.$store.state.dashboard.isChange
+                return this.$store.state.dashboard.noticeToLike
             }
         },
         methods: {
@@ -188,7 +188,7 @@
                     if (val === true) {
                         this.fetchLikes()
                         this.fetchFilters()
-                        this.$store.commit('dashboard/setChange', null)
+                        this.$store.commit('dashboard/setNoticeToLike', null)
                     }
                 }
             },
