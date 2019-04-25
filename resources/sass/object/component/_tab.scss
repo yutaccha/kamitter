@@ -1,7 +1,7 @@
 // ==================================
-// p-tab
+// c-tab
 // ==================================
-.p-tab{
+.c-tab{
   width: 100%;
   margin-bottom: 15px;
   box-sizing: border-box;
@@ -15,11 +15,12 @@
     text-align: center;
     box-sizing: border-box;
     border-bottom: 3px solid $color-default-parent;
+    margin-right: 20px;
     &:hover {
       cursor: pointer;
     }
     &:last-of-type{
-      margin-left: 20px;
+      margin-right: 0;
     }
 
     &--active{
@@ -28,3 +29,4 @@
     }
   }
 }
+

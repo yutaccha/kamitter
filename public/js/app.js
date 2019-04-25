@@ -1803,6 +1803,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 
@@ -1886,6 +1888,22 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1910,7 +1928,2135 @@ __webpack_require__.r(__webpack_exports__);
     },
     username: function username() {
       return this.$store.getters['auth/username'];
+    },
+    apiStatus: function apiStatus() {
+      return this.$store.state.auth.apiStatus;
     }
+  },
+  methods: {
+    logout: function () {
+      var _logout = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return this.$store.dispatch('auth/logout');
+
+              case 2:
+                if (this.apiStatus) {
+                  this.$router.push('/');
+                }
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function logout() {
+        return _logout.apply(this, arguments);
+      }
+
+      return logout;
+    }(),
+    changeTwitterUser: function () {
+      var _changeTwitterUser = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return this.$store.dispatch('auth/twitterUserLogout');
+
+              case 2:
+                if (this.apiStatus) {
+                  this.$router.push('/twitter');
+                }
+
+              case 3:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function changeTwitterUser() {
+        return _changeTwitterUser.apply(this, arguments);
+      }
+
+      return changeTwitterUser;
+    }()
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PanelFilter.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PanelFilter.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utility */ "./resources/js/utility.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      filters: [],
+      newModal: false,
+      editModal: false,
+      editIndex: null,
+      errors: null,
+      addForm: {
+        type: 1,
+        word: '',
+        remove: ''
+      },
+      editForm: {
+        id: null,
+        type: '',
+        word: '',
+        remove: ''
+      }
+    };
+  },
+  methods: {
+    fetchFilters: function () {
+      var _fetchFilters = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get('/api/filter');
+
+              case 2:
+                response = _context.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context.abrupt("return", false);
+
+              case 6:
+                this.filters = response.data;
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function fetchFilters() {
+        return _fetchFilters.apply(this, arguments);
+      }
+
+      return fetchFilters;
+    }(),
+    addFilter: function () {
+      var _addFilter = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response, addedFilter;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.post('/api/filter', this.addForm);
+
+              case 2:
+                response = _context2.sent;
+
+                if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["UNPROCESSABLE_ENTRY"])) {
+                  _context2.next = 6;
+                  break;
+                }
+
+                this.errors = response.data.errors;
+                return _context2.abrupt("return", false);
+
+              case 6:
+                this.resetAddForm();
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["CREATED"])) {
+                  _context2.next = 10;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context2.abrupt("return", false);
+
+              case 10:
+                addedFilter = response.data;
+                this.filters.push(addedFilter);
+                this.newModal = false;
+                this.$store.commit('dashboard/setNoticeToTweet', true);
+                this.$store.commit('dashboard/setNoticeToLike', true);
+
+              case 15:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function addFilter() {
+        return _addFilter.apply(this, arguments);
+      }
+
+      return addFilter;
+    }(),
+    showEditModal: function showEditModal(filter, index) {
+      this.editModal = true;
+      this.editForm.id = filter.id;
+      this.editForm.type = filter.type;
+      this.editForm.word = filter.word;
+      this.editForm.remove = filter.remove;
+      this.editIndex = index;
+    },
+    editFilter: function () {
+      var _editFilter = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios.put("/api/filter/".concat(this.editForm.id), this.editForm);
+
+              case 2:
+                response = _context3.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context3.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context3.abrupt("return", false);
+
+              case 6:
+                this.filters.splice(this.editIndex, 1, response.data);
+                this.resetEditForm();
+                this.$store.commit('dashboard/setNoticeToTweet', true);
+                this.$store.commit('dashboard/setNoticeToLike', true);
+
+              case 10:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function editFilter() {
+        return _editFilter.apply(this, arguments);
+      }
+
+      return editFilter;
+    }(),
+    removeFilter: function () {
+      var _removeFilter = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(id, index) {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios["delete"]("/api/filter/".concat(id));
+
+              case 2:
+                response = _context4.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context4.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context4.abrupt("return", false);
+
+              case 6:
+                this.filters.splice(index, 1);
+                this.$store.commit('dashboard/setNoticeToTweet', true);
+                this.$store.commit('dashboard/setNoticeToLike', true);
+
+              case 9:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function removeFilter(_x, _x2) {
+        return _removeFilter.apply(this, arguments);
+      }
+
+      return removeFilter;
+    }(),
+    resetAddForm: function resetAddForm() {
+      this.addForm.type = 1;
+      this.addForm.word = '';
+      this.addForm.remove = '';
+    },
+    resetEditForm: function resetEditForm() {
+      this.editModal = false;
+      this.editForm.id = null;
+      this.editForm.type = '';
+      this.editForm.word = '';
+      this.editForm.remove = '';
+      this.editIndex = null;
+    }
+  },
+  created: function created() {
+    this.fetchFilters();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PanelFollow.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PanelFollow.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utility */ "./resources/js/utility.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      followTargets: [],
+      filters: [],
+      newModal: false,
+      editModal: false,
+      editIndex: null,
+      serviceStatus: null,
+      errors: null,
+      addForm: {
+        target: null,
+        filter_word_id: null
+      },
+      editForm: {
+        id: null,
+        target: null,
+        filter_word_id: null
+      }
+    };
+  },
+  computed: {
+    dashChange: function dashChange() {
+      return this.$store.state.dashboard.noticeToTweet;
+    }
+  },
+  methods: {
+    fetchFollowTargets: function () {
+      var _fetchFollowTargets = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get('/api/follow');
+
+              case 2:
+                response = _context.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context.abrupt("return", false);
+
+              case 6:
+                this.followTargets = response.data;
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function fetchFollowTargets() {
+        return _fetchFollowTargets.apply(this, arguments);
+      }
+
+      return fetchFollowTargets;
+    }(),
+    fetchFilters: function () {
+      var _fetchFilters = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.get('/api/filter');
+
+              case 2:
+                response = _context2.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context2.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context2.abrupt("return", false);
+
+              case 6:
+                this.filters = response.data;
+
+              case 7:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function fetchFilters() {
+        return _fetchFilters.apply(this, arguments);
+      }
+
+      return fetchFilters;
+    }(),
+    addFollowTarget: function () {
+      var _addFollowTarget = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios.post('/api/follow', this.addForm);
+
+              case 2:
+                response = _context3.sent;
+
+                if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["UNPROCESSABLE_ENTRY"])) {
+                  _context3.next = 6;
+                  break;
+                }
+
+                this.errors = response.data.errors;
+                return _context3.abrupt("return", false);
+
+              case 6:
+                this.resetAddForm();
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["CREATED"])) {
+                  _context3.next = 10;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context3.abrupt("return", false);
+
+              case 10:
+                this.followTargets.push(response.data);
+                this.newModal = false;
+
+              case 12:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function addFollowTarget() {
+        return _addFollowTarget.apply(this, arguments);
+      }
+
+      return addFollowTarget;
+    }(),
+    showEditModal: function showEditModal(followTarget, index) {
+      this.editModal = true;
+      this.editForm.id = followTarget.id;
+      this.editForm.target = followTarget.target;
+      this.editForm.filter_word_id = followTarget.filter_word_id;
+      this.editIndex = index;
+    },
+    editFollowTarget: function () {
+      var _editFollowTarget = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios.put("/api/follow/".concat(this.editForm.id), this.editForm);
+
+              case 2:
+                response = _context4.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context4.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context4.abrupt("return", false);
+
+              case 6:
+                this.followTargets.splice(this.editIndex, 1, response.data);
+                this.resetEditForm();
+
+              case 8:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function editFollowTarget() {
+        return _editFollowTarget.apply(this, arguments);
+      }
+
+      return editFollowTarget;
+    }(),
+    removeFollowTarget: function () {
+      var _removeFollowTarget = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(id, index) {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
+                return axios["delete"]("/api/follow/".concat(id));
+
+              case 2:
+                response = _context5.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context5.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context5.abrupt("return", false);
+
+              case 6:
+                this.followTargets.splice(index, 1);
+
+              case 7:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
+
+      function removeFollowTarget(_x, _x2) {
+        return _removeFollowTarget.apply(this, arguments);
+      }
+
+      return removeFollowTarget;
+    }(),
+    resetAddForm: function resetAddForm() {
+      this.addForm.target = null;
+      this.addForm.filter_word_id = null;
+    },
+    resetEditForm: function resetEditForm() {
+      this.editModal = null;
+      this.editForm.id = null;
+      this.editForm.target = null;
+      this.editForm.filter_word_id = null;
+      this.editIndex = null;
+    },
+    fetchServiceStatus: function () {
+      var _fetchServiceStatus = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                _context6.next = 2;
+                return axios.get('/api/system/status');
+
+              case 2:
+                response = _context6.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context6.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context6.abrupt("return", false);
+
+              case 6:
+                this.serviceStatus = response.data.status_labels.auto_follow;
+
+              case 7:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+
+      function fetchServiceStatus() {
+        return _fetchServiceStatus.apply(this, arguments);
+      }
+
+      return fetchServiceStatus;
+    }(),
+    runFollowService: function () {
+      var _runFollowService = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+        var serviceType, data, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                serviceType = 1;
+                data = {
+                  type: serviceType
+                };
+                _context7.next = 4;
+                return axios.post('/api/system/run', data);
+
+              case 4:
+                response = _context7.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context7.next = 8;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context7.abrupt("return", false);
+
+              case 8:
+                this.serviceStatus = response.data.status_labels.auto_follow;
+
+              case 9:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, this);
+      }));
+
+      function runFollowService() {
+        return _runFollowService.apply(this, arguments);
+      }
+
+      return runFollowService;
+    }(),
+    stopFollowService: function () {
+      var _stopFollowService = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
+        var serviceType, data, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                serviceType = 1;
+                data = {
+                  type: serviceType
+                };
+                _context8.next = 4;
+                return axios.post('/api/system/stop', data);
+
+              case 4:
+                response = _context8.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context8.next = 8;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context8.abrupt("return", false);
+
+              case 8:
+                this.serviceStatus = response.data.status_labels.auto_follow;
+
+              case 9:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8, this);
+      }));
+
+      function stopFollowService() {
+        return _stopFollowService.apply(this, arguments);
+      }
+
+      return stopFollowService;
+    }()
+  },
+  created: function created() {
+    this.fetchFollowTargets();
+    this.fetchFilters();
+    this.fetchServiceStatus();
+  },
+  watch: {
+    dashChange: {
+      handler: function handler(val) {
+        if (val === true) {
+          this.fetchFollowTargets();
+          this.fetchFilters();
+          this.$store.commit('dashboard/setNoticeToTweet', null);
+        }
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PanelLike.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PanelLike.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utility */ "./resources/js/utility.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      likes: [],
+      filters: [],
+      newModal: false,
+      editModal: false,
+      editIndex: null,
+      serviceStatus: null,
+      errors: null,
+      addForm: {
+        filter_word_id: null
+      },
+      editForm: {
+        id: null,
+        filter_word_id: null
+      }
+    };
+  },
+  computed: {
+    dashChange: function dashChange() {
+      return this.$store.state.dashboard.noticeToLike;
+    }
+  },
+  methods: {
+    fetchLikes: function () {
+      var _fetchLikes = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get('/api/like');
+
+              case 2:
+                response = _context.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context.abrupt("return", false);
+
+              case 6:
+                this.likes = response.data;
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function fetchLikes() {
+        return _fetchLikes.apply(this, arguments);
+      }
+
+      return fetchLikes;
+    }(),
+    fetchFilters: function () {
+      var _fetchFilters = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.get('/api/filter');
+
+              case 2:
+                response = _context2.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context2.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context2.abrupt("return", false);
+
+              case 6:
+                this.filters = response.data;
+
+              case 7:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function fetchFilters() {
+        return _fetchFilters.apply(this, arguments);
+      }
+
+      return fetchFilters;
+    }(),
+    addLike: function () {
+      var _addLike = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios.post('/api/like', this.addForm);
+
+              case 2:
+                response = _context3.sent;
+
+                if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["UNPROCESSABLE_ENTRY"])) {
+                  _context3.next = 6;
+                  break;
+                }
+
+                this.errors = response.data.errors;
+                return _context3.abrupt("return", false);
+
+              case 6:
+                this.addForm.filter_word_id = null;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["CREATED"])) {
+                  _context3.next = 10;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context3.abrupt("return", false);
+
+              case 10:
+                this.likes.push(response.data);
+                this.newModal = false;
+
+              case 12:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function addLike() {
+        return _addLike.apply(this, arguments);
+      }
+
+      return addLike;
+    }(),
+    showEditModal: function showEditModal(like, index) {
+      this.editModal = true;
+      this.editForm.id = like.id;
+      this.editForm.filter_word_id = like.filter_word_id;
+      this.editIndex = index;
+    },
+    editLike: function () {
+      var _editLike = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios.put("/api/like/".concat(this.editForm.id), this.editForm);
+
+              case 2:
+                response = _context4.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context4.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context4.abrupt("return", false);
+
+              case 6:
+                this.likes.splice(this.editIndex, 1, response.data);
+                this.resetEditForm();
+
+              case 8:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function editLike() {
+        return _editLike.apply(this, arguments);
+      }
+
+      return editLike;
+    }(),
+    removeLike: function () {
+      var _removeLike = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(id, index) {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
+                return axios["delete"]("/api/like/".concat(id));
+
+              case 2:
+                response = _context5.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context5.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context5.abrupt("return", false);
+
+              case 6:
+                this.likes.splice(index, 1);
+
+              case 7:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
+
+      function removeLike(_x, _x2) {
+        return _removeLike.apply(this, arguments);
+      }
+
+      return removeLike;
+    }(),
+    resetEditForm: function resetEditForm() {
+      this.editModal = false;
+      this.editForm.id = null;
+      this.editForm.filter_word_id = null;
+      this.editIndex = null;
+    },
+    fetchServiceStatus: function () {
+      var _fetchServiceStatus = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                _context6.next = 2;
+                return axios.get('/api/system/status');
+
+              case 2:
+                response = _context6.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context6.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context6.abrupt("return", false);
+
+              case 6:
+                this.serviceStatus = response.data.status_labels.auto_like;
+
+              case 7:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+
+      function fetchServiceStatus() {
+        return _fetchServiceStatus.apply(this, arguments);
+      }
+
+      return fetchServiceStatus;
+    }(),
+    runLikeService: function () {
+      var _runLikeService = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+        var serviceType, data, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                serviceType = 3;
+                data = {
+                  type: serviceType
+                };
+                _context7.next = 4;
+                return axios.post('/api/system/run', data);
+
+              case 4:
+                response = _context7.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context7.next = 8;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context7.abrupt("return", false);
+
+              case 8:
+                this.serviceStatus = response.data.status_labels.auto_like;
+
+              case 9:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, this);
+      }));
+
+      function runLikeService() {
+        return _runLikeService.apply(this, arguments);
+      }
+
+      return runLikeService;
+    }(),
+    stopLikeService: function () {
+      var _stopLikeService = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
+        var serviceType, data, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                serviceType = 3;
+                data = {
+                  type: serviceType
+                };
+                _context8.next = 4;
+                return axios.post('/api/system/stop', data);
+
+              case 4:
+                response = _context8.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context8.next = 8;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context8.abrupt("return", false);
+
+              case 8:
+                this.serviceStatus = response.data.status_labels.auto_like;
+
+              case 9:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8, this);
+      }));
+
+      function stopLikeService() {
+        return _stopLikeService.apply(this, arguments);
+      }
+
+      return stopLikeService;
+    }()
+  },
+  created: function created() {
+    this.fetchLikes();
+    this.fetchFilters();
+    this.fetchServiceStatus();
+  },
+  watch: {
+    dashChange: {
+      handler: function handler(val) {
+        if (val === true) {
+          this.fetchLikes();
+          this.fetchFilters();
+          this.$store.commit('dashboard/setNoticeToLike', null);
+        }
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PanelTweet.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PanelTweet.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utility */ "./resources/js/utility.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      autoTweets: [],
+      newModal: false,
+      editModal: false,
+      editIndex: null,
+      serviceStatus: null,
+      errors: null,
+      addForm: {
+        tweet: '',
+        date: '',
+        time: '00:00'
+      },
+      editForm: {
+        tweet: '',
+        date: '',
+        time: ''
+      }
+    };
+  },
+  computed: {
+    addTextCount: function addTextCount() {
+      return this.addForm.tweet.length;
+    },
+    editTextCount: function editTextCount() {
+      return this.editForm.tweet.length;
+    },
+    getCurrentYYYYMMDD: function getCurrentYYYYMMDD() {
+      var date = new Date();
+      var year = date.getFullYear();
+      var month = ("00" + (date.getMonth() + 1)).slice(-2);
+      var day = ("00" + date.getDate()).slice(-2);
+      return [year, month, day].join("-");
+    }
+  },
+  methods: {
+    fetchAutoTweets: function () {
+      var _fetchAutoTweets = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get('/api/tweet');
+
+              case 2:
+                response = _context.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context.abrupt("return", false);
+
+              case 6:
+                this.autoTweets = response.data;
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function fetchAutoTweets() {
+        return _fetchAutoTweets.apply(this, arguments);
+      }
+
+      return fetchAutoTweets;
+    }(),
+    addAutoTweet: function () {
+      var _addAutoTweet = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response, addTweet;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.post('/api/tweet', this.addForm);
+
+              case 2:
+                response = _context2.sent;
+
+                if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["UNPROCESSABLE_ENTRY"])) {
+                  _context2.next = 6;
+                  break;
+                }
+
+                this.errors = response.data.errors;
+                return _context2.abrupt("return", false);
+
+              case 6:
+                this.resetAddForm();
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["CREATED"])) {
+                  _context2.next = 10;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context2.abrupt("return", false);
+
+              case 10:
+                addTweet = response.data;
+                this.autoTweets.push(addTweet);
+                this.newModal = false;
+
+              case 13:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function addAutoTweet() {
+        return _addAutoTweet.apply(this, arguments);
+      }
+
+      return addAutoTweet;
+    }(),
+    editAutoTweet: function () {
+      var _editAutoTweet = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios.put("/api/tweet/".concat(this.editForm.id), this.editForm);
+
+              case 2:
+                response = _context3.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context3.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context3.abrupt("return", false);
+
+              case 6:
+                this.autoTweets.splice(this.editIndex, 1, response.data);
+                this.resetEditForm();
+
+              case 8:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function editAutoTweet() {
+        return _editAutoTweet.apply(this, arguments);
+      }
+
+      return editAutoTweet;
+    }(),
+    showEditModal: function showEditModal(autoTweet, index) {
+      this.editModal = true;
+      this.editForm.id = autoTweet.id;
+      this.editForm.tweet = autoTweet.tweet;
+      this.editForm.date = this.getYYYYMMDD(autoTweet.formatted_date);
+      this.editForm.time = this.getHHMM(autoTweet.formatted_date);
+      this.editIndex = index;
+    },
+    removeAutoTweet: function () {
+      var _removeAutoTweet = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(id, index) {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios["delete"]("/api/tweet/".concat(id));
+
+              case 2:
+                response = _context4.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context4.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context4.abrupt("return", false);
+
+              case 6:
+                this.autoTweets.splice(index, 1);
+
+              case 7:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function removeAutoTweet(_x, _x2) {
+        return _removeAutoTweet.apply(this, arguments);
+      }
+
+      return removeAutoTweet;
+    }(),
+    getYYYYMMDD: function getYYYYMMDD(formatted_date) {
+      var date = new Date(formatted_date);
+      var year = date.getFullYear();
+      var month = ("00" + (date.getMonth() + 1)).slice(-2);
+      var day = ("00" + date.getDate()).slice(-2);
+      return [year, month, day].join("-");
+    },
+    getHHMM: function getHHMM(formatted_date) {
+      var date = new Date(formatted_date);
+      var hours = ("00" + date.getHours()).slice(-2);
+      var minutes = ("00" + date.getMinutes()).slice(-2);
+      return [hours, minutes].join(":");
+    },
+    resetAddForm: function resetAddForm() {
+      this.addForm.tweet = '';
+      this.addForm.date = '';
+      this.addForm.time = '00:00';
+    },
+    resetEditForm: function resetEditForm() {
+      this.editModal = false;
+      this.editForm.id = null;
+      this.editForm.tweet = '';
+      this.editForm.date = '';
+      this.editForm.time = '';
+      this.editIndex = null;
+    },
+    fetchServiceStatus: function () {
+      var _fetchServiceStatus = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
+                return axios.get('/api/system/status');
+
+              case 2:
+                response = _context5.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context5.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context5.abrupt("return", false);
+
+              case 6:
+                this.serviceStatus = response.data.status_labels.auto_tweet;
+
+              case 7:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
+
+      function fetchServiceStatus() {
+        return _fetchServiceStatus.apply(this, arguments);
+      }
+
+      return fetchServiceStatus;
+    }(),
+    runTweetService: function () {
+      var _runTweetService = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+        var serviceType, data, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                serviceType = 4;
+                data = {
+                  type: serviceType
+                };
+                _context6.next = 4;
+                return axios.post('/api/system/run', data);
+
+              case 4:
+                response = _context6.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context6.next = 8;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context6.abrupt("return", false);
+
+              case 8:
+                this.serviceStatus = response.data.status_labels.auto_tweet;
+
+              case 9:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+
+      function runTweetService() {
+        return _runTweetService.apply(this, arguments);
+      }
+
+      return runTweetService;
+    }(),
+    stopTweetService: function () {
+      var _stopTweetService = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+        var serviceType, data, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                serviceType = 4;
+                data = {
+                  type: serviceType
+                };
+                _context7.next = 4;
+                return axios.post('/api/system/stop', data);
+
+              case 4:
+                response = _context7.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context7.next = 8;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context7.abrupt("return", false);
+
+              case 8:
+                this.serviceStatus = response.data.status_labels.auto_tweet;
+
+              case 9:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, this);
+      }));
+
+      function stopTweetService() {
+        return _stopTweetService.apply(this, arguments);
+      }
+
+      return stopTweetService;
+    }()
+  },
+  created: function created() {
+    this.fetchAutoTweets();
+    this.fetchServiceStatus();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PanelUnfollow.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PanelUnfollow.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utility */ "./resources/js/utility.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      serviceStatus: null
+    };
+  },
+  methods: {
+    fetchServiceStatus: function () {
+      var _fetchServiceStatus = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get('/api/system/status');
+
+              case 2:
+                response = _context.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context.abrupt("return", false);
+
+              case 6:
+                this.serviceStatus = response.data.status_labels.auto_unfollow;
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function fetchServiceStatus() {
+        return _fetchServiceStatus.apply(this, arguments);
+      }
+
+      return fetchServiceStatus;
+    }(),
+    runUnfollowService: function () {
+      var _runUnfollowService = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var serviceType, data, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                serviceType = 2;
+                data = {
+                  type: serviceType
+                };
+                _context2.next = 4;
+                return axios.post('/api/system/run', data);
+
+              case 4:
+                response = _context2.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context2.next = 8;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context2.abrupt("return", false);
+
+              case 8:
+                this.serviceStatus = response.data.status_labels.auto_unfollow;
+
+              case 9:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function runUnfollowService() {
+        return _runUnfollowService.apply(this, arguments);
+      }
+
+      return runUnfollowService;
+    }(),
+    stopUnfollowService: function () {
+      var _stopUnfollowService = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var serviceType, data, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                serviceType = 2;
+                data = {
+                  type: serviceType
+                };
+                _context3.next = 4;
+                return axios.post('/api/system/stop', data);
+
+              case 4:
+                response = _context3.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context3.next = 8;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context3.abrupt("return", false);
+
+              case 8:
+                this.serviceStatus = response.data.status_labels.auto_unfollow;
+
+              case 9:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function stopUnfollowService() {
+        return _stopUnfollowService.apply(this, arguments);
+      }
+
+      return stopUnfollowService;
+    }()
+  },
+  created: function created() {
+    this.fetchServiceStatus();
   }
 });
 
@@ -1952,16 +4098,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     item: {
       type: Object,
       required: true
+    },
+    index: {
+      type: Number,
+      required: true
     }
   },
   data: function data() {
     return {
+      del: 1,
       screenName: "",
       name: "",
       thumbnail: ''
@@ -1982,7 +4136,269 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context.sent;
-                console.log(response);
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context.abrupt("return", false);
+
+              case 6:
+                this.screenName = response.data.screen_name;
+                this.name = response.data.name;
+                this.thumbnail = response.data.thumbnail; // // console.log(users);
+                // // console.log(accountNum);
+
+              case 9:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function fetchTwitterUser() {
+        return _fetchTwitterUser.apply(this, arguments);
+      }
+
+      return fetchTwitterUser;
+    }(),
+    setTwitterId: function () {
+      var _setTwitterId = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.post("/api/twitter/".concat(this.item.id));
+
+              case 2:
+                response = _context2.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context2.next = 6;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context2.abrupt("return", false);
+
+              case 6:
+                _context2.next = 8;
+                return this.$store.dispatch('auth/currentTwitterUser');
+
+              case 8:
+                if (this.apiStatus) {
+                  this.$router.push('/');
+                }
+
+                this.$router.push('/dashboard');
+
+              case 10:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function setTwitterId() {
+        return _setTwitterId.apply(this, arguments);
+      }
+
+      return setTwitterId;
+    }(),
+    deleteTwitterUser: function () {
+      var _deleteTwitterUser = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return this.$store.dispatch('auth/twitterUserLogout');
+
+              case 2:
+                if (!this.apiStatus) {
+                  _context3.next = 9;
+                  break;
+                }
+
+                _context3.next = 5;
+                return axios["delete"]("/api/twitter/".concat(this.item.id));
+
+              case 5:
+                response = _context3.sent;
+
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context3.next = 9;
+                  break;
+                }
+
+                this.$store.commit('error/setCode', response.status);
+                return _context3.abrupt("return", false);
+
+              case 9:
+                this.$emit('delUser', {
+                  index: this.index
+                });
+
+              case 10:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function deleteTwitterUser() {
+        return _deleteTwitterUser.apply(this, arguments);
+      }
+
+      return deleteTwitterUser;
+    }()
+  },
+  computed: {
+    apiStatus: function apiStatus() {
+      return this.$store.state.auth.apiStatus;
+    }
+  },
+  created: function created() {
+    this.fetchTwitterUser();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Dashboard.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Dashboard.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utility */ "./resources/js/utility.js");
+/* harmony import */ var _components_PanelFollow__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/PanelFollow */ "./resources/js/components/PanelFollow.vue");
+/* harmony import */ var _components_PanelUnfollow__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/PanelUnfollow */ "./resources/js/components/PanelUnfollow.vue");
+/* harmony import */ var _components_PanelLike__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/PanelLike */ "./resources/js/components/PanelLike.vue");
+/* harmony import */ var _components_PanelTweet__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/PanelTweet */ "./resources/js/components/PanelTweet.vue");
+/* harmony import */ var _components_PanelFilter__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/PanelFilter */ "./resources/js/components/PanelFilter.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    PanelFollow: _components_PanelFollow__WEBPACK_IMPORTED_MODULE_2__["default"],
+    PanelUnfollow: _components_PanelUnfollow__WEBPACK_IMPORTED_MODULE_3__["default"],
+    PanelLike: _components_PanelLike__WEBPACK_IMPORTED_MODULE_4__["default"],
+    PanelTweet: _components_PanelTweet__WEBPACK_IMPORTED_MODULE_5__["default"],
+    PanelFilter: _components_PanelFilter__WEBPACK_IMPORTED_MODULE_6__["default"]
+  },
+  data: function data() {
+    return {
+      tab: 1,
+      twitterUser: [],
+      refreshFlg: null
+    };
+  },
+  methods: {
+    fetchTwitterUser: function () {
+      var _fetchTwitterUser = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var id, response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                id = this.$store.state.auth.twitterId;
+                _context.next = 3;
+                return axios.get('/api/twitter/user/info/' + id);
+
+              case 3:
+                response = _context.sent;
 
                 if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
                   _context.next = 7;
@@ -1993,12 +4409,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context.abrupt("return", false);
 
               case 7:
-                this.screenName = response.data.screen_name;
-                this.name = response.data.name;
-                this.thumbnail = response.data.thumbnail; // // console.log(users);
+                this.twitterUser = response.data; // // console.log(users);
                 // // console.log(accountNum);
 
-              case 10:
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -2053,9 +4467,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return setTwitterId;
     }()
   },
-  created: function created() {
-    this.fetchTwitterUser();
-  }
+  created: function () {
+    var _created = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              this.fetchTwitterUser();
+
+            case 1:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, this);
+    }));
+
+    function created() {
+      return _created.apply(this, arguments);
+    }
+
+    return created;
+  }()
 });
 
 /***/ }),
@@ -2082,8 +4517,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
 //
 //
 //
@@ -2280,6 +4713,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
 /***/ }),
@@ -2303,6 +4742,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
 //
 //
 //
@@ -2366,8 +4807,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 6:
                 this.users = response.data.twitter_accounts;
-                this.accountNum = response.data.account_num; // // console.log(users);
-                // // console.log(accountNum);
+                this.accountNum = response.data.account_num;
 
               case 8:
               case "end":
@@ -2382,16 +4822,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return fetchTwitterUsers;
-    }()
+    }(),
+    removeCard: function removeCard(emitObject) {
+      this.users.splice(emitObject.index, 1);
+    }
   },
   computed: {
     isMaximumAccount: function isMaximumAccount() {
       return this.accountNum <= 10;
     }
   },
-  created: function created() {
-    this.fetchTwitterUsers();
-  }
+  created: function () {
+    var _created = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return this.fetchTwitterUsers();
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, this);
+    }));
+
+    function created() {
+      return _created.apply(this, arguments);
+    }
+
+    return created;
+  }()
 });
 
 /***/ }),
@@ -3657,7 +6122,19 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("main", { staticClass: "l-main" }, [
-      _c("div", { staticClass: "container" }, [_c("RouterView")], 1)
+      _c(
+        "div",
+        { staticClass: "container" },
+        [
+          _c(
+            "transition",
+            { attrs: { name: "page", mode: "out-in" } },
+            [_c("RouterView")],
+            1
+          )
+        ],
+        1
+      )
     ]),
     _vm._v(" "),
     _c("footer", { staticClass: "c-foot" }, [_c("Footer")], 1)
@@ -3718,7 +6195,7 @@ var render = function() {
       [
         _c(
           "RouterLink",
-          { staticClass: "p-navbar__title_link", attrs: { to: "/twitter" } },
+          { staticClass: "p-navbar__title_link", attrs: { to: "/" } },
           [_vm._v("twitter")]
         )
       ],
@@ -3726,13 +6203,43 @@ var render = function() {
     ),
     _vm._v(" "),
     _vm.isLogin
-      ? _c("span", { staticClass: "navbar__item" }, [
-          _vm._v("\n        " + _vm._s(_vm.username)),
-          _c("i", { staticClass: "c-icon fas fa-caret-down" })
+      ? _c("div", { staticClass: "p-navbar__item" }, [
+          _c("span", { staticClass: "p-navbar__item" }, [
+            _vm._v("\n        " + _vm._s(_vm.username)),
+            _c("i", { staticClass: "c-icon fas fa-caret-down" })
+          ]),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "p-navbar__item",
+              on: {
+                click: function($event) {
+                  $event.stopPropagation()
+                  return _vm.changeTwitterUser($event)
+                }
+              }
+            },
+            [_vm._v("\n            アカウント切り替え\n        ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "p-navbar__item",
+              on: {
+                click: function($event) {
+                  $event.stopPropagation()
+                  return _vm.logout($event)
+                }
+              }
+            },
+            [_vm._v("\n            ログアウト\n        ")]
+          )
         ])
       : _c(
           "div",
-          { staticClass: "navbar__item" },
+          { staticClass: "p-navbar__item" },
           [
             _c(
               "RouterLink",
@@ -3742,6 +6249,1921 @@ var render = function() {
           ],
           1
         )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PanelFilter.vue?vue&type=template&id=3fc17b81&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PanelFilter.vue?vue&type=template&id=3fc17b81& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "c-panel u-color__bg--white" }, [
+    _c("div", { staticClass: "p-table__title" }, [
+      _c("h2", { staticClass: "p-table__caption" }, [
+        _vm._v("○キーワードリスト")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          on: {
+            click: function($event) {
+              _vm.newModal = !_vm.newModal
+            }
+          }
+        },
+        [
+          _c("i", { staticClass: "c-icon c-icon--white fas fa-plus" }),
+          _vm._v("\n            キーワードを追加\n        ")
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "table",
+      { staticClass: "p-table" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.filters, function(filter, index) {
+          return _c("tr", [
+            _c("td", { staticClass: "p-table__td" }, [
+              _vm._v(_vm._s(filter.type_label))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "p-table__td" }, [
+              _vm._v(_vm._s(filter.word))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "p-table__td" }, [
+              _vm._v(_vm._s(filter.remove))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "p-table__td" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "c-button c-button--twitter",
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      return _vm.showEditModal(filter, index)
+                    }
+                  }
+                },
+                [_vm._v("編集\n                ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "c-button c-button--danger",
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      return _vm.removeFilter(filter.id, index)
+                    }
+                  }
+                },
+                [_vm._v("削除\n                ")]
+              )
+            ])
+          ])
+        })
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-modal__wrapper" }, [
+      _c(
+        "section",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.newModal,
+              expression: "newModal"
+            }
+          ],
+          staticClass: "p-modal p-modal--opened"
+        },
+        [
+          _c("div", { staticClass: "p-modal__contents" }, [
+            _c(
+              "span",
+              {
+                staticClass: "p-modal__cancel u-color__bg--white",
+                on: {
+                  click: function($event) {
+                    _vm.newModal = !_vm.newModal
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "c-icon--gray p-modal__icon fas fa-times"
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                staticClass: "p-form",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addFilter($event)
+                  }
+                }
+              },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "add-filter" }
+                  },
+                  [_vm._v("条件タイプ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.addForm.type,
+                        expression: "addForm.type"
+                      }
+                    ],
+                    staticClass: "p-form__select",
+                    attrs: { id: "add-filter" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.addForm,
+                          "type",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "1" } }, [
+                      _vm._v("次のワードを含む")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "2" } }, [
+                      _vm._v("いずれかのワードを含む")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  { staticClass: "p-form__label", attrs: { for: "keyword" } },
+                  [_vm._v("キーワード *必須")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.addForm.word,
+                      expression: "addForm.word"
+                    }
+                  ],
+                  staticClass: "p-form__item",
+                  attrs: {
+                    type: "text",
+                    id: "keyword",
+                    required: "",
+                    maxlength: "50"
+                  },
+                  domProps: { value: _vm.addForm.word },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.addForm, "word", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "remove_word" }
+                  },
+                  [_vm._v("除外ワード")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.addForm.remove,
+                      expression: "addForm.remove"
+                    }
+                  ],
+                  staticClass: "p-form__item",
+                  attrs: { type: "text", id: "remove_word", maxlength: "50" },
+                  domProps: { value: _vm.addForm.remove },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.addForm, "remove", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("p", { staticClass: "p-form__notion" }, [
+                  _vm._v(
+                    "※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。"
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(1)
+              ]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.editModal,
+              expression: "editModal"
+            }
+          ],
+          staticClass: "p-modal p-modal--opened"
+        },
+        [
+          _c("div", { staticClass: "p-modal__contents" }, [
+            _c(
+              "span",
+              {
+                staticClass: "p-modal__cancel u-color__bg--white",
+                on: {
+                  click: function($event) {
+                    _vm.editModal = !_vm.editModal
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "c-icon--gray p-modal__icon fas fa-times"
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                staticClass: "p-form",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.editFilter($event)
+                  }
+                }
+              },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "edit-filter" }
+                  },
+                  [_vm._v("条件タイプ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.editForm.type,
+                        expression: "editForm.type"
+                      }
+                    ],
+                    staticClass: "p-form__select",
+                    attrs: { id: "edit-filter" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.editForm,
+                          "type",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "1" } }, [
+                      _vm._v("次のワードを含む")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "2" } }, [
+                      _vm._v("いずれかのワードを含む")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "edit-keyword" }
+                  },
+                  [_vm._v("キーワード ※必須")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.editForm.word,
+                      expression: "editForm.word"
+                    }
+                  ],
+                  staticClass: "p-form__item",
+                  attrs: {
+                    type: "text",
+                    id: "edit-keyword",
+                    required: "",
+                    maxlength: "50"
+                  },
+                  domProps: { value: _vm.editForm.word },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.editForm, "word", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "edit-remove_keyword" }
+                  },
+                  [_vm._v("除外ワード")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.editForm.remove,
+                      expression: "editForm.remove"
+                    }
+                  ],
+                  staticClass: "p-form__item",
+                  attrs: {
+                    type: "text",
+                    id: "edit-remove_keyword",
+                    maxlength: "50"
+                  },
+                  domProps: { value: _vm.editForm.remove },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.editForm, "remove", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("p", { staticClass: "p-form__notion" }, [
+                  _vm._v(
+                    "※複数ワードを指定する際は、「ツイッター 神」のように半角スペースで区切ってください。"
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(2)
+              ]
+            )
+          ])
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", { staticClass: "p-table__head" }, [
+      _c("th", { staticClass: "p-table__th p-table__th--filter" }, [
+        _vm._v("条件タイプ")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "p-table__th p-table__th--filter" }, [
+        _vm._v("キーワード")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "p-table__th p-table__th--filter" }, [
+        _vm._v("除外ワード")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "p-table__th p-table__th--filter" }, [
+        _vm._v("操作")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-form__button" }, [
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("追加")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-form__button" }, [
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("変更")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PanelFollow.vue?vue&type=template&id=2381273a&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PanelFollow.vue?vue&type=template&id=2381273a& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "c-panel u-color__bg--white" }, [
+    _c("div", { staticClass: "p-status" }, [
+      _c("p", { staticClass: "p-status__show" }, [
+        _vm._v(_vm._s(_vm.serviceStatus))
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "p-status__button c-button c-button--success",
+          on: {
+            click: function($event) {
+              $event.stopPropagation()
+              return _vm.runFollowService($event)
+            }
+          }
+        },
+        [_vm._v("サービス開始")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "p-status__button c-button c-button--danger",
+          on: {
+            click: function($event) {
+              $event.stopPropagation()
+              return _vm.stopFollowService($event)
+            }
+          }
+        },
+        [_vm._v("停止")]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-table__title" }, [
+      _c("h2", { staticClass: "p-table__caption" }, [
+        _vm._v("○ターゲットアカウントリスト")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          on: {
+            click: function($event) {
+              _vm.newModal = !_vm.newModal
+            }
+          }
+        },
+        [
+          _c("i", { staticClass: "c-icon c-icon--white fas fa-plus" }),
+          _vm._v("\n            ターゲットアカウントを追加\n        ")
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "table",
+      { staticClass: "p-table" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.followTargets, function(followTarget, index) {
+          return _c("tr", [
+            _c("th", { staticClass: "p-table__td" }, [
+              _vm._v(_vm._s(followTarget.status_label))
+            ]),
+            _vm._v(" "),
+            _c("th", { staticClass: "p-table__td" }, [
+              _vm._v("@" + _vm._s(followTarget.target))
+            ]),
+            _vm._v(" "),
+            _c("th", { staticClass: "p-table__td" }, [
+              _vm._v(_vm._s(followTarget.filter_word.merged_word))
+            ]),
+            _vm._v(" "),
+            _c("th", { staticClass: "p-table__td" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "c-button c-button--twitter",
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      return _vm.showEditModal(followTarget, index)
+                    }
+                  }
+                },
+                [_vm._v("編集\n                ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "c-button c-button--danger",
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      return _vm.removeFollowTarget(followTarget.id, index)
+                    }
+                  }
+                },
+                [_vm._v("削除\n                ")]
+              )
+            ])
+          ])
+        })
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-modal__wrapper" }, [
+      _c(
+        "section",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.newModal,
+              expression: "newModal"
+            }
+          ],
+          staticClass: "p-modal p-modal--opened"
+        },
+        [
+          _c("div", { staticClass: "p-modal__contents" }, [
+            _c(
+              "span",
+              {
+                staticClass: "p-modal__cancel u-color__bg--white",
+                on: {
+                  click: function($event) {
+                    _vm.newModal = !_vm.newModal
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "c-icon--gray p-modal__icon fas fa-times"
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                staticClass: "p-form",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addFollowTarget($event)
+                  }
+                }
+              },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "add-target" }
+                  },
+                  [_vm._v("ターゲット名 *必須")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.addForm.target,
+                      expression: "addForm.target"
+                    }
+                  ],
+                  staticClass: "p-form__item",
+                  attrs: {
+                    type: "text",
+                    id: "add-target",
+                    required: "",
+                    maxlength: "15",
+                    placeholder: "例) kamitter_1234"
+                  },
+                  domProps: { value: _vm.addForm.target },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.addForm, "target", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "add-target_filter_id" }
+                  },
+                  [_vm._v("フォロー条件の選択 *必須")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.addForm.filter_word_id,
+                        expression: "addForm.filter_word_id"
+                      }
+                    ],
+                    staticClass: "p-form__select",
+                    attrs: { id: "add-target_filter_id", required: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.addForm,
+                          "filter_word_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.filters, function(filter) {
+                    return _c("option", { domProps: { value: filter.id } }, [
+                      _vm._v(_vm._s(filter.merged_word))
+                    ])
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c("p", { staticClass: "p-form__notion" }, [
+                  _vm._v(
+                    "※条件のキーワードは、「キーワード登録」から登録することができます。"
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(1)
+              ]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.editModal,
+              expression: "editModal"
+            }
+          ],
+          staticClass: "p-modal p-modal--opened"
+        },
+        [
+          _c("div", { staticClass: "p-modal__contents" }, [
+            _c(
+              "span",
+              {
+                staticClass: "p-modal__cancel u-color__bg--white",
+                on: {
+                  click: function($event) {
+                    _vm.editModal = !_vm.editModal
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "c-icon--gray p-modal__icon fas fa-times"
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                staticClass: "p-form",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.editFollowTarget($event)
+                  }
+                }
+              },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "edit-target" }
+                  },
+                  [_vm._v("ターゲット名 *必須")]
+                ),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.editForm.target,
+                      expression: "editForm.target"
+                    }
+                  ],
+                  staticClass: "p-form__item",
+                  attrs: {
+                    type: "text",
+                    id: "edit-target",
+                    required: "",
+                    maxlength: "15",
+                    placeholder: "例) kamitter_1234"
+                  },
+                  domProps: { value: _vm.editForm.target },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.editForm, "target", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "eidt-target_filter_id" }
+                  },
+                  [_vm._v("キーワード条件の選択 *必須")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.editForm.filter_word_id,
+                        expression: "editForm.filter_word_id"
+                      }
+                    ],
+                    staticClass: "p-form__select",
+                    attrs: { id: "eidt-target_filter_id", required: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.editForm,
+                          "filter_word_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.filters, function(filter) {
+                    return _c("option", { domProps: { value: filter.id } }, [
+                      _vm._v(_vm._s(filter.merged_word))
+                    ])
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c("p", { staticClass: "p-form__notion" }, [
+                  _vm._v(
+                    "※条件のキーワードは、「キーワード登録」から登録することができます。"
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(2)
+              ]
+            )
+          ])
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", { staticClass: "p-table__head" }, [
+      _c("th", { staticClass: "p-table__th p-table__th--follow" }, [
+        _vm._v("ステータス")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "p-table__th p-table__th--follow" }, [
+        _vm._v("ターゲット")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "p-table__th p-table__th--follow" }, [
+        _vm._v("条件")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "p-table__th p-table__th--follow" }, [
+        _vm._v("操作")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-form__button" }, [
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("追加")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-form__button" }, [
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("編集")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PanelLike.vue?vue&type=template&id=c1e03f40&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PanelLike.vue?vue&type=template&id=c1e03f40& ***!
+  \************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "c-panel u-color__bg--white" }, [
+    _c("div", { staticClass: "p-status" }, [
+      _c("p", { staticClass: "p-status__show" }, [
+        _vm._v(_vm._s(_vm.serviceStatus))
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "p-status__button c-button c-button--success",
+          on: {
+            click: function($event) {
+              $event.stopPropagation()
+              return _vm.runLikeService($event)
+            }
+          }
+        },
+        [_vm._v("サービス開始")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "p-status__button c-button c-button--danger",
+          on: {
+            click: function($event) {
+              $event.stopPropagation()
+              return _vm.stopLikeService($event)
+            }
+          }
+        },
+        [_vm._v("停止")]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-table__title" }, [
+      _c("h2", { staticClass: "p-table__caption" }, [
+        _vm._v("○自動いいねリスト")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          on: {
+            click: function($event) {
+              _vm.newModal = !_vm.newModal
+            }
+          }
+        },
+        [
+          _c("i", { staticClass: "c-icon c-icon--white fas fa-plus" }),
+          _vm._v("\n            いいね設定を追加\n        ")
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "table",
+      { staticClass: "p-table" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.likes, function(like, index) {
+          return _c("tr", [
+            _c("td", { staticClass: "p-table__td" }, [
+              _vm._v(_vm._s(like.filter_word.merged_word))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "p-table__td" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "c-button c-button--twitter",
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      return _vm.showEditModal(like, index)
+                    }
+                  }
+                },
+                [_vm._v("編集\n                ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "c-button c-button--danger",
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      return _vm.removeLike(like.id, index)
+                    }
+                  }
+                },
+                [_vm._v("削除\n                ")]
+              )
+            ])
+          ])
+        })
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-modal__wrapper" }, [
+      _c(
+        "section",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.newModal,
+              expression: "newModal"
+            }
+          ],
+          staticClass: "p-modal p-modal--opened"
+        },
+        [
+          _c("div", { staticClass: "p-modal__contents" }, [
+            _c(
+              "span",
+              {
+                staticClass: "p-modal__cancel u-color__bg--white",
+                on: {
+                  click: function($event) {
+                    _vm.newModal = !_vm.newModal
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "c-icon--gray p-modal__icon fas fa-times"
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                staticClass: "p-form",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addLike($event)
+                  }
+                }
+              },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "add-like-filter" }
+                  },
+                  [_vm._v("いいね条件の選択")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.addForm.filter_word_id,
+                        expression: "addForm.filter_word_id"
+                      }
+                    ],
+                    staticClass: "p-form__select",
+                    attrs: { id: "add-like-filter", required: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.addForm,
+                          "filter_word_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.filters, function(filter) {
+                    return _c("option", { domProps: { value: filter.id } }, [
+                      _vm._v(_vm._s(filter.merged_word))
+                    ])
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c("p", { staticClass: "p-form__notion" }, [
+                  _vm._v(
+                    "※条件のキーワードは、「キーワード登録」から登録することができます。"
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(1)
+              ]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.editModal,
+              expression: "editModal"
+            }
+          ],
+          staticClass: "p-modal p-modal--opened"
+        },
+        [
+          _c("div", { staticClass: "p-modal__contents" }, [
+            _c(
+              "span",
+              {
+                staticClass: "p-modal__cancel u-color__bg--white",
+                on: {
+                  click: function($event) {
+                    _vm.editModal = !_vm.editModal
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "c-icon--gray p-modal__icon fas fa-times"
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                staticClass: "p-form",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.editLike($event)
+                  }
+                }
+              },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "edit-like-filter" }
+                  },
+                  [_vm._v("いいね条件の選択")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.editForm.filter_word_id,
+                        expression: "editForm.filter_word_id"
+                      }
+                    ],
+                    staticClass: "p-form__select",
+                    attrs: { id: "edit-like-filter", required: "" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.editForm,
+                          "filter_word_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.filters, function(filter) {
+                    return _c("option", { domProps: { value: filter.id } }, [
+                      _vm._v(_vm._s(filter.merged_word))
+                    ])
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c("p", { staticClass: "p-form__notion" }, [
+                  _vm._v(
+                    "※条件のキーワードは、「キーワード登録」から登録することができます。"
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(2)
+              ]
+            )
+          ])
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", { staticClass: "p-table__head" }, [
+      _c("th", { staticClass: "p-table__th p-table__th--like" }, [
+        _vm._v("いいね条件")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "p-table__th p-table__th--like" }, [
+        _vm._v("操作")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-form__button" }, [
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("追加")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-form__button" }, [
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("変更")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PanelTweet.vue?vue&type=template&id=59b46cf8&":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PanelTweet.vue?vue&type=template&id=59b46cf8& ***!
+  \*************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "c-panel u-color__bg--white" }, [
+    _c("div", { staticClass: "p-status" }, [
+      _c("p", { staticClass: "p-status__show" }, [
+        _vm._v(_vm._s(_vm.serviceStatus))
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "p-status__button c-button c-button--success",
+          on: {
+            click: function($event) {
+              $event.stopPropagation()
+              return _vm.runTweetService($event)
+            }
+          }
+        },
+        [_vm._v("サービス開始")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "p-status__button c-button c-button--danger",
+          on: {
+            click: function($event) {
+              $event.stopPropagation()
+              return _vm.stopTweetService($event)
+            }
+          }
+        },
+        [_vm._v("停止")]
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-table__title" }, [
+      _c("h2", { staticClass: "p-table__caption" }, [
+        _vm._v("○自動ツイートリスト")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          on: {
+            click: function($event) {
+              _vm.newModal = !_vm.newModal
+            }
+          }
+        },
+        [
+          _c("i", { staticClass: "c-icon c-icon--white fas fa-plus" }),
+          _vm._v("\n            ツイートを追加\n        ")
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "table",
+      { staticClass: "p-table" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.autoTweets, function(autoTweet, index) {
+          return _c("tr", [
+            _c("td", { staticClass: "p-table__td" }, [
+              _vm._v(_vm._s(autoTweet.status_label))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "p-table__td" }, [
+              _vm._v(_vm._s(autoTweet.tweet))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "p-table__td" }, [
+              _vm._v(_vm._s(autoTweet.japanese_formatted_date))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "p-table__td" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "c-button c-button--twitter",
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      return _vm.showEditModal(autoTweet, index)
+                    }
+                  }
+                },
+                [_vm._v("編集\n                ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "c-button c-button--danger",
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      return _vm.removeAutoTweet(autoTweet.id, index)
+                    }
+                  }
+                },
+                [_vm._v("削除\n                ")]
+              )
+            ])
+          ])
+        })
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "p-modal__wrapper" }, [
+      _c(
+        "section",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.newModal,
+              expression: "newModal"
+            }
+          ],
+          staticClass: "p-modal p-modal--opened"
+        },
+        [
+          _c("div", { staticClass: "p-modal__contents" }, [
+            _c(
+              "span",
+              {
+                staticClass: "p-modal__cancel u-color__bg--white",
+                on: {
+                  click: function($event) {
+                    _vm.newModal = !_vm.newModal
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "c-icon--gray p-modal__icon fas fa-times"
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                staticClass: "p-form",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addAutoTweet($event)
+                  }
+                }
+              },
+              [
+                _c(
+                  "label",
+                  { staticClass: "p-form__label", attrs: { for: "add-tweet" } },
+                  [
+                    _vm._v(
+                      "ツイート内容 " + _vm._s(_vm.addTextCount) + "/140 ※必須"
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.addForm.tweet,
+                      expression: "addForm.tweet"
+                    }
+                  ],
+                  staticClass: "p-form__item p-form__item--textarea",
+                  attrs: {
+                    id: "add-tweet",
+                    rows: "5",
+                    cols: "40",
+                    required: "",
+                    maxlength: "140"
+                  },
+                  domProps: { value: _vm.addForm.tweet },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.addForm, "tweet", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { staticClass: "p-form__label" }, [
+                  _vm._v("ツイート予定日時")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "u-display__flex--left" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.addForm.date,
+                        expression: "addForm.date"
+                      }
+                    ],
+                    staticClass: "p-form__date",
+                    attrs: {
+                      type: "date",
+                      min: _vm.getCurrentYYYYMMDD,
+                      required: ""
+                    },
+                    domProps: { value: _vm.addForm.date },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.addForm, "date", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.addForm.time,
+                        expression: "addForm.time"
+                      }
+                    ],
+                    staticClass: "p-form__date",
+                    attrs: { type: "time", required: "" },
+                    domProps: { value: _vm.addForm.time },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.addForm, "time", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm._m(1)
+              ]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.editModal,
+              expression: "editModal"
+            }
+          ],
+          staticClass: "p-modal p-modal--opened"
+        },
+        [
+          _c("div", { staticClass: "p-modal__contents" }, [
+            _c(
+              "span",
+              {
+                staticClass: "p-modal__cancel u-color__bg--white",
+                on: {
+                  click: function($event) {
+                    _vm.editModal = !_vm.editModal
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "c-icon--gray p-modal__icon fas fa-times"
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                staticClass: "p-form",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.editAutoTweet($event)
+                  }
+                }
+              },
+              [
+                _c(
+                  "label",
+                  {
+                    staticClass: "p-form__label",
+                    attrs: { for: "edit-tweet" }
+                  },
+                  [
+                    _vm._v(
+                      "ツイート内容 " + _vm._s(_vm.editTextCount) + "/140 ※必須"
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.editForm.tweet,
+                      expression: "editForm.tweet"
+                    }
+                  ],
+                  staticClass: "p-form__item p-form__item--textarea",
+                  attrs: {
+                    id: "edit-tweet",
+                    rows: "5",
+                    cols: "40",
+                    required: "",
+                    maxlength: "140"
+                  },
+                  domProps: { value: _vm.editForm.tweet },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.editForm, "tweet", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { staticClass: "p-form__label" }, [
+                  _vm._v("予定日時")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "u-display__flex--left" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.editForm.date,
+                        expression: "editForm.date"
+                      }
+                    ],
+                    staticClass: "p-form__date",
+                    attrs: {
+                      type: "date",
+                      min: _vm.getCurrentYYYYMMDD,
+                      value: "getCurrentYYYYMMDD",
+                      required: ""
+                    },
+                    domProps: { value: _vm.editForm.date },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.editForm, "date", $event.target.value)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.editForm.time,
+                        expression: "editForm.time"
+                      }
+                    ],
+                    staticClass: "p-form__date",
+                    attrs: { type: "time", required: "" },
+                    domProps: { value: _vm.editForm.time },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.editForm, "time", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm._m(2)
+              ]
+            )
+          ])
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", { staticClass: "p-table__head" }, [
+      _c("th", { staticClass: "p-table__th p-table__th--tweet" }, [
+        _vm._v("ステータス")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "p-table__th p-table__th--tweet" }, [
+        _vm._v("ツイート内容")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "p-table__th p-table__th--tweet" }, [
+        _vm._v("時刻")
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "p-table__th p-table__th--tweet" }, [
+        _vm._v("操作")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-form__button" }, [
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("追加")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "p-form__button" }, [
+      _c(
+        "button",
+        {
+          staticClass: "c-button c-button--twitter",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("変更")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PanelUnfollow.vue?vue&type=template&id=1abdf253&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PanelUnfollow.vue?vue&type=template&id=1abdf253& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "c-panel u-color__bg--white" }, [
+    _c("div", { staticClass: "p-status" }, [
+      _c("p", { staticClass: "p-status__show" }, [
+        _vm._v(_vm._s(_vm.serviceStatus))
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "p-status__button c-button c-button--success",
+          on: {
+            click: function($event) {
+              $event.stopPropagation()
+              return _vm.runUnfollowService($event)
+            }
+          }
+        },
+        [_vm._v("サービス開始")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "p-status__button c-button c-button--danger",
+          on: {
+            click: function($event) {
+              $event.stopPropagation()
+              return _vm.stopUnfollowService($event)
+            }
+          }
+        },
+        [_vm._v("停止")]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -3769,13 +8191,8 @@ var render = function() {
   return _c(
     "li",
     {
-      staticClass: "c-card p-twitter__card",
-      on: {
-        click: function($event) {
-          $event.preventDefault()
-          return _vm.setTwitterId($event)
-        }
-      }
+      staticClass: "c-card p-twitter__card u-color__bg--white",
+      on: { click: _vm.setTwitterId }
     },
     [
       _c("div", { staticClass: "p-twitter__profile" }, [
@@ -3797,20 +8214,264 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(0)
+      _c(
+        "div",
+        { staticClass: "p-twitter__action" },
+        [
+          _c("transition-group", { attrs: { name: "t-del", mode: "out-in" } }, [
+            _c("i", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.del === 1,
+                  expression: "del===1"
+                }
+              ],
+              key: "box",
+              staticClass: "c-icon--gray p-twitter__icon fas fa-trash-alt",
+              on: {
+                click: function($event) {
+                  $event.stopPropagation()
+                  _vm.del = 2
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.del === 2,
+                    expression: "del===2"
+                  }
+                ],
+                key: "del",
+                staticClass: "p-twitter_delete c-button c-button--danger",
+                on: {
+                  click: function($event) {
+                    $event.stopPropagation()
+                    return _vm.deleteTwitterUser($event)
+                  }
+                }
+              },
+              [_vm._v("削除")]
+            )
+          ])
+        ],
+        1
+      )
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-twitter__action" }, [
-      _c("i", { staticClass: "c-icon--gray p-twitter__icon fas fa-trash-alt" })
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Dashboard.vue?vue&type=template&id=82704d4a&":
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Dashboard.vue?vue&type=template&id=82704d4a& ***!
+  \*******************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "l-contents" }, [
+    _c("div", { staticClass: "p-contents__area" }, [
+      _c("section", { staticClass: "p-profile" }, [
+        _c("figure", [
+          _c("img", {
+            staticClass: "p-profile__img",
+            attrs: { src: _vm.twitterUser.thumbnail, alt: "" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "p-profile__info" }, [
+          _c("p", { staticClass: "p-profile__name" }, [
+            _vm._v(_vm._s(_vm.twitterUser.name))
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "p-profile__screen" }, [
+            _vm._v("@" + _vm._s(_vm.twitterUser.screen_name))
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "p-profile__follow" }, [
+            _vm._v("\n                    フォロー: "),
+            _c("span", { staticClass: "p-profile__number" }, [
+              _vm._v(_vm._s(_vm.twitterUser.follows))
+            ]),
+            _vm._v("\n                    フォロワー: "),
+            _c("span", { staticClass: "p-profile__number" }, [
+              _vm._v(_vm._s(_vm.twitterUser.followers))
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("section", { staticClass: "c-tab" }, [
+        _c("ul", { staticClass: "c-tab__list" }, [
+          _c(
+            "li",
+            {
+              staticClass: "c-tab__item",
+              class: { "c-tab__item--active": _vm.tab === 1 },
+              on: {
+                click: function($event) {
+                  _vm.tab = 1
+                }
+              }
+            },
+            [_vm._v("自動フォロー\n                ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass: "c-tab__item",
+              class: { "c-tab__item--active": _vm.tab === 2 },
+              on: {
+                click: function($event) {
+                  _vm.tab = 2
+                }
+              }
+            },
+            [_vm._v("自動アンフォロー\n                ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass: "c-tab__item",
+              class: { "c-tab__item--active": _vm.tab === 3 },
+              on: {
+                click: function($event) {
+                  _vm.tab = 3
+                }
+              }
+            },
+            [_vm._v("自動いいね\n                ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass: "c-tab__item",
+              class: { "c-tab__item--active": _vm.tab === 4 },
+              on: {
+                click: function($event) {
+                  _vm.tab = 4
+                }
+              }
+            },
+            [_vm._v("自動ツイート\n                ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass: "c-tab__item",
+              class: { "c-tab__item--active": _vm.tab === 5 },
+              on: {
+                click: function($event) {
+                  _vm.tab = 5
+                }
+              }
+            },
+            [_vm._v("キーワード登録\n                ")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "section",
+        { staticClass: "p-dashboard" },
+        [
+          _c(
+            "transition-group",
+            { attrs: { name: "t-dashboard_panel" } },
+            [
+              _c("PanelFollow", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.tab === 1,
+                    expression: "tab===1"
+                  }
+                ],
+                key: "follow"
+              }),
+              _vm._v(" "),
+              _c("PanelUnfollow", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.tab === 2,
+                    expression: "tab===2"
+                  }
+                ],
+                key: "unfollow"
+              }),
+              _vm._v(" "),
+              _c("PanelLike", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.tab === 3,
+                    expression: "tab===3"
+                  }
+                ],
+                key: "like"
+              }),
+              _vm._v(" "),
+              _c("PanelTweet", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.tab === 4,
+                    expression: "tab===4"
+                  }
+                ],
+                key: "tweet"
+              }),
+              _vm._v(" "),
+              _c("PanelFilter", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.tab === 5,
+                    expression: "tab===5"
+                  }
+                ],
+                key: "filter"
+              })
+            ],
+            1
+          )
+        ],
+        1
+      )
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -3832,179 +8493,196 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("main", { staticClass: "l-main" }, [
-    _c("div", { staticClass: "l-contents" }, [
-      _c("div", { staticClass: "p-contents__area--narrow" }, [
-        _c("section", { staticClass: "p-tab" }, [
-          _c("ul", { staticClass: "p-tab__list" }, [
-            _c(
-              "li",
-              {
-                staticClass: "p-tab__item",
-                class: { "p-tab__item--active": _vm.tab === 1 },
-                on: {
-                  click: function($event) {
-                    _vm.tab = 1
-                  }
-                }
-              },
-              [_vm._v("ログイン\n                    ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                staticClass: "p-tab__item",
-                class: { "p-tab__item--active": _vm.tab === 2 },
-                on: {
-                  click: function($event) {
-                    _vm.tab = 2
-                  }
-                }
-              },
-              [_vm._v("新規登録\n                    ")]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("section", { staticClass: "p-login" }, [
+  return _c("div", { staticClass: "l-contents" }, [
+    _c("div", { staticClass: "p-contents__area--narrow" }, [
+      _c("section", { staticClass: "c-tab" }, [
+        _c("ul", { staticClass: "c-tab__list" }, [
           _c(
-            "div",
+            "li",
             {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.tab === 1,
-                  expression: "tab === 1"
+              staticClass: "c-tab__item",
+              class: { "c-tab__item--active": _vm.tab === 1 },
+              on: {
+                click: function($event) {
+                  _vm.tab = 1
                 }
-              ],
-              staticClass: "p-login__panel"
+              }
             },
-            [
-              _c(
-                "form",
-                {
-                  staticClass: "p-form",
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.login($event)
-                    }
-                  }
-                },
-                [
-                  _vm.loginErrors
-                    ? _c("div", { staticClass: "errors" }, [
-                        _vm.loginErrors.email
-                          ? _c(
-                              "ul",
-                              _vm._l(_vm.loginErrors.email, function(msg) {
-                                return _c("li", { key: msg }, [
-                                  _vm._v(_vm._s(msg))
-                                ])
-                              }),
-                              0
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.loginErrors.password
-                          ? _c(
-                              "ul",
-                              _vm._l(_vm.loginErrors.password, function(msg) {
-                                return _c("li", { key: msg }, [
-                                  _vm._v(_vm._s(msg))
-                                ])
-                              }),
-                              0
-                            )
-                          : _vm._e()
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "p-form__label",
-                      attrs: { for: "login-email" }
-                    },
-                    [_vm._v("メールアドレス")]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.loginForm.email,
-                        expression: "loginForm.email"
-                      }
-                    ],
-                    staticClass: "p-form__item",
-                    attrs: { type: "text", id: "login-email" },
-                    domProps: { value: _vm.loginForm.email },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.loginForm, "email", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "p-form__label",
-                      attrs: { for: "login-password" }
-                    },
-                    [_vm._v("パスワード")]
-                  ),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.loginForm.password,
-                        expression: "loginForm.password"
-                      }
-                    ],
-                    staticClass: "p-form__item",
-                    attrs: { type: "password", id: "login-password" },
-                    domProps: { value: _vm.loginForm.password },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.loginForm, "password", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm._m(0)
-                ]
-              )
-            ]
+            [_vm._v("ログイン\n                ")]
           ),
           _vm._v(" "),
           _c(
-            "div",
+            "li",
             {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.tab === 2,
-                  expression: "tab === 2"
+              staticClass: "c-tab__item",
+              class: { "c-tab__item--active": _vm.tab === 2 },
+              on: {
+                click: function($event) {
+                  _vm.tab = 2
                 }
-              ],
-              staticClass: "p-login--panel"
+              }
             },
-            [
-              _c("div", { staticClass: "p-login__panel" }, [
+            [_vm._v("新規登録\n                ")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "section",
+        { staticClass: "p-login" },
+        [
+          _c("transition-group", { attrs: { name: "tab" } }, [
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.tab === 1,
+                    expression: "tab === 1"
+                  }
+                ],
+                key: "login",
+                staticClass: "c-panel p-login__panel u-color__bg--white"
+              },
+              [
+                _c(
+                  "form",
+                  {
+                    staticClass: "p-form",
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.login($event)
+                      }
+                    }
+                  },
+                  [
+                    _vm.loginErrors
+                      ? _c("div", { staticClass: "errors" }, [
+                          _vm.loginErrors.email
+                            ? _c(
+                                "ul",
+                                _vm._l(_vm.loginErrors.email, function(msg) {
+                                  return _c("li", { key: msg }, [
+                                    _vm._v(_vm._s(msg))
+                                  ])
+                                }),
+                                0
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.loginErrors.password
+                            ? _c(
+                                "ul",
+                                _vm._l(_vm.loginErrors.password, function(msg) {
+                                  return _c("li", { key: msg }, [
+                                    _vm._v(_vm._s(msg))
+                                  ])
+                                }),
+                                0
+                              )
+                            : _vm._e()
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "p-form__label",
+                        attrs: { for: "login-email" }
+                      },
+                      [_vm._v("メールアドレス")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.loginForm.email,
+                          expression: "loginForm.email"
+                        }
+                      ],
+                      staticClass: "p-form__item",
+                      attrs: { type: "text", id: "login-email" },
+                      domProps: { value: _vm.loginForm.email },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.loginForm, "email", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "p-form__label",
+                        attrs: { for: "login-password" }
+                      },
+                      [_vm._v("パスワード")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.loginForm.password,
+                          expression: "loginForm.password"
+                        }
+                      ],
+                      staticClass: "p-form__item",
+                      attrs: { type: "password", id: "login-password" },
+                      domProps: { value: _vm.loginForm.password },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.loginForm,
+                            "password",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "p-form__button" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "c-button c-button--inverse",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("ログイン")]
+                      )
+                    ])
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.tab === 2,
+                    expression: "tab === 2"
+                  }
+                ],
+                key: "register",
+                staticClass: "c-panel p-login__panel u-color__bg--white"
+              },
+              [
                 _c(
                   "form",
                   {
@@ -4198,49 +8876,28 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _vm._m(1)
+                    _c("div", { staticClass: "p-form__button" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "c-button c-button--inverse",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("登録")]
+                      )
+                    ])
                   ]
                 )
-              ])
-            ]
-          )
-        ])
-      ])
+              ]
+            )
+          ])
+        ],
+        1
+      )
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-form__button" }, [
-      _c(
-        "button",
-        {
-          staticClass: "c-button c-button--inverse",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("ログイン")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-form__button" }, [
-      _c(
-        "button",
-        {
-          staticClass: "c-button c-button--inverse",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("登録")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -4262,9 +8919,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("p", [_vm._v("システムエラーが発生しました。")])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("main", { staticClass: "l-main" }, [
+      _c("div", { staticClass: "l-contents" }, [
+        _c("div", { staticClass: "p-contents__area" }, [
+          _c("p", [_vm._v("システムエラーが発生しました。")])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -4286,36 +8956,45 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("main", { staticClass: "l-main" }, [
-    _c("div", { staticClass: "l-contents" }, [
-      _c("div", { staticClass: "p-contents__area--narrow" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.isMaximumAccount,
-                expression: "isMaximumAccount"
-              }
-            ],
-            staticClass: "c-card p-twitter__card"
-          },
-          [_vm._m(1)]
-        ),
-        _vm._v(" "),
-        _c(
-          "ul",
-          { staticClass: "p-twitter" },
-          _vm._l(_vm.users, function(user) {
-            return _c("TwitterCard", { key: user.id, attrs: { item: user } })
-          }),
-          1
-        )
-      ])
+  return _c("div", { staticClass: "l-contents" }, [
+    _c("div", { staticClass: "p-contents__area--narrow" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.isMaximumAccount,
+              expression: "isMaximumAccount"
+            }
+          ],
+          staticClass: "c-card p-twitter__card u-color__bg--white"
+        },
+        [_vm._m(1)]
+      ),
+      _vm._v(" "),
+      _c(
+        "ul",
+        { staticClass: "p-twitter" },
+        [
+          _c(
+            "transition-group",
+            { attrs: { name: "t-twitter_card" } },
+            _vm._l(_vm.users, function(user, index) {
+              return _c("TwitterCard", {
+                key: user.id,
+                attrs: { item: user, index: index },
+                on: { delUser: _vm.removeCard }
+              })
+            }),
+            1
+          )
+        ],
+        1
+      )
     ])
   ])
 }
@@ -4339,7 +9018,7 @@ var staticRenderFns = [
           staticClass:
             "c-icon--twitter p-twitter__icon--create far fa-plus-square"
         }),
-        _vm._v("Twitterアカウントの追加\n                    ")
+        _vm._v("Twitterアカウントの追加\n                ")
       ])
     ])
   }
@@ -20468,6 +25147,351 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/PanelFilter.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/PanelFilter.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PanelFilter_vue_vue_type_template_id_3fc17b81___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PanelFilter.vue?vue&type=template&id=3fc17b81& */ "./resources/js/components/PanelFilter.vue?vue&type=template&id=3fc17b81&");
+/* harmony import */ var _PanelFilter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PanelFilter.vue?vue&type=script&lang=js& */ "./resources/js/components/PanelFilter.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PanelFilter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PanelFilter_vue_vue_type_template_id_3fc17b81___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PanelFilter_vue_vue_type_template_id_3fc17b81___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/PanelFilter.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/PanelFilter.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/PanelFilter.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelFilter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PanelFilter.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PanelFilter.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelFilter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/PanelFilter.vue?vue&type=template&id=3fc17b81&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/PanelFilter.vue?vue&type=template&id=3fc17b81& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelFilter_vue_vue_type_template_id_3fc17b81___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PanelFilter.vue?vue&type=template&id=3fc17b81& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PanelFilter.vue?vue&type=template&id=3fc17b81&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelFilter_vue_vue_type_template_id_3fc17b81___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelFilter_vue_vue_type_template_id_3fc17b81___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/PanelFollow.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/PanelFollow.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PanelFollow_vue_vue_type_template_id_2381273a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PanelFollow.vue?vue&type=template&id=2381273a& */ "./resources/js/components/PanelFollow.vue?vue&type=template&id=2381273a&");
+/* harmony import */ var _PanelFollow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PanelFollow.vue?vue&type=script&lang=js& */ "./resources/js/components/PanelFollow.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PanelFollow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PanelFollow_vue_vue_type_template_id_2381273a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PanelFollow_vue_vue_type_template_id_2381273a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/PanelFollow.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/PanelFollow.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/PanelFollow.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelFollow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PanelFollow.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PanelFollow.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelFollow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/PanelFollow.vue?vue&type=template&id=2381273a&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/PanelFollow.vue?vue&type=template&id=2381273a& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelFollow_vue_vue_type_template_id_2381273a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PanelFollow.vue?vue&type=template&id=2381273a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PanelFollow.vue?vue&type=template&id=2381273a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelFollow_vue_vue_type_template_id_2381273a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelFollow_vue_vue_type_template_id_2381273a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/PanelLike.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/components/PanelLike.vue ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PanelLike_vue_vue_type_template_id_c1e03f40___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PanelLike.vue?vue&type=template&id=c1e03f40& */ "./resources/js/components/PanelLike.vue?vue&type=template&id=c1e03f40&");
+/* harmony import */ var _PanelLike_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PanelLike.vue?vue&type=script&lang=js& */ "./resources/js/components/PanelLike.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PanelLike_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PanelLike_vue_vue_type_template_id_c1e03f40___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PanelLike_vue_vue_type_template_id_c1e03f40___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/PanelLike.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/PanelLike.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/PanelLike.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelLike_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PanelLike.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PanelLike.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelLike_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/PanelLike.vue?vue&type=template&id=c1e03f40&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/PanelLike.vue?vue&type=template&id=c1e03f40& ***!
+  \******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelLike_vue_vue_type_template_id_c1e03f40___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PanelLike.vue?vue&type=template&id=c1e03f40& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PanelLike.vue?vue&type=template&id=c1e03f40&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelLike_vue_vue_type_template_id_c1e03f40___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelLike_vue_vue_type_template_id_c1e03f40___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/PanelTweet.vue":
+/*!************************************************!*\
+  !*** ./resources/js/components/PanelTweet.vue ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PanelTweet_vue_vue_type_template_id_59b46cf8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PanelTweet.vue?vue&type=template&id=59b46cf8& */ "./resources/js/components/PanelTweet.vue?vue&type=template&id=59b46cf8&");
+/* harmony import */ var _PanelTweet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PanelTweet.vue?vue&type=script&lang=js& */ "./resources/js/components/PanelTweet.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PanelTweet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PanelTweet_vue_vue_type_template_id_59b46cf8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PanelTweet_vue_vue_type_template_id_59b46cf8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/PanelTweet.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/PanelTweet.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/PanelTweet.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelTweet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PanelTweet.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PanelTweet.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelTweet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/PanelTweet.vue?vue&type=template&id=59b46cf8&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/PanelTweet.vue?vue&type=template&id=59b46cf8& ***!
+  \*******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelTweet_vue_vue_type_template_id_59b46cf8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PanelTweet.vue?vue&type=template&id=59b46cf8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PanelTweet.vue?vue&type=template&id=59b46cf8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelTweet_vue_vue_type_template_id_59b46cf8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelTweet_vue_vue_type_template_id_59b46cf8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/PanelUnfollow.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/PanelUnfollow.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PanelUnfollow_vue_vue_type_template_id_1abdf253___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PanelUnfollow.vue?vue&type=template&id=1abdf253& */ "./resources/js/components/PanelUnfollow.vue?vue&type=template&id=1abdf253&");
+/* harmony import */ var _PanelUnfollow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PanelUnfollow.vue?vue&type=script&lang=js& */ "./resources/js/components/PanelUnfollow.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PanelUnfollow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PanelUnfollow_vue_vue_type_template_id_1abdf253___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PanelUnfollow_vue_vue_type_template_id_1abdf253___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/PanelUnfollow.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/PanelUnfollow.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/PanelUnfollow.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelUnfollow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PanelUnfollow.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PanelUnfollow.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelUnfollow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/PanelUnfollow.vue?vue&type=template&id=1abdf253&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/PanelUnfollow.vue?vue&type=template&id=1abdf253& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelUnfollow_vue_vue_type_template_id_1abdf253___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PanelUnfollow.vue?vue&type=template&id=1abdf253& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PanelUnfollow.vue?vue&type=template&id=1abdf253&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelUnfollow_vue_vue_type_template_id_1abdf253___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PanelUnfollow_vue_vue_type_template_id_1abdf253___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/TwitterCard.vue":
 /*!*************************************************!*\
   !*** ./resources/js/components/TwitterCard.vue ***!
@@ -20532,6 +25556,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TwitterCard_vue_vue_type_template_id_5a654cf0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TwitterCard_vue_vue_type_template_id_5a654cf0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/Dashboard.vue":
+/*!******************************************!*\
+  !*** ./resources/js/pages/Dashboard.vue ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Dashboard_vue_vue_type_template_id_82704d4a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Dashboard.vue?vue&type=template&id=82704d4a& */ "./resources/js/pages/Dashboard.vue?vue&type=template&id=82704d4a&");
+/* harmony import */ var _Dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Dashboard.vue?vue&type=script&lang=js& */ "./resources/js/pages/Dashboard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Dashboard_vue_vue_type_template_id_82704d4a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Dashboard_vue_vue_type_template_id_82704d4a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/pages/Dashboard.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/pages/Dashboard.vue?vue&type=script&lang=js&":
+/*!*******************************************************************!*\
+  !*** ./resources/js/pages/Dashboard.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Dashboard.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Dashboard.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/pages/Dashboard.vue?vue&type=template&id=82704d4a&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/pages/Dashboard.vue?vue&type=template&id=82704d4a& ***!
+  \*************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_82704d4a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Dashboard.vue?vue&type=template&id=82704d4a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Dashboard.vue?vue&type=template&id=82704d4a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_82704d4a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dashboard_vue_vue_type_template_id_82704d4a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -20758,10 +25851,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _pages_Twitter_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/Twitter.vue */ "./resources/js/pages/Twitter.vue");
 /* harmony import */ var _pages_Login_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/Login.vue */ "./resources/js/pages/Login.vue");
-/* harmony import */ var _pages_System_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/System.vue */ "./resources/js/pages/System.vue");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var _pages_Dashboard_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/Dashboard.vue */ "./resources/js/pages/Dashboard.vue");
+/* harmony import */ var _pages_System_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/System.vue */ "./resources/js/pages/System.vue");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
 
  // ページコンポーネントをインポートする
+
+
 
 
 
@@ -20774,7 +25870,7 @@ var routes = [{
   path: '/login',
   component: _pages_Login_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
   beforeEnter: function beforeEnter(to, from, next) {
-    if (_store__WEBPACK_IMPORTED_MODULE_5__["default"].getters['auth/check']) {
+    if (_store__WEBPACK_IMPORTED_MODULE_6__["default"].getters['auth/check']) {
       next('/twitter');
     } else {
       next();
@@ -20784,24 +25880,46 @@ var routes = [{
   path: '/twitter',
   component: _pages_Twitter_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
   beforeEnter: function beforeEnter(to, from, next) {
-    var auth = _store__WEBPACK_IMPORTED_MODULE_5__["default"].getters['auth/check'];
+    var auth = _store__WEBPACK_IMPORTED_MODULE_6__["default"].getters['auth/check'];
 
-    if (auth && _store__WEBPACK_IMPORTED_MODULE_5__["default"].getters['auth/checkTwitterId']) {
+    if (auth && _store__WEBPACK_IMPORTED_MODULE_6__["default"].getters['auth/checkTwitterId']) {
+      console.log('tw.dash');
       next('/dashboard');
     } else if (auth) {
+      console.log('tw.tw');
       next();
     } else {
       next('login');
     }
   }
 }, {
+  path: '/dashboard',
+  component: _pages_Dashboard_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+  beforeEnter: function beforeEnter(to, from, next) {
+    var auth = _store__WEBPACK_IMPORTED_MODULE_6__["default"].getters['auth/check'];
+    var twitterAuth = _store__WEBPACK_IMPORTED_MODULE_6__["default"].getters['auth/checkTwitterId'];
+    console.log(twitterAuth);
+
+    if (auth && twitterAuth) {
+      console.log('router.dash');
+      next();
+    } else if (auth) {
+      console.log('router.twitter');
+      next('/twitter');
+    } else {
+      next('/login');
+    }
+  }
+}, {
   path: '/',
   beforeEnter: function beforeEnter(to, from, next) {
-    var auth = _store__WEBPACK_IMPORTED_MODULE_5__["default"].getters['auth/check'];
+    var auth = _store__WEBPACK_IMPORTED_MODULE_6__["default"].getters['auth/check'];
 
-    if (auth && _store__WEBPACK_IMPORTED_MODULE_5__["default"].getters['auth/checkTwitterId']) {
+    if (auth && _store__WEBPACK_IMPORTED_MODULE_6__["default"].getters['auth/checkTwitterId']) {
+      console.log('/.dash');
       next('/dashboard');
     } else if (auth) {
+      console.log('/.twi');
       next('/twitter');
     } else {
       next('login');
@@ -20809,7 +25927,7 @@ var routes = [{
   }
 }, {
   path: '/500',
-  component: _pages_System_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+  component: _pages_System_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
 }]; // VueRouterインスタンスを作成する
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
@@ -20949,10 +26067,9 @@ var actions = {
 
             case 3:
               response = _context2.sent;
-              console.log(response);
 
               if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
-                _context2.next = 9;
+                _context2.next = 8;
                 break;
               }
 
@@ -20960,7 +26077,7 @@ var actions = {
               context.commit('setUser', response.data);
               return _context2.abrupt("return", false);
 
-            case 9:
+            case 8:
               context.commit('setApiStatus', false);
 
               if (response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["UNPROCESSABLE_ENTRY"]) {
@@ -20971,7 +26088,7 @@ var actions = {
                 });
               }
 
-            case 11:
+            case 10:
             case "end":
               return _context2.stop();
           }
@@ -21003,21 +26120,22 @@ var actions = {
               response = _context3.sent;
 
               if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
-                _context3.next = 8;
+                _context3.next = 9;
                 break;
               }
 
               context.commit('setApiStatus', true);
               context.commit('setUser', null);
+              context.commit('setTwitterUser', null);
               return _context3.abrupt("return", false);
 
-            case 8:
+            case 9:
               context.commit('setApiStatus', false);
               context.commit('error/setCode', response.status, {
                 root: true
               });
 
-            case 10:
+            case 11:
             case "end":
               return _context3.stop();
           }
@@ -21078,6 +26196,7 @@ var actions = {
 
     return currentUser;
   }(),
+  // ツイッターユーザーログインチェック
   currentTwitterUser: function () {
     var _currentTwitterUser = _asyncToGenerator(
     /*#__PURE__*/
@@ -21123,6 +26242,51 @@ var actions = {
     }
 
     return currentTwitterUser;
+  }(),
+  twitterUserLogout: function () {
+    var _twitterUserLogout = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(context) {
+      var response;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              context.commit('setApiStatus', null);
+              _context6.next = 3;
+              return axios.post('/api/twitter/logout');
+
+            case 3:
+              response = _context6.sent;
+
+              if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                _context6.next = 8;
+                break;
+              }
+
+              context.commit('setApiStatus', true);
+              context.commit('setTwitterUser', null);
+              return _context6.abrupt("return", false);
+
+            case 8:
+              context.commit('setApiStatus', false);
+              context.commit('error/setCode', response.status, {
+                root: true
+              });
+
+            case 10:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6);
+    }));
+
+    function twitterUserLogout(_x8) {
+      return _twitterUserLogout.apply(this, arguments);
+    }
+
+    return twitterUserLogout;
   }()
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -21131,6 +26295,35 @@ var actions = {
   getters: getters,
   mutations: mutations,
   actions: actions
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/dashboard.js":
+/*!*****************************************!*\
+  !*** ./resources/js/store/dashboard.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var state = {
+  noticeToLike: null,
+  noticeToTweet: null
+};
+var mutations = {
+  setNoticeToLike: function setNoticeToLike(state, noticeToLike) {
+    state.noticeToLike = noticeToLike;
+  },
+  setNoticeToTweet: function setNoticeToTweet(state, noticeToTweet) {
+    state.noticeToTweet = noticeToTweet;
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: state,
+  mutations: mutations
 });
 
 /***/ }),
@@ -21174,6 +26367,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth */ "./resources/js/store/auth.js");
 /* harmony import */ var _error__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./error */ "./resources/js/store/error.js");
+/* harmony import */ var _dashboard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./dashboard */ "./resources/js/store/dashboard.js");
+
 
 
 
@@ -21184,7 +26379,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
     auth: _auth__WEBPACK_IMPORTED_MODULE_2__["default"],
-    error: _error__WEBPACK_IMPORTED_MODULE_3__["default"]
+    error: _error__WEBPACK_IMPORTED_MODULE_3__["default"],
+    dashboard: _dashboard__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
 });
 /* harmony default export */ __webpack_exports__["default"] = (store);

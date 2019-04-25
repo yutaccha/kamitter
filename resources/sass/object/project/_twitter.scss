@@ -10,7 +10,7 @@
     margin-bottom: 15px;
     transition: 0.5s;
     &:hover {
-      transform: translate(-10px, -5px);
+      transform: translateX(-10px);
       cursor: pointer;
     }
   }
@@ -33,7 +33,6 @@
     width: 15%;
     text-align: right;
     float: right;
-    height: inherit;
     line-height: 50px;
   }
 
@@ -56,9 +55,14 @@
   }
 
   &__icon{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    font-size: $font-size_xl;
+    height: 50px;
+    padding: 15px;
     margin-right: 5px;
-    font-size: $font-size_l;
-    padding: 5px;
+    box-sizing: border-box;
     &--create{
       font-size: $font-size_xl;
       margin-right: 10px;

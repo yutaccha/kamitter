@@ -1,26 +1,28 @@
 <template>
-    <main class="l-main">
-        <div class="l-contents">
+    <div class="l-contents">
 
-            <div class="p-contents__area--narrow">
-                <h2 class="p-contents__head"><i class="c-icon--twitter fab fa-twitter"></i>利用するTwitterアカウントを選択する</h2>
-                <div v-show="isMaximumAccount" class="c-card p-twitter__card">
-                    <a href="auth/twitter/oauth">
-                        <p class="p-twitter__create">
-                            <i class="c-icon--twitter p-twitter__icon--create far fa-plus-square"></i>Twitterアカウントの追加
-                        </p>
-                    </a>
-                </div>
-                <ul class="p-twitter">
+        <div class="p-contents__area--narrow">
+            <h2 class="p-contents__head"><i class="c-icon--twitter fab fa-twitter"></i>利用するTwitterアカウントを選択する</h2>
+            <div v-show="isMaximumAccount" class="c-card p-twitter__card u-color__bg--white">
+                <a href="auth/twitter/oauth">
+                    <p class="p-twitter__create">
+                        <i class="c-icon--twitter p-twitter__icon--create far fa-plus-square"></i>Twitterアカウントの追加
+                    </p>
+                </a>
+            </div>
+            <ul class="p-twitter">
+                <transition-group name="t-twitter_card">
                     <TwitterCard
-                            v-for="user in users"
+                            v-for="(user, index) in users"
                             :key="user.id"
                             :item="user"
+                            :index="index"
+                            @delUser="removeCard"
                     />
-                </ul>
-            </div>
+                </transition-group>
+            </ul>
         </div>
-    </main>
+    </div>
 </template>
 
 <script>
@@ -44,22 +46,22 @@
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
-
                 this.users = response.data.twitter_accounts
                 this.accountNum = response.data.account_num
-                // // console.log(users);
-                // // console.log(accountNum);
 
             },
+            removeCard(emitObject) {
+                this.users.splice(emitObject.index, 1)
+            }
         },
         computed: {
-            isMaximumAccount () {
+            isMaximumAccount() {
                 return this.accountNum <= 10
             }
         },
-        created() {
-            this.fetchTwitterUsers()
-        },
+        async created() {
+            await this.fetchTwitterUsers()
+        }
     }
 </script>
 

@@ -6,4 +6,7 @@
   border: 1px solid $color-default-parent;
   border-radius: 5px;
   box-sizing: border-box;
+  filter: drop-shadow(0px 5px 3px $color-default-parent);
+  position: relative;
+  z-index: 1;
 }

@@ -12,7 +12,7 @@
 */
 
 
-Route::get('dashboard' ,function() {
+Route::get('dash' ,function() {
     return view('dashboard');
 });
 
