@@ -1,9 +1,10 @@
 <template>
     <div class="c-panel u-color__bg--white">
+
         <div class="p-status">
-            <p class="p-status__show">稼働中</p>
-            <button class="p-status__button c-button c-button--success">サービス開始</button>
-            <button class="p-status__button c-button c-button--danger">停止</button>
+            <p class="p-status__show">{{serviceStatus}}</p>
+            <button class="p-status__button c-button c-button--success" @click.stop="runLikeService">サービス開始</button>
+            <button class="p-status__button c-button c-button--danger" @click.stop="stopLikeService">停止</button>
         </div>
 
 
@@ -74,7 +75,7 @@
                         >
                             <option v-for="filter in filters" :value="filter.id">{{filter.merged_word}}</option>
                         </select>
-                        <p class="p-form__notion">※※条件のキーワードは、「キーワード登録」から登録することができます。</p>
+                        <p class="p-form__notion">※条件のキーワードは、「キーワード登録」から登録することができます。</p>
                         <div class="p-form__button">
                             <button type="submit" class="c-button c-button--twitter">変更</button>
                         </div>
@@ -99,6 +100,7 @@
                 newModal: false,
                 editModal: false,
                 editIndex: null,
+                serviceStatus: null,
                 errors: null,
                 addForm: {
                     filter_word_id: null,
@@ -160,7 +162,6 @@
                 }
                 this.likes.splice(this.editIndex, 1, response.data)
                 this.resetEditForm()
-                this.$store.commit('dashboard/setChange', true)
             },
             async removeLike(id, index) {
                 const response = await axios.delete(`/api/like/${id}`)
@@ -175,12 +176,41 @@
                 this.editForm.id = null
                 this.editForm.filter_word_id = null
                 this.editIndex = null
+            },
+            async fetchServiceStatus() {
+                const response = await axios.get('/api/system/status')
+                if (response.status !== OK) {
+                    this.$store.commit('error/setCode', response.status)
+                    return false
+                }
+                this.serviceStatus = response.data.status_labels.auto_like
+            },
+            async runLikeService() {
+                const serviceType = 3
+                const data = {type: serviceType}
+                const response = await axios.post('/api/system/run', data)
+                if (response.status !== OK) {
+                    this.$store.commit('error/setCode', response.status)
+                    return false
+                }
+                this.serviceStatus = response.data.status_labels.auto_like
+            },
+            async stopLikeService() {
+                const serviceType = 3
+                const data = {type: serviceType}
+                const response = await axios.post('/api/system/stop', data)
+                if (response.status !== OK) {
+                    this.$store.commit('error/setCode', response.status)
+                    return false
+                }
+                this.serviceStatus = response.data.status_labels.auto_like
             }
 
         },
         created() {
             this.fetchLikes()
             this.fetchFilters()
+            this.fetchServiceStatus()
         },
         watch: {
             dashChange: {

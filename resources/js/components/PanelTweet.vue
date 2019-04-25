@@ -1,9 +1,10 @@
 <template>
     <div class="c-panel u-color__bg--white">
+
         <div class="p-status">
-            <p class="p-status__show">稼働中</p>
-            <button class="p-status__button c-button c-button--success">サービス開始</button>
-            <button class="p-status__button c-button c-button--danger">停止</button>
+            <p class="p-status__show">{{serviceStatus}}</p>
+            <button class="p-status__button c-button c-button--success" @click.stop="runTweetService">サービス開始</button>
+            <button class="p-status__button c-button c-button--danger" @click.stop="stopTweetService">停止</button>
         </div>
 
 
@@ -112,6 +113,7 @@
                 newModal: false,
                 editModal: false,
                 editIndex: null,
+                serviceStatus: null,
                 errors: null,
                 addForm: {
                     tweet: '',
@@ -218,10 +220,39 @@
                 this.editForm.date = ''
                 this.editForm.time = ''
                 this.editIndex = null
+            },
+            async fetchServiceStatus() {
+                const response = await axios.get('/api/system/status')
+                if (response.status !== OK) {
+                    this.$store.commit('error/setCode', response.status)
+                    return false
+                }
+                this.serviceStatus = response.data.status_labels.auto_tweet
+            },
+            async runTweetService() {
+                const serviceType = 4
+                const data = {type: serviceType}
+                const response = await axios.post('/api/system/run', data)
+                if (response.status !== OK) {
+                    this.$store.commit('error/setCode', response.status)
+                    return false
+                }
+                this.serviceStatus = response.data.status_labels.auto_tweet
+            },
+            async stopTweetService() {
+                const serviceType = 4
+                const data = {type: serviceType}
+                const response = await axios.post('/api/system/stop', data)
+                if (response.status !== OK) {
+                    this.$store.commit('error/setCode', response.status)
+                    return false
+                }
+                this.serviceStatus = response.data.status_labels.auto_tweet
             }
         },
         created() {
             this.fetchAutoTweets()
+            this.fetchServiceStatus()
         }
     }
 

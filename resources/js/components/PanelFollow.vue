@@ -18,10 +18,10 @@
 
         <table class="p-table">
             <tr class="p-table__head">
-                <th class="p-table__th">ステータス</th>
-                <th class="p-table__th">ターゲット</th>
-                <th class="p-table__th">条件</th>
-                <th class="p-table__th">操作</th>
+                <th class="p-table__th p-table__th--follow">ステータス</th>
+                <th class="p-table__th p-table__th--follow">ターゲット</th>
+                <th class="p-table__th p-table__th--follow">条件</th>
+                <th class="p-table__th p-table__th--follow">操作</th>
             </tr>
 
             <tr v-for="(followTarget, index) in followTargets">

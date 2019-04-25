@@ -43,7 +43,7 @@ class TwitterUserController extends Controller
         $token = $twitter_user->token;
         $token_secret = $twitter_user->token_secret;
 
-        $json = TwitterApi::useTwitterApi('get', 'account/verify_credentials', [], $token, $token_secret);
+        $json = TwitterApi::useTwitterApi('GET', 'account/verify_credentials', [], $token, $token_secret);
 //        dd($json);
         $twitter_users_data = [
             'name' => $json->name,

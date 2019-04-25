@@ -7,6 +7,17 @@ use App\SystemManager;
 
 class SystemManagerController extends Controller
 {
+    public static function stopAllServices($id)
+    {
+        $system_manager = SystemManager::where('id', $id)->first();
+        $system_manager->auto_follow_status = 1;
+        $system_manager->auto_unfollow_status = 1;
+        $system_manager->auto_like_status = 1;
+        $system_manager->auto_tweet_status = 1;
+        $system_manager->save();
+    }
+
+
     public function run(EditSystemManager $request)
     {
         $twitter_user = session()->get('twitter_id');

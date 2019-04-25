@@ -9,26 +9,28 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 
 class TwitterApi
 {
-    public static function useTwitterApi(String $method = "", $url = 0, $options = [], $token, $token_secret){
+    public static function useTwitterApi(String $method = "GET", $url = "", $options = [], $token, $token_secret){
         $api_key = config('services.twitter')['client_id'];
         $api_secret = config('services.twitter')['client_secret'];
-
-
 
         $access_token = $token;
         $access_token_secret = $token_secret;
 
-
-        $twitter_user = new TwitterOAuth(
+        $twitter_api_connection = new TwitterOAuth(
             $api_key,
             $api_secret,
             $access_token,
             $access_token_secret
         );
 
-        # 本来はアカウント有効状態を確認するためのものですが、プロフィール取得にも使用可能
-        $twitter_user_info = $twitter_user->get($url);
-        return $twitter_user_info;
+        if($method === 'POST'){
+            $twitter_api_result = $twitter_api_connection->post($url, $options);
+            return $twitter_api_result;
+        }else if($method === 'GET'){
+            $twitter_api_result = $twitter_api_connection->get($url, $options);
+            return $twitter_api_result;
+        }
 
+        return [];
     }
 }

@@ -39,7 +39,7 @@ class SystemManager extends Model
     /**
      * リレーションシップ -twitter_usersテーブル
      */
-    public function twitter_user()
+    public function twitterUser()
     {
         return $this->belongsTo('App\TwitterUser', 'user_id');
     }

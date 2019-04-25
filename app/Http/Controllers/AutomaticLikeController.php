@@ -32,7 +32,7 @@ class AutomaticLikeController extends Controller
 
     public function edit(int $id, AddAutomaticLike $request)
     {
-        $auto_like = AutomaticLike::where('id', $id)->first();
+        $auto_like = AutomaticLike::where('id', $id)->with('filterWord')->first();
         if (! $auto_like){
             abort(404);
         }
