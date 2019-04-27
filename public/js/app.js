@@ -2465,6 +2465,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2475,6 +2479,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       editModal: false,
       editIndex: null,
       serviceStatus: null,
+      serviceStatusLabel: null,
       errors: null,
       addForm: {
         target: null,
@@ -2490,6 +2495,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: {
     dashChange: function dashChange() {
       return this.$store.state.dashboard.noticeToTweet;
+    },
+    showRunButton: function showRunButton() {
+      return this.serviceStatus === 1 || this.serviceStatus === 3;
+    },
+    showStopButton: function showStopButton() {
+      return this.serviceStatus === 2 || this.serviceStatus === 3;
     }
   },
   methods: {
@@ -2748,9 +2759,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context6.abrupt("return", false);
 
               case 6:
-                this.serviceStatus = response.data.status_labels.auto_follow;
+                this.serviceStatus = response.data.auto_follow_status;
+                this.serviceStatusLabel = response.data.status_labels.auto_follow;
 
-              case 7:
+              case 8:
               case "end":
                 return _context6.stop();
             }
@@ -2792,9 +2804,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context7.abrupt("return", false);
 
               case 8:
-                this.serviceStatus = response.data.status_labels.auto_follow;
+                this.serviceStatus = response.data.auto_follow_status;
+                this.serviceStatusLabel = response.data.status_labels.auto_follow;
 
-              case 9:
+              case 10:
               case "end":
                 return _context7.stop();
             }
@@ -2836,9 +2849,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context8.abrupt("return", false);
 
               case 8:
-                this.serviceStatus = response.data.status_labels.auto_follow;
+                this.serviceStatus = response.data.auto_follow_status;
+                this.serviceStatusLabel = response.data.status_labels.auto_follow;
 
-              case 9:
+              case 10:
               case "end":
                 return _context8.stop();
             }
@@ -6787,12 +6801,20 @@ var render = function() {
   return _c("div", { staticClass: "c-panel u-color__bg--white" }, [
     _c("div", { staticClass: "p-status" }, [
       _c("p", { staticClass: "p-status__show" }, [
-        _vm._v(_vm._s(_vm.serviceStatus))
+        _vm._v(_vm._s(_vm.serviceStatusLabel))
       ]),
       _vm._v(" "),
       _c(
         "button",
         {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.showRunButton,
+              expression: "showRunButton"
+            }
+          ],
           staticClass: "p-status__button c-button c-button--success",
           on: {
             click: function($event) {
@@ -6807,6 +6829,14 @@ var render = function() {
       _c(
         "button",
         {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.showStopButton,
+              expression: "showStopButton"
+            }
+          ],
           staticClass: "p-status__button c-button c-button--danger",
           on: {
             click: function($event) {

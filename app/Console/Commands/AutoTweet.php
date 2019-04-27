@@ -58,12 +58,14 @@ class AutoTweet extends Command
 
 
         foreach ($auto_tweet_running_status_list as $auto_tweet_running_status_item) {
+
             $system_manager_id = $auto_tweet_running_status_item->id;
             $twitter_user_id =  $auto_tweet_running_status_item->twitter_user_id;
 
             //ユーザーごとの自動ツイート配列を取得する
             $auto_tweets_list = AutomaticTweet::where('twitter_user_id', $twitter_user_id)
                 ->with('twitterUser')->get();
+
 
             foreach ($auto_tweets_list as $auto_tweet) {
                 //投稿予定時刻なら自動ツイート
@@ -72,6 +74,7 @@ class AutoTweet extends Command
                     $api_result = $this->fetchTweetApi($auto_tweet);
                     //APIエラーの場合の処理と判定
                     $flg_skip_to_next_user = $this->handleApiError($api_result, $system_manager_id);
+
                     if ($flg_skip_to_next_user === true) {
                         break;
                     }
@@ -89,12 +92,14 @@ class AutoTweet extends Command
         if (property_exists($api_result, 'errors')) {
 
             foreach ($api_result->errors as $error) {
+
                 //アカウント凍結時の処理
                 if ($error->code === self::ERROR_CODE_SUSPENDED) {
                     SystemManager::stopAllServices($system_manager_id);
                     echo 'send mail¥n';
                     return true;
                 }
+
                 //レート制限時の処理
                 if ($error->code === self::ERROR_CODE_LIMIT_EXCEEDED){
                     echo 'limit exceeded';
@@ -102,18 +107,25 @@ class AutoTweet extends Command
                 }
             }
 
+
         }
         return false;
     }
+
 
     private function fetchTweetApi($auto_tweet)
     {
         //APIに必要な変数の用意
         $token = $auto_tweet->twitterUser->token;
         $token_secret = $auto_tweet->twitterUser->token_secret;
-        $param_status = $auto_tweet->tweet;
+        $param = [
+            'status' => $auto_tweet->tweet,
+        ];
+
+
         //API呼び出し
-        $response_json = TwitterApi::useTwitterApi('GET', self::API_URL_TWEET, ['status' => $param_status], $token, $token_secret);
+        $response_json = TwitterApi::useTwitterApi('GET', self::API_URL_TWEET,
+            $param, $token, $token_secret);
 
         return $response_json;
     }

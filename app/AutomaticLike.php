@@ -15,10 +15,14 @@ class AutomaticLike extends Model
         return $this->belongsTo('App\User', 'user_id');
     }
 
+    public function twitterUser()
+    {
+        return $this->belongsTo('App\TwitterUser', 'twitter_user_id');
+    }
+
     public function filterWord()
     {
         return $this->belongsTo('App\FilterWord', 'filter_word_id');
     }
-
 
 }

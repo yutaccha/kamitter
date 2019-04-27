@@ -2,9 +2,13 @@
     <div class="c-panel u-color__bg--white">
 
         <div class="p-status">
-            <p class="p-status__show">{{serviceStatus}}</p>
-            <button class="p-status__button c-button c-button--success" @click.stop="runFollowService">サービス開始</button>
-            <button class="p-status__button c-button c-button--danger" @click.stop="stopFollowService">停止</button>
+            <p class="p-status__show">{{serviceStatusLabel}}</p>
+            <button class="p-status__button c-button c-button--success"
+                    v-show="showRunButton"
+                    @click.stop="runFollowService">サービス開始</button>
+            <button class="p-status__button c-button c-button--danger"
+                    v-show="showStopButton"
+                    @click.stop="stopFollowService">停止</button>
         </div>
 
 
@@ -111,6 +115,7 @@
                 editModal: false,
                 editIndex: null,
                 serviceStatus: null,
+                serviceStatusLabel: null,
                 errors: null,
                 addForm: {
                     target: null,
@@ -127,6 +132,12 @@
             dashChange() {
                 return this.$store.state.dashboard.noticeToTweet
             },
+            showRunButton() {
+                return this.serviceStatus === 1 || this.serviceStatus === 3
+            },
+            showStopButton() {
+                return this.serviceStatus === 2 || this.serviceStatus === 3
+            }
         },
         methods: {
             async fetchFollowTargets() {
@@ -201,7 +212,8 @@
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
-                this.serviceStatus = response.data.status_labels.auto_follow
+                this.serviceStatus = response.data.auto_follow_status
+                this.serviceStatusLabel = response.data.status_labels.auto_follow
             },
             async runFollowService() {
                 const serviceType = 1
@@ -211,7 +223,9 @@
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
-                this.serviceStatus = response.data.status_labels.auto_follow
+                this.serviceStatus = response.data.auto_follow_status
+                this.serviceStatusLabel = response.data.status_labels.auto_follow
+
             },
             async stopFollowService() {
                 const serviceType = 1
@@ -221,7 +235,8 @@
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
-                this.serviceStatus = response.data.status_labels.auto_follow
+                this.serviceStatus = response.data.auto_follow_status
+                this.serviceStatusLabel = response.data.status_labels.auto_follow
             }
 
         },

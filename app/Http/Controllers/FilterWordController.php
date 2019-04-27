@@ -25,6 +25,10 @@ class FilterWordController extends Controller
     private function adjustWordStyle($preAdjustWord){
         $adjustedWord = mb_convert_kana($preAdjustWord, 's', 'UTF-8');
         $adjustedWord = preg_replace('/\s+/', ' ', $adjustedWord);
+        if (' ' === mb_substr($adjustedWord, 0, 1))
+        {
+            $adjustedWord = mb_substr($adjustedWord, 1);
+        }
         return $adjustedWord;
     }
 

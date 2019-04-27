@@ -9,6 +9,7 @@ class FollowTarget extends Model
     const STATUS = [
         1 => ['label' => '待機中'],
         2 => ['label' => 'リスト作成中'],
+        3 =>['label' => '作成済']
     ];
 
     protected $appends = [
@@ -22,6 +23,11 @@ class FollowTarget extends Model
     public function user()
     {
         return $this->belongsTo('App\User' ,'user_id');
+    }
+
+    public function twitterUser()
+    {
+        return $this->belongsTo('App\TwitterUser', 'twitter_user_id');
     }
 
     public function filterWord()
