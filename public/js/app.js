@@ -2469,6 +2469,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -6823,7 +6827,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("サービス開始")]
+        [_vm._v("サービス開始\n        ")]
       ),
       _vm._v(" "),
       _c(
@@ -6845,7 +6849,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("停止")]
+        [_vm._v("停止\n        ")]
       )
     ]),
     _vm._v(" "),
@@ -6877,53 +6881,58 @@ var render = function() {
       [
         _vm._m(0),
         _vm._v(" "),
-        _vm._l(_vm.followTargets, function(followTarget, index) {
-          return _c("tr", [
-            _c("th", { staticClass: "p-table__td" }, [
-              _vm._v(_vm._s(followTarget.status_label))
-            ]),
-            _vm._v(" "),
-            _c("th", { staticClass: "p-table__td" }, [
-              _vm._v("@" + _vm._s(followTarget.target))
-            ]),
-            _vm._v(" "),
-            _c("th", { staticClass: "p-table__td" }, [
-              _vm._v(_vm._s(followTarget.filter_word.merged_word))
-            ]),
-            _vm._v(" "),
-            _c("th", { staticClass: "p-table__td" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "c-button c-button--twitter",
-                  on: {
-                    click: function($event) {
-                      $event.stopPropagation()
-                      return _vm.showEditModal(followTarget, index)
-                    }
-                  }
-                },
-                [_vm._v("編集\n                ")]
-              ),
+        _c(
+          "transition-group",
+          { attrs: { tag: "tbody", name: "t-th" } },
+          _vm._l(_vm.followTargets, function(followTarget, index) {
+            return _c("tr", { key: followTarget.id }, [
+              _c("th", { staticClass: "p-table__td" }, [
+                _vm._v(_vm._s(followTarget.status_label))
+              ]),
               _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "c-button c-button--danger",
-                  on: {
-                    click: function($event) {
-                      $event.stopPropagation()
-                      return _vm.removeFollowTarget(followTarget.id, index)
+              _c("th", { staticClass: "p-table__td" }, [
+                _vm._v("@" + _vm._s(followTarget.target))
+              ]),
+              _vm._v(" "),
+              _c("th", { staticClass: "p-table__td" }, [
+                _vm._v(_vm._s(followTarget.filter_word.merged_word))
+              ]),
+              _vm._v(" "),
+              _c("th", { staticClass: "p-table__td" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "c-button c-button--twitter",
+                    on: {
+                      click: function($event) {
+                        $event.stopPropagation()
+                        return _vm.showEditModal(followTarget, index)
+                      }
                     }
-                  }
-                },
-                [_vm._v("削除\n                ")]
-              )
+                  },
+                  [_vm._v("編集\n                    ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "c-button c-button--danger",
+                    on: {
+                      click: function($event) {
+                        $event.stopPropagation()
+                        return _vm.removeFollowTarget(followTarget.id, index)
+                      }
+                    }
+                  },
+                  [_vm._v("削除\n                    ")]
+                )
+              ])
             ])
-          ])
-        })
+          }),
+          0
+        )
       ],
-      2
+      1
     ),
     _vm._v(" "),
     _c("div", { staticClass: "p-modal__wrapper" }, [

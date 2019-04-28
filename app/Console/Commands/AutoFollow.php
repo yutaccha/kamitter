@@ -291,7 +291,7 @@ class AutoFollow extends Command
 
     private function fetchGetFollowerListApi($twitter_user, $target_screen, $cursor)
     {
-        $count = 100;
+        $count = 50;
 
         //APIに必要な変数の用意
         $token = $twitter_user->token;
@@ -329,6 +329,9 @@ class AutoFollow extends Command
             }
 
             //アンフォローリストにいないか
+
+            //フォロー済リストから30日以内にフォローしてないか
+
 
             //trueなら
             //ターゲットリストに追加

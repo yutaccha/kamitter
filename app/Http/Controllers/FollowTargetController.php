@@ -50,6 +50,7 @@ class FollowTargetController extends Controller
     {
         $twitter_id = session()->get('twitter_id');
         $follow_target = FollowTarget::where('id', $id)->first();
+        
         if (! $follow_target){
             abort(404);
         }
