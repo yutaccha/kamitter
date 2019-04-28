@@ -71,7 +71,7 @@ class TwitterAuthController extends Controller
 
     public function getId()
     {
-        return response(session()->get('twitter_id') ?? '', 200);
+        return session()->get('twitter_id') ?? '';
     }
 
 
@@ -79,15 +79,13 @@ class TwitterAuthController extends Controller
     {
         $user_id = Auth::id();
         $twitter_user = TwitterUser::where('id', $id)->first();
-        if (!$twitter_user) {
+        if (is_null($twitter_user)) {
             return 404;
         }
-        if ($twitter_user->user_id === $user_id) {
-            session()->put('twitter_id', $id);
-        } else {
+        if ($twitter_user->user_id !== $user_id) {
             abort(403);
         }
-        return response(200);
+        session()->put('twitter_id', $id);
     }
 
 
@@ -95,22 +93,19 @@ class TwitterAuthController extends Controller
     {
         $user_id = Auth::id();
         $twitter_user = TwitterUser::where('id', $id)->first();
-        if (!$twitter_user) {
+        if (is_null($twitter_user)) {
             return 404;
         }
-        if ($twitter_user->user_id === $user_id) {
-            $twitter_user->delete();
-        } else {
+        if ($twitter_user->user_id !== $user_id) {
             abort(403);
         }
-        return response(200);
+        $twitter_user->delete();
     }
 
 
     public function logout()
     {
         session()->forget('twitter_id');
-        return response(200);
     }
 
 }

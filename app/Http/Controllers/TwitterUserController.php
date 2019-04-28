@@ -22,10 +22,7 @@ class TwitterUserController extends Controller
         $twitter_user = TwitterUser::where('user_id', $user_id);
         $my_twitter_accounts = $twitter_user->get();
         $account_num = $twitter_user->count();
-        return response([
-            'twitter_accounts' => $my_twitter_accounts,
-            'account_num' => $account_num
-        ], 200);
+        return ['twitter_accounts' => $my_twitter_accounts, 'account_num' => $account_num];
     }
 
 
