@@ -35,15 +35,19 @@
                                 </ul>
                             </div>
                             <label class="p-form__label" for="login-email">メールアドレス</label>
-                            <input type="text" class="p-form__item" id="login-email" v-model="loginForm.email">
+                            <input type="email" class="p-form__item" id="login-email"
+                                   placeholder="sample@kamitter.ltd"
+                                   v-model="loginForm.email" required>
                             <label class="p-form__label" for="login-password">パスワード</label>
                             <input type="password" class="p-form__item" id="login-password"
-                                   v-model="loginForm.password">
+                                   placeholder="半角英数8文字以上"
+                                   v-model="loginForm.password" required>
                             <div class="p-form__button">
                                 <button type="submit" class="c-button c-button--inverse">ログイン</button>
                             </div>
                         </form>
                     </div>
+
                     <div class="c-panel p-login__panel u-color__bg--white" v-show="tab === 2" key="register">
                         <form class="p-form" @submit.prevent="register">
                             <div v-if="registerErrors" class="errors">
@@ -58,15 +62,20 @@
                                 </ul>
                             </div>
                             <label class="p-form__label" for="username">ユーザー名</label>
-                            <input type="text" class="p-form__item" id="username" v-model="registerForm.name">
+                            <input type="text" class="p-form__item" id="username"
+                                   Kamitter
+                                   v-model="registerForm.name" required>
                             <label class="p-form__label" for="email">メールアドレス</label>
-                            <input type="text" class="p-form__item" id="email" v-model="registerForm.email">
+                            <input type="email" class="p-form__item" id="email"
+                                   placeholder="kamitter@sample.ltd"
+                                   v-model="registerForm.email" required>
                             <label class="p-form__label" for="password">パスワード</label>
                             <input type="password" class="p-form__item" id="password"
+                                   placeholder="半角英数8文字以上"
                                    v-model="registerForm.password">
-                            <label class="p-form__label" for="password-confirmation">パスワード(確認)</label>
-                            <input type="password" class="p-form__item" id="password-confirmation"
-                                   v-model="registerForm.password_confirmation">
+                            <label class="p-form__label" for="confirm_password">パスワード(確認)</label>
+                            <input type="password" class="p-form__item" id="confirm_password"
+                                   v-model="registerForm.password_confirmation" required>
                             <div class="p-form__button">
                                 <button type="submit" class="c-button c-button--inverse">登録</button>
                             </div>

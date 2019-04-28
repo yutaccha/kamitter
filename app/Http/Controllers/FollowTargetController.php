@@ -60,4 +60,5 @@ class FollowTargetController extends Controller
         }
         $follow_target->delete();
     }
+
 }

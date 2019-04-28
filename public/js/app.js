@@ -4615,6 +4615,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -8645,7 +8654,12 @@ var render = function() {
                         }
                       ],
                       staticClass: "p-form__item",
-                      attrs: { type: "text", id: "login-email" },
+                      attrs: {
+                        type: "email",
+                        id: "login-email",
+                        placeholder: "sample@kamitter.ltd",
+                        required: ""
+                      },
                       domProps: { value: _vm.loginForm.email },
                       on: {
                         input: function($event) {
@@ -8676,7 +8690,12 @@ var render = function() {
                         }
                       ],
                       staticClass: "p-form__item",
-                      attrs: { type: "password", id: "login-password" },
+                      attrs: {
+                        type: "password",
+                        id: "login-password",
+                        placeholder: "半角英数8文字以上",
+                        required: ""
+                      },
                       domProps: { value: _vm.loginForm.password },
                       on: {
                         input: function($event) {
@@ -8795,7 +8814,12 @@ var render = function() {
                         }
                       ],
                       staticClass: "p-form__item",
-                      attrs: { type: "text", id: "username" },
+                      attrs: {
+                        type: "text",
+                        id: "username",
+                        Kamitter: "",
+                        required: ""
+                      },
                       domProps: { value: _vm.registerForm.name },
                       on: {
                         input: function($event) {
@@ -8827,7 +8851,12 @@ var render = function() {
                         }
                       ],
                       staticClass: "p-form__item",
-                      attrs: { type: "text", id: "email" },
+                      attrs: {
+                        type: "email",
+                        id: "email",
+                        placeholder: "kamitter@sample.ltd",
+                        required: ""
+                      },
                       domProps: { value: _vm.registerForm.email },
                       on: {
                         input: function($event) {
@@ -8862,7 +8891,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "p-form__item",
-                      attrs: { type: "password", id: "password" },
+                      attrs: {
+                        type: "password",
+                        id: "password",
+                        placeholder: "半角英数8文字以上"
+                      },
                       domProps: { value: _vm.registerForm.password },
                       on: {
                         input: function($event) {
@@ -8882,7 +8915,7 @@ var render = function() {
                       "label",
                       {
                         staticClass: "p-form__label",
-                        attrs: { for: "password-confirmation" }
+                        attrs: { for: "confirm_password" }
                       },
                       [_vm._v("パスワード(確認)")]
                     ),
@@ -8897,7 +8930,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "p-form__item",
-                      attrs: { type: "password", id: "password-confirmation" },
+                      attrs: {
+                        type: "password",
+                        id: "confirm_password",
+                        required: ""
+                      },
                       domProps: {
                         value: _vm.registerForm.password_confirmation
                       },
