@@ -50,11 +50,12 @@ class FollowTargetController extends Controller
     {
         $twitter_id = session()->get('twitter_id');
         $follow_target = FollowTarget::where('id', $id)->first();
-        
+        $status_under_making_list = 3;
+
         if (! $follow_target){
             abort(404);
         }
-        if($follow_target->status === 2 ){
+        if($follow_target->status === $status_under_making_list ){
             FollowerTarget::where('twitter_user_id', $twitter_id)->delete();
         }
         $follow_target->delete();

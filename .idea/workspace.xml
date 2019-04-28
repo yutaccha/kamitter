@@ -7,10 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="276c904a-3ce4-4162-84be-a3ddf76cf74c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Console/Commands/AutoFollow.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/AutoFollow.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FollowTargetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FollowTargetController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -133,8 +130,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FollowTargetController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="978">
-                  <caret line="52" column="8" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="8" />
+                <state relative-caret-position="1083">
+                  <caret line="57" column="63" selection-start-line="57" selection-start-column="63" selection-end-line="57" selection-end-column="63" />
                   <folding>
                     <element signature="e#40#68#0#PHP" expanded="true" />
                   </folding>
@@ -660,12 +657,12 @@
       <workItem from="1555403889209" duration="23172000" />
       <workItem from="1555467168992" duration="80105000" />
       <workItem from="1556017393582" duration="40886000" />
-      <workItem from="1556184896877" duration="49715000" />
+      <workItem from="1556184896877" duration="49836000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64029000" />
+    <option name="totallyTimeSpent" value="64150000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="710" y="-1440" width="2560" height="1440" extended-state="6" />
@@ -1051,8 +1048,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FollowTargetController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="978">
-          <caret line="52" column="8" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="8" />
+        <state relative-caret-position="1083">
+          <caret line="57" column="63" selection-start-line="57" selection-start-column="63" selection-end-line="57" selection-end-column="63" />
           <folding>
             <element signature="e#40#68#0#PHP" expanded="true" />
           </folding>
