@@ -42,6 +42,7 @@ class AutoFollow extends Command
 
     const API_URL_FOLLOWERS_LIST = 'followers/list';
     const API_URL_FOLLOW = 'friendships/create';
+    const API_URL_CREDENTIOAL = 'account/verify_credentials';
 
     const API_REQUEST_RATE_PER_DAY = 600;
     const INTERVAL_HOURS = 2;
@@ -55,6 +56,7 @@ class AutoFollow extends Command
         "2000" => 100,
         "3000" => 150,
     ];
+    const FOLLOW_RATE_MAX = 150;
 
     //APIエラーコード
     const ERROR_CODE_SUSPENDED = 63;
@@ -95,8 +97,7 @@ class AutoFollow extends Command
             if (is_null($twitter_api_follower_cursor) || $twitter_api_follower_cursor !== '0') {
                 $this->makeFollowerTargetList($system_manager_id, $twitter_user_id, $twitter_api_follower_cursor);
             }
-
-            dd('リスト完了');
+            echo 'makedlist¥n';
 
             //フォロワーターゲットリストを取得
             $follower_target_list = FollowerTarget::where('twitter_user_id', $twitter_user_id)
@@ -107,7 +108,9 @@ class AutoFollow extends Command
                 continue;
             }
 
-
+            echo 'following¥n';
+            //フォローを行う
+            $this->autoFollow($system_manager_id, $twitter_user_id, $follower_target_list);
         }
     }
 
@@ -119,18 +122,111 @@ class AutoFollow extends Command
                 //アカウント凍結時の処理
                 if ($error->code === self::ERROR_CODE_SUSPENDED) {
                     SystemManager::stopAllServices($system_manager_id);
-                    echo 'send mail¥n';
+                    echo 'send suspend mail';
                     return true;
                 }
                 //レート制限時の処理
                 if ($error->code === self::ERROR_CODE_LIMIT_EXCEEDED) {
-                    echo 'limit exceeded';
+                    echo 'limit exceeded mail';
                     return true;
                 }
             }
 
         }
         return false;
+    }
+
+
+    private function autoFollow($system_manager_id, $twitter_user_id, $follower_target_list)
+    {
+        //API認証用のツイッターユーザー情報を取得
+        $twitter_user = TwitterUser::where('id', $twitter_user_id)->first();
+
+        //フォローレートの決定
+        $follow_counter = 0;
+        $follow_limit = $this->getFollowLimit($system_manager_id, $twitter_user_id);
+
+
+        foreach ($follower_target_list as $follower_target_item) {
+            //APIでフォローを行う、エラーを検知した場合フォローを中止
+            echo $follower_target_item->screen;
+            $api_result = $this->fetchAutoFollow($twitter_user, $follower_target_item->screen);
+            $flg_skip_to_next_user = $this->handleApiError($api_result, $system_manager_id);
+            if ($flg_skip_to_next_user === true) {
+                return;
+            }
+            $follow_counter++;
+            $follower_target_item->delete();
+
+            //レート上限を超えたら終了
+            if ($follow_counter >= $follow_limit) {
+                break;
+            }
+        }
+
+    }
+
+    private function fetchAutoFollow($twitter_user, $screen)
+    {
+        //APIに必要な変数の用意
+        $token = $twitter_user->token;
+        $token_secret = $twitter_user->token_secret;
+        $param = [
+            'screen_name' => $screen,
+        ];
+
+        //API呼び出し
+        $response_json = TwitterApi::useTwitterApi('POST', self::API_URL_FOLLOW,
+            $param, $token, $token_secret);
+
+        return $response_json;
+
+
+    }
+
+
+
+    public function getFollowLimit($system_manager_id, $twitter_user_id)
+    {
+        $followers = $this->getTwitterFollowerNum($system_manager_id, $twitter_user_id);
+        echo $followers;
+        foreach (self::FOLLOW_RATE as $rate => $limit) {
+            if ((int)$rate >= (int)$followers) {
+                return (int)( $limit / self::API_PER_A_DAY);
+            }
+        }
+
+        return (int)( self::FOLLOW_RATE_MAX / self::API_PER_A_DAY);
+    }
+
+
+    private function getTwitterFollowerNum($system_manager_id, $twitter_user_id)
+    {
+        //API認証用のツイッターユーザー情報を取得
+        $twitter_user = TwitterUser::where('id', $twitter_user_id)->first();
+        $api_result = $this->fetchTwitterUserInfo($twitter_user);
+        $flg_skip_to_next_user = $this->handleApiError($api_result, $system_manager_id);
+        if ($flg_skip_to_next_user === true) {
+            return 0;
+        }
+
+        return $api_result->followers_count;
+    }
+
+
+    private function fetchTwitterUserInfo($twitter_user)
+    {
+        //APIに必要な変数の用意
+        $token = $twitter_user->token;
+        $token_secret = $twitter_user->token_secret;
+        $param = [
+        ];
+
+        //API呼び出し
+        $response_json = TwitterApi::useTwitterApi('GET', self::API_URL_CREDENTIOAL,
+            $param, $token, $token_secret);
+
+        return $response_json;
     }
 
 
@@ -195,8 +291,8 @@ class AutoFollow extends Command
 
     private function fetchGetFollowerListApi($twitter_user, $target_screen, $cursor)
     {
-
         $count = 100;
+
         //APIに必要な変数の用意
         $token = $twitter_user->token;
         $token_secret = $twitter_user->token_secret;

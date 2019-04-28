@@ -3,12 +3,12 @@
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/resources/sass/app.scss" line="46" mnemonic="5" />
     <bookmark url="file://$PROJECT_DIR$/resources/js/components/PanelFollow.vue" description="serviceStatus: null," line="116" />
-    <bookmark url="file://$PROJECT_DIR$/app/Console/Commands/AutoFollow.php" line="247" mnemonic="4" />
+    <bookmark url="file://$PROJECT_DIR$/app/Console/Commands/AutoFollow.php" line="343" mnemonic="4" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="276c904a-3ce4-4162-84be-a3ddf76cf74c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/app/Console/Commands/AutoFollow.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/AutoFollow.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/AddFollowTarget.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/AddFollowTarget.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TwitterUserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TwitterUserController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,24 +41,6 @@
     <splitter split-orientation="horizontal" split-proportion="0.50249887">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/resources/js/components/PanelTweet.vue">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="462">
-                  <caret line="22" column="66" selection-start-line="22" selection-start-column="66" selection-end-line="22" selection-end-column="66" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/resources/js/components/PanelFilter.vue">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="777">
-                  <caret line="37" column="23" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/FilterWord.php">
               <provider selected="true" editor-type-id="text-editor">
@@ -101,7 +83,7 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TwitterAuthController.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="458">
+                <state relative-caret-position="390">
                   <caret line="63" column="32" lean-forward="true" selection-start-line="63" selection-start-column="32" selection-end-line="63" selection-end-column="32" />
                   <folding>
                     <element signature="e#40#60#0#PHP" expanded="true" />
@@ -119,11 +101,20 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/storage/logs/laravel-2019-04-28.log">
               <provider selected="true" editor-type-id="LogFileEditorProvider">
-                <state relative-caret-position="-360">
-                  <caret line="179" column="46" lean-forward="true" selection-start-line="179" selection-start-column="46" selection-end-line="179" selection-end-column="46" />
+                <state relative-caret-position="186">
+                  <caret line="205" column="46" lean-forward="true" selection-start-line="205" selection-start-column="46" selection-end-line="205" selection-end-column="46" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TwitterUserController.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="856">
+                  <caret line="48" column="50" lean-forward="true" selection-start-line="48" selection-start-column="50" selection-end-line="48" selection-end-column="50" />
                 </state>
               </provider>
             </entry>
@@ -165,8 +156,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/Console/Commands/AutoFollow.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="834">
-                  <caret line="159" column="8" selection-start-line="159" selection-start-column="8" selection-end-line="159" selection-end-column="8" />
+                <state relative-caret-position="291">
+                  <caret line="129" column="45" selection-start-line="129" selection-start-column="45" selection-end-line="129" selection-end-column="45" />
                   <folding>
                     <element signature="e#40#63#0#PHP" expanded="true" />
                   </folding>
@@ -263,10 +254,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>twitter/id</find>
-      <find>logout</find>
-      <find>c</find>
-      <find>id</find>
       <find>tab-</find>
       <find>panel</find>
       <find>t-dashboard_panel</find>
@@ -292,7 +279,11 @@
       <find>console</find>
       <find>tweet</find>
       <find>post</find>
+      <find>followers_</find>
+      <find>follower</find>
+      <find>count</find>
       <find>dd</find>
+      <find>per</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;c-form</replace>
@@ -369,9 +360,9 @@
         <option value="$PROJECT_DIR$/.php_cs.php" />
         <option value="$PROJECT_DIR$/app/FollowTarget.php" />
         <option value="$PROJECT_DIR$/app/Console/Commands/AutoLike.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/TwitterUserController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/TwitterAuthController.php" />
         <option value="$PROJECT_DIR$/app/Http/Requests/AddFollowTarget.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/TwitterUserController.php" />
         <option value="$PROJECT_DIR$/app/Console/Commands/AutoFollow.php" />
       </list>
     </option>
@@ -655,12 +646,12 @@
       <workItem from="1555403889209" duration="23172000" />
       <workItem from="1555467168992" duration="80105000" />
       <workItem from="1556017393582" duration="40886000" />
-      <workItem from="1556184896877" duration="41047000" />
+      <workItem from="1556184896877" duration="47537000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55361000" />
+    <option name="totallyTimeSpent" value="61851000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="710" y="-1440" width="2560" height="1440" extended-state="6" />
@@ -873,16 +864,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FilterWordController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="30" column="9" selection-start-line="30" selection-start-column="9" selection-end-line="30" selection-end-column="9" />
-          <folding>
-            <element signature="e#40#59#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/SystemManager.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="773">
@@ -976,13 +957,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TwitterUserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="25" column="5" lean-forward="true" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Commands/AutoLike.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -1010,16 +984,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TwitterAuthController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="63" column="32" lean-forward="true" selection-start-line="63" selection-start-column="32" selection-end-line="63" selection-end-column="32" />
-          <folding>
-            <element signature="e#40#60#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FollowTargetController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="501">
@@ -1039,15 +1003,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/storage/logs/laravel-2019-04-28.log">
       <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-360">
-          <caret line="179" column="46" lean-forward="true" selection-start-line="179" selection-start-column="46" selection-end-line="179" selection-end-column="46" />
+        <state relative-caret-position="186">
+          <caret line="205" column="46" lean-forward="true" selection-start-line="205" selection-start-column="46" selection-end-line="205" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/FilterWordController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="22" column="5" lean-forward="true" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+          <folding>
+            <element signature="e#40#59#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TwitterAuthController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="63" column="32" lean-forward="true" selection-start-line="63" selection-start-column="32" selection-end-line="63" selection-end-column="32" />
+          <folding>
+            <element signature="e#40#60#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TwitterUserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="856">
+          <caret line="48" column="50" lean-forward="true" selection-start-line="48" selection-start-column="50" selection-end-line="48" selection-end-column="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Commands/AutoFollow.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="834">
-          <caret line="159" column="8" selection-start-line="159" selection-start-column="8" selection-end-line="159" selection-end-column="8" />
+        <state relative-caret-position="291">
+          <caret line="129" column="45" selection-start-line="129" selection-start-column="45" selection-end-line="129" selection-end-column="45" />
           <folding>
             <element signature="e#40#63#0#PHP" expanded="true" />
           </folding>

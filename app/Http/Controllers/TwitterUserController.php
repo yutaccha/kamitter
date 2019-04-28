@@ -30,10 +30,9 @@ class TwitterUserController extends Controller
     {
         $user_id = Auth::id();
         $twitter_user = TwitterUser::where('id', $id)->first();
-//        dd($twitter_user);
-//        if ($twitter_user === null){
-//            abort(404);
-//        }
+        if (is_null($twitter_user)){
+            abort(404);
+        }
         if ($user_id !== $twitter_user->user_id){
             abort(403);
         }
