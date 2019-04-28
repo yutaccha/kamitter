@@ -7,6 +7,7 @@ use App\Http\Requests\AddFollowTarget;
 use App\FollowTarget;
 use App\Http\Requests\AddAutomaticLike;
 use App\Http\Controllers\TwitterAuthController;
+use App\FollowerTarget;
 use Illuminate\Support\Facades\Auth;
 
 class FollowTargetController extends Controller
@@ -47,9 +48,13 @@ class FollowTargetController extends Controller
 
     public function delete(int $id)
     {
+        $twitter_id = session()->get('twitter_id');
         $follow_target = FollowTarget::where('id', $id)->first();
         if (! $follow_target){
             abort(404);
+        }
+        if($follow_target->status === 2 ){
+            FollowerTarget::where('twitter_user_id', $twitter_id)->delete();
         }
         $follow_target->delete();
     }
