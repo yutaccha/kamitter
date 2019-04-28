@@ -25,7 +25,7 @@ class AddFollowTarget extends FormRequest
     public function rules()
     {
         return [
-            'target' => 'required|max:15|alpha_dash',
+            'target' => "required|max:15|regex:/^[a-zA-Z0-9_]+$/i",
             'filter_word_id' => 'required',
         ];
     }
