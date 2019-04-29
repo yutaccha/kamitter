@@ -36,11 +36,9 @@
                             </div>
                             <label class="p-form__label" for="login-email">メールアドレス</label>
                             <input type="email" class="p-form__item" id="login-email"
-                                   placeholder="sample@kamitter.ltd"
                                    v-model="loginForm.email" required>
                             <label class="p-form__label" for="login-password">パスワード</label>
                             <input type="password" class="p-form__item" id="login-password"
-                                   placeholder="半角英数8文字以上"
                                    v-model="loginForm.password" required>
                             <div class="p-form__button">
                                 <button type="submit" class="c-button c-button--inverse">ログイン</button>
@@ -63,11 +61,11 @@
                             </div>
                             <label class="p-form__label" for="username">ユーザー名</label>
                             <input type="text" class="p-form__item" id="username"
-                                   Kamitter
+                                   placeholder="かみった"
                                    v-model="registerForm.name" required>
                             <label class="p-form__label" for="email">メールアドレス</label>
                             <input type="email" class="p-form__item" id="email"
-                                   placeholder="kamitter@sample.ltd"
+                                   placeholder="sample@kamitter.ltd"
                                    v-model="registerForm.email" required>
                             <label class="p-form__label" for="password">パスワード</label>
                             <input type="password" class="p-form__item" id="password"
@@ -75,6 +73,7 @@
                                    v-model="registerForm.password">
                             <label class="p-form__label" for="confirm_password">パスワード(確認)</label>
                             <input type="password" class="p-form__item" id="confirm_password"
+                                   placeholder=""
                                    v-model="registerForm.password_confirmation" required>
                             <div class="p-form__button">
                                 <button type="submit" class="c-button c-button--inverse">登録</button>
@@ -124,7 +123,7 @@
                 }
             },
             async register() {
-                // authストアのresigterアクションを呼び出す
+                // authストアのregisterアクションを呼び出す
                 await this.$store.dispatch('auth/register', this.registerForm)
 
                 if (this.apiStatus) {
