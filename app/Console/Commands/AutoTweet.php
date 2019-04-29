@@ -34,16 +34,9 @@ class AutoTweet extends Command
         parent::__construct();
     }
 
-    //サービスステータス
-    const STATUS_STOP = 1;
-    const STATUS_RUNNING = 2;
-    const STATUS_WAIT_API_RESTRICTION = 3;
 
+    //API_URL
     const API_URL_TWEET = 'statuses/update';
-
-    //APIエラーコード
-    const ERROR_CODE_SUSPENDED = 63;
-    const ERROR_CODE_LIMIT_EXCEEDED = 88;
 
     /**
      * Execute the console command.
@@ -54,7 +47,7 @@ class AutoTweet extends Command
     {
 
         //稼動中のステータスになっているsystem_managersテーブルのレコードを取得する
-        $auto_tweet_running_status_list = SystemManager::where('auto_tweet_status', self::STATUS_RUNNING)->get();
+        $auto_tweet_running_status_list = SystemManager::where('auto_tweet_status', SystemManager::STATUS_RUNNING)->get();
 
 
         foreach ($auto_tweet_running_status_list as $auto_tweet_running_status_item) {
@@ -73,7 +66,7 @@ class AutoTweet extends Command
                     //API実行
                     $api_result = $this->fetchTweetApi($auto_tweet);
                     //APIエラーの場合の処理と判定
-                    $flg_skip_to_next_user = $this->handleApiError($api_result, $system_manager_id);
+                    $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id);
 
                     if ($flg_skip_to_next_user === true) {
                         break;
@@ -83,33 +76,6 @@ class AutoTweet extends Command
 
         }
 
-
-    }
-
-
-    private function handleApiError($api_result, $system_manager_id)
-    {
-        if (property_exists($api_result, 'errors')) {
-
-            foreach ($api_result->errors as $error) {
-
-                //アカウント凍結時の処理
-                if ($error->code === self::ERROR_CODE_SUSPENDED) {
-                    SystemManager::stopAllServices($system_manager_id);
-                    echo 'send mail¥n';
-                    return true;
-                }
-
-                //レート制限時の処理
-                if ($error->code === self::ERROR_CODE_LIMIT_EXCEEDED){
-                    echo 'limit exceeded';
-                    return true;
-                }
-            }
-
-
-        }
-        return false;
     }
 
 

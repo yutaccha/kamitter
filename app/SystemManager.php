@@ -22,11 +22,18 @@ class SystemManager extends Model
         4 => 'auto_tweet',
     ];
 
+    //サービスステータス
+    const STATUS_STOP = 1;
+    const STATUS_RUNNING = 2;
+    const STATUS_WAIT_API_RESTRICTION = 3;
+
     const STATUS = [
         1 => ['label' => 'サービス停止'],
         2 => ['label' => 'サービス稼動中'],
         3 => ['label' => 'API制限中'],
     ];
+
+
 
     /**
      * リレーションシップ -usersテーブル
