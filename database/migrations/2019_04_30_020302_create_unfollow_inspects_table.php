@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFollowerTargetsTable extends Migration
+class CreateUnfollowInspectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateFollowerTargetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('follower_targets', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('unfollow_inspects', function (Blueprint $table) {
             $table->unsignedInteger('twitter_user_id');
             $table->string('twitter_id', 30);
-            $table->string('cursor', 50);
             $table->timestamps();
 
             $table->foreign('twitter_user_id')->references('id')->on('twitter_users')->onDelete('cascade');
@@ -31,6 +29,6 @@ class CreateFollowerTargetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('follower_targets');
+        Schema::dropIfExists('unfollow_inspects');
     }
 }
