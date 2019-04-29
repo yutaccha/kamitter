@@ -37,6 +37,13 @@ class TwitterAuthController extends Controller
     {
         $user_id = Auth::id();
 
+        if($request->query('denied')){
+            return redirect('/twitter/');
+        }
+        if(is_null($request->query('oauth_token')) || is_null('oauth_verifier')){
+            abort('404');
+        }
+
         try {
             $auth_twitter_user = Socialite::driver('twitter')->user();
             $exist_twitter_user = DB::table('twitter_users')->where('token', $auth_twitter_user->token)->first();
@@ -45,7 +52,7 @@ class TwitterAuthController extends Controller
                 if (Auth::id() === $exist_twitter_user->user_id) {
                     $request->session()->put('twitter_id', $exist_twitter_user->id);
                 }
-                return redirect('/twitter');
+                return redirect('/twitter/');
             }
 
             $twitter_user = [
@@ -61,11 +68,11 @@ class TwitterAuthController extends Controller
             $system_manager->save();
 
 
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return abort(500);
         }
         $request->session()->put('twitter_id', $new_twitter_user->id);
-        return redirect('/twitter');
+        return redirect('/twitter/');
     }
 
 
