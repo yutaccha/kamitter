@@ -14,12 +14,7 @@ class CreateUnfollowHistoriesTable extends Migration
     public function up()
     {
         Schema::create('unfollow_histories', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('twitter_user_id');
-            $table->string('twitter_id', 30);
-            $table->timestamps();
 
-            $table->foreign('twitter_user_id')->references('id')->on('twitter_users')->onDelete('cascade');
         });
     }
 

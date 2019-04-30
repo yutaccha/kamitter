@@ -57,12 +57,12 @@ class InspectNotFollowback extends Command
             $twitter_user_id = $auto_unfollow_running_status_item->twitter_user_id;
 
             $follower = $this->getTwitterFollowerNum($system_manager_id, $twitter_user_id);
-//            if ($this->isFollowerOverEntryNumber($system_manager_id, $follower)) {
-//                continue;
-//            }
+            if ($this->isFollowerOverEntryNumber($system_manager_id, $follower)) {
+                continue;
+            }
 
             $users_followed_7days_ago = $this->getUsersFollowed7daysAgo($twitter_user_id);
-            $this->addToUnfollowTargets($system_manager_id, $twitter_user_id, $users_followed_7days_ago);
+            $this->addToUnfollowTargetsByCheckFollowback($system_manager_id, $twitter_user_id, $users_followed_7days_ago);
 
         }
 
@@ -87,12 +87,14 @@ class InspectNotFollowback extends Command
         return true;
     }
 
-    private function addToUnfollowTargets($system_manager_id, $twitter_user_id, $users)
+    private function addToUnfollowTargetsByCheckFollowback($system_manager_id, $twitter_user_id, $users)
     {
         //API認証用のツイッターユーザー情報を取得
         $twitter_user = TwitterUser::where('id', $twitter_user_id)->first();
         $user_id_string_list = $this->makeUsersStringList($users);
         foreach ($user_id_string_list as $user_id_string){
+            //配列型でapiが帰ってくる
+            //handleApiError内でproperty_existsを使用しているのでオブジェクトに変換する必要がある
             $api_result = (object)$this->fetchFollowbackInfo($twitter_user, $user_id_string);
             $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id);
             if ($flg_skip_to_next_user === true) {
