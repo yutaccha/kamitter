@@ -2,9 +2,15 @@
     <div class="c-panel u-color__bg--white">
 
         <div class="p-status">
-            <p class="p-status__show">{{serviceStatus}}</p>
-            <button class="p-status__button c-button c-button--success" @click.stop="runUnfollowService">サービス開始</button>
-            <button class="p-status__button c-button c-button--danger" @click.stop="stopUnfollowService">停止</button>
+            <p class="p-status__show">{{serviceStatusLabel}}</p>
+            <button class="p-status__button c-button c-button--success"
+                    v-show="showRunButton"
+                    @click.stop="runUnfollowService">サービス開始
+            </button>
+            <button class="p-status__button c-button c-button--danger"
+                    v-show="showStopButton"
+                    @click.stop="stopUnfollowService">停止
+            </button>
         </div>
 
     </div>
@@ -17,6 +23,15 @@
         data() {
             return {
                 serviceStatus: null,
+                serviceStatusLabel: null,
+            }
+        },
+        computed: {
+            showRunButton() {
+                return this.serviceStatus === 1 || this.serviceStatus === 3
+            },
+            showStopButton() {
+                return this.serviceStatus === 2 || this.serviceStatus === 3
             }
         },
         methods: {
@@ -26,7 +41,8 @@
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
-                this.serviceStatus = response.data.status_labels.auto_unfollow
+                this.serviceStatus = response.data.auto_unfollow_status
+                this.serviceStatusLabel = response.data.status_labels.auto_unfollow
             },
             async runUnfollowService() {
                 const serviceType = 2
@@ -36,7 +52,8 @@
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
-                this.serviceStatus = response.data.status_labels.auto_unfollow
+                this.serviceStatus = response.data.auto_unfollow_status
+                this.serviceStatusLabel = response.data.status_labels.auto_unfollow
             },
             async stopUnfollowService() {
                 const serviceType = 2
@@ -46,7 +63,8 @@
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
-                this.serviceStatus = response.data.status_labels.auto_unfollow
+                this.serviceStatus = response.data.auto_unfollow_status
+                this.serviceStatusLabel = response.data.status_labels.auto_unfollow
             }
         },
         created() {
