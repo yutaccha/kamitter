@@ -2,9 +2,15 @@
     <div class="c-panel u-color__bg--white">
 
         <div class="p-status">
-            <p class="p-status__show">{{serviceStatus}}</p>
-            <button class="p-status__button c-button c-button--success" @click.stop="runTweetService">サービス開始</button>
-            <button class="p-status__button c-button c-button--danger" @click.stop="stopTweetService">停止</button>
+            <p class="p-status__show">{{serviceStatusLabel}}</p>
+            <button class="p-status__button c-button c-button--success"
+                    v-show="showRunButton"
+                    @click.stop="runTweetService">サービス開始
+            </button>
+            <button class="p-status__button c-button c-button--danger"
+                    v-show="showStopButton"
+                    @click.stop="stopTweetService">停止
+            </button>
         </div>
 
 
@@ -114,6 +120,7 @@
                 editModal: false,
                 editIndex: null,
                 serviceStatus: null,
+                serviceStatusLabel: null,
                 errors: null,
                 addForm: {
                     tweet: '',
@@ -140,6 +147,12 @@
                 const month = ("00" + (date.getMonth() + 1)).slice(-2)
                 const day = ("00" + date.getDate()).slice(-2)
                 return [year, month, day].join("-")
+            },
+            showRunButton() {
+                return this.serviceStatus === 1 || this.serviceStatus === 3
+            },
+            showStopButton() {
+                return this.serviceStatus === 2 || this.serviceStatus === 3
             }
         },
         methods: {
@@ -227,7 +240,8 @@
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
-                this.serviceStatus = response.data.status_labels.auto_tweet
+                this.serviceStatus = response.data.auto_tweet_status
+                this.serviceStatusLabel = response.data.status_labels.auto_tweet
             },
             async runTweetService() {
                 const serviceType = 4
@@ -237,7 +251,8 @@
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
-                this.serviceStatus = response.data.status_labels.auto_tweet
+                this.serviceStatus = response.data.auto_tweet_status
+                this.serviceStatusLabel = response.data.status_labels.auto_tweet
             },
             async stopTweetService() {
                 const serviceType = 4
@@ -247,7 +262,8 @@
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
-                this.serviceStatus = response.data.status_labels.auto_tweet
+                this.serviceStatus = response.data.auto_tweet_status
+                this.serviceStatusLabel = response.data.status_labels.auto_tweet
             }
         },
         created() {

@@ -2,9 +2,15 @@
     <div class="c-panel u-color__bg--white">
 
         <div class="p-status">
-            <p class="p-status__show">{{serviceStatus}}</p>
-            <button class="p-status__button c-button c-button--success" @click.stop="runLikeService">サービス開始</button>
-            <button class="p-status__button c-button c-button--danger" @click.stop="stopLikeService">停止</button>
+            <p class="p-status__show">{{serviceStatusLabel}}</p>
+            <button class="p-status__button c-button c-button--success"
+                    v-show="showRunButton"
+                    @click.stop="runLikeService">サービス開始
+            </button>
+            <button class="p-status__button c-button c-button--danger"
+                    v-show="showStopButton"
+                    @click.stop="stopLikeService">停止
+            </button>
         </div>
 
 
@@ -101,6 +107,7 @@
                 editModal: false,
                 editIndex: null,
                 serviceStatus: null,
+                serviceStatusLabel: null,
                 errors: null,
                 addForm: {
                     filter_word_id: null,
@@ -114,6 +121,12 @@
         computed: {
             dashChange() {
                 return this.$store.state.dashboard.noticeToLike
+            },
+            showRunButton() {
+                return this.serviceStatus === 1 || this.serviceStatus === 3
+            },
+            showStopButton() {
+                return this.serviceStatus === 2 || this.serviceStatus === 3
             }
         },
         methods: {
@@ -183,7 +196,9 @@
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
-                this.serviceStatus = response.data.status_labels.auto_like
+
+                this.serviceStatus = response.data.auto_like_status
+                this.serviceStatusLabel = response.data.status_labels.auto_like
             },
             async runLikeService() {
                 const serviceType = 3
@@ -193,7 +208,8 @@
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
-                this.serviceStatus = response.data.status_labels.auto_like
+                this.serviceStatus = response.data.auto_like_status
+                this.serviceStatusLabel = response.data.status_labels.auto_like
             },
             async stopLikeService() {
                 const serviceType = 3
@@ -203,7 +219,8 @@
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
-                this.serviceStatus = response.data.status_labels.auto_like
+                this.serviceStatus = response.data.auto_like_status
+                this.serviceStatusLabel = response.data.status_labels.auto_like
             }
 
         },
