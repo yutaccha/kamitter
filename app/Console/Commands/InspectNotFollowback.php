@@ -2,14 +2,14 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\FollowerTarget;
-use App\FollowTarget;
 use App\Http\Components\TwitterApi;
 use App\SystemManager;
+use App\UnfollowTarget;
 use App\TwitterUser;
+use Illuminate\Console\Command;
 use App\FollowHistory;
-
+use Carbon\Carbon;
+use Illuminate\Support\Arr;
 
 class InspectNotFollowback extends Command
 {
@@ -38,6 +38,8 @@ class InspectNotFollowback extends Command
     }
 
 
+    const API_URL_FRIEND_LOOKUP = 'friendships/lookup';
+    const FOLLOWER_NUMBER_FOR_ENTRY_UNFOLLOW = 5000;
 
     /**
      * Execute the console command.
@@ -55,10 +57,95 @@ class InspectNotFollowback extends Command
             $twitter_user_id = $auto_unfollow_running_status_item->twitter_user_id;
 
             $follower = $this->getTwitterFollowerNum($system_manager_id, $twitter_user_id);
-            dd($follower);
+//            if ($this->isFollowerOverEntryNumber($system_manager_id, $follower)) {
+//                continue;
+//            }
+
+            $users_followed_7days_ago = $this->getUsersFollowed7daysAgo($twitter_user_id);
+            $this->addToUnfollowTargets($system_manager_id, $twitter_user_id, $users_followed_7days_ago);
+
         }
 
     }
+
+    private function getUsersFollowed7daysAgo($twitter_user_id)
+    {
+        $the_day_7_before = Carbon::today()->addDay(-7);
+        $users = FollowHistory::where('twitter_user_id', $twitter_user_id)
+            ->whereDate('created_at',  '=' , $the_day_7_before)->get();
+        return $users;
+    }
+
+
+    private function isFollowerOverEntryNumber($system_manager_id, $follower)
+    {
+        if ($follower > self::FOLLOWER_NUMBER_FOR_ENTRY_UNFOLLOW) {
+            $system_manager = SystemManager::find($system_manager_id);
+            $system_manager->auto_unfollow_status = SystemManager::STATUS_STOP;
+            return false;
+        }
+        return true;
+    }
+
+    private function addToUnfollowTargets($system_manager_id, $twitter_user_id, $users)
+    {
+        //API認証用のツイッターユーザー情報を取得
+        $twitter_user = TwitterUser::where('id', $twitter_user_id)->first();
+        $user_id_string_list = $this->makeUsersStringList($users);
+        foreach ($user_id_string_list as $user_id_string){
+            $api_result = (object)$this->fetchFollowbackInfo($twitter_user, $user_id_string);
+            $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id);
+            if ($flg_skip_to_next_user === true) {
+                return;
+            }
+
+            $this->inspectFollowback($api_result, $twitter_user_id);
+        }
+    }
+
+    private function inspectFollowBack($api_result, $twitter_user_id)
+    {
+        foreach ($api_result as $inspect_target){
+            if (!in_array('followed_by', $inspect_target->connections)){
+                $this->addUnfollowTargetDB($inspect_target, $twitter_user_id);
+            }
+        }
+    }
+
+    private function addUnfollowTargetDB($target, $twitter_user_id){
+        $unfollow_target = new UnfollowTarget();
+        $unfollow_target->twitter_user_id = $twitter_user_id;
+        $unfollow_target->twitter_id = $target->id_str;
+        $unfollow_target->save();
+    }
+
+    private function makeUsersStringList($users)
+    {
+        $users_string_list = [];
+        $user_id_strings = Arr::pluck($users, 'twitter_id');
+        $users_id_strings_chunk = array_chunk($user_id_strings, 100);
+        foreach ($users_id_strings_chunk as $user_id_string){
+            $users_string_list[] = implode(',', $user_id_string);
+        }
+
+        return $users_string_list;
+    }
+
+    private function fetchFollowbackInfo($twitter_user, $user_id_string)
+    {
+        //APIに必要な変数の用意
+        $token = $twitter_user->token;
+        $token_secret = $twitter_user->token_secret;
+        $param = [
+            'user_id' => $user_id_string
+        ];
+        //API呼び出し
+        $response_json = TwitterApi::useTwitterApi('GET', self::API_URL_FRIEND_LOOKUP,
+            $param, $token, $token_secret);
+
+        return $response_json;
+    }
+
 
     private function getTwitterFollowerNum($system_manager_id, $twitter_user_id)
     {
