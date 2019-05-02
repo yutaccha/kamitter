@@ -177,10 +177,20 @@ img {
   vertical-align: bottom;
 }
 
+.l-body {
+  overflow: hidden;
+}
+
 .l-contents {
   padding: calc(80px + 50px) 10%;
   display: flex;
   justify-content: center;
+}
+
+@media screen and (max-width: 960px) {
+  .l-contents {
+    padding: calc(40px + 50px) 2.5%;
+  }
 }
 
 .l-header {
@@ -205,6 +215,13 @@ img {
   transition: all 0.2s;
   -webkit-filter: drop-shadow(0px 3px 5px #3335);
           filter: drop-shadow(0px 3px 5px #3335);
+}
+
+@media screen and (max-width: 960px) {
+  .c-button {
+    padding: 0.6rem 0.7rem;
+    font-size: 0.9rem;
+  }
 }
 
 .c-button:hover {
@@ -299,6 +316,15 @@ img {
   margin-right: 20px;
 }
 
+@media screen and (max-width: 960px) {
+  .c-tab__item {
+    font-size: 12px;
+    padding: 5px;
+    margin-right: 10px;
+    width: 20%;
+  }
+}
+
 .c-tab__item:hover {
   cursor: pointer;
 }
@@ -317,15 +343,36 @@ img {
   min-width: 980px;
 }
 
+@media screen and (max-width: 960px) {
+  .p-contents__area {
+    width: 100%;
+    min-width: initial;
+  }
+}
+
 .p-contents__area--narrow {
   width: 450px;
   min-width: 450px;
+}
+
+@media screen and (max-width: 960px) {
+  .p-contents__area--narrow {
+    width: 100%;
+    min-width: initial;
+  }
 }
 
 .p-contents__head {
   font-size: 18px;
   text-align: center;
   margin-bottom: 50px;
+}
+
+@media screen and (max-width: 960px) {
+  .p-contents__head {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
 }
 
 .p-form {
@@ -349,6 +396,14 @@ img {
   line-height: 25px;
   border: 1px solid #3335;
   border-radius: 5px;
+}
+
+@media screen and (max-width: 960px) {
+  .p-form__item {
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 15px;
+  }
 }
 
 .p-form__item--date {
@@ -395,6 +450,13 @@ img {
   border-radius: 5px;
 }
 
+@media screen and (max-width: 960px) {
+  .p-form__select {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
 .p-form__notion {
   font-size: 14px;
 }
@@ -409,8 +471,20 @@ img {
   box-shadow: 0px 4px 8px -1px #42544caa;
 }
 
+@media screen and (max-width: 960px) {
+  .p-navbar {
+    padding: 0 2.5%;
+  }
+}
+
 .p-navbar__title_link {
   font-size: 24px;
+}
+
+@media screen and (max-width: 960px) {
+  .p-navbar__title_link {
+    font-size: 18px;
+  }
 }
 
 .p-twitter {
@@ -422,6 +496,12 @@ img {
   overflow: hidden;
   margin-bottom: 15px;
   transition: 0.5s;
+}
+
+@media screen and (max-width: 960px) {
+  .p-twitter__card {
+    height: 60px;
+  }
 }
 
 .p-twitter__card:hover {
@@ -438,6 +518,13 @@ img {
   align-items: center;
 }
 
+@media screen and (max-width: 960px) {
+  .p-twitter__create {
+    font-size: 16px;
+    line-height: 40px;
+  }
+}
+
 .p-twitter__profile {
   width: 70%;
   float: left;
@@ -451,6 +538,12 @@ img {
   line-height: 50px;
 }
 
+@media screen and (max-width: 960px) {
+  .p-twitter__action {
+    line-height: initial;
+  }
+}
+
 .p-twitter__img {
   background: #63513b63;
   height: 50px;
@@ -460,9 +553,22 @@ img {
   float: left;
 }
 
+@media screen and (max-width: 960px) {
+  .p-twitter__img {
+    height: 40px;
+    width: 40px;
+  }
+}
+
 .p-twitter__ids {
   float: left;
   line-height: 25px;
+}
+
+@media screen and (max-width: 960px) {
+  .p-twitter__ids {
+    line-height: 20px;
+  }
 }
 
 .p-twitter__name {
@@ -478,6 +584,12 @@ img {
   padding: 15px;
   margin-right: 5px;
   box-sizing: border-box;
+}
+
+@media screen and (max-width: 960px) {
+  .p-twitter__icon {
+    height: 40px;
+  }
 }
 
 .p-twitter__icon--create {
@@ -629,6 +741,12 @@ img {
   box-shadow: 0px 5px 3px #3335;
 }
 
+@media screen and (max-width: 960px) {
+  .c-panel {
+    padding: 20px;
+  }
+}
+
 .p-login {
   position: relative;
 }
@@ -648,6 +766,13 @@ img {
   align-items: center;
 }
 
+@media screen and (max-width: 960px) {
+  .p-profile {
+    padding: 0 0 30px 0;
+    justify-content: space-around;
+  }
+}
+
 .p-profile__img {
   height: 120px;
   width: 120px;
@@ -656,15 +781,36 @@ img {
   margin-right: 50px;
 }
 
+@media screen and (max-width: 960px) {
+  .p-profile__img {
+    height: 72px;
+    width: 72px;
+    margin-right: 0;
+  }
+}
+
 .p-profile__info {
   font-size: 18px;
   line-height: 40px;
   text-align: center;
 }
 
+@media screen and (max-width: 960px) {
+  .p-profile__info {
+    line-height: 24px;
+    font-size: 14px;
+  }
+}
+
 .p-profile__name {
   font-size: 24px;
   font-weight: bold;
+}
+
+@media screen and (max-width: 960px) {
+  .p-profile__name {
+    font-size: 16px;
+  }
 }
 
 .p-dashboard__panel {
@@ -679,12 +825,24 @@ img {
   box-sizing: border-box;
 }
 
+@media screen and (max-width: 960px) {
+  .p-table {
+    letter-spacing: 0;
+  }
+}
+
 .p-table__title {
   margin-bottom: 20px;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+@media screen and (max-width: 960px) {
+  .p-table__title {
+    margin-bottom: 10px;
+  }
 }
 
 .p-table__caption {
@@ -694,8 +852,21 @@ img {
   display: inline-block;
 }
 
+@media screen and (max-width: 960px) {
+  .p-table__caption {
+    font-size: 14px;
+    width: 50%;
+  }
+}
+
 .p-table__button {
   display: inline-block;
+}
+
+@media screen and (max-width: 960px) {
+  .p-table__button {
+    margin-bottom: 3px;
+  }
 }
 
 .p-table__head {
@@ -703,11 +874,24 @@ img {
   font-weight: bold;
 }
 
+@media screen and (max-width: 960px) {
+  .p-table__head {
+    font-size: 14px;
+  }
+}
+
 .p-table__th {
   padding: 10px;
   border-bottom: 3px solid #55acee;
   margin-right: 10px;
   box-sizing: border-box;
+}
+
+@media screen and (max-width: 960px) {
+  .p-table__th {
+    font-size: 12px;
+    padding: 5px;
+  }
 }
 
 .p-table__th--follow:nth-child(1),
@@ -762,15 +946,34 @@ img {
   border-bottom: 1px dotted #3335;
 }
 
+@media screen and (max-width: 960px) {
+  .p-table__td {
+    font-size: 12px;
+    padding: 5px;
+  }
+}
+
 .p-status {
   display: flex;
   align-items: center;
   margin-bottom: 30px;
 }
 
+@media screen and (max-width: 960px) {
+  .p-status {
+    margin-bottom: 30px;
+  }
+}
+
 .p-status__show {
   font-size: 24px;
   margin-right: 40px;
+}
+
+@media screen and (max-width: 960px) {
+  .p-status__show {
+    font-size: 18px;
+  }
 }
 
 .p-status__button {
@@ -801,6 +1004,14 @@ img {
   width: 600px;
   padding: 40px;
   box-sizing: border-box;
+}
+
+@media screen and (max-width: 960px) {
+  .p-modal__contents {
+    width: 100%;
+    padding: 20px;
+    margin: 2.5%;
+  }
 }
 
 .p-modal__cancel {

@@ -6399,7 +6399,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "c-button c-button--twitter",
+                  staticClass: "c-button c-button--twitter p-table__button",
                   on: {
                     click: function($event) {
                       $event.stopPropagation()
@@ -6413,7 +6413,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "c-button c-button--danger",
+                  staticClass: "c-button c-button--danger p-table__button",
                   on: {
                     click: function($event) {
                       $event.stopPropagation()
@@ -6931,7 +6931,7 @@ var render = function() {
         },
         [
           _c("i", { staticClass: "c-icon c-icon--white fas fa-plus" }),
-          _vm._v("\n            ターゲットアカウントを追加\n        ")
+          _vm._v("\n            ターゲットを追加\n        ")
         ]
       )
     ]),
@@ -6960,7 +6960,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "c-button c-button--twitter",
+                  staticClass: "c-button c-button--twitter p-table__button",
                   on: {
                     click: function($event) {
                       $event.stopPropagation()
@@ -6974,7 +6974,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "c-button c-button--danger",
+                  staticClass: "c-button c-button--danger p-table__button",
                   on: {
                     click: function($event) {
                       $event.stopPropagation()
@@ -7446,7 +7446,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "c-button c-button--twitter",
+                  staticClass: "c-button c-button--twitter p-table__button",
                   on: {
                     click: function($event) {
                       $event.stopPropagation()
@@ -7460,7 +7460,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "c-button c-button--danger",
+                  staticClass: "c-button c-button--danger p-table__button",
                   on: {
                     click: function($event) {
                       $event.stopPropagation()
@@ -7863,7 +7863,8 @@ var render = function() {
                       _c(
                         "button",
                         {
-                          staticClass: "c-button c-button--twitter",
+                          staticClass:
+                            "c-button c-button--twitter p-table__button",
                           on: {
                             click: function($event) {
                               $event.stopPropagation()
@@ -7877,7 +7878,8 @@ var render = function() {
                       _c(
                         "button",
                         {
-                          staticClass: "c-button c-button--danger",
+                          staticClass:
+                            "c-button c-button--danger p-table__button",
                           on: {
                             click: function($event) {
                               $event.stopPropagation()

@@ -71,13 +71,6 @@ class AutoFollow extends Command
             $twitter_user_id = $auto_follow_running_status_item->twitter_user_id;
 
 
-            //フォローターゲットリストを取得、設定されていなければ次のユーザーへ
-            $follow_target_list = FollowTarget::where('twitter_user_id', $twitter_user_id)->first();
-            if (is_null($follow_target_list)) {
-                continue;
-            }
-
-
             //最後に作成されたフォロワーターゲットリストのカラムを見て
             //フォロワーターゲットリストを作る必要があるかないかを判定する
             $follower_target_list_latest = FollowerTarget::where('twitter_user_id', $twitter_user_id)

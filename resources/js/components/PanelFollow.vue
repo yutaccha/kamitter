@@ -18,7 +18,7 @@
             <h2 class="p-table__caption">○ターゲットアカウントリスト</h2>
             <button class="c-button c-button--twitter" @click="newModal = ! newModal">
                 <i class="c-icon c-icon--white fas fa-plus"></i>
-                ターゲットアカウントを追加
+                ターゲットを追加
             </button>
         </div>
 
@@ -35,11 +35,11 @@
                 <td class="p-table__td">@{{followTarget.target}}</td>
                 <td class="p-table__td">{{followTarget.filter_word.merged_word}}</td>
                 <td class="p-table__td">
-                    <button class="c-button c-button--twitter"
+                    <button class="c-button c-button--twitter p-table__button"
                             @click.stop="showEditModal(followTarget, index)"
                     >編集
                     </button>
-                    <button class="c-button c-button--danger"
+                    <button class="c-button c-button--danger p-table__button"
                             @click.stop="removeFollowTarget(followTarget.id, index)"
                     >削除
                     </button>

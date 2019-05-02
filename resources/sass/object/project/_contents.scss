@@ -2,24 +2,31 @@
 // p-contents
 // ==================================
 .p-contents {
-  &__area{
+  &__area {
     width: 980px;
     min-width: 980px;
-    //display: flex;
-    //justify-content: center;
-    //flex-direction: column;
-    &--narrow{
+    @include mq() {
+      width: 100%;
+      min-width: initial;
+    }
+
+    &--narrow {
       width: 450px;
       min-width: 450px;
-      //display: flex;
-      //justify-content: center;
-      //flex-direction: column;
+      @include mq(){
+        width: 100%;
+        min-width: initial;
+      }
     }
   }
 
-  &__head{
+  &__head {
     font-size: $font-size_l;
     text-align: center;
     margin-bottom: 50px;
+    @include mq(){
+      font-size: $font-size_m;
+      margin-bottom: 30px;
+    }
   }
 }

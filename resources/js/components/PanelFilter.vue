@@ -21,11 +21,11 @@
                 <td class="p-table__td">{{filter.word}}</td>
                 <td class="p-table__td">{{filter.remove}}</td>
                 <td class="p-table__td">
-                    <button class="c-button c-button--twitter"
+                    <button class="c-button c-button--twitter p-table__button"
                             @click.stop="showEditModal(filter, index)"
                     >編集
                     </button>
-                    <button class="c-button c-button--danger"
+                    <button class="c-button c-button--danger p-table__button"
                             @click.stop="removeFilter(filter.id, index)"
                     >削除
                     </button>

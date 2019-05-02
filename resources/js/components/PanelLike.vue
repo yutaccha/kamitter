@@ -31,11 +31,11 @@
             <tr v-for="(like, index) in likes">
                 <th class="p-table__td">{{like.filter_word.merged_word}}</th>
                 <th class="p-table__td">
-                    <button class="c-button c-button--twitter"
+                    <button class="c-button c-button--twitter p-table__button"
                             @click.stop="showEditModal(like, index)"
                     >編集
                     </button>
-                    <button class="c-button c-button--danger"
+                    <button class="c-button c-button--danger p-table__button"
                             @click.stop="removeLike(like.id, index)"
                     >削除
                     </button>

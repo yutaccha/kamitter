@@ -36,11 +36,11 @@
                 <td class="p-table__td">{{autoTweet.japanese_formatted_date}}</td>
                 <td class="p-table__td">
                     <template v-if="autoTweet.status === 1">
-                        <button class="c-button c-button--twitter"
+                        <button class="c-button c-button--twitter p-table__button"
                                 @click.stop="showEditModal(autoTweet, index)"
                         >編集
                         </button>
-                        <button class="c-button c-button--danger"
+                        <button class="c-button c-button--danger p-table__button"
                                 @click.stop="removeAutoTweet(autoTweet.id, index)"
                         >削除
                         </button>

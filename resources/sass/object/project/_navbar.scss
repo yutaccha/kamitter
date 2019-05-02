@@ -9,8 +9,15 @@
   align-items: center;
   border-bottom: 1px solid $color-brown-parent;
   box-shadow:0px 4px 8px -1px #42544caa;
+  @include mq(){
+    padding: 0 2.5%;
+
+  }
   &__title_link{
     font-size: $font-size_xl;
+    @include mq(){
+      font-size: $font-size_l;
+    }
   }
   &__item{
     
