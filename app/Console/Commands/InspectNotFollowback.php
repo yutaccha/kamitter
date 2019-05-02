@@ -58,6 +58,7 @@ class InspectNotFollowback extends Command
 
             $follower = $this->getTwitterFollowerNum($system_manager_id, $twitter_user_id);
             if ($this->isFollowerOverEntryNumber($system_manager_id, $follower)) {
+                $this->changeAutoUnfollowStatusToStop($auto_unfollow_running_status_item);
                 continue;
             }
 
@@ -67,6 +68,14 @@ class InspectNotFollowback extends Command
         }
 
     }
+
+
+    private function changeAutoUnfollowStatusToStop($system_manager)
+    {
+        $system_manager->auto_unfollow_status = 1;
+        $system_manager->save();
+    }
+
 
     private function getUsersFollowed7daysAgo($twitter_user_id)
     {

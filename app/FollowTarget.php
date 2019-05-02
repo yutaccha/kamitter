@@ -9,20 +9,20 @@ class FollowTarget extends Model
     const STATUS = [
         1 => ['label' => '待機中'],
         2 => ['label' => 'リスト作成中'],
-        3 =>['label' => '作成済']
+        3 => ['label' => '作成済']
     ];
 
     protected $appends = [
-      'status_label'
+        'status_label'
     ];
 
     protected $hidden = [
-      'created_at', 'updated_at'
+        'created_at', 'updated_at'
     ];
 
     public function user()
     {
-        return $this->belongsTo('App\User' ,'user_id');
+        return $this->belongsTo('App\User', 'user_id');
     }
 
     public function twitterUser()
@@ -40,7 +40,7 @@ class FollowTarget extends Model
     {
         $status = $this->attributes['status'];
 
-        if(!isset(self::STATUS[$status])){
+        if (!isset(self::STATUS[$status])) {
             return '';
         }
 

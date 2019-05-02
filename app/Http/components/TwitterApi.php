@@ -29,7 +29,7 @@ class TwitterApi
             $access_token,
             $access_token_secret
         );
-
+        $twitter_api_connection->setTimeouts(3, 15);
         if($method === 'POST'){
             $twitter_api_result = $twitter_api_connection->post($url, $options);
             return $twitter_api_result;
@@ -49,12 +49,12 @@ class TwitterApi
                 //アカウント凍結時の処理
                 if ($error->code === self::ERROR_CODE_SUSPENDED) {
                     SystemManager::stopAllServices($system_manager_id);
-                    echo 'send suspend mail';
+                    info('send suspend mail');
                     return true;
                 }
                 //レート制限時の処理
                 if ($error->code === self::ERROR_CODE_LIMIT_EXCEEDED) {
-                    echo 'limit exceeded mail';
+                    info('limit exceeded mail');
                     return true;
                 }
             }

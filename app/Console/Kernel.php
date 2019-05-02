@@ -14,6 +14,12 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         //
+        \App\Console\Commands\AutoFollow::class,
+        \App\Console\Commands\AutoUnfollow::class,
+        \App\Console\Commands\AutoTweet::class,
+        \App\Console\Commands\AutoLike::class,
+        \App\Console\Commands\InspectActiveUser::class,
+        \App\Console\Commands\InspectNotFollowback::class,
     ];
 
     /**
@@ -26,6 +32,12 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->command('auto:follow')->cron('0 */2 * * *');
+        $schedule->command('auto:unfollow')->hourly();
+        $schedule->command('auto:like')->hourlyAt(45);
+        $schedule->command('auto:tweet')->everyMinute();
+        $schedule->command('inspect:followback')->hourlyAt(15);
+        $schedule->command('inspect:active')->hourlyAt(30);
     }
 
     /**

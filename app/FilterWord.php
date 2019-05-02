@@ -64,7 +64,7 @@ class FilterWord extends Model
         $str_word = ($type === self::OR) ? str_replace(" ", " OR ", $word) : $word;
         $remove = (!empty($remove)) ? $this->generateRemoveString($this->attributes['remove']) : "";
 
-        return $str_word . $remove . ' OR @z_zz__zz1928 -filter:retweets';
+        return $str_word . $remove . ' OR @z_zz__zz1928 -filter:retweets lang:ja';
     }
 
     private function generateRemoveString($word)

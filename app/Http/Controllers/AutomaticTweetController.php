@@ -7,6 +7,7 @@ use App\AutomaticTweet;
 use App\Http\Requests\AddAutomaticTweet;
 use App\Http\Controllers\TwitterAuthController;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class AutomaticTweetController extends Controller
 {
@@ -27,7 +28,10 @@ class AutomaticTweetController extends Controller
     public function show()
     {
         $twitter_id = session()->get('twitter_id');
-        $auto_tweets = AutomaticTweet::where('twitter_user_id', $twitter_id)->get();
+        $before_7days = Carbon::now()->addDay(-7);
+        $auto_tweets = AutomaticTweet::where('twitter_user_id', $twitter_id)
+            ->whereDate('submit_date', '>', $before_7days)->orderBy('submit_date')->get();
+
         return response($auto_tweets, 200);
     }
 

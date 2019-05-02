@@ -38,9 +38,9 @@ class AutoLike extends Command
     const API_URL_SEARCH = 'search/tweets';
     const API_URL_LIKE = 'favorites/create';
 
-    const API_REQUEST_RATE_PER_DAY = 600;
-    const DO_API_PER_A_DAY = 12;
-    const INTERVAL_HOURS = 2;
+    const API_REQUEST_RATE_PER_DAY = 300;
+    const DO_API_PER_A_DAY = 24;
+    const INTERVAL_HOURS = 1;
 
     /**
      * Execute the console command.
@@ -74,7 +74,6 @@ class AutoLike extends Command
                 //検索にヒットしたツイート配列を取得
                 $api_result = $this->fetchGetTweetListApi($auto_like, $auto_like_list_quantity);
                 $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id);
-
                 if ($flg_skip_to_next_user === true) {
                     break;
                 }
@@ -106,7 +105,7 @@ class AutoLike extends Command
         $token_secret = $auto_like->twitterUser->token_secret;
         $param = [
             'q' => $auto_like->filterWord->getMergedWordStringForQuery(),
-            'count' => 2,
+            'count' => $count,
             'result_type' => 'recent',
             'include_entities' => false,
         ];

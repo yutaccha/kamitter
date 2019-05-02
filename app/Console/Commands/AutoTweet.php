@@ -67,10 +67,11 @@ class AutoTweet extends Command
                     $api_result = $this->fetchTweetApi($auto_tweet);
                     //APIエラーの場合の処理と判定
                     $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id);
-
                     if ($flg_skip_to_next_user === true) {
                         break;
                     }
+
+                    $this->changeStatusTweeted($auto_tweet);
                 }
             }
 
@@ -78,6 +79,12 @@ class AutoTweet extends Command
 
     }
 
+
+    private function changeStatusTweeted($auto_tweet)
+    {
+        $auto_tweet->status = 2;
+        $auto_tweet->save();
+    }
 
     private function fetchTweetApi($auto_tweet)
     {
@@ -90,7 +97,7 @@ class AutoTweet extends Command
 
 
         //API呼び出し
-        $response_json = TwitterApi::useTwitterApi('GET', self::API_URL_TWEET,
+        $response_json = TwitterApi::useTwitterApi('POST', self::API_URL_TWEET,
             $param, $token, $token_secret);
 
         return $response_json;

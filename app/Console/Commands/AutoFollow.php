@@ -48,9 +48,9 @@ class AutoFollow extends Command
         "100" => 20,
         "500" => 25,
         "1000" => 40,
-        "1500" => 70,
-        "2000" => 100,
-        "3000" => 150,
+        "1500" => 55,
+        "2000" => 80,
+        "3000" => 120,
     ];
     const FOLLOW_RATE_MAX = 150;
 
@@ -121,12 +121,7 @@ class AutoFollow extends Command
                 return;
             }
 
-            $follow_history = new FollowHistory();
-            $follow_history->twitter_user_id = $twitter_user_id;
-            $follow_history->twitter_id = $follower_target_item->twitter_id;
-            $follow_history->save();
-
-            $follower_target_item->delete();
+            $this->moveFollowTargetsToFollowHistories($twitter_user_id, $follower_target_item);
 
             $follow_counter++;
             //レート上限を超えたら終了
@@ -135,6 +130,16 @@ class AutoFollow extends Command
             }
         }
 
+    }
+
+    private function moveFollowTargetsToFollowHistories($twitter_user_id, $follower_target_item)
+    {
+        $follow_history = new FollowHistory();
+        $follow_history->twitter_user_id = $twitter_user_id;
+        $follow_history->twitter_id = $follower_target_item->twitter_id;
+        $follow_history->save();
+
+        $follower_target_item->delete();
     }
 
 
@@ -185,17 +190,18 @@ class AutoFollow extends Command
     private function makeFollowerTargetList($system_manager_id, $twitter_user_id, $cursor)
     {
         $waiting_status = 1;
-        $under_construction_status = 2;
+        $under_creating_status = 2;
+        $created_status = 3;
 
         //ターゲットアカウントリストを取得
         $follow_target = FollowTarget::where('twitter_user_id', $twitter_user_id)
-            ->with('filterWord')->first();
+            ->whereIn('status', [1, 2])->with('filterWord')->first();
         if (empty($follow_target)) {
             return;
         }
 
         if ($follow_target->status === $waiting_status) {
-            $follow_target->status = $under_construction_status;
+            $follow_target->status = $under_creating_status;
             $follow_target->save();
         }
 
@@ -221,6 +227,9 @@ class AutoFollow extends Command
             $cursor = $api_result->next_cursor_str;
             //APIのフォロワーリストで次ページがなければ終了
         } while ($cursor !== "0");
+
+        $follow_target->status = $created_status;
+        $follow_target->save();
     }
 
 
