@@ -12,6 +12,7 @@
                     @click.stop="stopUnfollowService">停止
             </button>
         </div>
+        <p>※ 自動アンフォロー機能はフォロワー5000人以内の場合、自動的に停止されます。</p>
 
     </div>
 </template>

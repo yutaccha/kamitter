@@ -2471,8 +2471,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3000,6 +2998,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3010,6 +3015,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       editModal: false,
       editIndex: null,
       serviceStatus: null,
+      serviceStatusLabel: null,
       errors: null,
       addForm: {
         filter_word_id: null
@@ -3023,6 +3029,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   computed: {
     dashChange: function dashChange() {
       return this.$store.state.dashboard.noticeToLike;
+    },
+    showRunButton: function showRunButton() {
+      return this.serviceStatus === 1 || this.serviceStatus === 3;
+    },
+    showStopButton: function showStopButton() {
+      return this.serviceStatus === 2 || this.serviceStatus === 3;
     }
   },
   methods: {
@@ -3275,9 +3287,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context6.abrupt("return", false);
 
               case 6:
-                this.serviceStatus = response.data.status_labels.auto_like;
+                this.serviceStatus = response.data.auto_like_status;
+                this.serviceStatusLabel = response.data.status_labels.auto_like;
 
-              case 7:
+              case 8:
               case "end":
                 return _context6.stop();
             }
@@ -3319,9 +3332,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context7.abrupt("return", false);
 
               case 8:
-                this.serviceStatus = response.data.status_labels.auto_like;
+                this.serviceStatus = response.data.auto_like_status;
+                this.serviceStatusLabel = response.data.status_labels.auto_like;
 
-              case 9:
+              case 10:
               case "end":
                 return _context7.stop();
             }
@@ -3363,9 +3377,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context8.abrupt("return", false);
 
               case 8:
-                this.serviceStatus = response.data.status_labels.auto_like;
+                this.serviceStatus = response.data.auto_like_status;
+                this.serviceStatusLabel = response.data.status_labels.auto_like;
 
-              case 9:
+              case 10:
               case "end":
                 return _context8.stop();
             }
@@ -3523,6 +3538,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3532,6 +3556,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       editModal: false,
       editIndex: null,
       serviceStatus: null,
+      serviceStatusLabel: null,
       errors: null,
       addForm: {
         tweet: '',
@@ -3558,6 +3583,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var month = ("00" + (date.getMonth() + 1)).slice(-2);
       var day = ("00" + date.getDate()).slice(-2);
       return [year, month, day].join("-");
+    },
+    showRunButton: function showRunButton() {
+      return this.serviceStatus === 1 || this.serviceStatus === 3;
+    },
+    showStopButton: function showStopButton() {
+      return this.serviceStatus === 2 || this.serviceStatus === 3;
     }
   },
   methods: {
@@ -3793,9 +3824,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context5.abrupt("return", false);
 
               case 6:
-                this.serviceStatus = response.data.status_labels.auto_tweet;
+                this.serviceStatus = response.data.auto_tweet_status;
+                this.serviceStatusLabel = response.data.status_labels.auto_tweet;
 
-              case 7:
+              case 8:
               case "end":
                 return _context5.stop();
             }
@@ -3837,9 +3869,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context6.abrupt("return", false);
 
               case 8:
-                this.serviceStatus = response.data.status_labels.auto_tweet;
+                this.serviceStatus = response.data.auto_tweet_status;
+                this.serviceStatusLabel = response.data.status_labels.auto_tweet;
 
-              case 9:
+              case 10:
               case "end":
                 return _context6.stop();
             }
@@ -3881,9 +3914,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context7.abrupt("return", false);
 
               case 8:
-                this.serviceStatus = response.data.status_labels.auto_tweet;
+                this.serviceStatus = response.data.auto_tweet_status;
+                this.serviceStatusLabel = response.data.status_labels.auto_tweet;
 
-              case 9:
+              case 10:
               case "end":
                 return _context7.stop();
             }
@@ -3936,12 +3970,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      serviceStatus: null
+      serviceStatus: null,
+      serviceStatusLabel: null
     };
+  },
+  computed: {
+    showRunButton: function showRunButton() {
+      return this.serviceStatus === 1 || this.serviceStatus === 3;
+    },
+    showStopButton: function showStopButton() {
+      return this.serviceStatus === 2 || this.serviceStatus === 3;
+    }
   },
   methods: {
     fetchServiceStatus: function () {
@@ -3968,9 +4018,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context.abrupt("return", false);
 
               case 6:
-                this.serviceStatus = response.data.status_labels.auto_unfollow;
+                this.serviceStatus = response.data.auto_unfollow_status;
+                this.serviceStatusLabel = response.data.status_labels.auto_unfollow;
 
-              case 7:
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -4012,9 +4063,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context2.abrupt("return", false);
 
               case 8:
-                this.serviceStatus = response.data.status_labels.auto_unfollow;
+                this.serviceStatus = response.data.auto_unfollow_status;
+                this.serviceStatusLabel = response.data.status_labels.auto_unfollow;
 
-              case 9:
+              case 10:
               case "end":
                 return _context2.stop();
             }
@@ -4056,9 +4108,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context3.abrupt("return", false);
 
               case 8:
-                this.serviceStatus = response.data.status_labels.auto_unfollow;
+                this.serviceStatus = response.data.auto_unfollow_status;
+                this.serviceStatusLabel = response.data.status_labels.auto_unfollow;
 
-              case 9:
+              case 10:
               case "end":
                 return _context3.stop();
             }
@@ -4535,7 +4588,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
 //
 //
 //
@@ -6890,58 +6942,53 @@ var render = function() {
       [
         _vm._m(0),
         _vm._v(" "),
-        _c(
-          "transition-group",
-          { attrs: { tag: "tbody", name: "t-th" } },
-          _vm._l(_vm.followTargets, function(followTarget, index) {
-            return _c("tr", { key: followTarget.id }, [
-              _c("th", { staticClass: "p-table__td" }, [
-                _vm._v(_vm._s(followTarget.status_label))
-              ]),
-              _vm._v(" "),
-              _c("th", { staticClass: "p-table__td" }, [
-                _vm._v("@" + _vm._s(followTarget.target))
-              ]),
-              _vm._v(" "),
-              _c("th", { staticClass: "p-table__td" }, [
-                _vm._v(_vm._s(followTarget.filter_word.merged_word))
-              ]),
-              _vm._v(" "),
-              _c("th", { staticClass: "p-table__td" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "c-button c-button--twitter",
-                    on: {
-                      click: function($event) {
-                        $event.stopPropagation()
-                        return _vm.showEditModal(followTarget, index)
-                      }
+        _vm._l(_vm.followTargets, function(followTarget, index) {
+          return _c("tr", [
+            _c("td", { staticClass: "p-table__td" }, [
+              _vm._v(_vm._s(followTarget.status_label))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "p-table__td" }, [
+              _vm._v("@" + _vm._s(followTarget.target))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "p-table__td" }, [
+              _vm._v(_vm._s(followTarget.filter_word.merged_word))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "p-table__td" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "c-button c-button--twitter",
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      return _vm.showEditModal(followTarget, index)
                     }
-                  },
-                  [_vm._v("編集\n                    ")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "c-button c-button--danger",
-                    on: {
-                      click: function($event) {
-                        $event.stopPropagation()
-                        return _vm.removeFollowTarget(followTarget.id, index)
-                      }
+                  }
+                },
+                [_vm._v("編集\n                ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "c-button c-button--danger",
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      return _vm.removeFollowTarget(followTarget.id, index)
                     }
-                  },
-                  [_vm._v("削除\n                    ")]
-                )
-              ])
+                  }
+                },
+                [_vm._v("削除\n                ")]
+              )
             ])
-          }),
-          0
-        )
+          ])
+        })
       ],
-      1
+      2
     ),
     _vm._v(" "),
     _c("div", { staticClass: "p-modal__wrapper" }, [
@@ -7313,12 +7360,20 @@ var render = function() {
   return _c("div", { staticClass: "c-panel u-color__bg--white" }, [
     _c("div", { staticClass: "p-status" }, [
       _c("p", { staticClass: "p-status__show" }, [
-        _vm._v(_vm._s(_vm.serviceStatus))
+        _vm._v(_vm._s(_vm.serviceStatusLabel))
       ]),
       _vm._v(" "),
       _c(
         "button",
         {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.showRunButton,
+              expression: "showRunButton"
+            }
+          ],
           staticClass: "p-status__button c-button c-button--success",
           on: {
             click: function($event) {
@@ -7327,12 +7382,20 @@ var render = function() {
             }
           }
         },
-        [_vm._v("サービス開始")]
+        [_vm._v("サービス開始\n        ")]
       ),
       _vm._v(" "),
       _c(
         "button",
         {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.showStopButton,
+              expression: "showStopButton"
+            }
+          ],
           staticClass: "p-status__button c-button c-button--danger",
           on: {
             click: function($event) {
@@ -7341,7 +7404,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("停止")]
+        [_vm._v("停止\n        ")]
       )
     ]),
     _vm._v(" "),
@@ -7375,11 +7438,11 @@ var render = function() {
         _vm._v(" "),
         _vm._l(_vm.likes, function(like, index) {
           return _c("tr", [
-            _c("td", { staticClass: "p-table__td" }, [
+            _c("th", { staticClass: "p-table__td" }, [
               _vm._v(_vm._s(like.filter_word.merged_word))
             ]),
             _vm._v(" "),
-            _c("td", { staticClass: "p-table__td" }, [
+            _c("th", { staticClass: "p-table__td" }, [
               _c(
                 "button",
                 {
@@ -7701,12 +7764,20 @@ var render = function() {
   return _c("div", { staticClass: "c-panel u-color__bg--white" }, [
     _c("div", { staticClass: "p-status" }, [
       _c("p", { staticClass: "p-status__show" }, [
-        _vm._v(_vm._s(_vm.serviceStatus))
+        _vm._v(_vm._s(_vm.serviceStatusLabel))
       ]),
       _vm._v(" "),
       _c(
         "button",
         {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.showRunButton,
+              expression: "showRunButton"
+            }
+          ],
           staticClass: "p-status__button c-button c-button--success",
           on: {
             click: function($event) {
@@ -7715,12 +7786,20 @@ var render = function() {
             }
           }
         },
-        [_vm._v("サービス開始")]
+        [_vm._v("サービス開始\n        ")]
       ),
       _vm._v(" "),
       _c(
         "button",
         {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.showStopButton,
+              expression: "showStopButton"
+            }
+          ],
           staticClass: "p-status__button c-button c-button--danger",
           on: {
             click: function($event) {
@@ -7729,7 +7808,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("停止")]
+        [_vm._v("停止\n        ")]
       )
     ]),
     _vm._v(" "),
@@ -7762,7 +7841,7 @@ var render = function() {
         _vm._m(0),
         _vm._v(" "),
         _vm._l(_vm.autoTweets, function(autoTweet, index) {
-          return _c("tr", [
+          return _c("tr", { key: autoTweet.id }, [
             _c("td", { staticClass: "p-table__td" }, [
               _vm._v(_vm._s(autoTweet.status_label))
             ]),
@@ -7775,35 +7854,44 @@ var render = function() {
               _vm._v(_vm._s(autoTweet.japanese_formatted_date))
             ]),
             _vm._v(" "),
-            _c("td", { staticClass: "p-table__td" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "c-button c-button--twitter",
-                  on: {
-                    click: function($event) {
-                      $event.stopPropagation()
-                      return _vm.showEditModal(autoTweet, index)
-                    }
-                  }
-                },
-                [_vm._v("編集\n                ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "c-button c-button--danger",
-                  on: {
-                    click: function($event) {
-                      $event.stopPropagation()
-                      return _vm.removeAutoTweet(autoTweet.id, index)
-                    }
-                  }
-                },
-                [_vm._v("削除\n                ")]
-              )
-            ])
+            _c(
+              "td",
+              { staticClass: "p-table__td" },
+              [
+                autoTweet.status === 1
+                  ? [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "c-button c-button--twitter",
+                          on: {
+                            click: function($event) {
+                              $event.stopPropagation()
+                              return _vm.showEditModal(autoTweet, index)
+                            }
+                          }
+                        },
+                        [_vm._v("編集\n                    ")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "c-button c-button--danger",
+                          on: {
+                            click: function($event) {
+                              $event.stopPropagation()
+                              return _vm.removeAutoTweet(autoTweet.id, index)
+                            }
+                          }
+                        },
+                        [_vm._v("削除\n                    ")]
+                      )
+                    ]
+                  : _vm._e()
+              ],
+              2
+            )
           ])
         })
       ],
@@ -8181,12 +8269,20 @@ var render = function() {
   return _c("div", { staticClass: "c-panel u-color__bg--white" }, [
     _c("div", { staticClass: "p-status" }, [
       _c("p", { staticClass: "p-status__show" }, [
-        _vm._v(_vm._s(_vm.serviceStatus))
+        _vm._v(_vm._s(_vm.serviceStatusLabel))
       ]),
       _vm._v(" "),
       _c(
         "button",
         {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.showRunButton,
+              expression: "showRunButton"
+            }
+          ],
           staticClass: "p-status__button c-button c-button--success",
           on: {
             click: function($event) {
@@ -8195,12 +8291,20 @@ var render = function() {
             }
           }
         },
-        [_vm._v("サービス開始")]
+        [_vm._v("サービス開始\n        ")]
       ),
       _vm._v(" "),
       _c(
         "button",
         {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.showStopButton,
+              expression: "showStopButton"
+            }
+          ],
           staticClass: "p-status__button c-button c-button--danger",
           on: {
             click: function($event) {
@@ -8209,7 +8313,13 @@ var render = function() {
             }
           }
         },
-        [_vm._v("停止")]
+        [_vm._v("停止\n        ")]
+      )
+    ]),
+    _vm._v(" "),
+    _c("p", [
+      _vm._v(
+        "※ 自動アンフォロー機能はフォロワー5000人以内の場合、自動的に停止されます。"
       )
     ])
   ])
@@ -8449,7 +8559,7 @@ var render = function() {
         [
           _c(
             "transition-group",
-            { attrs: { name: "t-dashboard_panel" } },
+            { attrs: { name: "t-dashboard_panel", tag: "div" } },
             [
               _c("PanelFollow", {
                 directives: [
@@ -8654,12 +8764,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "p-form__item",
-                      attrs: {
-                        type: "email",
-                        id: "login-email",
-                        placeholder: "sample@kamitter.ltd",
-                        required: ""
-                      },
+                      attrs: { type: "email", id: "login-email", required: "" },
                       domProps: { value: _vm.loginForm.email },
                       on: {
                         input: function($event) {
@@ -8693,7 +8798,6 @@ var render = function() {
                       attrs: {
                         type: "password",
                         id: "login-password",
-                        placeholder: "半角英数8文字以上",
                         required: ""
                       },
                       domProps: { value: _vm.loginForm.password },
@@ -8817,7 +8921,7 @@ var render = function() {
                       attrs: {
                         type: "text",
                         id: "username",
-                        Kamitter: "",
+                        placeholder: "かみった",
                         required: ""
                       },
                       domProps: { value: _vm.registerForm.name },
@@ -8854,7 +8958,7 @@ var render = function() {
                       attrs: {
                         type: "email",
                         id: "email",
-                        placeholder: "kamitter@sample.ltd",
+                        placeholder: "sample@kamitter.ltd",
                         required: ""
                       },
                       domProps: { value: _vm.registerForm.email },
@@ -8933,6 +9037,7 @@ var render = function() {
                       attrs: {
                         type: "password",
                         id: "confirm_password",
+                        placeholder: "",
                         required: ""
                       },
                       domProps: {
@@ -26073,7 +26178,7 @@ var mutations = {
   setRegisterErrorMessages: function setRegisterErrorMessages(state, messages) {
     state.registerErrorMessages = messages;
   }
-}; //stateを非同期処理で更新するメソッドAPIの通史語など
+}; //stateを非同期処理で更新するメソッドAPIの通信など
 
 var actions = {
   // 会員登録

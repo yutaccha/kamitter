@@ -37,7 +37,7 @@ const mutations = {
     }
 }
 
-//stateを非同期処理で更新するメソッドAPIの通史語など
+//stateを非同期処理で更新するメソッドAPIの通信など
 const actions = {
     // 会員登録
     async register(context, data) {

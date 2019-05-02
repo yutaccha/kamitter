@@ -27,9 +27,10 @@
                 <th class="p-table__th p-table__th--like">いいね条件</th>
                 <th class="p-table__th p-table__th--like">操作</th>
             </tr>
+
             <tr v-for="(like, index) in likes">
-                <td class="p-table__td">{{like.filter_word.merged_word}}</td>
-                <td class="p-table__td">
+                <th class="p-table__td">{{like.filter_word.merged_word}}</th>
+                <th class="p-table__td">
                     <button class="c-button c-button--twitter"
                             @click.stop="showEditModal(like, index)"
                     >編集
@@ -38,7 +39,7 @@
                             @click.stop="removeLike(like.id, index)"
                     >削除
                     </button>
-                </td>
+                </th>
             </tr>
         </table>
 

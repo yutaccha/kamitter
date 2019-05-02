@@ -41,7 +41,7 @@
             </section>
 
             <section class="p-dashboard">
-                <transition-group name="t-dashboard_panel">
+                <transition-group name="t-dashboard_panel" tag="div">
 
                     <PanelFollow key="follow" v-show="tab===1"></PanelFollow>
 

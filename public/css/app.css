@@ -601,8 +601,6 @@ img {
 }
 
 .t-dashboard_panel-leave-to {
-  -webkit-transform: translate(-100%, 0);
-          transform: translate(-100%, 0);
   opacity: 0;
 }
 
@@ -622,36 +620,6 @@ img {
 
 .t-twitter_card-leave-active {
   transition: all 1s;
-}
-
-.t-th-enter {
-  -webkit-transform: translate(10%, 0);
-          transform: translate(10%, 0);
-  opacity: 0;
-}
-
-.t-th-enter-to {
-  opacity: 1;
-}
-
-.t-th-enter-active {
-  transition: all 0.7s 0s ease;
-}
-
-.t-th-leave {
-  -webkit-transform: translate(0, 0);
-          transform: translate(0, 0);
-  opacity: 1;
-}
-
-.t-th-leave-to {
-  -webkit-transform: translate(-10%, 0);
-          transform: translate(-10%, 0);
-  opacity: 0;
-}
-
-.t-th-leave-active {
-  transition: all 0.7s 0s ease;
 }
 
 .c-panel {

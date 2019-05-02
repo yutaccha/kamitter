@@ -29,19 +29,22 @@
                 <th class="p-table__th p-table__th--tweet">時刻</th>
                 <th class="p-table__th p-table__th--tweet">操作</th>
             </tr>
-            <tr v-for="(autoTweet, index) in autoTweets">
+
+            <tr v-for="(autoTweet, index) in autoTweets" :key="autoTweet.id">
                 <td class="p-table__td">{{autoTweet.status_label}}</td>
                 <td class="p-table__td">{{autoTweet.tweet}}</td>
                 <td class="p-table__td">{{autoTweet.japanese_formatted_date}}</td>
                 <td class="p-table__td">
-                    <button class="c-button c-button--twitter"
-                            @click.stop="showEditModal(autoTweet, index)"
-                    >編集
-                    </button>
-                    <button class="c-button c-button--danger"
-                            @click.stop="removeAutoTweet(autoTweet.id, index)"
-                    >削除
-                    </button>
+                    <template v-if="autoTweet.status === 1">
+                        <button class="c-button c-button--twitter"
+                                @click.stop="showEditModal(autoTweet, index)"
+                        >編集
+                        </button>
+                        <button class="c-button c-button--danger"
+                                @click.stop="removeAutoTweet(autoTweet.id, index)"
+                        >削除
+                        </button>
+                    </template>
                 </td>
             </tr>
         </table>
@@ -153,7 +156,7 @@
             },
             showStopButton() {
                 return this.serviceStatus === 2 || this.serviceStatus === 3
-            }
+            },
         },
         methods: {
             async fetchAutoTweets() {
@@ -163,7 +166,6 @@
                     return false
                 }
                 this.autoTweets = response.data
-
             },
             async addAutoTweet() {
                 const response = await axios.post('/api/tweet', this.addForm)
@@ -264,12 +266,12 @@
                 }
                 this.serviceStatus = response.data.auto_tweet_status
                 this.serviceStatusLabel = response.data.status_labels.auto_tweet
-            }
+            },
         },
         created() {
             this.fetchAutoTweets()
             this.fetchServiceStatus()
-        }
+        },
     }
 
 </script>

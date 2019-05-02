@@ -67,7 +67,7 @@
   display: none;
 }
 
-//dash-panel
+////dash-panel
 .t-dashboard_panel-enter {
   transform: translate(10%, 0);
   opacity: 0;
@@ -83,7 +83,6 @@
   opacity: 1;
 }
 .t-dashboard_panel-leave-to {
-  transform: translate(-100%, 0);
   opacity: 0;
 }
 .t-dashboard_panel-leave-active {
@@ -100,27 +99,4 @@
 }
 .t-twitter_card-leave-active {
   transition: all 1s;
-}
-
-//th
-.t-th-enter {
-  transform: translate(10%, 0);
-  opacity: 0;
-}
-.t-th-enter-to {
-  opacity: 1;
-}
-.t-th-enter-active {
-  transition: all .7s 0s ease;
-}
-.t-th-leave {
-  transform: translate(0, 0);
-  opacity: 1;
-}
-.t-th-leave-to {
-  transform: translate(-10%, 0);
-  opacity: 0;
-}
-.t-th-leave-active {
-  transition: all .7s 0s ease;
 }

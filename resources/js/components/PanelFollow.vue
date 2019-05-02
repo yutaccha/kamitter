@@ -30,23 +30,21 @@
                 <th class="p-table__th p-table__th--follow">操作</th>
             </tr>
 
-            <transition-group tag="tbody" name="t-th">
-                <tr v-for="(followTarget, index) in followTargets" :key="followTarget.id">
-                    <th class="p-table__td">{{followTarget.status_label}}</th>
-                    <th class="p-table__td">@{{followTarget.target}}</th>
-                    <th class="p-table__td">{{followTarget.filter_word.merged_word}}</th>
-                    <th class="p-table__td">
-                        <button class="c-button c-button--twitter"
-                                @click.stop="showEditModal(followTarget, index)"
-                        >編集
-                        </button>
-                        <button class="c-button c-button--danger"
-                                @click.stop="removeFollowTarget(followTarget.id, index)"
-                        >削除
-                        </button>
-                    </th>
-                </tr>
-            </transition-group>
+            <tr v-for="(followTarget, index) in followTargets">
+                <td class="p-table__td">{{followTarget.status_label}}</td>
+                <td class="p-table__td">@{{followTarget.target}}</td>
+                <td class="p-table__td">{{followTarget.filter_word.merged_word}}</td>
+                <td class="p-table__td">
+                    <button class="c-button c-button--twitter"
+                            @click.stop="showEditModal(followTarget, index)"
+                    >編集
+                    </button>
+                    <button class="c-button c-button--danger"
+                            @click.stop="removeFollowTarget(followTarget.id, index)"
+                    >削除
+                    </button>
+                </td>
+            </tr>
         </table>
 
         <div class="p-modal__wrapper">

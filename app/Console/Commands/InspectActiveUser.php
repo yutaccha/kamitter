@@ -6,8 +6,8 @@ use App\FollowHistory;
 use App\Http\Components\TwitterApi;
 use App\SystemManager;
 use App\TwitterUser;
-use App\UnfollowTarget;
 use App\UnfollowInspect;
+use App\UnfollowTarget;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
@@ -60,6 +60,7 @@ class InspectActiveUser extends Command
 
             $follower = $this->getTwitterFollowerNum($system_manager_id, $twitter_user_id);
             if ($this->isFollowerOverEntryNumber($system_manager_id, $follower)) {
+                $this->changeAutoUnfollowStatusToStop($auto_unfollow_running_status_item);
                 continue;
             }
 
@@ -75,6 +76,12 @@ class InspectActiveUser extends Command
     }
 
 
+    private function changeAutoUnfollowStatusToStop($system_manager)
+    {
+        $system_manager->auto_unfollow_status = 1;
+        $system_manager->save();
+    }
+
     private function addToUnfollowTargetsByCheckActiveUser($system_manager_id, $twitter_user_id, $inspect_targets)
     {
         $twitter_user = TwitterUser::where('id', $twitter_user_id)->first();
@@ -87,6 +94,7 @@ class InspectActiveUser extends Command
             }
 
             $this->inspectActiveUser($api_result, $twitter_user_id);
+            UnfollowInspect::where('twitter_user_id', $twitter_user_id)->limit(100)->delete();
         }
     }
 
@@ -102,7 +110,8 @@ class InspectActiveUser extends Command
         }
     }
 
-    private function addUnfollowTargetDB($target, $twitter_user_id){
+    private function addUnfollowTargetDB($target, $twitter_user_id)
+    {
         $unfollow_target = new UnfollowTarget();
         $unfollow_target->twitter_user_id = $twitter_user_id;
         $unfollow_target->twitter_id = $target->id_str;
