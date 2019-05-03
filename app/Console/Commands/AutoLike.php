@@ -38,7 +38,7 @@ class AutoLike extends Command
     const API_URL_SEARCH = 'search/tweets';
     const API_URL_LIKE = 'favorites/create';
 
-    const API_REQUEST_RATE_PER_DAY = 300;
+    const API_REQUEST_RATE_PER_DAY = 600;
     const DO_API_PER_A_DAY = 24;
     const INTERVAL_HOURS = 1;
 

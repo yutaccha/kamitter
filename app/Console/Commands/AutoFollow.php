@@ -3,12 +3,14 @@
 namespace App\Console\Commands;
 
 use App\FollowerTarget;
+use App\FollowHistory;
 use App\FollowTarget;
 use App\Http\Components\TwitterApi;
 use App\SystemManager;
 use App\TwitterUser;
+use App\UnfollowHistory;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
-use App\FollowHistory;
 
 class AutoFollow extends Command
 {
@@ -215,7 +217,7 @@ class AutoFollow extends Command
             }
 
             //取得したフォロワーのリストから、フォローターゲットリストに追加
-            $this->addToFollowList($api_result, $filter_word, $twitter_user_id);
+            $this->addToFollowTargetList($api_result, $filter_word, $twitter_user_id);
 
             $cursor = $api_result->next_cursor_str;
             //APIのフォロワーリストで次ページがなければ終了
@@ -250,7 +252,7 @@ class AutoFollow extends Command
     }
 
 
-    private function addToFollowList($api_result, $filter_word, $twitter_user_id)
+    private function addToFollowTargetList($api_result, $filter_word, $twitter_user_id)
     {
         foreach ($api_result->users as $user) {
             $description = $user->description;
@@ -259,18 +261,23 @@ class AutoFollow extends Command
             if (!$this->isJapaneseProfile($description)) {
                 continue;
             }
-
             //プロフィールが条件フィルターに該当するかチェック
             if (!$this->isMatchedFilterWord($description, $filter_word)) {
                 continue;
             }
-
             //アンフォローリストにいないか
-
+            if ($this->isInUnfollowHistories($user, $twitter_user_id)) {
+                info('isunfollowhist');
+                info($user->id_str);
+                continue;
+            }
             //フォロー済リストから30日以内にフォローしてないか
+            if ($this->isFollowedWithin30Days($user, $twitter_user_id)) {
+                info('is30followhist');
+                info($user->id_str);
+                continue;
+            }
 
-
-            //trueなら
             //ターゲットリストに追加
             $new_follower_target = new FollowerTarget();
             $new_follower_target->twitter_user_id = $twitter_user_id;
@@ -280,6 +287,29 @@ class AutoFollow extends Command
         }
     }
 
+    private function isInUnfollowHistories($user, $twitter_user_id)
+    {
+        $unfollow_history = UnfollowHistory::where('twitter_user_id', $twitter_user_id)
+            ->where('twitter_id', $user->id_str)->first();
+        if (is_null($unfollow_history)){
+            return false;
+        }
+        return true;
+    }
+
+    private function isFollowedWithin30Days($user, $twitter_user_id)
+    {
+        $before_30days = Carbon::now()->addDay(-30);
+        $follow_history = FollowHistory::where('twitter_user_id', $twitter_user_id)
+            ->where('twitter_id', $user->id_str)
+            ->whereDate('created_at', '>', $before_30days)->first();
+
+        if (is_null($follow_history)){
+            return false;
+        }
+        return true;
+
+    }
 
     private function isJapaneseProfile(String $description)
     {
