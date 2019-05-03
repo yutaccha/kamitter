@@ -4,10 +4,10 @@ import VueRouter from 'vue-router'
 import Twitter from './pages/Twitter.vue'
 import Login from './pages/Login.vue'
 import Dashboard from './pages/Dashboard.vue'
-import S from './pages/System.vue'
+import Error from './pages/500Error.vue'
+import NotFound from './pages/NotFound.vue'
 
 import store from './store'
-import System from "./pages/System";
 
 // VueRouterプラグインを使用する
 // これによって<RouterView />コンポーネントなどを使うことができる
@@ -77,7 +77,11 @@ const routes = [
     },
     {
         path: '/500',
-        component: System,
+        component: Error,
+    },
+    {
+        path: '*',
+        component: NotFound,
     },
 ]
 

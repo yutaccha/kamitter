@@ -1,6 +1,14 @@
 <?php
 
 /**
+ * sessionトークンのリフレッシュ
+ */
+Route::get('/token/refresh', function (\Illuminate\Http\Request $request){
+   $request->session()->regenerateToken();
+   return response()->json();
+});
+
+/**
  * ユーザー管理API
  */
 Route::post('/register', 'Auth\RegisterController@register')->name('register');
