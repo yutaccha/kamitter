@@ -16,6 +16,9 @@
     &:hover {
       transform: translateX(-10px);
       cursor: pointer;
+      @include mq(){
+        transform: initial;
+      }
     }
   }
 
@@ -43,6 +46,7 @@
     float: right;
     line-height: 50px;
     @include mq(){
+      width: initial;
       line-height: initial;
     }
   }
