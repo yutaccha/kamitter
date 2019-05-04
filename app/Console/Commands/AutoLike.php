@@ -73,14 +73,14 @@ class AutoLike extends Command
 
                 //検索にヒットしたツイート配列を取得
                 $api_result = $this->fetchGetTweetListApi($auto_like, $auto_like_list_quantity);
-                $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id);
+                $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id, $twitter_user_id);
                 if ($flg_skip_to_next_user === true) {
                     break;
                 }
                 foreach ($api_result->statuses as $item) {
                     $like_target_id = $item->id_str;
                     $api_result = $this->fetchLikeApi($auto_like, $like_target_id);
-                    $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id);
+                    $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id, $twitter_user_id);
                     if ($flg_skip_to_next_user === true) {
                         break 2;
                     }

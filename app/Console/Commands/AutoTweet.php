@@ -7,6 +7,9 @@ use App\Http\Components\TwitterApi;
 use App\SystemManager;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use App\Mail\CompleteTweet;
+use Illuminate\Support\Facades\Mail;
+use App\TwitterUser;
 
 class AutoTweet extends Command
 {
@@ -57,6 +60,7 @@ class AutoTweet extends Command
 
             //ユーザーごとの自動ツイート配列を取得する
             $auto_tweets_list = AutomaticTweet::where('twitter_user_id', $twitter_user_id)
+                ->where('status', 1) //未ツイート
                 ->with('twitterUser')->get();
 
 
@@ -66,11 +70,11 @@ class AutoTweet extends Command
                     //API実行
                     $api_result = $this->fetchTweetApi($auto_tweet);
                     //APIエラーの場合の処理と判定
-                    $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id);
+                    $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id, $twitter_user_id);
                     if ($flg_skip_to_next_user === true) {
                         break;
                     }
-
+                    $this->sendMail($system_manager_id, $twitter_user_id, $auto_tweet);
                     $this->changeStatusTweeted($auto_tweet);
                 }
             }
@@ -79,10 +83,17 @@ class AutoTweet extends Command
 
     }
 
+    private function sendMail($system_manager_id, $twitter_user_id, $auto_tweet)
+    {
+        $system_manager = SystemManager::find($system_manager_id)->with('user')->first();
+        $twitter_user = TwitterUser::find($twitter_user_id)->first();
+        $user = $system_manager->user;
+        Mail::to($user)->send(new CompleteTweet($user, $twitter_user, $auto_tweet));
+    }
 
     private function changeStatusTweeted($auto_tweet)
     {
-        $auto_tweet->status = 2;
+        $auto_tweet->status = 2; //ツイート済み
         $auto_tweet->save();
     }
 
@@ -94,7 +105,6 @@ class AutoTweet extends Command
         $param = [
             'status' => $auto_tweet->tweet,
         ];
-
 
         //API呼び出し
         $response_json = TwitterApi::useTwitterApi('POST', self::API_URL_TWEET,

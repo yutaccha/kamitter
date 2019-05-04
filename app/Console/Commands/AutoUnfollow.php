@@ -80,7 +80,7 @@ class AutoUnfollow extends Command
         $unfollow_limit = (int)(self::UNFOLLOW_RATE_MAX / self::API_PER_A_DAY);
         foreach ($unfollow_targets as $unfollow_target) {
             $api_result = (object)$this->fetchAutoUnfollow($twitter_user, $unfollow_target->twitter_id);
-            $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id);
+            $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id, $twitter_user_id);
             if ($flg_skip_to_next_user === true) {
                 return;
             }
@@ -123,7 +123,7 @@ class AutoUnfollow extends Command
     private function isFollowerOverEntryNumber($system_manager_id, $follower)
     {
         if ($follower > self::FOLLOWER_NUMBER_FOR_ENTRY_UNFOLLOW) {
-            $system_manager = SystemManager::find($system_manager_id);
+            $system_manager = SystemManager::where('id', $system_manager_id)->first();
             $system_manager->auto_unfollow_status = SystemManager::STATUS_STOP;
             return false;
         }
@@ -136,7 +136,7 @@ class AutoUnfollow extends Command
         //API認証用のツイッターユーザー情報を取得
         $twitter_user = TwitterUser::where('id', $twitter_user_id)->first();
         $api_result = TwitterApi::fetchTwitterUserInfo($twitter_user);
-        $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id);
+        $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id, $twitter_user_id);
         if ($flg_skip_to_next_user === true) {
             return 0;
         }

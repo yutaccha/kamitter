@@ -7,6 +7,9 @@ use App\TwitterUser;
 use Illuminate\Support\Facades\Auth;
 use Abraham\TwitterOAuth\TwitterOAuth;
 use App\SystemManager;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SuspendedTwitterAccount;
+use App\Mail\ExceededLimit;
 
 class TwitterApi
 {
@@ -42,25 +45,38 @@ class TwitterApi
         return [];
     }
 
-    public static function handleApiError($api_result, $system_manager_id)
+    public static function handleApiError($api_result, $system_manager_id, $twitter_user_id)
     {
         if (property_exists($api_result, 'errors')) {
             foreach ($api_result->errors as $error) {
                 //アカウント凍結時の処理
                 if ($error->code === self::ERROR_CODE_SUSPENDED) {
                     SystemManager::stopAllServices($system_manager_id);
-                    info('send suspend mail');
+                    self::sendMail($system_manager_id, $twitter_user_id, self::ERROR_CODE_SUSPENDED);
                     return true;
                 }
                 //レート制限時の処理
                 if ($error->code === self::ERROR_CODE_LIMIT_EXCEEDED) {
-                    info('limit exceeded mail');
+                    self::sendMail($system_manager_id, $twitter_user_id, self::ERROR_CODE_LIMIT_EXCEEDED);
                     return true;
                 }
             }
 
         }
         return false;
+    }
+
+    public static function sendMail($system_manager_id, $twitter_user_id, $mail_type = 0)
+    {
+        $system_manager = SystemManager::find($system_manager_id)->with('user')->first();
+        $twitter_user = TwitterUser::find($twitter_user_id)->first();
+        $user = $system_manager->user;
+
+        if($mail_type === self::ERROR_CODE_SUSPENDED){
+            Mail::to($user)->send(new SuspendedTwitterAccount($user, $twitter_user));
+        }else if($mail_type === self::ERROR_CODE_LIMIT_EXCEEDED) {
+            Mail::to($user)->send(new ExceededLimit($user, $twitter_user));
+        }
     }
 
     public static function fetchTwitterUserInfo($twitter_user)

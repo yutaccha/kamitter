@@ -9,7 +9,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use App\User;
 use App\TwitterUser;
 
-class SuspendedTwitterAccount extends Mailable
+
+class CompleteFollow extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -35,7 +36,7 @@ class SuspendedTwitterAccount extends Mailable
     public function build()
     {
         return $this
-            ->subject('Twitterアカウント凍結のお知らせ')
-            ->view('emails.suspended');
+            ->subject('自動フォロー完了のお知らせ')
+            ->view('emails.completeFollow');
     }
 }

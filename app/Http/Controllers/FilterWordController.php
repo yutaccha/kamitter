@@ -19,6 +19,7 @@ class FilterWordController extends Controller
 
         Auth::user()->filterWords()->save($filter);
         $new_filter = FilterWord::where('id', $filter->id)->with('user')->first();
+
         return response($new_filter, 201);
     }
 

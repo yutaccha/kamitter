@@ -111,7 +111,7 @@ class AutoFollow extends Command
         foreach ($follower_target_list as $follower_target_item) {
             //APIでフォローを行う、エラーを検知した場合フォローを中止
             $api_result = $this->fetchAutoFollow($twitter_user, $follower_target_item->twitter_id);
-            $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id);
+            $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id, $twitter_user_id);
             if ($flg_skip_to_next_user === true) {
                 return;
             }
@@ -174,7 +174,7 @@ class AutoFollow extends Command
         //API認証用のツイッターユーザー情報を取得
         $twitter_user = TwitterUser::where('id', $twitter_user_id)->first();
         $api_result = TwitterApi::fetchTwitterUserInfo($twitter_user);
-        $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id);
+        $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id, $twitter_user_id);
         if ($flg_skip_to_next_user === true) {
             return 0;
         }
@@ -211,7 +211,7 @@ class AutoFollow extends Command
             //APIでフォロワーのリストを取得
             $api_result = $this->fetchGetFollowerListApi($twitter_user, $target_screen, $cursor);
             //エラーがあれば検索終了
-            $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id);
+            $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id, $twitter_user_id);
             if ($flg_skip_to_next_user === true) {
                 return;
             }

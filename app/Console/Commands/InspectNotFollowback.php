@@ -89,7 +89,7 @@ class InspectNotFollowback extends Command
     private function isFollowerOverEntryNumber($system_manager_id, $follower)
     {
         if ($follower > self::FOLLOWER_NUMBER_FOR_ENTRY_UNFOLLOW) {
-            $system_manager = SystemManager::find($system_manager_id);
+            $system_manager = SystemManager::where('id', $system_manager_id)->first();
             $system_manager->auto_unfollow_status = SystemManager::STATUS_STOP;
             return false;
         }
@@ -105,7 +105,7 @@ class InspectNotFollowback extends Command
             //配列型でapiが帰ってくる
             //handleApiError内でproperty_existsを使用しているのでオブジェクトに変換する必要がある
             $api_result = (object)$this->fetchFollowbackInfo($twitter_user, $user_id_string);
-            $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id);
+            $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id, $twitter_user_id);
             if ($flg_skip_to_next_user === true) {
                 return;
             }
@@ -163,7 +163,7 @@ class InspectNotFollowback extends Command
         //API認証用のツイッターユーザー情報を取得
         $twitter_user = TwitterUser::where('id', $twitter_user_id)->first();
         $api_result = TwitterApi::fetchTwitterUserInfo($twitter_user);
-        $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id);
+        $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id, $twitter_user_id);
         if ($flg_skip_to_next_user === true) {
             return 0;
         }
