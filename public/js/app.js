@@ -2669,7 +2669,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context3.abrupt("return", false);
 
               case 10:
-                this.followTargets.push(response.data);
+                this.followTargets.unshift(response.data);
                 this.newModal = false;
 
               case 12:

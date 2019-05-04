@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * sessionトークンのリフレッシュ
  */
@@ -14,6 +15,7 @@ Route::get('/token/refresh', function (\Illuminate\Http\Request $request){
 Route::post('/register', 'Auth\RegisterController@register')->name('register');
 Route::post('/login', 'Auth\LoginController@login')->name('login');
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('/user', function (){
     return Auth::user();
 })->name('user');

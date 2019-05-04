@@ -171,7 +171,7 @@
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
-                this.followTargets.push(response.data)
+                this.followTargets.unshift(response.data)
                 this.newModal = false
             },
             showEditModal(followTarget, index) {
