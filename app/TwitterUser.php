@@ -9,7 +9,7 @@ class TwitterUser extends Model
     protected $table = 'twitter_users';
 
     protected $fillable = [
-        'user_id', 'token', 'token_secret'
+        'user_id', 'token', 'token_secret', 'screen'
     ];
 
     protected $visible = [
