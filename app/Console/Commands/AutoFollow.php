@@ -11,6 +11,8 @@ use App\TwitterUser;
 use App\UnfollowHistory;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CompleteFollow;
 
 class AutoFollow extends Command
 {
@@ -124,8 +126,20 @@ class AutoFollow extends Command
                 break;
             }
         }
-
+        $target_quantity = FollowerTarget::where('twitter_user_id', $twitter_user_id)->count();
+        if($target_quantity === 0){
+            $this->sendMail($system_manager_id, $twitter_user_id);
+        }
     }
+
+    private function sendMail($system_manager_id, $twitter_user_id)
+    {
+        $system_manager = SystemManager::find($system_manager_id)->with('user')->first();
+        $twitter_user = TwitterUser::find($twitter_user_id)->first();
+        $user = $system_manager->user;
+        Mail::to($user)->send(new CompleteFollow($user, $twitter_user));
+    }
+
 
     private function moveFollowTargetsToFollowHistories($twitter_user_id, $follower_target_item)
     {

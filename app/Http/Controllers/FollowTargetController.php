@@ -27,7 +27,8 @@ class FollowTargetController extends Controller
     {
         $twitter_id = session()->get('twitter_id');
         $follow_target = FollowTarget::where('twitter_user_id', $twitter_id)
-            ->whereIn('status', [1, 2])->with('filterWord')->get();
+            ->whereIn('status', [1, 2, 3])->orderby('created_at', 'desc')->limit(30)
+            ->with('filterWord')->get();
 
         return response($follow_target, 200);
     }
