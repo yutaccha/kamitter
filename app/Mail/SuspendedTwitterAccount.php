@@ -12,7 +12,6 @@ class SuspendedTwitterAccount extends Mailable
     use Queueable, SerializesModels;
 
     public $user;
-    public $twitter_user;
     public $twitter_user_screen;
 
     /**
