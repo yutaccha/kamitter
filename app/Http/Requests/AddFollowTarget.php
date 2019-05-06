@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\FollowTarget;
+use App\Rules\ApiTwitterUserExist;
 
 class AddFollowTarget extends FormRequest
 {
@@ -25,7 +26,7 @@ class AddFollowTarget extends FormRequest
     public function rules()
     {
         return [
-            'target' => "required|max:15|regex:/^[a-zA-Z0-9_]+$/i",
+            'target' => ["required", "max:15", "regex:/^[a-zA-Z0-9_]+$/i", new ApiTwitterUserExist],
             'filter_word_id' => 'required',
         ];
     }

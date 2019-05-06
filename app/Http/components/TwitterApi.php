@@ -14,10 +14,13 @@ use App\Mail\ExceededLimit;
 class TwitterApi
 {
     //APIエラーコード
+    const ERROR_CODE_NOTFOUND = 34;
+    const ERROR_CODE_NOUSER = 50;
     const ERROR_CODE_SUSPENDED = 63;
     const ERROR_CODE_LIMIT_EXCEEDED = 88;
 
     const API_URL_CREDENTIAL = 'account/verify_credentials';
+    const API_URL_USERS_SHOW = 'users/show';
 
     public static function useTwitterApi(String $method = "GET", $url = "", $options = [], $token, $token_secret){
         $api_key = config('services.twitter')['client_id'];
@@ -60,10 +63,18 @@ class TwitterApi
                     self::sendMail($system_manager_id, $twitter_user_id, self::ERROR_CODE_LIMIT_EXCEEDED);
                     return true;
                 }
-            }
+                //ページがない場合の処理
+                if ($error->code === self::ERROR_CODE_NOTFOUND) {
+                    return true;
+                }
+                //ユーザーがいない場合の処理
+                if ($error->code === self::ERROR_CODE_NOUSER) {
+                    return true;
+                }
 
+            }
+            return false;
         }
-        return false;
     }
 
     public static function sendMail($system_manager_id, $twitter_user_id, $mail_type = 0)
@@ -94,5 +105,20 @@ class TwitterApi
         return $response_json;
     }
 
+    public static function getUsersShow($twitter_user, $screen)
+    {
+        //APIに必要な変数の用意
+        $token = $twitter_user->token;
+        $token_secret = $twitter_user->token_secret;
+        $param = [
+            'screen_name' => $screen,
+        ];
+
+        //API呼び出し
+        $response_json = TwitterApi::useTwitterApi('GET', self::API_URL_USERS_SHOW,
+            $param, $token, $token_secret);
+
+        return $response_json;
+    }
 
 }

@@ -4,13 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EditSystemManager;
 use App\SystemManager;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class SystemManagerController extends Controller
 {
+    use AuthenticatesUsers;
+
+    public function __construct()
+    {
+        // Controllerに認証を適応
+        $this->middleware('auth');
+    }
 
 
     public function run(EditSystemManager $request)
     {
+        $user_id = Auth::id();
+        if (is_null($user_id)) {
+            abort(419);
+        }
         $twitter_user = session()->get('twitter_id');
         $system_manager = SystemManager::where('twitter_user_id', $twitter_user)->first();
         if (!$system_manager) {
@@ -36,6 +49,10 @@ class SystemManagerController extends Controller
 
     public function stop(EditSystemManager $request)
     {
+        $user_id = Auth::id();
+        if (is_null($user_id)) {
+            abort(419);
+        }
         $twitter_user = session()->get('twitter_id');
         $system_manager = SystemManager::where('twitter_user_id', $twitter_user)->first();
         if (!$system_manager) {
@@ -61,6 +78,10 @@ class SystemManagerController extends Controller
 
     public function show()
     {
+        $user_id = Auth::id();
+        if (is_null($user_id)) {
+            abort(419);
+        }
         $twitter_user = session()->get('twitter_id');
         $system_manager = SystemManager::where('twitter_user_id', $twitter_user)->first();
         if (!$system_manager) {

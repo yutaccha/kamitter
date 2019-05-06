@@ -29,7 +29,7 @@ class TwitterUser extends Model
      */
     public function systemManagers()
     {
-        return $this->hasMany('App\SystemManages', 'twitter_user_id');
+        return $this->hasMany('App\SystemManager', 'twitter_user_id');
 
     }
 }

@@ -18,7 +18,7 @@
 </template>
 
 <script>
-    import {INTERNAL_SERVER_ERROR, NOT_FOUND, UNAUTHORIED} from './utility'
+    import {INTERNAL_SERVER_ERROR, NOT_FOUND, EXPIRED, UNAUTHORISED} from './utility'
 
     import Navbar from './components/Navbar.vue'
     import Footer from './components/Footer.vue'
@@ -38,7 +38,7 @@
                 async handler(val) {
                     if (val === INTERNAL_SERVER_ERROR) {
                         this.$router.push('/500')
-                    } else if (val === UNAUTHORIED) {
+                    } else if (val === EXPIRED || val === UNAUTHORISED) {
                         await axios.get('/api/token/refresh')
                         this.$store.commit('auth/setUser', null)
                         this.$store.commit('auth/setTwitterUser', null)
