@@ -28,6 +28,9 @@ class TwitterUserController extends Controller
     public function info(int $id)
     {
         $user_id = Auth::id();
+        if (is_null($user_id)){
+            abort(419);
+        }
         $twitter_user = TwitterUser::where('id', $id)->first();
         if (is_null($twitter_user)){
             abort(404);
