@@ -15,11 +15,23 @@ Route::get('/token/refresh', function (\Illuminate\Http\Request $request){
 Route::post('/register', 'Auth\RegisterController@register')->name('register');
 Route::post('/login', 'Auth\LoginController@login')->name('login');
 Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
-Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('/user', function (){
     return Auth::user();
 })->name('user');
 
+
+/**
+ * パスワードリマインダーAPI
+ */
+Route::group([
+    'namespace' => 'Auth',
+    'middleware' => 'api',
+    'prefix' => 'password'
+], function () {
+    Route::post('/create', 'PasswordResetController@create');
+    Route::get('/find/{token}', 'PasswordResetController@find');
+    Route::post('/reset', 'PasswordResetController@reset');
+});
 
 /**
  * ツイッターアカウント管理API
