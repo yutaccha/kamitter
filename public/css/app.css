@@ -638,7 +638,7 @@ img {
 }
 
 .page-enter-active {
-  transition: all 1s 0s ease;
+  transition: all 0.7s 0s ease;
 }
 
 .page-leave {
@@ -668,7 +668,7 @@ img {
 }
 
 .tab-enter-active {
-  transition: all 1s 0.1s ease;
+  transition: all 0.7s 0s ease;
 }
 
 .tab-leave {
@@ -678,25 +678,11 @@ img {
 }
 
 .tab-leave-to {
-  -webkit-transform: translate(10%, 0);
-          transform: translate(10%, 0);
   opacity: 0;
 }
 
 .tab-leave-active {
-  transition: all 0.5s 0s ease;
-}
-
-.t-del-enter {
-  opacity: 0;
-}
-
-.t-del-enter-to {
-  opacity: 1;
-}
-
-.t-del-enter-active {
-  transition: all 0.5s 0s ease-out;
+  display: none;
 }
 
 .t-del-leave {

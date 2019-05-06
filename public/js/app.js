@@ -1838,7 +1838,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   break;
 
                 case 4:
-                  if (!(val === _utility__WEBPACK_IMPORTED_MODULE_1__["UNAUTHORIED"])) {
+                  if (!(val === _utility__WEBPACK_IMPORTED_MODULE_1__["EXPIRED"] || val === _utility__WEBPACK_IMPORTED_MODULE_1__["UNAUTHORISED"])) {
                     _context.next = 12;
                     break;
                   }
@@ -26759,7 +26759,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*!*********************************!*\
   !*** ./resources/js/utility.js ***!
   \*********************************/
-/*! exports provided: getCookieValue, OK, CREATED, NOT_FOUND, UNAUTHORIED, UNPROCESSABLE_ENTRY, INTERNAL_SERVER_ERROR */
+/*! exports provided: getCookieValue, OK, CREATED, UNAUTHORISED, NOT_FOUND, EXPIRED, UNPROCESSABLE_ENTRY, INTERNAL_SERVER_ERROR */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26767,8 +26767,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCookieValue", function() { return getCookieValue; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OK", function() { return OK; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CREATED", function() { return CREATED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UNAUTHORISED", function() { return UNAUTHORISED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NOT_FOUND", function() { return NOT_FOUND; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UNAUTHORIED", function() { return UNAUTHORIED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EXPIRED", function() { return EXPIRED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UNPROCESSABLE_ENTRY", function() { return UNPROCESSABLE_ENTRY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INTERNAL_SERVER_ERROR", function() { return INTERNAL_SERVER_ERROR; });
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
@@ -26805,8 +26806,9 @@ function getCookieValue(searchKey) {
 
 var OK = 200;
 var CREATED = 201;
+var UNAUTHORISED = 401;
 var NOT_FOUND = 404;
-var UNAUTHORIED = 419;
+var EXPIRED = 419;
 var UNPROCESSABLE_ENTRY = 422;
 var INTERNAL_SERVER_ERROR = 500;
 
