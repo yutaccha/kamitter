@@ -3,10 +3,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Notifications\PasswordResetRequest;
-use App\Notifications\PasswordResetSuccess;
 use App\User;
 use App\PasswordReset;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PasswordReset as MPassReset;
+
 class PasswordResetController extends Controller
 {
     /**
@@ -24,7 +25,7 @@ class PasswordResetController extends Controller
         if (!$user)
             return response()->json([
                 'message' => "正しいメールアドレスを入力してください。"
-            ], 404);
+            ], 422);
         $passwordReset = PasswordReset::updateOrCreate(
             ['email' => $user->email],
             [
@@ -32,10 +33,9 @@ class PasswordResetController extends Controller
                 'token' => str_random(60)
              ]
         );
-        if ($user && $passwordReset)
-            $user->notify(
-                new PasswordResetRequest($passwordReset->token)
-            );
+        if ($user && $passwordReset){
+            Mail::to($user)->send(new MPassReset($user, $passwordReset));
+        }
         return response()->json([
             'message' => 'パスワードリセットのためのメールを送信しました。'
         ]);
@@ -53,15 +53,15 @@ class PasswordResetController extends Controller
             ->first();
         if (!$passwordReset)
             return response()->json([
-                'message' => 'This password reset token is invalid.'
-            ], 404);
+                'message' => 'フォームの有効期限が切れています。'
+            ], 422);
         //パスワードリセットの有効期限切れ
         if (Carbon::parse($passwordReset->updated_at)->addMinutes(900)->isPast()) {
             $passwordReset->delete();
 
             return response()->json([
-                'message' => 'This password reset token is invalid.'
-            ], 404);
+                'message' => 'フォームの有効期限が切れています。'
+            ], 422);
         }
         return response()->json($passwordReset);
     }
@@ -88,17 +88,16 @@ class PasswordResetController extends Controller
         ])->first();
         if (!$passwordReset)
             return response()->json([
-                'message' => 'This password reset token is invalid.'
-            ], 404);
+                'message' => 'フォームの有効期限が切れています。'
+            ], 422);
         $user = User::where('email', $passwordReset->email)->first();
         if (!$user)
             return response()->json([
-                'message' => "We can't find a user with that e-mail address."
-            ], 404);
+                'message' => "正しいメールアドレスを入力してください。"
+            ], 422);
         $user->password = bcrypt($request->password);
         $user->save();
         $passwordReset->delete();
-        $user->notify(new PasswordResetSuccess($passwordReset));
         return response()->json($user);
     }
 }

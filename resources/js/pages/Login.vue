@@ -17,6 +17,13 @@
 
                     >新規登録
                     </li>
+                    <li
+                            class="c-tab__item"
+                            :class="{'c-tab__item--active': tab ===3}"
+                            @click="tab = 3"
+
+                    >パスワード再設定
+                    </li>
                 </ul>
             </section>
 
@@ -80,6 +87,30 @@
                             </div>
                         </form>
                     </div>
+
+                    <div class="c-panel p-login__panel u-color__bg--white" v-show="tab === 3" key="password">
+                        <!--@submit に続く .prevent はイベント修飾子と呼ばれます。.prevent を記述することは、
+                        イベントハンドラで event.preventDefault() を呼び出すのと同じ効果があります。-->
+                        <form class="p-form" @submit.prevent="passwordReset">
+                            <div v-if="passwordErrors" class="errors">
+                                <ul v-if="passwordErrors.email">
+                                    <li v-for="msg in passwordErrors.email" :key="msg">{{ msg }}</li>
+                                </ul>
+                                <ul v-if="passwordErrors.password">
+                                    <li v-for="msg in passwordErrors.password" :key="msg">{{ msg }}</li>
+                                </ul>
+                            </div>
+                            <label class="p-form__label" for="login-email">メールアドレス</label>
+                            <input type="email" class="p-form__item" id="password-email"
+                                   v-model="passwordForm.email" required>
+                            <p v-show="showMailMessage">メールを送信しました。メールボックスをご確認ください。</p>
+                            <div class="p-form__button">
+                                <button type="submit"
+                                        class="c-button c-button--inverse"
+                                        v-bind:disabled="isPush">メール送信</button>
+                            </div>
+                        </form>
+                    </div>
                 </transition-group>
             </section>
         </div>
@@ -88,11 +119,14 @@
 
 <script>
     import {mapState} from 'vuex'
+    import {OK} from '../utility'
 
     export default {
         data() {
             return {
                 tab: 1,
+                showMailMessage: false,
+                isPush: false,
                 loginForm: {
                     email: '',
                     password: ''
@@ -102,6 +136,9 @@
                     email: '',
                     password: '',
                     password_confirmation: ''
+                },
+                passwordForm: {
+                    email: '',
                 }
             }
         },
@@ -109,8 +146,9 @@
             ...mapState({
                 apiStatus: state => state.auth.apiStatus,
                 loginErrors: state => state.auth.loginErrorMessages,
-                registerErrors: state => state.auth.registerErrorMessages
-            })
+                registerErrors: state => state.auth.registerErrorMessages,
+                passwordErrors: state => state.auth.passwordErrorMessages
+            }),
         },
         methods: {
             async login() {
@@ -131,9 +169,23 @@
                     this.$router.push('/twitter')
                 }
             },
+            async passwordReset() {
+                this.$set(this, 'isPush', true)
+                this.clearError()
+                const response = await axios.post('/api/password/create', this.passwordForm)
+                this.$set(this, 'isPush', false)
+                if (response.status !== OK) {
+                    this.$store.commit('error/setCode', response.status)
+                    return false
+                }
+                this.passwordForm.email = ''
+                this.$set(this, 'showMailMessage', true)
+
+            },
             clearError() {
                 this.$store.commit('auth/setLoginErrorMessages', null)
                 this.$store.commit('auth/setRegisterErrorMessages', null)
+                this.$store.commit('auth/setPasswordErrorMessages', null)
             }
         },
         created() {

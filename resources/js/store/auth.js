@@ -8,7 +8,8 @@ const state = {
     twitterId: null,
     apiStatus: null,
     loginErrorMessages: null,
-    registerErrorMessages: null
+    registerErrorMessages: null,
+    passwordErrorMessages: null
 }
 
 //stateの算出プロパティ
@@ -34,7 +35,11 @@ const mutations = {
     },
     setRegisterErrorMessages (state, messages) {
         state.registerErrorMessages = messages
+    },
+    setPasswordErrorMessages (state, messages) {
+        state.passwordErrorMessages = messages
     }
+
 }
 
 //stateを非同期処理で更新するメソッドAPIの通信など

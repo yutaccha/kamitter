@@ -18,7 +18,7 @@ class TwitterAuthController extends Controller
     public function __construct()
     {
         // Controllerに認証を適応
-        $this->middleware('auth');
+        $this->middleware('auth')->except('getId');
     }
 
     /**

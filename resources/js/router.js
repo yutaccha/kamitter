@@ -6,6 +6,7 @@ import Login from './pages/Login.vue'
 import Dashboard from './pages/Dashboard.vue'
 import Error from './pages/500Error.vue'
 import NotFound from './pages/NotFound.vue'
+import Password from './pages/PasswordReset.vue'
 
 import store from './store'
 
@@ -14,6 +15,21 @@ import store from './store'
 Vue.use(VueRouter)
 
 const routes = [
+    {
+        path: '/password',
+        component: Password,
+        props: route => {
+            const token = route.query.token
+            return { token: token}
+        },
+        beforeEnter(to, from, next) {
+            if (!store.getters['auth/check']) {
+                next();
+            } else {
+                next('/')
+            }
+        }
+    },
     {
         path: '/login',
         component: Login,
@@ -71,7 +87,7 @@ const routes = [
                 console.log('/.twi');
                 next('/twitter')
             } else {
-                next('login')
+                next('/login')
             }
         }
     },
