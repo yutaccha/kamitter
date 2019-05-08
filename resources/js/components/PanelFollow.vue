@@ -92,6 +92,7 @@
                                 required
                         >
                             <option v-for="filter in filters" :value="filter.id">{{filter.merged_word}}</option>
+                            <optgroup></optgroup>
                         </select>
                         <p class="p-form__notion">※条件のキーワードは、「キーワード登録」から登録することができます。</p>
                         <div class="p-form__button">
