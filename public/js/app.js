@@ -1968,7 +1968,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      isMenuActive: false
+    };
+  },
   computed: {
     isLogin: function isLogin() {
       return this.$store.getters['auth/check'];
@@ -6590,43 +6601,50 @@ var render = function() {
     ),
     _vm._v(" "),
     _vm.isLogin
-      ? _c("div", { staticClass: "p-navbar__item" }, [
-          _c("span", { staticClass: "p-navbar__item" }, [
-            _vm._v("\n        " + _vm._s(_vm.username)),
-            _c("i", { staticClass: "c-icon fas fa-caret-down" })
-          ]),
-          _vm._v(" "),
-          _c(
-            "span",
-            {
-              staticClass: "p-navbar__item",
-              on: {
-                click: function($event) {
-                  $event.stopPropagation()
-                  return _vm.changeTwitterUser($event)
-                }
+      ? _c(
+          "div",
+          {
+            staticClass: "p-navbar__menu",
+            on: {
+              click: function($event) {
+                _vm.isMenuActive = !_vm.isMenuActive
               }
-            },
-            [_vm._v("\n            アカウント切り替え\n        ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "span",
-            {
-              staticClass: "p-navbar__item",
-              on: {
-                click: function($event) {
-                  $event.stopPropagation()
-                  return _vm.logout($event)
-                }
-              }
-            },
-            [_vm._v("\n            ログアウト\n        ")]
-          )
-        ])
+            }
+          },
+          [
+            _c("div", { staticClass: "p-navbar__name" }, [
+              _vm._v("\n            " + _vm._s(_vm.username)),
+              _c("i", { staticClass: "c-icon fas fa-caret-down" })
+            ]),
+            _vm._v(" "),
+            _c(
+              "ul",
+              {
+                staticClass: "p-navbar__list",
+                class: { "p-navbar__list--active": _vm.isMenuActive }
+              },
+              [
+                _c(
+                  "li",
+                  {
+                    staticClass: "p-navbar__item",
+                    on: { click: _vm.changeTwitterUser }
+                  },
+                  [_vm._v("\n                アカウント切り替え\n            ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  { staticClass: "p-navbar__item", on: { click: _vm.logout } },
+                  [_vm._v("\n                ログアウト\n            ")]
+                )
+              ]
+            )
+          ]
+        )
       : _c(
           "div",
-          { staticClass: "p-navbar__item" },
+          { staticClass: "p-navbar__menu" },
           [
             _c(
               "RouterLink",

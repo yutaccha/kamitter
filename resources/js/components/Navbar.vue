@@ -4,18 +4,24 @@
             <RouterLink class="p-navbar__title_link" to="/">twitter</RouterLink>
         </h1>
 
-        <div class="p-navbar__item" v-if="isLogin">
-        <span  class="p-navbar__item">
-            {{ username }}<i class="c-icon fas fa-caret-down"></i>
-        </span>
-            <span class="p-navbar__item" v-on:click.stop="changeTwitterUser">
-                アカウント切り替え
-            </span>
-            <span class="p-navbar__item" v-on:click.stop="logout">
-                ログアウト
-            </span>
+        <div class="p-navbar__menu"
+             @click="isMenuActive = ! isMenuActive"
+             v-if="isLogin">
+            <div class="p-navbar__name">
+                {{ username }}<i class="c-icon fas fa-caret-down"></i>
+            </div>
+            <ul class="p-navbar__list"
+                :class="{'p-navbar__list--active': isMenuActive}"
+            >
+                <li class="p-navbar__item" v-on:click="changeTwitterUser">
+                    アカウント切り替え
+                </li>
+                <li class="p-navbar__item" v-on:click="logout">
+                    ログアウト
+                </li>
+            </ul>
         </div>
-        <div v-else class="p-navbar__item">
+        <div v-else class="p-navbar__menu">
             <RouterLink class="button button--link" to="/login">
                 ログイン/新規登録
             </RouterLink>
@@ -25,6 +31,11 @@
 
 <script>
     export default {
+        data() {
+          return {
+              isMenuActive: false,
+          }
+        },
         computed: {
             isLogin() {
                 return this.$store.getters['auth/check']
@@ -39,7 +50,7 @@
         methods: {
             async logout() {
                 await this.$store.dispatch('auth/logout')
-                if (this.apiStatus){
+                if (this.apiStatus) {
                     this.$router.push('/')
                 }
             },
@@ -48,7 +59,7 @@
                 if (this.apiStatus) {
                     this.$router.push('/twitter')
                 }
-            }
-        }
+            },
+        },
     }
 </script>

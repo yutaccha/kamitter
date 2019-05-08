@@ -169,7 +169,7 @@ a {
 a {
   color: #333;
   text-decoration: none;
-  transition: 0.7s;
+  transition: 0.3s;
 }
 
 img {
@@ -497,6 +497,67 @@ img {
   .p-navbar__title_link {
     font-size: 18px;
   }
+}
+
+.p-navbar__title_link:hover {
+  opacity: 0.7;
+}
+
+.p-navbar__menu:hover {
+  cursor: pointer;
+}
+
+.p-navbar__name {
+  font-size: 16px;
+}
+
+.p-navbar__name:hover {
+  transition: all 0.3s ease;
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 960px) {
+  .p-navbar__name:hover {
+    opacity: 1;
+  }
+}
+
+.p-navbar__list {
+  align-self: center;
+  position: absolute;
+  right: 10%;
+  top: calc((50px - 44px) / 2 + 40px);
+  background: #fff;
+  border: 1px solid #3335;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media screen and (max-width: 960px) {
+  .p-navbar__list {
+    right: 2.5%;
+  }
+}
+
+.p-navbar__list--active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.p-navbar__item {
+  padding: 10px;
+  border-bottom: 1px solid #3335;
+}
+
+.p-navbar__item:last-of-type {
+  border-bottom: none;
+}
+
+.p-navbar__item:hover {
+  background: #333;
+  color: #fff;
 }
 
 .p-twitter {

@@ -1,25 +1,79 @@
 // ==================================
 // p-navbar
 // ==================================
-.p-navbar{
+.p-navbar {
   height: $header_height;
   padding: 0 10%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid $color-brown-parent;
-  box-shadow:0px 4px 8px -1px #42544caa;
-  @include mq(){
+  box-shadow: 0px 4px 8px -1px #42544caa;
+  @include mq() {
     padding: 0 2.5%;
-
   }
-  &__title_link{
+
+  &__title_link {
     font-size: $font-size_xl;
-    @include mq(){
+    @include mq() {
       font-size: $font-size_l;
     }
+
+    &:hover {
+      opacity: .7;
+    }
   }
-  &__item{
-    
+
+  &__menu {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__name {
+    font-size: $font-size_m;
+
+    &:hover {
+      transition: all .3s ease;
+      opacity: .7;
+      @include mq() {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__list {
+    align-self: center;
+    position: absolute;
+    right: 10%;
+    top: calc((#{$header_height} - 44px) / 2 + 40px);
+    background: $color-white;
+    border: 1px solid $color-default-parent;
+    border-radius: 5px;
+    transition: all .3s ease;
+    opacity: 0;
+    visibility: hidden;
+    @include mq() {
+      right: 2.5%;
+    }
+
+    &--active {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  &__item {
+    padding: 10px;
+    border-bottom: 1px solid $color-default-parent;
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background: $color-default;
+      color: $color-white;
+    }
   }
 }
