@@ -473,6 +473,15 @@ img {
   font-size: 14px;
 }
 
+.p-form__errors {
+  color: #dc3545;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #dc3545;
+  border-radius: 5px;
+  list-style: none;
+}
+
 .p-navbar {
   height: 50px;
   padding: 0 10%;

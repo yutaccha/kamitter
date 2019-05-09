@@ -24,8 +24,8 @@ class SystemManagerController extends Controller
         if (is_null($user_id)) {
             abort(419);
         }
-        $twitter_user = session()->get('twitter_id');
-        $system_manager = SystemManager::where('twitter_user_id', $twitter_user)->first();
+        $twitter_user_id = session()->get('twitter_id');
+        $system_manager = SystemManager::where('twitter_user_id', $twitter_user_id)->first();
         if (!$system_manager) {
             abort(404);
         }
@@ -53,8 +53,8 @@ class SystemManagerController extends Controller
         if (is_null($user_id)) {
             abort(419);
         }
-        $twitter_user = session()->get('twitter_id');
-        $system_manager = SystemManager::where('twitter_user_id', $twitter_user)->first();
+        $twitter_user_id = session()->get('twitter_id');
+        $system_manager = SystemManager::where('twitter_user_id', $twitter_user_id)->first();
         if (!$system_manager) {
             abort(404);
         }
@@ -82,8 +82,8 @@ class SystemManagerController extends Controller
         if (is_null($user_id)) {
             abort(419);
         }
-        $twitter_user = session()->get('twitter_id');
-        $system_manager = SystemManager::where('twitter_user_id', $twitter_user)->first();
+        $twitter_user_id = session()->get('twitter_id');
+        $system_manager = SystemManager::where('twitter_user_id', $twitter_user_id)->first();
         if (!$system_manager) {
             abort(404);
         }

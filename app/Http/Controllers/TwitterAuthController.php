@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\SystemManager;
 use App\TwitterUser;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Facades\Socialite;
-use App\SystemManager;
 
 
 class TwitterAuthController extends Controller
@@ -17,8 +17,7 @@ class TwitterAuthController extends Controller
 
     public function __construct()
     {
-        // Controllerに認証を適応
-        $this->middleware('auth')->except('getId');
+        $this->middleware('auth')->except(['getId', 'handleProviderCallback']);
     }
 
     /**
@@ -26,7 +25,6 @@ class TwitterAuthController extends Controller
      *
      * @return Response
      */
-
     public function oauth()
     {
         return Socialite::driver('twitter')->redirect();
@@ -36,11 +34,10 @@ class TwitterAuthController extends Controller
     public function handleProviderCallback(Request $request)
     {
         $user_id = Auth::id();
-
-        if($request->query('denied')){
+        if ($request->query('denied')) {
             return redirect('/twitter/');
         }
-        if(is_null($request->query('oauth_token')) || is_null('oauth_verifier')){
+        if (is_null($request->query('oauth_token')) || is_null('oauth_verifier')) {
             abort('404');
         }
 
@@ -48,7 +45,7 @@ class TwitterAuthController extends Controller
             $auth_twitter_user = Socialite::driver('twitter')->user();
             $exist_twitter_user = DB::table('twitter_users')->where('token', $auth_twitter_user->token)->first();
 
-            if (null !== $exist_twitter_user) {
+            if (!is_null($exist_twitter_user)) {
                 if (Auth::id() === $exist_twitter_user->user_id) {
                     $request->session()->put('twitter_id', $exist_twitter_user->id);
                 }
@@ -64,7 +61,7 @@ class TwitterAuthController extends Controller
             $new_twitter_user = TwitterUser::create($twitter_user);
 
             $system_manager = new SystemManager();
-            $system_manager->user_id =$user_id;
+            $system_manager->user_id = $user_id;
             $system_manager->twitter_user_id = $new_twitter_user->id;
             $system_manager->save();
 
@@ -88,7 +85,7 @@ class TwitterAuthController extends Controller
         $user_id = Auth::id();
         $twitter_user = TwitterUser::where('id', $id)->first();
         if (is_null($twitter_user)) {
-            return 404;
+            abort(404);
         }
         if ($twitter_user->user_id !== $user_id) {
             abort(403);
@@ -102,7 +99,7 @@ class TwitterAuthController extends Controller
         $user_id = Auth::id();
         $twitter_user = TwitterUser::where('id', $id)->first();
         if (is_null($twitter_user)) {
-            return 404;
+            abort(404);
         }
         if ($twitter_user->user_id !== $user_id) {
             abort(403);
@@ -115,7 +112,6 @@ class TwitterAuthController extends Controller
     {
         session()->forget('twitter_id');
     }
-
 }
 
 

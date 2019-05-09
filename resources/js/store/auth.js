@@ -9,7 +9,6 @@ const state = {
     apiStatus: null,
     loginErrorMessages: null,
     registerErrorMessages: null,
-    passwordErrorMessages: null
 }
 
 //stateの算出プロパティ
@@ -36,9 +35,6 @@ const mutations = {
     setRegisterErrorMessages (state, messages) {
         state.registerErrorMessages = messages
     },
-    setPasswordErrorMessages (state, messages) {
-        state.passwordErrorMessages = messages
-    }
 
 }
 

@@ -2531,6 +2531,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2542,7 +2560,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       editIndex: null,
       serviceStatus: null,
       serviceStatusLabel: null,
-      errors: null,
+      addErrors: null,
+      editErrors: null,
       addForm: {
         target: null,
         filter_word_id: null
@@ -2655,36 +2674,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _context3.next = 2;
+                this.clearErrors();
+                _context3.next = 3;
                 return axios.post('/api/follow', this.addForm);
 
-              case 2:
+              case 3:
                 response = _context3.sent;
 
                 if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["UNPROCESSABLE_ENTRY"])) {
-                  _context3.next = 6;
+                  _context3.next = 7;
                   break;
                 }
 
-                this.errors = response.data.errors;
+                this.addErrors = response.data.errors;
                 return _context3.abrupt("return", false);
 
-              case 6:
+              case 7:
                 this.resetAddForm();
 
                 if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["CREATED"])) {
-                  _context3.next = 10;
+                  _context3.next = 11;
                   break;
                 }
 
                 this.$store.commit('error/setCode', response.status);
                 return _context3.abrupt("return", false);
 
-              case 10:
+              case 11:
                 this.followTargets.unshift(response.data);
                 this.newModal = false;
 
-              case 12:
+              case 13:
               case "end":
                 return _context3.stop();
             }
@@ -2714,25 +2734,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                _context4.next = 2;
+                this.clearErrors();
+                _context4.next = 3;
                 return axios.put("/api/follow/".concat(this.editForm.id), this.editForm);
 
-              case 2:
+              case 3:
                 response = _context4.sent;
 
+                if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["UNPROCESSABLE_ENTRY"])) {
+                  _context4.next = 7;
+                  break;
+                }
+
+                this.editErrors = response.data.errors;
+                return _context4.abrupt("return", false);
+
+              case 7:
                 if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
-                  _context4.next = 6;
+                  _context4.next = 10;
                   break;
                 }
 
                 this.$store.commit('error/setCode', response.status);
                 return _context4.abrupt("return", false);
 
-              case 6:
+              case 10:
                 this.followTargets.splice(this.editIndex, 1, response.data);
                 this.resetEditForm();
 
-              case 8:
+              case 12:
               case "end":
                 return _context4.stop();
             }
@@ -2927,7 +2957,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return stopFollowService;
-    }()
+    }(),
+    clearErrors: function clearErrors() {
+      this.addErrors = null;
+      this.editErrors = null;
+    }
   },
   created: function created() {
     this.fetchFollowTargets();
@@ -4786,13 +4820,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4813,7 +4840,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
       passwordForm: {
         email: ''
-      }
+      },
+      passwordError: ''
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
@@ -4825,9 +4853,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     registerErrors: function registerErrors(state) {
       return state.auth.registerErrorMessages;
-    },
-    passwordErrors: function passwordErrors(state) {
-      return state.auth.passwordErrorMessages;
     }
   })),
   methods: {
@@ -4911,19 +4936,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 response = _context3.sent;
                 this.$set(this, 'isPush', false);
 
+                if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_2__["UNPROCESSABLE_ENTRY"])) {
+                  _context3.next = 12;
+                  break;
+                }
+
+                this.passwordError = response.data;
+                console.log(this.passwordError);
+                return _context3.abrupt("return", false);
+
+              case 12:
                 if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_2__["OK"])) {
-                  _context3.next = 9;
+                  _context3.next = 15;
                   break;
                 }
 
                 this.$store.commit('error/setCode', response.status);
                 return _context3.abrupt("return", false);
 
-              case 9:
+              case 15:
                 this.passwordForm.email = '';
                 this.$set(this, 'showMailMessage', true);
 
-              case 11:
+              case 17:
               case "end":
                 return _context3.stop();
             }
@@ -4940,7 +4975,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     clearError: function clearError() {
       this.$store.commit('auth/setLoginErrorMessages', null);
       this.$store.commit('auth/setRegisterErrorMessages', null);
-      this.$store.commit('auth/setPasswordErrorMessages', null);
+      this.$set(this, 'passwordError', '');
     }
   },
   created: function created() {
@@ -5042,13 +5077,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       isReseted: false,
+      errors: null,
       resetForm: {
         email: '',
         password: '',
@@ -5073,28 +5108,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                this.clearErrors();
+                _context.next = 3;
                 return axios.post('/api/password/reset', this.resetForm);
 
-              case 2:
+              case 3:
                 response = _context.sent;
 
+                if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["UNPROCESSABLE_ENTRY"])) {
+                  _context.next = 9;
+                  break;
+                }
+
+                this.errors = response.data.errors;
+                return _context.abrupt("return", false);
+
+              case 9:
                 if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
-                  _context.next = 6;
+                  _context.next = 12;
                   break;
                 }
 
                 this.$store.commit('error/setCode', response.status);
                 return _context.abrupt("return", false);
 
-              case 6:
+              case 12:
                 this.$set(this, 'isReseted', 'true');
                 this.clearResetForm();
                 setTimeout(function () {
                   _router__WEBPACK_IMPORTED_MODULE_2__["default"].push('/login');
                 }, 3000);
 
-              case 9:
+              case 15:
               case "end":
                 return _context.stop();
             }
@@ -5115,6 +5160,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.resetForm.email = '';
       this.resetForm.password = '';
       this.resetForm.password_confirmation = '';
+    },
+    clearErrors: function clearErrors() {
+      this.errors = null;
     }
   },
   created: function created() {
@@ -6597,7 +6645,7 @@ var render = function() {
         _c(
           "RouterLink",
           { staticClass: "p-navbar__title_link", attrs: { to: "/" } },
-          [_vm._v("twitter")]
+          [_vm._v("神ったー")]
         )
       ],
       1
@@ -7365,6 +7413,34 @@ var render = function() {
                 }
               },
               [
+                _vm.addErrors
+                  ? _c("div", { staticClass: "p-form__errors" }, [
+                      _vm.addErrors.target
+                        ? _c(
+                            "ul",
+                            _vm._l(_vm.addErrors.target, function(msg) {
+                              return _c("li", { key: msg }, [
+                                _vm._v(_vm._s(msg))
+                              ])
+                            }),
+                            0
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.addErrors.filter_word_id
+                        ? _c(
+                            "ul",
+                            _vm._l(_vm.addErrors.filter_word_id, function(msg) {
+                              return _c("li", { key: msg }, [
+                                _vm._v(_vm._s(msg))
+                              ])
+                            }),
+                            0
+                          )
+                        : _vm._e()
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
                 _c(
                   "label",
                   {
@@ -7513,6 +7589,36 @@ var render = function() {
                 }
               },
               [
+                _vm.editErrors
+                  ? _c("div", { staticClass: "p-form__errors" }, [
+                      _vm.editErrors.target
+                        ? _c(
+                            "ul",
+                            _vm._l(_vm.editErrors.target, function(msg) {
+                              return _c("li", { key: msg }, [
+                                _vm._v(_vm._s(msg))
+                              ])
+                            }),
+                            0
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.editErrors.filter_word_id
+                        ? _c(
+                            "ul",
+                            _vm._l(_vm.editErrors.filter_word_id, function(
+                              msg
+                            ) {
+                              return _c("li", { key: msg }, [
+                                _vm._v(_vm._s(msg))
+                              ])
+                            }),
+                            0
+                          )
+                        : _vm._e()
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
                 _c(
                   "label",
                   {
@@ -9116,7 +9222,7 @@ var render = function() {
                   },
                   [
                     _vm.loginErrors
-                      ? _c("div", { staticClass: "errors" }, [
+                      ? _c("div", { staticClass: "p-form__errors" }, [
                           _vm.loginErrors.email
                             ? _c(
                                 "ul",
@@ -9256,7 +9362,7 @@ var render = function() {
                   },
                   [
                     _vm.registerErrors
-                      ? _c("div", { staticClass: "errors" }, [
+                      ? _c("div", { staticClass: "p-form__errors" }, [
                           _vm.registerErrors.name
                             ? _c(
                                 "ul",
@@ -9319,7 +9425,7 @@ var render = function() {
                       attrs: {
                         type: "text",
                         id: "username",
-                        placeholder: "かみった",
+                        placeholder: "神ったー",
                         required: ""
                       },
                       domProps: { value: _vm.registerForm.name },
@@ -9497,33 +9603,9 @@ var render = function() {
                     }
                   },
                   [
-                    _vm.passwordErrors
-                      ? _c("div", { staticClass: "errors" }, [
-                          _vm.passwordErrors.email
-                            ? _c(
-                                "ul",
-                                _vm._l(_vm.passwordErrors.email, function(msg) {
-                                  return _c("li", { key: msg }, [
-                                    _vm._v(_vm._s(msg))
-                                  ])
-                                }),
-                                0
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.passwordErrors.password
-                            ? _c(
-                                "ul",
-                                _vm._l(_vm.passwordErrors.password, function(
-                                  msg
-                                ) {
-                                  return _c("li", { key: msg }, [
-                                    _vm._v(_vm._s(msg))
-                                  ])
-                                }),
-                                0
-                              )
-                            : _vm._e()
+                    _vm.passwordError
+                      ? _c("div", { staticClass: "p-form__errors" }, [
+                          _c("p", [_vm._v(_vm._s(_vm.passwordError.message))])
                         ])
                       : _vm._e(),
                     _vm._v(" "),
@@ -9650,10 +9732,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/PasswordReset.vue?vue&type=template&id=8bccaa8a&scoped=true&":
-/*!***********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/PasswordReset.vue?vue&type=template&id=8bccaa8a&scoped=true& ***!
-  \***********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/PasswordReset.vue?vue&type=template&id=8bccaa8a&":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/PasswordReset.vue?vue&type=template&id=8bccaa8a& ***!
+  \***********************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -9686,6 +9768,38 @@ var render = function() {
                 }
               },
               [
+                _vm.errors
+                  ? _c("div", { staticClass: "p-form__errors" }, [
+                      _vm.errors.email
+                        ? _c(
+                            "ul",
+                            _vm._l(_vm.errors.email, function(msg) {
+                              return _c("li", { key: msg }, [
+                                _vm._v(_vm._s(msg))
+                              ])
+                            }),
+                            0
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.errors.password
+                        ? _c(
+                            "ul",
+                            _vm._l(_vm.errors.password, function(msg) {
+                              return _c("li", { key: msg }, [
+                                _vm._v(_vm._s(msg))
+                              ])
+                            }),
+                            0
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.errors.message
+                        ? _c("p", [_vm._v(_vm._s(_vm.errors.message))])
+                        : _vm._e()
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
                 _c(
                   "label",
                   {
@@ -26763,7 +26877,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PasswordReset_vue_vue_type_template_id_8bccaa8a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PasswordReset.vue?vue&type=template&id=8bccaa8a&scoped=true& */ "./resources/js/pages/PasswordReset.vue?vue&type=template&id=8bccaa8a&scoped=true&");
+/* harmony import */ var _PasswordReset_vue_vue_type_template_id_8bccaa8a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PasswordReset.vue?vue&type=template&id=8bccaa8a& */ "./resources/js/pages/PasswordReset.vue?vue&type=template&id=8bccaa8a&");
 /* harmony import */ var _PasswordReset_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PasswordReset.vue?vue&type=script&lang=js& */ "./resources/js/pages/PasswordReset.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -26775,11 +26889,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _PasswordReset_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PasswordReset_vue_vue_type_template_id_8bccaa8a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PasswordReset_vue_vue_type_template_id_8bccaa8a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _PasswordReset_vue_vue_type_template_id_8bccaa8a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PasswordReset_vue_vue_type_template_id_8bccaa8a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "8bccaa8a",
+  null,
   null
   
 )
@@ -26805,19 +26919,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/pages/PasswordReset.vue?vue&type=template&id=8bccaa8a&scoped=true&":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/pages/PasswordReset.vue?vue&type=template&id=8bccaa8a&scoped=true& ***!
-  \*****************************************************************************************/
+/***/ "./resources/js/pages/PasswordReset.vue?vue&type=template&id=8bccaa8a&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/pages/PasswordReset.vue?vue&type=template&id=8bccaa8a& ***!
+  \*****************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordReset_vue_vue_type_template_id_8bccaa8a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PasswordReset.vue?vue&type=template&id=8bccaa8a&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/PasswordReset.vue?vue&type=template&id=8bccaa8a&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordReset_vue_vue_type_template_id_8bccaa8a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordReset_vue_vue_type_template_id_8bccaa8a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PasswordReset.vue?vue&type=template&id=8bccaa8a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/PasswordReset.vue?vue&type=template&id=8bccaa8a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordReset_vue_vue_type_template_id_8bccaa8a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordReset_vue_vue_type_template_id_8bccaa8a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PasswordReset_vue_vue_type_template_id_8bccaa8a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -27043,8 +27157,7 @@ var state = {
   twitterId: null,
   apiStatus: null,
   loginErrorMessages: null,
-  registerErrorMessages: null,
-  passwordErrorMessages: null //stateの算出プロパティ
+  registerErrorMessages: null //stateの算出プロパティ
 
 };
 var getters = {
@@ -27074,9 +27187,6 @@ var mutations = {
   },
   setRegisterErrorMessages: function setRegisterErrorMessages(state, messages) {
     state.registerErrorMessages = messages;
-  },
-  setPasswordErrorMessages: function setPasswordErrorMessages(state, messages) {
-    state.passwordErrorMessages = messages;
   }
 }; //stateを非同期処理で更新するメソッドAPIの通信など
 

@@ -6,15 +6,23 @@ use App\FollowerTarget;
 use App\FollowTarget;
 use App\Http\Requests\AddFollowTarget;
 use Illuminate\Support\Facades\Auth;
+use App\TwitterUser;
 
 class FollowTargetController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function add(AddFollowTarget $request)
     {
-        $twitter_id = session()->get('twitter_id');
+        $twitter_user_id = session()->get('twitter_id');
+        $this->authCheck($twitter_user_id);
 
         $follow_target = new FollowTarget();
-        $follow_target->twitter_user_id = $twitter_id;
+        $follow_target->twitter_user_id = $twitter_user_id;
         $follow_target->filter_word_id = $request->filter_word_id;
         $follow_target->target = $request->target;
 
@@ -25,8 +33,10 @@ class FollowTargetController extends Controller
 
     public function show()
     {
-        $twitter_id = session()->get('twitter_id');
-        $follow_target = FollowTarget::where('twitter_user_id', $twitter_id)
+        $twitter_user_id = session()->get('twitter_id');
+        $this->authCheck($twitter_user_id);
+
+        $follow_target = FollowTarget::where('twitter_user_id', $twitter_user_id)
             ->whereIn('status', [1, 2, 3])->orderby('created_at', 'desc')->limit(30)
             ->with('filterWord')->get();
 
@@ -35,6 +45,9 @@ class FollowTargetController extends Controller
 
     public function edit(int $id, AddFollowTarget $request)
     {
+        $twitter_user_id = session()->get('twitter_id');
+        $this->authCheck($twitter_user_id);
+
         $follow_target = FollowTarget::where('id', $id)->with('filterWord')->first();
         if (!$follow_target) {
             abort(404);
@@ -48,7 +61,10 @@ class FollowTargetController extends Controller
 
     public function delete(int $id)
     {
-        $twitter_id = session()->get('twitter_id');
+        $twitter_user_id = session()->get('twitter_id');
+        $this->authCheck($twitter_user_id);
+
+        $twitter_user_id = session()->get('twitter_id');
         $follow_target = FollowTarget::where('id', $id)->first();
         $status_under_making_list = 3;
 
@@ -56,9 +72,21 @@ class FollowTargetController extends Controller
             abort(404);
         }
         if ($follow_target->status === $status_under_making_list) {
-            FollowerTarget::where('twitter_user_id', $twitter_id)->delete();
+            FollowerTarget::where('twitter_user_id', $twitter_user_id)->delete();
         }
         $follow_target->delete();
+    }
+
+    public function authCheck($twitter_user_id)
+    {
+        $user_id = Auth::id();
+        $twitter_user = TwitterUser::where('id', $twitter_user_id)->first();
+        if (is_null($twitter_user)) {
+            abort(404);
+        }
+        if ($twitter_user->user_id !== $user_id) {
+            abort(403);
+        }
     }
 
 }

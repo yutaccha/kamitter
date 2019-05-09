@@ -10,17 +10,16 @@
 
             <section class="p-login">
                     <div class="c-panel p-login__panel u-color__bg--white">
-                        <!--@submit に続く .prevent はイベント修飾子と呼ばれます。.prevent を記述することは、
-                        イベントハンドラで event.preventDefault() を呼び出すのと同じ効果があります。-->
                         <form class="p-form" @submit.prevent="resetPassword">
-                            <!--<div v-if="loginErrors" class="errors">-->
-                                <!--<ul v-if="loginErrors.email">-->
-                                    <!--<li v-for="msg in loginErrors.email" :key="msg">{{ msg }}</li>-->
-                                <!--</ul>-->
-                                <!--<ul v-if="loginErrors.password">-->
-                                    <!--<li v-for="msg in loginErrors.password" :key="msg">{{ msg }}</li>-->
-                                <!--</ul>-->
-                            <!--</div>-->
+                            <div v-if="errors" class="p-form__errors">
+                                <ul v-if="errors.email">
+                                    <li v-for="msg in errors.email" :key="msg">{{ msg }}</li>
+                                </ul>
+                                <ul v-if="errors.password">
+                                    <li v-for="msg in errors.password" :key="msg">{{ msg }}</li>
+                                </ul>
+                                <p v-if="errors.message">{{ errors.message }}</p>
+                            </div>
                             <label class="p-form__label" for="reset-email">メールアドレス</label>
                             <input type="email" class="p-form__item" id="reset-email"
                                    placeholder="sample@kamitter.ltd" required
@@ -50,13 +49,14 @@
 </template>
 
 <script>
-    import {OK} from '../utility'
+    import {OK, UNPROCESSABLE_ENTRY} from '../utility'
     import router from '../router'
 
     export default {
         data() {
             return {
                 isReseted: false,
+                errors: null,
                 resetForm: {
                     email: '',
                     password: '',
@@ -73,8 +73,13 @@
         },
         methods: {
             async resetPassword(){
+                this.clearErrors()
                 const response = await axios.post('/api/password/reset', this.resetForm)
-                if(response.status !== OK){
+
+                if (response.status === UNPROCESSABLE_ENTRY){
+                    this.errors = response.data.errors
+                    return false
+                } else if(response.status !== OK){
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
@@ -94,13 +99,12 @@
                 this.resetForm.password = ''
                 this.resetForm.password_confirmation = ''
             },
+            clearErrors(){
+                this.errors = null
+            }
         },
         created() {
             this.setTokenFromUrlParam()
         }
     }
 </script>
-
-<style scoped>
-
-</style>

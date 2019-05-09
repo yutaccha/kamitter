@@ -55,6 +55,15 @@
                             </span>
                     <form class="p-form" @submit.prevent="addFollowTarget">
 
+                        <div v-if="addErrors" class="p-form__errors">
+                            <ul v-if="addErrors.target">
+                                <li v-for="msg in addErrors.target" :key="msg">{{ msg }}</li>
+                            </ul>
+                            <ul v-if="addErrors.filter_word_id">
+                                <li v-for="msg in addErrors.filter_word_id" :key="msg">{{ msg }}</li>
+                            </ul>
+                        </div>
+
                         <label class="p-form__label" for="add-target">ターゲット名 *必須</label>
                         <input type="text" class="p-form__item" id="add-target"
                                v-model="addForm.target" required maxlength="15" placeholder="例) kamitter_1234">
@@ -81,6 +90,15 @@
                                 <i class="c-icon--gray p-modal__icon fas fa-times"></i>
                             </span>
                     <form class="p-form" @submit.prevent="editFollowTarget">
+
+                        <div v-if="editErrors" class="p-form__errors">
+                            <ul v-if="editErrors.target">
+                                <li v-for="msg in editErrors.target" :key="msg">{{ msg }}</li>
+                            </ul>
+                            <ul v-if="editErrors.filter_word_id">
+                                <li v-for="msg in editErrors.filter_word_id" :key="msg">{{ msg }}</li>
+                            </ul>
+                        </div>
 
                         <label class="p-form__label" for="edit-target">ターゲット名 *必須</label>
                         <input type="text" class="p-form__item" id="edit-target"
@@ -120,7 +138,8 @@
                 editIndex: null,
                 serviceStatus: null,
                 serviceStatusLabel: null,
-                errors: null,
+                addErrors: null,
+                editErrors: null,
                 addForm: {
                     target: null,
                     filter_word_id: null,
@@ -162,9 +181,10 @@
                 this.filters = response.data
             },
             async addFollowTarget() {
+                this.clearErrors()
                 const response = await axios.post('/api/follow', this.addForm)
                 if (response.status === UNPROCESSABLE_ENTRY) {
-                    this.errors = response.data.errors
+                    this.addErrors = response.data.errors
                     return false
                 }
                 this.resetAddForm()
@@ -183,7 +203,13 @@
                 this.editIndex = index
             },
             async editFollowTarget() {
+                this.clearErrors()
                 const response = await axios.put(`/api/follow/${this.editForm.id}`, this.editForm)
+
+                if (response.status === UNPROCESSABLE_ENTRY) {
+                    this.editErrors = response.data.errors
+                    return false
+                }
                 if (response.status !== OK) {
                     this.$store.commit('error/setCode', response.status)
                     return false
@@ -241,8 +267,11 @@
                 }
                 this.serviceStatus = response.data.auto_follow_status
                 this.serviceStatusLabel = response.data.status_labels.auto_follow
+            },
+            clearErrors() {
+                this.addErrors = null
+                this.editErrors = null
             }
-
         },
         created() {
             this.fetchFollowTargets()

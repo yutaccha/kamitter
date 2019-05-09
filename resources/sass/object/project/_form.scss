@@ -82,4 +82,13 @@
   &__notion {
     font-size: $font-size_default;
   }
+
+  &__errors {
+    color: $color-danger;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid $color-danger;
+    border-radius: 5px;
+    list-style: none;
+  }
 }

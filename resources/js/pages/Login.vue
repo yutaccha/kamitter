@@ -30,10 +30,8 @@
             <section class="p-login">
                 <transition-group name="tab">
                     <div class="c-panel p-login__panel u-color__bg--white" v-show="tab === 1" key="login">
-                        <!--@submit に続く .prevent はイベント修飾子と呼ばれます。.prevent を記述することは、
-                        イベントハンドラで event.preventDefault() を呼び出すのと同じ効果があります。-->
                         <form class="p-form" @submit.prevent="login">
-                            <div v-if="loginErrors" class="errors">
+                            <div v-if="loginErrors" class="p-form__errors">
                                 <ul v-if="loginErrors.email">
                                     <li v-for="msg in loginErrors.email" :key="msg">{{ msg }}</li>
                                 </ul>
@@ -55,7 +53,7 @@
 
                     <div class="c-panel p-login__panel u-color__bg--white" v-show="tab === 2" key="register">
                         <form class="p-form" @submit.prevent="register">
-                            <div v-if="registerErrors" class="errors">
+                            <div v-if="registerErrors" class="p-form__errors">
                                 <ul v-if="registerErrors.name">
                                     <li v-for="msg in registerErrors.name" :key="msg">{{ msg }}</li>
                                 </ul>
@@ -68,7 +66,7 @@
                             </div>
                             <label class="p-form__label" for="username">ユーザー名</label>
                             <input type="text" class="p-form__item" id="username"
-                                   placeholder="かみった"
+                                   placeholder="神ったー"
                                    v-model="registerForm.name" required>
                             <label class="p-form__label" for="email">メールアドレス</label>
                             <input type="email" class="p-form__item" id="email"
@@ -92,13 +90,8 @@
                         <!--@submit に続く .prevent はイベント修飾子と呼ばれます。.prevent を記述することは、
                         イベントハンドラで event.preventDefault() を呼び出すのと同じ効果があります。-->
                         <form class="p-form" @submit.prevent="passwordReset">
-                            <div v-if="passwordErrors" class="errors">
-                                <ul v-if="passwordErrors.email">
-                                    <li v-for="msg in passwordErrors.email" :key="msg">{{ msg }}</li>
-                                </ul>
-                                <ul v-if="passwordErrors.password">
-                                    <li v-for="msg in passwordErrors.password" :key="msg">{{ msg }}</li>
-                                </ul>
+                            <div v-if="passwordError" class="p-form__errors">
+                                <p>{{ passwordError.message }}</p>
                             </div>
                             <label class="p-form__label" for="login-email">メールアドレス</label>
                             <input type="email" class="p-form__item" id="password-email"
@@ -119,7 +112,7 @@
 
 <script>
     import {mapState} from 'vuex'
-    import {OK} from '../utility'
+    import {OK, UNPROCESSABLE_ENTRY} from '../utility'
 
     export default {
         data() {
@@ -139,7 +132,8 @@
                 },
                 passwordForm: {
                     email: '',
-                }
+                },
+                passwordError: '',
             }
         },
         computed: {
@@ -147,7 +141,6 @@
                 apiStatus: state => state.auth.apiStatus,
                 loginErrors: state => state.auth.loginErrorMessages,
                 registerErrors: state => state.auth.registerErrorMessages,
-                passwordErrors: state => state.auth.passwordErrorMessages
             }),
         },
         methods: {
@@ -174,7 +167,11 @@
                 this.clearError()
                 const response = await axios.post('/api/password/create', this.passwordForm)
                 this.$set(this, 'isPush', false)
-                if (response.status !== OK) {
+                if (response.status === UNPROCESSABLE_ENTRY) {
+                    this.passwordError = response.data
+                    console.log(this.passwordError);
+                    return false
+                }else if(response.status !== OK){
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
@@ -185,7 +182,7 @@
             clearError() {
                 this.$store.commit('auth/setLoginErrorMessages', null)
                 this.$store.commit('auth/setRegisterErrorMessages', null)
-                this.$store.commit('auth/setPasswordErrorMessages', null)
+                this.$set(this, 'passwordError', '')
             }
         },
         created() {
