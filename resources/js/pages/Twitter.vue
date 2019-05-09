@@ -40,6 +40,9 @@
             }
         },
         methods: {
+            /**
+             * ユーザーが登録しているTwitterUserのID一覧を取得する
+             */
             async fetchTwitterUsers() {
                 const response = await axios.get('/api/twitter/user/list')
                 if (response.status !== OK) {
@@ -50,21 +53,23 @@
                 this.accountNum = response.data.account_num
 
             },
+            /**
+             * TwitterCardのemitをトリガーにして
+             * TwitterUserのカードを配列から削除する
+             */
             removeCard(emitObject) {
                 this.users.splice(emitObject.index, 1)
             }
         },
         computed: {
+            //TwitterUserアカウントを追加するボタンの非表示フラグ
             isMaximumAccount() {
-                return this.accountNum <= 10
+                return this.accountNum < 10
             }
         },
+        //ページ作成時に実行
         async created() {
             await this.fetchTwitterUsers()
         }
     }
 </script>
-
-<style scoped>
-
-</style>

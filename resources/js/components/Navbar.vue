@@ -32,9 +32,9 @@
 <script>
     export default {
         data() {
-          return {
-              isMenuActive: false,
-          }
+            return {
+                isMenuActive: false,
+            }
         },
         computed: {
             isLogin() {
@@ -48,12 +48,19 @@
             },
         },
         methods: {
+            /**
+             * ユーザーログアウトしてログイン画面に遷移する
+             */
             async logout() {
                 await this.$store.dispatch('auth/logout')
                 if (this.apiStatus) {
                     this.$router.push('/')
                 }
             },
+            /**
+             * storeからTwitterUserIdを削除して、
+             *TwitterUser選択画面に遷移する
+             */
             async changeTwitterUser() {
                 await this.$store.dispatch('auth/twitterUserLogout')
                 if (this.apiStatus) {

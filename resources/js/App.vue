@@ -5,7 +5,6 @@
         </header>
         <main class="l-main">
             <div class="container">
-                <!--<Message />-->
                 <transition name="page" mode="out-in">
                     <RouterView/>
                 </transition>
@@ -34,6 +33,9 @@
             }
         },
         watch: {
+            /**
+             * API実行時のステータスコードを取得して、エラーハンドリングを行う
+             */
             errorCode: {
                 async handler(val) {
                     if (val === INTERNAL_SERVER_ERROR) {
@@ -49,6 +51,10 @@
                 },
                 immediate: true
             },
+            /**
+             * 画面遷移時にユーザー認証と、TwitterUser認証を行って
+             * storeに保存する
+             */
             async $route() {
                 this.$store.commit('error/setCode', null)
                 await this.$store.dispatch('auth/currentUser')

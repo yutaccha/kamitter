@@ -1,3 +1,7 @@
+/**
+ * store内でAPIを実行する際に
+ * エラーのレスポンコードを保存する
+ */
 const state = {
     code: null
 }

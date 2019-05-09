@@ -18,7 +18,7 @@
 </template>
 
 <script>
-    import {CREATED, OK, UNPROCESSABLE_ENTRY} from "../utility"
+    import {OK} from "../utility"
 
     export default {
         data() {
@@ -36,6 +36,9 @@
             }
         },
         methods: {
+            /**
+             * APIを使用して自動アンフォローのステータスを取得する
+             */
             async fetchServiceStatus() {
                 const response = await axios.get('/api/system/status')
                 if (response.status !== OK) {
@@ -45,6 +48,10 @@
                 this.serviceStatus = response.data.auto_unfollow_status
                 this.serviceStatusLabel = response.data.status_labels.auto_unfollow
             },
+
+            /**
+             * APIを使用して自動アンフォローを実行状態にする
+             */
             async runUnfollowService() {
                 const serviceType = 2
                 const data = {type: serviceType}
@@ -56,6 +63,10 @@
                 this.serviceStatus = response.data.auto_unfollow_status
                 this.serviceStatusLabel = response.data.status_labels.auto_unfollow
             },
+
+            /**
+             * APIを使用して自動アンフォローを停止状態にする
+             */
             async stopUnfollowService() {
                 const serviceType = 2
                 const data = {type: serviceType}

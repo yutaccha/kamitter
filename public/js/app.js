@@ -1804,7 +1804,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 
 
@@ -1819,6 +1818,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   watch: {
+    /**
+     * API実行時のステータスコードを取得して、エラーハンドリングを行う
+     */
     errorCode: {
       handler: function () {
         var _handler = _asyncToGenerator(
@@ -1874,6 +1876,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }(),
       immediate: true
     },
+
+    /**
+     * 画面遷移時にユーザー認証と、TwitterUser認証を行って
+     * storeに保存する
+     */
     $route: function () {
       var _$route = _asyncToGenerator(
       /*#__PURE__*/
@@ -1992,6 +1999,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    /**
+     * ユーザーログアウトしてログイン画面に遷移する
+     */
     logout: function () {
       var _logout = _asyncToGenerator(
       /*#__PURE__*/
@@ -2022,6 +2032,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return logout;
     }(),
+
+    /**
+     * storeからTwitterUserIdを削除して、
+     *TwitterUser選択画面に遷移する
+     */
     changeTwitterUser: function () {
       var _changeTwitterUser = _asyncToGenerator(
       /*#__PURE__*/
@@ -2201,6 +2216,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
+    /**
+     * 登録したフィルターキーワード一覧をAPIで取得する
+     */
     fetchFilters: function () {
       var _fetchFilters = _asyncToGenerator(
       /*#__PURE__*/
@@ -2241,6 +2259,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return fetchFilters;
     }(),
+
+    /**
+     * 新規フィルターキーワードをAPIで登録する
+     */
     addFilter: function () {
       var _addFilter = _asyncToGenerator(
       /*#__PURE__*/
@@ -2250,39 +2272,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
+                this.clearErrors();
+                _context2.next = 3;
                 return axios.post('/api/filter', this.addForm);
 
-              case 2:
+              case 3:
                 response = _context2.sent;
 
                 if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["UNPROCESSABLE_ENTRY"])) {
-                  _context2.next = 6;
+                  _context2.next = 7;
                   break;
                 }
 
+                //バリデーションエラー
                 this.addErrors = response.data.errors;
                 return _context2.abrupt("return", false);
 
-              case 6:
+              case 7:
                 this.resetAddForm();
 
                 if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["CREATED"])) {
-                  _context2.next = 10;
+                  _context2.next = 11;
                   break;
                 }
 
+                //システムエラー類
                 this.$store.commit('error/setCode', response.status);
                 return _context2.abrupt("return", false);
 
-              case 10:
+              case 11:
+                //取得したデータを格納する
                 addedFilter = response.data;
                 this.filters.push(addedFilter);
-                this.newModal = false;
+                this.newModal = false; //自動ツイート、自動いいね機能ではフィルターキーワードを参照しているので、
+                //フィルターキーワードに変更があった際に変更を通知する
+
                 this.$store.commit('dashboard/setNoticeToTweet', true);
                 this.$store.commit('dashboard/setNoticeToLike', true);
 
-              case 15:
+              case 16:
               case "end":
                 return _context2.stop();
             }
@@ -2296,6 +2324,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return addFilter;
     }(),
+
+    /**
+     * 編集フォームモーダルの表示を行って、値を入力しておく
+     */
     showEditModal: function showEditModal(filter, index) {
       this.editModal = true;
       this.editForm.id = filter.id;
@@ -2304,6 +2336,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.editForm.remove = filter.remove;
       this.editIndex = index;
     },
+
+    /**
+     * APIを利用してフィルターキーワードの変更を行う
+     */
     editFilter: function () {
       var _editFilter = _asyncToGenerator(
       /*#__PURE__*/
@@ -2313,27 +2349,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _context3.next = 2;
+                this.clearErrors();
+                _context3.next = 3;
                 return axios.put("/api/filter/".concat(this.editForm.id), this.editForm);
 
-              case 2:
+              case 3:
                 response = _context3.sent;
 
-                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
-                  _context3.next = 6;
+                if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["UNPROCESSABLE_ENTRY"])) {
+                  _context3.next = 7;
                   break;
                 }
 
+                //バリデーションエラー
+                this.editErrors = response.data.errors;
+                return _context3.abrupt("return", false);
+
+              case 7:
+                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
+                  _context3.next = 10;
+                  break;
+                }
+
+                //システムエラー類
                 this.$store.commit('error/setCode', response.status);
                 return _context3.abrupt("return", false);
 
-              case 6:
-                this.filters.splice(this.editIndex, 1, response.data);
+              case 10:
                 this.resetEditForm();
+                this.filters.splice(this.editIndex, 1, response.data); //自動ツイート、自動いいね機能ではフィルターキーワードを参照しているので、
+                //フィルターキーワードに変更があった際に変更を通知する
+
                 this.$store.commit('dashboard/setNoticeToTweet', true);
                 this.$store.commit('dashboard/setNoticeToLike', true);
 
-              case 10:
+              case 14:
               case "end":
                 return _context3.stop();
             }
@@ -2347,6 +2397,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return editFilter;
     }(),
+
+    /**
+     * APIを利用してフィルターキーワードの削除を行う
+     */
     removeFilter: function () {
       var _removeFilter = _asyncToGenerator(
       /*#__PURE__*/
@@ -2389,11 +2443,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return removeFilter;
     }(),
+
+    /**
+     * 登録フォームの入力欄を空にする
+     */
     resetAddForm: function resetAddForm() {
       this.addForm.type = 1;
       this.addForm.word = '';
       this.addForm.remove = '';
     },
+
+    /**
+     * 編集フォームの入力欄を空にする
+     */
     resetEditForm: function resetEditForm() {
       this.editModal = false;
       this.editForm.id = null;
@@ -2402,6 +2464,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.editForm.remove = '';
       this.editIndex = null;
     },
+
+    /**
+     * エラーメッセージを空にする
+     */
     clearErrors: function clearErrors() {
       this.addErrors = null;
       this.editErrors = null;
@@ -2584,6 +2650,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   computed: {
+    /**
+     * フィルターキワードの追加、変更、削除イベントの通知を取得する
+     */
     dashChange: function dashChange() {
       return this.$store.state.dashboard.noticeToTweet;
     },
@@ -2595,6 +2664,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    /**
+     * 登録したフォローターゲット一覧を取得する
+     */
     fetchFollowTargets: function () {
       var _fetchFollowTargets = _asyncToGenerator(
       /*#__PURE__*/
@@ -2635,6 +2707,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return fetchFollowTargets;
     }(),
+
+    /**
+     * フィルターワード一覧を取得する
+     */
     fetchFilters: function () {
       var _fetchFilters = _asyncToGenerator(
       /*#__PURE__*/
@@ -2675,6 +2751,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return fetchFilters;
     }(),
+
+    /**
+     * 新規フォローターゲットを追加する
+     */
     addFollowTarget: function () {
       var _addFollowTarget = _asyncToGenerator(
       /*#__PURE__*/
@@ -2728,6 +2808,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return addFollowTarget;
     }(),
+
+    /**
+     * 編集用のモーダルフォームを表示する
+     * 表示の際にフォローターゲットのデータを入力しておく
+     */
     showEditModal: function showEditModal(followTarget, index) {
       this.editModal = true;
       this.editForm.id = followTarget.id;
@@ -2735,6 +2820,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.editForm.filter_word_id = followTarget.filter_word_id;
       this.editIndex = index;
     },
+
+    /**
+     * フォーローターゲットを編集する
+     */
     editFollowTarget: function () {
       var _editFollowTarget = _asyncToGenerator(
       /*#__PURE__*/
@@ -2786,6 +2875,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return editFollowTarget;
     }(),
+
+    /**
+     * フォローターゲットを削除する
+     */
     removeFollowTarget: function () {
       var _removeFollowTarget = _asyncToGenerator(
       /*#__PURE__*/
@@ -2826,10 +2919,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return removeFollowTarget;
     }(),
+
+    /**
+     * 新規追加フォームのデータを空にする
+     */
     resetAddForm: function resetAddForm() {
       this.addForm.target = null;
       this.addForm.filter_word_id = null;
     },
+
+    /**
+     * 編集フォームのデータを空にする
+     */
     resetEditForm: function resetEditForm() {
       this.editModal = null;
       this.editForm.id = null;
@@ -2837,6 +2938,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.editForm.filter_word_id = null;
       this.editIndex = null;
     },
+
+    /**
+     * 自動フォロー機能のサービスステータスを取得する
+     */
     fetchServiceStatus: function () {
       var _fetchServiceStatus = _asyncToGenerator(
       /*#__PURE__*/
@@ -2878,6 +2983,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return fetchServiceStatus;
     }(),
+
+    /**
+     * 自動フォロー機能を稼働状態にする
+     */
     runFollowService: function () {
       var _runFollowService = _asyncToGenerator(
       /*#__PURE__*/
@@ -2923,6 +3032,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return runFollowService;
     }(),
+
+    /**
+     * 自動フォロー機能を停止状態にする
+     */
     stopFollowService: function () {
       var _stopFollowService = _asyncToGenerator(
       /*#__PURE__*/
@@ -2968,6 +3081,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return stopFollowService;
     }(),
+
+    /**
+     * 入力フォームエラーメッセージをクリアする
+     */
     clearErrors: function clearErrors() {
       this.addErrors = null;
       this.editErrors = null;
@@ -2979,6 +3096,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.fetchServiceStatus();
   },
   watch: {
+    /**
+     * フィルターワードの通知を受け取ったら
+     * フォロワーターゲットと、フィルターワードを再取得する
+     */
     dashChange: {
       handler: function handler(val) {
         if (val === true) {
@@ -3133,6 +3254,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   computed: {
+    /**
+     * フィルターキワードの追加、変更、削除イベントの通知を取得する
+     */
     dashChange: function dashChange() {
       return this.$store.state.dashboard.noticeToLike;
     },
@@ -3144,6 +3268,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    /**
+     * 登録した自動いいねデータ一覧を取得する
+     */
     fetchLikes: function () {
       var _fetchLikes = _asyncToGenerator(
       /*#__PURE__*/
@@ -3184,6 +3311,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return fetchLikes;
     }(),
+
+    /**
+     * フィルターワード一覧を取得する
+     */
     fetchFilters: function () {
       var _fetchFilters = _asyncToGenerator(
       /*#__PURE__*/
@@ -3224,6 +3355,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return fetchFilters;
     }(),
+
+    /**
+     * 新規自動いいねを追加する
+     */
     addLike: function () {
       var _addLike = _asyncToGenerator(
       /*#__PURE__*/
@@ -3276,12 +3411,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return addLike;
     }(),
+
+    /**
+     * 編集用のモーダルフォームを表示する
+     * 表示の際に自動いいねのデータを入力しておく
+     */
     showEditModal: function showEditModal(like, index) {
       this.editModal = true;
       this.editForm.id = like.id;
       this.editForm.filter_word_id = like.filter_word_id;
       this.editIndex = index;
     },
+
+    /**
+     * 自動いいねデータを編集する
+     */
     editLike: function () {
       var _editLike = _asyncToGenerator(
       /*#__PURE__*/
@@ -3323,6 +3467,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return editLike;
     }(),
+
+    /**
+     * 自動いいねを削除する
+     */
     removeLike: function () {
       var _removeLike = _asyncToGenerator(
       /*#__PURE__*/
@@ -3363,12 +3511,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return removeLike;
     }(),
+
+    /**
+     * 編集フォームデータを空にする
+     */
     resetEditForm: function resetEditForm() {
       this.editModal = false;
       this.editForm.id = null;
       this.editForm.filter_word_id = null;
       this.editIndex = null;
     },
+
+    /**
+     * 自動いいねサービスのステータスを取得する
+     */
     fetchServiceStatus: function () {
       var _fetchServiceStatus = _asyncToGenerator(
       /*#__PURE__*/
@@ -3410,6 +3566,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return fetchServiceStatus;
     }(),
+
+    /**
+     * 自動いいねサービスを稼働状態にする
+     */
     runLikeService: function () {
       var _runLikeService = _asyncToGenerator(
       /*#__PURE__*/
@@ -3455,6 +3615,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return runLikeService;
     }(),
+
+    /**
+     * 自動いいねサービスを停止状態にする
+     */
     stopLikeService: function () {
       var _stopLikeService = _asyncToGenerator(
       /*#__PURE__*/
@@ -3507,6 +3671,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.fetchServiceStatus();
   },
   watch: {
+    /**
+     * フィルターワードの通知を受け取ったら
+     * 自動いいねと、フィルターワードを再取得する
+     */
     dashChange: {
       handler: function handler(val) {
         if (val === true) {
@@ -3688,12 +3856,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   computed: {
+    /**
+     * 新規作成フォームでTWEETの文字数をカウントする
+     */
     addTextCount: function addTextCount() {
       return this.addForm.tweet.length;
     },
+
+    /**
+     * 編集フォームでTWEETの文字数をカウントする
+     */
     editTextCount: function editTextCount() {
       return this.editForm.tweet.length;
     },
+
+    /**
+     * 現在の日付をYYYY-MM-DD形式で取得する
+     */
     getCurrentYYYYMMDD: function getCurrentYYYYMMDD() {
       var date = new Date();
       var year = date.getFullYear();
@@ -3709,6 +3888,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    /**
+     * APIを使用して登録した自動ツイート一覧を取得する
+     */
     fetchAutoTweets: function () {
       var _fetchAutoTweets = _asyncToGenerator(
       /*#__PURE__*/
@@ -3749,6 +3931,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return fetchAutoTweets;
     }(),
+
+    /**
+     * APIを使用して自動ツイートを新規登録する
+     */
     addAutoTweet: function () {
       var _addAutoTweet = _asyncToGenerator(
       /*#__PURE__*/
@@ -3803,6 +3989,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return addAutoTweet;
     }(),
+
+    /**
+     * APIを使用して自動ツイートを編集する
+     */
     editAutoTweet: function () {
       var _editAutoTweet = _asyncToGenerator(
       /*#__PURE__*/
@@ -3854,6 +4044,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return editAutoTweet;
     }(),
+
+    /**
+     * 自動ツイート編集用のモーダルフォームを表示する
+     * 表示した際に、自動ツイートのデータをフォームに入力しておく
+     */
     showEditModal: function showEditModal(autoTweet, index) {
       this.editModal = true;
       this.editForm.id = autoTweet.id;
@@ -3862,6 +4057,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.editForm.time = this.getHHMM(autoTweet.formatted_date);
       this.editIndex = index;
     },
+
+    /**
+     * APIを使用して自動ツイートを削除する
+     */
     removeAutoTweet: function () {
       var _removeAutoTweet = _asyncToGenerator(
       /*#__PURE__*/
@@ -3902,6 +4101,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return removeAutoTweet;
     }(),
+
+    /**
+     * Datetime型をYYYY-MM-DD形式に変換する
+     * @param formatted_date
+     * @returns {string}
+     */
     getYYYYMMDD: function getYYYYMMDD(formatted_date) {
       var date = new Date(formatted_date);
       var year = date.getFullYear();
@@ -3909,17 +4114,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var day = ("00" + date.getDate()).slice(-2);
       return [year, month, day].join("-");
     },
+
+    /**
+     * Datetime型をHH:MMの形式に変換する
+     */
     getHHMM: function getHHMM(formatted_date) {
       var date = new Date(formatted_date);
       var hours = ("00" + date.getHours()).slice(-2);
       var minutes = ("00" + date.getMinutes()).slice(-2);
       return [hours, minutes].join(":");
     },
+
+    /**
+     * 新規登録フォームのリセットを行う
+     */
     resetAddForm: function resetAddForm() {
       this.addForm.tweet = '';
       this.addForm.date = '';
       this.addForm.time = '00:00';
     },
+
+    /**
+     * 編集フォームのリセットを行う
+     */
     resetEditForm: function resetEditForm() {
       this.editModal = false;
       this.editForm.id = null;
@@ -3928,6 +4145,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.editForm.time = '';
       this.editIndex = null;
     },
+
+    /**
+     * APIを使用して自動ツイートのサービスステータスを取得する
+     */
     fetchServiceStatus: function () {
       var _fetchServiceStatus = _asyncToGenerator(
       /*#__PURE__*/
@@ -3969,6 +4190,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return fetchServiceStatus;
     }(),
+
+    /**
+     * 自動ツイートサービスを稼働状態に変更する
+     */
     runTweetService: function () {
       var _runTweetService = _asyncToGenerator(
       /*#__PURE__*/
@@ -4014,6 +4239,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return runTweetService;
     }(),
+
+    /**
+     * 自動ツイートサービスを停止状態にする
+     */
     stopTweetService: function () {
       var _stopTweetService = _asyncToGenerator(
       /*#__PURE__*/
@@ -4059,6 +4288,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return stopTweetService;
     }(),
+
+    /**
+     * フォームのエラーメッセージをクリアする
+     */
     clearErrors: function clearErrors() {
       this.addErrors = null;
       this.editErrors = null;
@@ -4126,6 +4359,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    /**
+     * APIを使用して自動アンフォローのステータスを取得する
+     */
     fetchServiceStatus: function () {
       var _fetchServiceStatus = _asyncToGenerator(
       /*#__PURE__*/
@@ -4167,6 +4403,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return fetchServiceStatus;
     }(),
+
+    /**
+     * APIを使用して自動アンフォローを実行状態にする
+     */
     runUnfollowService: function () {
       var _runUnfollowService = _asyncToGenerator(
       /*#__PURE__*/
@@ -4212,6 +4452,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return runUnfollowService;
     }(),
+
+    /**
+     * APIを使用して自動アンフォローを停止状態にする
+     */
     stopUnfollowService: function () {
       var _stopUnfollowService = _asyncToGenerator(
       /*#__PURE__*/
@@ -4304,6 +4548,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -4325,6 +4572,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
+    /**
+     * TwitterUserのユーザーデータを1件取得する
+     */
     fetchTwitterUser: function () {
       var _fetchTwitterUser = _asyncToGenerator(
       /*#__PURE__*/
@@ -4351,8 +4601,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 6:
                 this.screenName = response.data.screen_name;
                 this.name = response.data.name;
-                this.thumbnail = response.data.thumbnail; // // console.log(users);
-                // // console.log(accountNum);
+                this.thumbnail = response.data.thumbnail;
 
               case 9:
               case "end":
@@ -4368,6 +4617,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return fetchTwitterUser;
     }(),
+
+    /**
+     * 使用するTwitterユーザーが選択された際に、セッションとstoreにTwitterUserIdを保存する
+     * その後ダッシュボードに遷移する
+     */
     setTwitterId: function () {
       var _setTwitterId = _asyncToGenerator(
       /*#__PURE__*/
@@ -4416,6 +4670,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return setTwitterId;
     }(),
+
+    /**
+     * TwitterUserIdをstoreから削除する
+     * TwitterUserをDBから削除するAPIを実行する
+     * APIが正常に完了した場合、Twitterページemitを通知して、削除の描画を行う
+     */
     deleteTwitterUser: function () {
       var _deleteTwitterUser = _asyncToGenerator(
       /*#__PURE__*/
@@ -4469,6 +4729,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }()
   },
   computed: {
+    //storeを使ってAPIを実行する際に、APIのステータスを取得する
     apiStatus: function apiStatus() {
       return this.$store.state.auth.apiStatus;
     }
@@ -4610,6 +4871,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
+    /**
+     * 操作するTwitterUserのユーザー情報を取得する
+     * profileセクションで表示する
+     */
     fetchTwitterUser: function () {
       var _fetchTwitterUser = _asyncToGenerator(
       /*#__PURE__*/
@@ -4635,8 +4900,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context.abrupt("return", false);
 
               case 7:
-                this.twitterUser = response.data; // // console.log(users);
-                // // console.log(accountNum);
+                this.twitterUser = response.data;
 
               case 8:
               case "end":
@@ -4651,64 +4915,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return fetchTwitterUser;
-    }(),
-    setTwitterId: function () {
-      var _setTwitterId = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        var response;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios.post("/api/twitter/".concat(this.item.id));
-
-              case 2:
-                response = _context2.sent;
-
-                if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
-                  _context2.next = 6;
-                  break;
-                }
-
-                this.$store.commit('error/setCode', response.status);
-                return _context2.abrupt("return", false);
-
-              case 6:
-                this.$router.push('/dashboard');
-
-              case 7:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function setTwitterId() {
-        return _setTwitterId.apply(this, arguments);
-      }
-
-      return setTwitterId;
     }()
   },
   created: function () {
     var _created = _asyncToGenerator(
     /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               this.fetchTwitterUser();
 
             case 1:
             case "end":
-              return _context3.stop();
+              return _context2.stop();
           }
         }
-      }, _callee3, this);
+      }, _callee2, this);
     }));
 
     function created() {
@@ -4744,6 +4968,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -4892,6 +5117,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   })),
   methods: {
+    /**
+     * ログインAPIを使用してユーザーログインを行う
+     * 正常時Twitterページに遷移
+     */
     login: function () {
       var _login = _asyncToGenerator(
       /*#__PURE__*/
@@ -4923,6 +5152,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return login;
     }(),
+
+    /**
+     * ユーザー登録APIを使用してユーザー登録を行う
+     * 正常時Twitterページに遷移
+     */
     register: function () {
       var _register = _asyncToGenerator(
       /*#__PURE__*/
@@ -4954,6 +5188,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return register;
     }(),
+
+    /**
+     * パスワードリマインダーAPIを使用して、リセット用のリンクをメールで送信する
+     */
     passwordReset: function () {
       var _passwordReset = _asyncToGenerator(
       /*#__PURE__*/
@@ -4963,8 +5201,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                this.$set(this, 'isPush', true);
                 this.clearError();
+                this.$set(this, 'isPush', true); // パスワードリセット用メール送信APIを呼び出す
+
                 _context3.next = 4;
                 return axios.post('/api/password/create', this.passwordForm);
 
@@ -4973,28 +5212,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 this.$set(this, 'isPush', false);
 
                 if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_2__["UNPROCESSABLE_ENTRY"])) {
-                  _context3.next = 12;
+                  _context3.next = 11;
                   break;
                 }
 
-                this.passwordError = response.data;
-                console.log(this.passwordError);
+                //バリデーションエラー
+                this.passwordError = response.data.errors;
                 return _context3.abrupt("return", false);
 
-              case 12:
+              case 11:
                 if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_2__["OK"])) {
-                  _context3.next = 15;
+                  _context3.next = 14;
                   break;
                 }
 
+                //システムエラー類
                 this.$store.commit('error/setCode', response.status);
                 return _context3.abrupt("return", false);
 
-              case 15:
+              case 14:
                 this.passwordForm.email = '';
                 this.$set(this, 'showMailMessage', true);
 
-              case 17:
+              case 16:
               case "end":
                 return _context3.stop();
             }
@@ -5008,6 +5248,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return passwordReset;
     }(),
+
+    /**
+     * エラーメッセージのリセットを行う
+     */
     clearError: function clearError() {
       this.$store.commit('auth/setLoginErrorMessages', null);
       this.$store.commit('auth/setRegisterErrorMessages', null);
@@ -5113,6 +5357,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5135,6 +5380,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    /**
+     * パスワードリマインダーAPIを使用して、パスワードにリセットを行う
+     * リセットが成功したら、メッセージを表示してログイン画面に遷移させる
+     */
     resetPassword: function () {
       var _resetPassword = _asyncToGenerator(
       /*#__PURE__*/
@@ -5144,7 +5393,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                this.clearErrors();
+                this.clearErrors(); // パスワードリセットAPIを呼び出す
+
                 _context.next = 3;
                 return axios.post('/api/password/reset', this.resetForm);
 
@@ -5156,6 +5406,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   break;
                 }
 
+                //バリデーションエラー
                 this.errors = response.data.errors;
                 return _context.abrupt("return", false);
 
@@ -5165,6 +5416,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   break;
                 }
 
+                //システムエラー類
                 this.$store.commit('error/setCode', response.status);
                 return _context.abrupt("return", false);
 
@@ -5189,14 +5441,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return resetPassword;
     }(),
+
+    /**
+     * Propsで渡されたURLのGETパラメータ、tokenをデータに格納する
+     */
     setTokenFromUrlParam: function setTokenFromUrlParam() {
       this.resetForm.token = this.token;
     },
+
+    /**
+     * フォーム項目を空にする
+     */
     clearResetForm: function clearResetForm() {
       this.resetForm.email = '';
       this.resetForm.password = '';
       this.resetForm.password_confirmation = '';
     },
+
+    /**
+     * エラーメッセージのリセット
+     */
     clearErrors: function clearErrors() {
       this.errors = null;
     }
@@ -5267,6 +5531,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   methods: {
+    /**
+     * ユーザーが登録しているTwitterUserのID一覧を取得する
+     */
     fetchTwitterUsers: function () {
       var _fetchTwitterUsers = _asyncToGenerator(
       /*#__PURE__*/
@@ -5308,15 +5575,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return fetchTwitterUsers;
     }(),
+
+    /**
+     * TwitterCardのemitをトリガーにして
+     * TwitterUserのカードを配列から削除する
+     */
     removeCard: function removeCard(emitObject) {
       this.users.splice(emitObject.index, 1);
     }
   },
   computed: {
+    //TwitterUserアカウントを追加するボタンの非表示フラグ
     isMaximumAccount: function isMaximumAccount() {
-      return this.accountNum <= 10;
+      return this.accountNum < 10;
     }
   },
+  //ページ作成時に実行
   created: function () {
     var _created = _asyncToGenerator(
     /*#__PURE__*/
@@ -8953,7 +9227,7 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("削除")]
+              [_vm._v("削除\n            ")]
             )
           ])
         ],
@@ -9758,7 +10032,7 @@ var render = function() {
                           staticClass: "c-button c-button--inverse",
                           attrs: { type: "submit", disabled: _vm.isPush }
                         },
-                        [_vm._v("メール送信")]
+                        [_vm._v("メール送信\n                            ")]
                       )
                     ])
                   ]
@@ -10045,7 +10319,7 @@ var staticRenderFns = [
           staticClass: "c-button c-button--inverse",
           attrs: { type: "submit" }
         },
-        [_vm._v("ログイン")]
+        [_vm._v("ログイン\n                        ")]
       )
     ])
   }
@@ -10056,10 +10330,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Twitter.vue?vue&type=template&id=e0a15d0c&scoped=true&":
-/*!*****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Twitter.vue?vue&type=template&id=e0a15d0c&scoped=true& ***!
-  \*****************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Twitter.vue?vue&type=template&id=e0a15d0c&":
+/*!*****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/Twitter.vue?vue&type=template&id=e0a15d0c& ***!
+  \*****************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -26047,6 +26321,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+/**
+ * 一番最初の初期描画の時に、ユーザ認証とTwitterUser認証を行う
+ */
 
 var createApp =
 /*#__PURE__*/
@@ -26107,14 +26384,17 @@ __webpack_require__.r(__webpack_exports__);
  * LaravelにCSRFトークンをヘッダーでチェックさせる設定
  */
 
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); // Ajaxリクエストであることを示すヘッダーを付与する
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); // Ajaxリクエストであることを示すヘッダーを追加する
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.interceptors.request.use(function (config) {
-  // クッキーからトークンを取り出してヘッダーに添付する
+  // クッキーからトークンを取り出してヘッダーに追加する
   config.headers['X-XSRF-TOKEN'] = Object(_utility__WEBPACK_IMPORTED_MODULE_0__["getCookieValue"])('XSRF-TOKEN');
   return config;
-}); //エラーが帰ってきた場合は、エラーのレスポンスオブジェクトを取得する
+});
+/**
+ * エラーが帰ってきた場合は、エラーのレスポンスオブジェクトを取得する
+ */
 
 window.axios.interceptors.response.use(function (response) {
   return response;
@@ -27030,7 +27310,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Twitter_vue_vue_type_template_id_e0a15d0c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Twitter.vue?vue&type=template&id=e0a15d0c&scoped=true& */ "./resources/js/pages/Twitter.vue?vue&type=template&id=e0a15d0c&scoped=true&");
+/* harmony import */ var _Twitter_vue_vue_type_template_id_e0a15d0c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Twitter.vue?vue&type=template&id=e0a15d0c& */ "./resources/js/pages/Twitter.vue?vue&type=template&id=e0a15d0c&");
 /* harmony import */ var _Twitter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Twitter.vue?vue&type=script&lang=js& */ "./resources/js/pages/Twitter.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -27042,11 +27322,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _Twitter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Twitter_vue_vue_type_template_id_e0a15d0c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Twitter_vue_vue_type_template_id_e0a15d0c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Twitter_vue_vue_type_template_id_e0a15d0c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Twitter_vue_vue_type_template_id_e0a15d0c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "e0a15d0c",
+  null,
   null
   
 )
@@ -27072,19 +27352,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/pages/Twitter.vue?vue&type=template&id=e0a15d0c&scoped=true&":
-/*!***********************************************************************************!*\
-  !*** ./resources/js/pages/Twitter.vue?vue&type=template&id=e0a15d0c&scoped=true& ***!
-  \***********************************************************************************/
+/***/ "./resources/js/pages/Twitter.vue?vue&type=template&id=e0a15d0c&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/pages/Twitter.vue?vue&type=template&id=e0a15d0c& ***!
+  \***********************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Twitter_vue_vue_type_template_id_e0a15d0c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Twitter.vue?vue&type=template&id=e0a15d0c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Twitter.vue?vue&type=template&id=e0a15d0c&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Twitter_vue_vue_type_template_id_e0a15d0c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Twitter_vue_vue_type_template_id_e0a15d0c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Twitter.vue?vue&type=template&id=e0a15d0c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/Twitter.vue?vue&type=template&id=e0a15d0c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Twitter_vue_vue_type_template_id_e0a15d0c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Twitter_vue_vue_type_template_id_e0a15d0c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Twitter_vue_vue_type_template_id_e0a15d0c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -27233,13 +27513,13 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
- //データの入れ物、中身を直接編集できない
 
 var state = {
   //ユーザの認証状態を保存
   user: null,
   twitterId: null,
   apiStatus: null,
+  //store内でAPIを使用するのでここでエラーをキャッチする
   loginErrorMessages: null,
   registerErrorMessages: null //stateの算出プロパティ
 
@@ -27275,7 +27555,9 @@ var mutations = {
 }; //stateを非同期処理で更新するメソッドAPIの通信など
 
 var actions = {
-  // 会員登録
+  /**
+   * APIを使って会員登録を行う
+   */
   register: function () {
     var _register = _asyncToGenerator(
     /*#__PURE__*/
@@ -27302,6 +27584,7 @@ var actions = {
               return _context.abrupt("return", false);
 
             case 8:
+              // API失敗時
               context.commit('setApiStatus', false);
 
               if (response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["UNPROCESSABLE_ENTRY"]) {
@@ -27326,7 +27609,10 @@ var actions = {
 
     return register;
   }(),
-  // ログイン
+
+  /**
+   * APIを使ってログインを行う
+   */
   login: function () {
     var _login = _asyncToGenerator(
     /*#__PURE__*/
@@ -27353,6 +27639,7 @@ var actions = {
               return _context2.abrupt("return", false);
 
             case 8:
+              // API失敗時
               context.commit('setApiStatus', false);
 
               if (response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["UNPROCESSABLE_ENTRY"]) {
@@ -27377,7 +27664,10 @@ var actions = {
 
     return login;
   }(),
-  // ログアウト
+
+  /**
+   * APIを使ってログアウトを行う
+   */
   logout: function () {
     var _logout = _asyncToGenerator(
     /*#__PURE__*/
@@ -27405,6 +27695,7 @@ var actions = {
               return _context3.abrupt("return", false);
 
             case 9:
+              // API失敗時
               context.commit('setApiStatus', false);
               context.commit('error/setCode', response.status, {
                 root: true
@@ -27424,7 +27715,11 @@ var actions = {
 
     return logout;
   }(),
-  // ログインユーザーチェック
+
+  /**
+   * APIを使ってユーザーログインチェックする
+   * sessionからユーザーIDを取得する
+   */
   currentUser: function () {
     var _currentUser = _asyncToGenerator(
     /*#__PURE__*/
@@ -27440,7 +27735,7 @@ var actions = {
 
             case 3:
               response = _context4.sent;
-              user = response.data || null;
+              user = response.data || null; // API成功時
 
               if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
                 _context4.next = 9;
@@ -27452,6 +27747,7 @@ var actions = {
               return _context4.abrupt("return", false);
 
             case 9:
+              // API失敗時
               context.commit('setApiStatus', false);
               context.commit('error/setCode', response.status, {
                 root: true
@@ -27471,7 +27767,11 @@ var actions = {
 
     return currentUser;
   }(),
-  // ツイッターユーザーログインチェック
+
+  /**
+   * APIを使ってツイッターユーザーログインチェックする
+   * sessionからTwitterUserIdを取得する
+   */
   currentTwitterUser: function () {
     var _currentTwitterUser = _asyncToGenerator(
     /*#__PURE__*/
@@ -27518,6 +27818,10 @@ var actions = {
 
     return currentTwitterUser;
   }(),
+
+  /**
+   * APIを使ってツイッターユーザーログアウトする
+   */
   twitterUserLogout: function () {
     var _twitterUserLogout = _asyncToGenerator(
     /*#__PURE__*/
@@ -27583,6 +27887,11 @@ var actions = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/**
+ *自動ツイート、自動いいね機能ではフィルターキーワードを参照しているので、
+ * フィルターキーワードに変更があった際に変更を通知する
+ * 通知を保存する
+ */
 var state = {
   noticeToLike: null,
   noticeToTweet: null
@@ -27612,6 +27921,10 @@ var mutations = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/**
+ * store内でAPIを実行する際に
+ * エラーのレスポンコードを保存する
+ */
 var state = {
   code: null
 };
@@ -27688,9 +28001,7 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 /**
- * クッキーの値を取得する
- * @param {String} searchKey 検索するキー
- * @returns {String} キーに対応する値
+ *クッキーの値を取得する
  */
 function getCookieValue(searchKey) {
   if (typeof searchKey === 'undefined') {
@@ -27709,7 +28020,10 @@ function getCookieValue(searchKey) {
     }
   });
   return val;
-} //Vueでで判別するためのステータスコード
+}
+/**
+ *Vueでエラーを判別するためのステータスコード
+ */
 
 var OK = 200;
 var CREATED = 201;

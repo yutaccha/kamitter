@@ -12,8 +12,11 @@
         </div>
         <div class="p-twitter__action">
             <transition-group name="t-del" mode="out-in">
-                <i class="c-icon--gray p-twitter__icon fas fa-trash-alt" @click.stop="del = 2" v-show="del===1" key="box"></i>
-                <button class="p-twitter_delete c-button c-button--danger" @click.stop="deleteTwitterUser" v-show="del===2" key="del">削除</button>
+                <i class="c-icon--gray p-twitter__icon fas fa-trash-alt" @click.stop="del = 2" v-show="del===1"
+                   key="box"></i>
+                <button class="p-twitter_delete c-button c-button--danger" @click.stop="deleteTwitterUser"
+                        v-show="del===2" key="del">削除
+                </button>
             </transition-group>
         </div>
     </li>
@@ -42,6 +45,9 @@
             }
         },
         methods: {
+            /**
+             * TwitterUserのユーザーデータを1件取得する
+             */
             async fetchTwitterUser() {
                 const response = await axios.get('/api/twitter/user/info/' + this.item.id)
                 if (response.status !== OK) {
@@ -52,10 +58,11 @@
                 this.screenName = response.data.screen_name
                 this.name = response.data.name
                 this.thumbnail = response.data.thumbnail
-                // // console.log(users);
-                // // console.log(accountNum);
-
             },
+            /**
+             * 使用するTwitterユーザーが選択された際に、セッションとstoreにTwitterUserIdを保存する
+             * その後ダッシュボードに遷移する
+             */
             async setTwitterId() {
                 const response = await axios.post(`/api/twitter/${this.item.id}`)
                 if (response.status !== OK) {
@@ -64,12 +71,17 @@
                 }
 
                 await this.$store.dispatch('auth/currentTwitterUser')
-                if (this.apiStatus){
+                if (this.apiStatus) {
                     this.$router.push('/')
                 }
 
                 this.$router.push('/dashboard')
             },
+            /**
+             * TwitterUserIdをstoreから削除する
+             * TwitterUserをDBから削除するAPIを実行する
+             * APIが正常に完了した場合、Twitterページemitを通知して、削除の描画を行う
+             */
             async deleteTwitterUser() {
                 await this.$store.dispatch('auth/twitterUserLogout')
                 if (this.apiStatus) {
@@ -85,6 +97,7 @@
             }
         },
         computed: {
+            //storeを使ってAPIを実行する際に、APIのステータスを取得する
             apiStatus() {
                 return this.$store.state.auth.apiStatus
             },

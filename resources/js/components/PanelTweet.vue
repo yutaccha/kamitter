@@ -149,12 +149,21 @@
             }
         },
         computed: {
+            /**
+             * 新規作成フォームでTWEETの文字数をカウントする
+             */
             addTextCount: function () {
                 return this.addForm.tweet.length
             },
+            /**
+             * 編集フォームでTWEETの文字数をカウントする
+             */
             editTextCount: function () {
                 return this.editForm.tweet.length
             },
+            /**
+             * 現在の日付をYYYY-MM-DD形式で取得する
+             */
             getCurrentYYYYMMDD: function () {
                 const date = new Date()
                 const year = date.getFullYear()
@@ -170,6 +179,9 @@
             },
         },
         methods: {
+            /**
+             * APIを使用して登録した自動ツイート一覧を取得する
+             */
             async fetchAutoTweets() {
                 const response = await axios.get('/api/tweet')
                 if (response.status !== OK) {
@@ -178,6 +190,9 @@
                 }
                 this.autoTweets = response.data
             },
+            /**
+             * APIを使用して自動ツイートを新規登録する
+             */
             async addAutoTweet() {
                 this.clearErrors()
                 const response = await axios.post('/api/tweet', this.addForm)
@@ -195,6 +210,10 @@
                 this.autoTweets.push(addTweet)
                 this.newModal = false
             },
+
+            /**
+             * APIを使用して自動ツイートを編集する
+             */
             async editAutoTweet() {
                 this.clearErrors()
                 const response = await axios.put(`/api/tweet/${this.editForm.id}`, this.editForm)
@@ -210,6 +229,11 @@
                 this.autoTweets.splice(this.editIndex, 1, response.data)
                 this.resetEditForm()
             },
+
+            /**
+             * 自動ツイート編集用のモーダルフォームを表示する
+             * 表示した際に、自動ツイートのデータをフォームに入力しておく
+             */
             showEditModal(autoTweet, index) {
                 this.editModal = true
                 this.editForm.id = autoTweet.id
@@ -218,6 +242,10 @@
                 this.editForm.time = this.getHHMM(autoTweet.formatted_date)
                 this.editIndex = index
             },
+
+            /**
+             * APIを使用して自動ツイートを削除する
+             */
             async removeAutoTweet(id, index) {
                 const response = await axios.delete(`/api/tweet/${id}`)
                 if (response.status !== OK) {
@@ -227,6 +255,11 @@
 
                 this.autoTweets.splice(index, 1)
             },
+            /**
+             * Datetime型をYYYY-MM-DD形式に変換する
+             * @param formatted_date
+             * @returns {string}
+             */
             getYYYYMMDD(formatted_date) {
                 const date = new Date(formatted_date)
                 const year = date.getFullYear()
@@ -234,17 +267,27 @@
                 const day = ("00" + date.getDate()).slice(-2)
                 return [year, month, day].join("-")
             },
+
+            /**
+             * Datetime型をHH:MMの形式に変換する
+             */
             getHHMM(formatted_date) {
                 const date = new Date(formatted_date)
                 const hours = ("00" + date.getHours()).slice(-2)
                 const minutes = ("00" + date.getMinutes()).slice(-2)
                 return [hours, minutes].join(":")
             },
+            /**
+             * 新規登録フォームのリセットを行う
+             */
             resetAddForm() {
                 this.addForm.tweet = ''
                 this.addForm.date = ''
                 this.addForm.time = '00:00'
             },
+            /**
+             * 編集フォームのリセットを行う
+             */
             resetEditForm() {
                 this.editModal = false
                 this.editForm.id = null
@@ -253,6 +296,10 @@
                 this.editForm.time = ''
                 this.editIndex = null
             },
+
+            /**
+             * APIを使用して自動ツイートのサービスステータスを取得する
+             */
             async fetchServiceStatus() {
                 const response = await axios.get('/api/system/status')
                 if (response.status !== OK) {
@@ -262,6 +309,10 @@
                 this.serviceStatus = response.data.auto_tweet_status
                 this.serviceStatusLabel = response.data.status_labels.auto_tweet
             },
+
+            /**
+             * 自動ツイートサービスを稼働状態に変更する
+             */
             async runTweetService() {
                 const serviceType = 4
                 const data = {type: serviceType}
@@ -273,6 +324,10 @@
                 this.serviceStatus = response.data.auto_tweet_status
                 this.serviceStatusLabel = response.data.status_labels.auto_tweet
             },
+
+            /**
+             * 自動ツイートサービスを停止状態にする
+             */
             async stopTweetService() {
                 const serviceType = 4
                 const data = {type: serviceType}
@@ -284,6 +339,9 @@
                 this.serviceStatus = response.data.auto_tweet_status
                 this.serviceStatusLabel = response.data.status_labels.auto_tweet
             },
+            /**
+             * フォームのエラーメッセージをクリアする
+             */
             clearErrors() {
                 this.addErrors = null
                 this.editErrors = null

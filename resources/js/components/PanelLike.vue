@@ -122,6 +122,9 @@
             }
         },
         computed: {
+            /**
+             * フィルターキワードの追加、変更、削除イベントの通知を取得する
+             */
             dashChange() {
                 return this.$store.state.dashboard.noticeToLike
             },
@@ -133,6 +136,9 @@
             }
         },
         methods: {
+            /**
+             * 登録した自動いいねデータ一覧を取得する
+             */
             async fetchLikes() {
                 const response = await axios.get('/api/like')
                 if (response.status !== OK) {
@@ -141,6 +147,9 @@
                 }
                 this.likes = response.data
             },
+            /**
+             * フィルターワード一覧を取得する
+             */
             async fetchFilters() {
                 const response = await axios.get('/api/filter')
                 if (response.status !== OK) {
@@ -150,6 +159,9 @@
 
                 this.filters = response.data
             },
+            /**
+             * 新規自動いいねを追加する
+             */
             async addLike() {
                 const response = await axios.post('/api/like', this.addForm)
                 if (response.status === UNPROCESSABLE_ENTRY) {
@@ -164,12 +176,21 @@
                 this.likes.push(response.data)
                 this.newModal = false
             },
+
+            /**
+             * 編集用のモーダルフォームを表示する
+             * 表示の際に自動いいねのデータを入力しておく
+             */
             showEditModal(like, index) {
                 this.editModal = true
                 this.editForm.id = like.id
                 this.editForm.filter_word_id = like.filter_word_id
                 this.editIndex = index
             },
+
+            /**
+             * 自動いいねデータを編集する
+             */
             async editLike() {
                 const response = await axios.put(`/api/like/${this.editForm.id}`, this.editForm)
                 if (response.status !== OK) {
@@ -179,6 +200,9 @@
                 this.likes.splice(this.editIndex, 1, response.data)
                 this.resetEditForm()
             },
+            /**
+             * 自動いいねを削除する
+             */
             async removeLike(id, index) {
                 const response = await axios.delete(`/api/like/${id}`)
                 if (response.status !== OK) {
@@ -187,12 +211,20 @@
                 }
                 this.likes.splice(index, 1)
             },
+
+            /**
+             * 編集フォームデータを空にする
+             */
             resetEditForm() {
                 this.editModal = false
                 this.editForm.id = null
                 this.editForm.filter_word_id = null
                 this.editIndex = null
             },
+
+            /**
+             * 自動いいねサービスのステータスを取得する
+             */
             async fetchServiceStatus() {
                 const response = await axios.get('/api/system/status')
                 if (response.status !== OK) {
@@ -203,6 +235,10 @@
                 this.serviceStatus = response.data.auto_like_status
                 this.serviceStatusLabel = response.data.status_labels.auto_like
             },
+
+            /**
+             * 自動いいねサービスを稼働状態にする
+             */
             async runLikeService() {
                 const serviceType = 3
                 const data = {type: serviceType}
@@ -214,6 +250,10 @@
                 this.serviceStatus = response.data.auto_like_status
                 this.serviceStatusLabel = response.data.status_labels.auto_like
             },
+
+            /**
+             * 自動いいねサービスを停止状態にする
+             */
             async stopLikeService() {
                 const serviceType = 3
                 const data = {type: serviceType}
@@ -233,6 +273,10 @@
             this.fetchServiceStatus()
         },
         watch: {
+            /**
+             * フィルターワードの通知を受け取ったら
+             * 自動いいねと、フィルターワードを再取得する
+             */
             dashChange: {
                 handler(val) {
                     if (val === true) {

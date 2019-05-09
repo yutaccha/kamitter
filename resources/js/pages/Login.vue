@@ -100,7 +100,8 @@
                             <div class="p-form__button">
                                 <button type="submit"
                                         class="c-button c-button--inverse"
-                                        v-bind:disabled="isPush">メール送信</button>
+                                        v-bind:disabled="isPush">メール送信
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -144,6 +145,10 @@
             }),
         },
         methods: {
+            /**
+             * ログインAPIを使用してユーザーログインを行う
+             * 正常時Twitterページに遷移
+             */
             async login() {
                 // authストアのloginアクションを呼び出す
                 await this.$store.dispatch('auth/login', this.loginForm)
@@ -153,6 +158,10 @@
                     this.$router.push('/twitter')
                 }
             },
+            /**
+             * ユーザー登録APIを使用してユーザー登録を行う
+             * 正常時Twitterページに遷移
+             */
             async register() {
                 // authストアのregisterアクションを呼び出す
                 await this.$store.dispatch('auth/register', this.registerForm)
@@ -162,23 +171,31 @@
                     this.$router.push('/twitter')
                 }
             },
+            /**
+             * パスワードリマインダーAPIを使用して、リセット用のリンクをメールで送信する
+             */
             async passwordReset() {
-                this.$set(this, 'isPush', true)
                 this.clearError()
+                this.$set(this, 'isPush', true)
+                // パスワードリセット用メール送信APIを呼び出す
                 const response = await axios.post('/api/password/create', this.passwordForm)
                 this.$set(this, 'isPush', false)
+
                 if (response.status === UNPROCESSABLE_ENTRY) {
-                    this.passwordError = response.data
-                    console.log(this.passwordError);
+                    //バリデーションエラー
+                    this.passwordError = response.data.errors
                     return false
-                }else if(response.status !== OK){
+                } else if (response.status !== OK) {
+                    //システムエラー類
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
                 this.passwordForm.email = ''
                 this.$set(this, 'showMailMessage', true)
-
             },
+            /**
+             * エラーメッセージのリセットを行う
+             */
             clearError() {
                 this.$store.commit('auth/setLoginErrorMessages', null)
                 this.$store.commit('auth/setRegisterErrorMessages', null)

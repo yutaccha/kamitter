@@ -126,6 +126,9 @@
             }
         },
         methods: {
+            /**
+             * 登録したフィルターキーワード一覧をAPIで取得する
+             */
             async fetchFilters() {
                 const response = await axios.get('/api/filter')
                 if (response.status !== OK) {
@@ -135,25 +138,38 @@
 
                 this.filters = response.data
             },
+            /**
+             * 新規フィルターキーワードをAPIで登録する
+             */
             async addFilter() {
+                this.clearErrors()
                 const response = await axios.post('/api/filter', this.addForm)
+
                 if (response.status === UNPROCESSABLE_ENTRY) {
+                    //バリデーションエラー
                     this.addErrors = response.data.errors
                     return false
                 }
-
                 this.resetAddForm()
-
                 if (response.status !== CREATED) {
+                    //システムエラー類
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
+
+                //取得したデータを格納する
                 const addedFilter = response.data;
                 this.filters.push(addedFilter)
                 this.newModal = false
+
+                //自動ツイート、自動いいね機能ではフィルターキーワードを参照しているので、
+                //フィルターキーワードに変更があった際に変更を通知する
                 this.$store.commit('dashboard/setNoticeToTweet', true)
                 this.$store.commit('dashboard/setNoticeToLike', true)
             },
+            /**
+             * 編集フォームモーダルの表示を行って、値を入力しておく
+             */
             showEditModal(filter, index) {
                 this.editModal = true
                 this.editForm.id = filter.id
@@ -162,17 +178,33 @@
                 this.editForm.remove = filter.remove
                 this.editIndex = index
             },
+            /**
+             * APIを利用してフィルターキーワードの変更を行う
+             */
             async editFilter() {
+                this.clearErrors()
                 const response = await axios.put(`/api/filter/${this.editForm.id}`, this.editForm)
+                if (response.status === UNPROCESSABLE_ENTRY) {
+                    //バリデーションエラー
+                    this.editErrors = response.data.errors
+                    return false
+                }
                 if (response.status !== OK) {
+                    //システムエラー類
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
-                this.filters.splice(this.editIndex, 1, response.data)
                 this.resetEditForm()
+                this.filters.splice(this.editIndex, 1, response.data)
+
+                //自動ツイート、自動いいね機能ではフィルターキーワードを参照しているので、
+                //フィルターキーワードに変更があった際に変更を通知する
                 this.$store.commit('dashboard/setNoticeToTweet', true)
                 this.$store.commit('dashboard/setNoticeToLike', true)
             },
+            /**
+             * APIを利用してフィルターキーワードの削除を行う
+             */
             async removeFilter(id, index) {
                 const response = await axios.delete(`/api/filter/${id}`)
                 if (response.status !== OK) {
@@ -185,11 +217,17 @@
                 this.$store.commit('dashboard/setNoticeToLike', true)
             },
 
+            /**
+             * 登録フォームの入力欄を空にする
+             */
             resetAddForm() {
                 this.addForm.type = 1
                 this.addForm.word = ''
                 this.addForm.remove = ''
             },
+            /**
+             * 編集フォームの入力欄を空にする
+             */
             resetEditForm() {
                 this.editModal = false
                 this.editForm.id = null
@@ -198,6 +236,9 @@
                 this.editForm.remove = ''
                 this.editIndex = null
             },
+            /**
+             * エラーメッセージを空にする
+             */
             clearErrors() {
                 this.addErrors = null
                 this.editErrors = null

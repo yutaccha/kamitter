@@ -30,6 +30,7 @@
     }
   }
 
+
   &__name {
     font-size: $font-size_m;
 
@@ -70,7 +71,6 @@
     &:last-of-type {
       border-bottom: none;
     }
-
     &:hover {
       background: $color-default;
       color: $color-white;

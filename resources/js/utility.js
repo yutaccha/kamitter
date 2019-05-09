@@ -1,7 +1,5 @@
 /**
- * クッキーの値を取得する
- * @param {String} searchKey 検索するキー
- * @returns {String} キーに対応する値
+ *クッキーの値を取得する
  */
 export function getCookieValue (searchKey) {
     if (typeof searchKey === 'undefined') {
@@ -20,7 +18,9 @@ export function getCookieValue (searchKey) {
     return val
 }
 
-//Vueでで判別するためのステータスコード
+/**
+ *Vueでエラーを判別するためのステータスコード
+ */
 export const OK = 200
 export const CREATED = 201
 export const UNAUTHORISED = 401

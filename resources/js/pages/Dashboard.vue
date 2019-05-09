@@ -84,6 +84,10 @@
             }
         },
         methods: {
+            /**
+             * 操作するTwitterUserのユーザー情報を取得する
+             * profileセクションで表示する
+             */
             async fetchTwitterUser() {
                 const id = this.$store.state.auth.twitterId
                 const response = await axios.get('/api/twitter/user/info/' + id)
@@ -92,17 +96,6 @@
                     return false
                 }
                 this.twitterUser = response.data
-                // // console.log(users);
-                // // console.log(accountNum);
-
-            },
-            async setTwitterId() {
-                const response = await axios.post(`/api/twitter/${this.item.id}`)
-                if (response.status !== OK) {
-                    this.$store.commit('error/setCode', response.status)
-                    return false
-                }
-                this.$router.push('/dashboard')
             },
         },
         async created() {

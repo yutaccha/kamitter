@@ -5,18 +5,20 @@ import { getCookieValue } from './utility'
 
 window.axios = require('axios')
 
-// Ajaxリクエストであることを示すヘッダーを付与する
+// Ajaxリクエストであることを示すヘッダーを追加する
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 window.axios.interceptors.request.use(config => {
-    // クッキーからトークンを取り出してヘッダーに添付する
+    // クッキーからトークンを取り出してヘッダーに追加する
     config.headers['X-XSRF-TOKEN'] = getCookieValue('XSRF-TOKEN')
 
     return config
 })
 
 
-//エラーが帰ってきた場合は、エラーのレスポンスオブジェクトを取得する
+/**
+ * エラーが帰ってきた場合は、エラーのレスポンスオブジェクトを取得する
+ */
 window.axios.interceptors.response.use(
     response => response,
     error => error.response || error
