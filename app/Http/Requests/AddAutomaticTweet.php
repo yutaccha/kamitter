@@ -47,4 +47,11 @@ class AddAutomaticTweet extends FormRequest
 
         return $results;
     }
+
+    public function messages()
+    {
+        return [
+          'after' => '現在時刻より後の時間を指定してください。'
+        ];
+    }
 }

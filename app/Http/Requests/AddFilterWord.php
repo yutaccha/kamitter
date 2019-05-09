@@ -33,4 +33,11 @@ class AddFilterWord extends FormRequest
             'remove' => 'max:50',
         ];
     }
+
+    public function attributes()
+    {
+        return [
+          'word' => 'キーワード'
+        ];
+    }
 }

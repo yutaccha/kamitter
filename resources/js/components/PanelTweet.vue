@@ -58,13 +58,18 @@
                             </span>
                     <form class="p-form" @submit.prevent="addAutoTweet">
 
+                        <div v-if="addErrors" class="p-form__errors">
+                            <ul v-if="addErrors.date_time">
+                                <li v-for="msg in addErrors.date_time" :key="msg">{{ msg }}</li>
+                            </ul>
+                        </div>
 
-                        <label class="p-form__label" for="add-tweet">ツイート内容 {{addTextCount}}/140 ※必須</label>
+                        <label class="p-form__label" for="add-tweet">ツイート内容 {{addTextCount}}/140 *必須</label>
                         <textarea class="p-form__item p-form__item--textarea" id="add-tweet"
                                   rows="5" cols="40" v-model="addForm.tweet" required maxlength="140">
                         </textarea>
 
-                        <label class="p-form__label">ツイート予定日時</label>
+                        <label class="p-form__label">ツイート予定日時 *必須</label>
                         <div class="u-display__flex--left">
                             <input type="date" class="p-form__date"
                                    :min="getCurrentYYYYMMDD"
@@ -86,13 +91,18 @@
                             </span>
                     <form class="p-form" @submit.prevent="editAutoTweet">
 
+                        <div v-if="editErrors" class="p-form__errors">
+                            <ul v-if="editErrors.date_time">
+                                <li v-for="msg in editErrors.date_time" :key="msg">{{ msg }}</li>
+                            </ul>
+                        </div>
 
-                        <label class="p-form__label" for="edit-tweet">ツイート内容 {{editTextCount}}/140 ※必須</label>
+                        <label class="p-form__label" for="edit-tweet">ツイート内容 {{editTextCount}}/140 *必須</label>
                         <textarea class="p-form__item p-form__item--textarea" id="edit-tweet"
                                   rows="5" cols="40" v-model="editForm.tweet" required maxlength="140">
                         </textarea>
 
-                        <label class="p-form__label">予定日時</label>
+                        <label class="p-form__label">予定日時 *必須</label>
                         <div class="u-display__flex--left">
                             <input type="date" class="p-form__date"
                                    :min="getCurrentYYYYMMDD"
@@ -124,7 +134,8 @@
                 editIndex: null,
                 serviceStatus: null,
                 serviceStatusLabel: null,
-                errors: null,
+                addErrors: null,
+                editErrors: null,
                 addForm: {
                     tweet: '',
                     date: '',
@@ -168,14 +179,14 @@
                 this.autoTweets = response.data
             },
             async addAutoTweet() {
+                this.clearErrors()
                 const response = await axios.post('/api/tweet', this.addForm)
+
                 if (response.status === UNPROCESSABLE_ENTRY) {
-                    this.errors = response.data.errors
+                    this.addErrors = response.data.errors
                     return false
                 }
-
                 this.resetAddForm()
-
                 if (response.status !== CREATED) {
                     this.$store.commit('error/setCode', response.status)
                     return false
@@ -185,7 +196,13 @@
                 this.newModal = false
             },
             async editAutoTweet() {
+                this.clearErrors()
                 const response = await axios.put(`/api/tweet/${this.editForm.id}`, this.editForm)
+
+                if (response.status === UNPROCESSABLE_ENTRY) {
+                    this.editErrors = response.data.errors
+                    return false
+                }
                 if (response.status !== OK) {
                     this.$store.commit('error/setCode', response.status)
                     return false
@@ -267,6 +284,10 @@
                 this.serviceStatus = response.data.auto_tweet_status
                 this.serviceStatusLabel = response.data.status_labels.auto_tweet
             },
+            clearErrors() {
+                this.addErrors = null
+                this.editErrors = null
+            }
         },
         created() {
             this.fetchAutoTweets()

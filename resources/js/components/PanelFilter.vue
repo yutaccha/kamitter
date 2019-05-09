@@ -42,6 +42,11 @@
                             </span>
                     <form class="p-form" @submit.prevent="addFilter">
 
+                        <div v-if="addErrors" class="p-form__errors">
+                            <ul v-if="addErrors.word">
+                                <li v-for="msg in addErrors.word" :key="msg">{{ msg }}</li>
+                            </ul>
+                        </div>
 
                         <label class="p-form__label" for="add-filter">条件タイプ</label>
                         <select class="p-form__select" id="add-filter" v-model="addForm.type">
@@ -105,7 +110,8 @@
                 newModal: false,
                 editModal: false,
                 editIndex: null,
-                errors: null,
+                addErrors: null,
+                editErrors: null,
                 addForm: {
                     type: 1,
                     word: '',
@@ -132,7 +138,7 @@
             async addFilter() {
                 const response = await axios.post('/api/filter', this.addForm)
                 if (response.status === UNPROCESSABLE_ENTRY) {
-                    this.errors = response.data.errors
+                    this.addErrors = response.data.errors
                     return false
                 }
 
@@ -191,6 +197,10 @@
                 this.editForm.word = ''
                 this.editForm.remove = ''
                 this.editIndex = null
+            },
+            clearErrors() {
+                this.addErrors = null
+                this.editErrors = null
             }
         },
         created() {

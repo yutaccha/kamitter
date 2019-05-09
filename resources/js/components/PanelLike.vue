@@ -52,7 +52,7 @@
                     <form class="p-form" @submit.prevent="addLike">
 
 
-                        <label class="p-form__label" for="add-like-filter">いいね条件の選択</label>
+                        <label class="p-form__label" for="add-like-filter">いいね条件の選択 *必須</label>
                         <select class="p-form__select" id="add-like-filter"
                                 v-model="addForm.filter_word_id"
                                 required
@@ -76,7 +76,7 @@
                     <form class="p-form" @submit.prevent="editLike">
 
 
-                        <label class="p-form__label" for="edit-like-filter">いいね条件の選択</label>
+                        <label class="p-form__label" for="edit-like-filter">いいね条件の選択 *必須</label>
                         <select class="p-form__select" id="edit-like-filter"
                                 v-model="editForm.filter_word_id"
                                 required

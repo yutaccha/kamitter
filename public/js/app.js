@@ -2172,6 +2172,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2180,7 +2185,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       newModal: false,
       editModal: false,
       editIndex: null,
-      errors: null,
+      addErrors: null,
+      editErrors: null,
       addForm: {
         type: 1,
         word: '',
@@ -2255,7 +2261,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   break;
                 }
 
-                this.errors = response.data.errors;
+                this.addErrors = response.data.errors;
                 return _context2.abrupt("return", false);
 
               case 6:
@@ -2395,6 +2401,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.editForm.word = '';
       this.editForm.remove = '';
       this.editIndex = null;
+    },
+    clearErrors: function clearErrors() {
+      this.addErrors = null;
+      this.editErrors = null;
     }
   },
   created: function created() {
@@ -3643,6 +3653,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3653,7 +3673,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       editIndex: null,
       serviceStatus: null,
       serviceStatusLabel: null,
-      errors: null,
+      addErrors: null,
+      editErrors: null,
       addForm: {
         tweet: '',
         date: '',
@@ -3737,37 +3758,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
+                this.clearErrors();
+                _context2.next = 3;
                 return axios.post('/api/tweet', this.addForm);
 
-              case 2:
+              case 3:
                 response = _context2.sent;
 
                 if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["UNPROCESSABLE_ENTRY"])) {
-                  _context2.next = 6;
+                  _context2.next = 7;
                   break;
                 }
 
-                this.errors = response.data.errors;
+                this.addErrors = response.data.errors;
                 return _context2.abrupt("return", false);
 
-              case 6:
+              case 7:
                 this.resetAddForm();
 
                 if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["CREATED"])) {
-                  _context2.next = 10;
+                  _context2.next = 11;
                   break;
                 }
 
                 this.$store.commit('error/setCode', response.status);
                 return _context2.abrupt("return", false);
 
-              case 10:
+              case 11:
                 addTweet = response.data;
                 this.autoTweets.push(addTweet);
                 this.newModal = false;
 
-              case 13:
+              case 14:
               case "end":
                 return _context2.stop();
             }
@@ -3790,25 +3812,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _context3.next = 2;
+                this.clearErrors();
+                _context3.next = 3;
                 return axios.put("/api/tweet/".concat(this.editForm.id), this.editForm);
 
-              case 2:
+              case 3:
                 response = _context3.sent;
 
+                if (!(response.status === _utility__WEBPACK_IMPORTED_MODULE_1__["UNPROCESSABLE_ENTRY"])) {
+                  _context3.next = 7;
+                  break;
+                }
+
+                this.editErrors = response.data.errors;
+                return _context3.abrupt("return", false);
+
+              case 7:
                 if (!(response.status !== _utility__WEBPACK_IMPORTED_MODULE_1__["OK"])) {
-                  _context3.next = 6;
+                  _context3.next = 10;
                   break;
                 }
 
                 this.$store.commit('error/setCode', response.status);
                 return _context3.abrupt("return", false);
 
-              case 6:
+              case 10:
                 this.autoTweets.splice(this.editIndex, 1, response.data);
                 this.resetEditForm();
 
-              case 8:
+              case 12:
               case "end":
                 return _context3.stop();
             }
@@ -4026,7 +4058,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return stopTweetService;
-    }()
+    }(),
+    clearErrors: function clearErrors() {
+      this.addErrors = null;
+      this.editErrors = null;
+    }
   },
   created: function created() {
     this.fetchAutoTweets();
@@ -6852,6 +6888,22 @@ var render = function() {
                 }
               },
               [
+                _vm.addErrors
+                  ? _c("div", { staticClass: "p-form__errors" }, [
+                      _vm.addErrors.word
+                        ? _c(
+                            "ul",
+                            _vm._l(_vm.addErrors.word, function(msg) {
+                              return _c("li", { key: msg }, [
+                                _vm._v(_vm._s(msg))
+                              ])
+                            }),
+                            0
+                          )
+                        : _vm._e()
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
                 _c(
                   "label",
                   {
@@ -7971,7 +8023,7 @@ var render = function() {
                     staticClass: "p-form__label",
                     attrs: { for: "add-like-filter" }
                   },
-                  [_vm._v("いいね条件の選択")]
+                  [_vm._v("いいね条件の選択 *必須")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -8082,7 +8134,7 @@ var render = function() {
                     staticClass: "p-form__label",
                     attrs: { for: "edit-like-filter" }
                   },
-                  [_vm._v("いいね条件の選択")]
+                  [_vm._v("いいね条件の選択 *必須")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -8396,12 +8448,28 @@ var render = function() {
                 }
               },
               [
+                _vm.addErrors
+                  ? _c("div", { staticClass: "p-form__errors" }, [
+                      _vm.addErrors.date_time
+                        ? _c(
+                            "ul",
+                            _vm._l(_vm.addErrors.date_time, function(msg) {
+                              return _c("li", { key: msg }, [
+                                _vm._v(_vm._s(msg))
+                              ])
+                            }),
+                            0
+                          )
+                        : _vm._e()
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
                 _c(
                   "label",
                   { staticClass: "p-form__label", attrs: { for: "add-tweet" } },
                   [
                     _vm._v(
-                      "ツイート内容 " + _vm._s(_vm.addTextCount) + "/140 ※必須"
+                      "ツイート内容 " + _vm._s(_vm.addTextCount) + "/140 *必須"
                     )
                   ]
                 ),
@@ -8435,7 +8503,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("label", { staticClass: "p-form__label" }, [
-                  _vm._v("ツイート予定日時")
+                  _vm._v("ツイート予定日時 *必須")
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "u-display__flex--left" }, [
@@ -8539,6 +8607,22 @@ var render = function() {
                 }
               },
               [
+                _vm.editErrors
+                  ? _c("div", { staticClass: "p-form__errors" }, [
+                      _vm.editErrors.date_time
+                        ? _c(
+                            "ul",
+                            _vm._l(_vm.editErrors.date_time, function(msg) {
+                              return _c("li", { key: msg }, [
+                                _vm._v(_vm._s(msg))
+                              ])
+                            }),
+                            0
+                          )
+                        : _vm._e()
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
                 _c(
                   "label",
                   {
@@ -8547,7 +8631,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "ツイート内容 " + _vm._s(_vm.editTextCount) + "/140 ※必須"
+                      "ツイート内容 " + _vm._s(_vm.editTextCount) + "/140 *必須"
                     )
                   ]
                 ),
@@ -8581,7 +8665,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("label", { staticClass: "p-form__label" }, [
-                  _vm._v("予定日時")
+                  _vm._v("予定日時 *必須")
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "u-display__flex--left" }, [
