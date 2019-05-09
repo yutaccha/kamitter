@@ -3,6 +3,7 @@
 
 /**
  * sessionトークンのリフレッシュ
+ * CRSFトークンのリフレッシュ
  */
 Route::get('/token/refresh', function (\Illuminate\Http\Request $request){
    $request->session()->regenerateToken();

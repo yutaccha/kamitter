@@ -52,6 +52,11 @@ class SystemManager extends Model
     }
 
 
+    /**
+     * それぞれの自動サービスのステータスラベルを返す
+     * アクセサ - status_labels
+     * @return array
+     */
     public function getStatusLabelsAttribute()
     {
         $status_labels = [];
@@ -64,6 +69,11 @@ class SystemManager extends Model
         return $status_labels;
     }
 
+
+    /**
+     * すべてのサービスを停止状態にする
+     * @param $id
+     */
     public static function stopAllServices($id)
     {
         $system_manager = self::where('id', $id)->first();

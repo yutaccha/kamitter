@@ -20,22 +20,38 @@ class FollowTarget extends Model
         'created_at', 'updated_at'
     ];
 
+
+    /**
+     * リレーションシップ - usersテーブル
+     */
     public function user()
     {
         return $this->belongsTo('App\User', 'user_id');
     }
 
+
+    /**
+     * リレーションシップ - twitter_usersテーブル
+     */
     public function twitterUser()
     {
         return $this->belongsTo('App\TwitterUser', 'twitter_user_id');
     }
 
+
+    /**
+     * リレーションシップ - filter_wordsテーブル
+     */
     public function filterWord()
     {
         return $this->belongsTo('App\FilterWord', 'filter_word_id');
     }
 
 
+    /**
+     * アクセサ - status_label
+     * @return string
+     */
     public function getStatusLabelAttribute()
     {
         $status = $this->attributes['status'];

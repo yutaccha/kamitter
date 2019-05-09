@@ -11,8 +11,14 @@
 |
 */
 
+/**
+ * ツイッター認証でTwitter.comと通信する際のルート
+ */
+//認証ページにリダイレクトする
 Route::get('auth/twitter/oauth', 'TwitterAuthController@oauth')->name('twitter.oauth');
+//コールバックの処理
 Route::get('auth/twitter/callback', 'TwitterAuthController@handleProviderCallback')->name('twitter.callback');
+
 
 // 他のルートに該当しない場合indexを返す
 Route::get('/{any?}', function () {
