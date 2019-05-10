@@ -1,6 +1,6 @@
 const mix = require('laravel-mix')
 
-mix.setPublicPath('kamitter/public')
+
 
 mix.webpackConfig({
     module: {
@@ -13,7 +13,8 @@ mix.webpackConfig({
     }
 })
 
-mix.js('resources/js/app.js', 'public/js')
+mix.setPublicPath('kamitter/public')
+    .js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .options({
         postCss: [
