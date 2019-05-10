@@ -16,6 +16,11 @@ class FollowTargetController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * 新規のフォローターゲットを追加する
+     * @param AddFollowTarget $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function add(AddFollowTarget $request)
     {
         $twitter_user_id = session()->get('twitter_id');
@@ -31,6 +36,11 @@ class FollowTargetController extends Controller
         return response($new_auto_like, 201);
     }
 
+
+    /**
+     * 登録したフォローターゲット一覧を取得する
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function show()
     {
         $twitter_user_id = session()->get('twitter_id');
@@ -43,6 +53,13 @@ class FollowTargetController extends Controller
         return response($follow_target, 200);
     }
 
+
+    /**
+     * フォローターゲット情報を修正する
+     * @param int $id
+     * @param AddFollowTarget $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function edit(int $id, AddFollowTarget $request)
     {
         $twitter_user_id = session()->get('twitter_id');
@@ -59,6 +76,10 @@ class FollowTargetController extends Controller
         return response($follow_target, 200);
     }
 
+    /**
+     * フォローターゲットを削除する
+     * @param int $id
+     */
     public function delete(int $id)
     {
         $twitter_user_id = session()->get('twitter_id');
@@ -77,6 +98,11 @@ class FollowTargetController extends Controller
         $follow_target->delete();
     }
 
+    /**
+     * TwitterUserが見つからなかった場合にはNOTFOUND
+     * 権限のないアクセスをした場合にはForbiddenを返す
+     * @param $twitter_user_id
+     */
     public function authCheck($twitter_user_id)
     {
         $user_id = Auth::id();

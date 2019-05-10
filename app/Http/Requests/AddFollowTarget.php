@@ -26,6 +26,7 @@ class AddFollowTarget extends FormRequest
     public function rules()
     {
         return [
+            //apiTwiterUserExistは入力されたscreenのユーザーが存在するかチェックする
             'target' => ["required", "max:15", "regex:/^[a-zA-Z0-9_]+$/i", new ApiTwitterUserExist],
             'filter_word_id' => 'required',
         ];

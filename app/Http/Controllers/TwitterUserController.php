@@ -14,6 +14,10 @@ class TwitterUserController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * TwitterUserのリストと取得したTwitterUserの総数を返す
+     * @return array
+     */
     public function list()
     {
         $user_id = Auth::id();
@@ -24,32 +28,49 @@ class TwitterUserController extends Controller
     }
 
 
+    /**
+     * APIでTwitterのユーザ情報を取得する
+     * @param int $id
+     * @return array
+     */
     public function info(int $id)
     {
+
         $user_id = Auth::id();
-        if (is_null($user_id)){
-            abort(419);
-        }
         $twitter_user = TwitterUser::where('id', $id)->first();
+        //存在しないユーザーを取得
         if (is_null($twitter_user)){
             abort(404);
         }
+        //他のユーザーのTwitterIdを取得した場合アクセス禁止
         if ($user_id !== $twitter_user->user_id){
             abort(403);
         }
+
         $token = $twitter_user->token;
         $token_secret = $twitter_user->token_secret;
 
-        $json = TwitterApi::useTwitterApi('GET', 'account/verify_credentials', [], $token, $token_secret);
-//        dd($json);
-        $twitter_users_data = [
-            'name' => $json->name,
-            'screen_name' => $json->screen_name,
-            'thumbnail' =>  str_replace('_normal', '', $json->profile_image_url),
-            'follows' => $json->friends_count,
-            'followers' => $json->followers_count,
-        ];
 
-        return $twitter_users_data;
+        try {
+            //TwitterApiの実行
+            $json = TwitterApi::useTwitterApi('GET', 'users/show', [
+                'screen_name' => $twitter_user->screen,
+            ], $token, $token_secret);
+
+
+            $twitter_users_data = [
+                'name' => $json->name,
+                'screen_name' => $json->screen_name,
+                'thumbnail' => str_replace('_normal', '', $json->profile_image_url),
+                'follows' => $json->friends_count,
+                'followers' => $json->followers_count,
+            ];
+
+            return $twitter_users_data;
+        }catch (\Exception $e){
+            abort(500);
+    }
+
+
     }
 }

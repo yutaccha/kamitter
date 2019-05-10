@@ -16,6 +16,12 @@ class AutomaticTweetController extends Controller
         $this->middleware('auth');
     }
 
+
+    /**
+     * 新規自動ツイートを登録する
+     * @param AddAutomaticTweet $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function add(AddAutomaticTweet $request)
     {
         $twitter_user_id = session()->get('twitter_id');
@@ -31,6 +37,11 @@ class AutomaticTweetController extends Controller
         return response($new_auto_tweet, 201);
     }
 
+
+    /**
+     * 登録した自動ツイート一覧を取得する
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function show()
     {
         $twitter_user_id = session()->get('twitter_id');
@@ -41,10 +52,18 @@ class AutomaticTweetController extends Controller
         return response($auto_tweets, 200);
     }
 
+
+    /**
+     * 自動ツイート情報を変更する
+     * @param int $id
+     * @param AddAutomaticTweet $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function edit(int $id, AddAutomaticTweet $request)
     {
         $twitter_user_id = session()->get('twitter_id');
         $this->authCheck($twitter_user_id);
+
         $auto_tweet = AutomaticTweet::where('id', $id)->first();
         if (!$auto_tweet) {
             abort(404);
@@ -56,6 +75,11 @@ class AutomaticTweetController extends Controller
         return response($auto_tweet, 200);
     }
 
+
+    /**
+     * 自動ツイートを削除する
+     * @param int $id
+     */
     public function delete(int $id)
     {
         $twitter_user_id = session()->get('twitter_id');
@@ -68,6 +92,11 @@ class AutomaticTweetController extends Controller
         $auto_tweet->delete();
     }
 
+    /**
+     * TwitterUserが見つからなかった場合にはNOTFOUND
+     * 権限のないアクセスをした場合にはForbiddenを返す
+     * @param $twitter_user_id
+     */
     public function authCheck($twitter_user_id)
     {
         $user_id = Auth::id();

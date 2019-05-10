@@ -28,6 +28,11 @@ class ApiTwitterUserExist implements Rule
      */
     public function passes($attribute, $value)
     {
+
+        /**
+         * 指定のscreen_nameのツイッターユーザーが存在しているかをチェック
+         * 存在していればtrueを返す、存在しなければfalseを返す
+         */
         $twitter_user_id = session()->get('twitter_id');
         $twitter_user = TwitterUser::where('id', $twitter_user_id)->with('systemManagers')->first();
         $system_manager_id = $twitter_user->system_manager['id'];

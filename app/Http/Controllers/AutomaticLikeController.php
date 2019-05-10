@@ -17,6 +17,11 @@ class AutomaticLikeController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * 新規自動いいね設定を追加する
+     * @param AddAutomaticLike $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function add(AddAutomaticLike $request)
     {
         $twitter_user_id = session()->get('twitter_id');
@@ -31,6 +36,11 @@ class AutomaticLikeController extends Controller
         return response($new_auto_like, 201);
     }
 
+
+    /**
+     * 登録した自動いいね設定一覧を取得する
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function show()
     {
         $twitter_user_id = session()->get('twitter_id');
@@ -40,6 +50,13 @@ class AutomaticLikeController extends Controller
         return response($auto_likes, 200);
     }
 
+
+    /**
+     * 自動いいね設定情報を変更する
+     * @param int $id
+     * @param AddAutomaticLike $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function edit(int $id, AddAutomaticLike $request)
     {
         $twitter_user_id = session()->get('twitter_id');
@@ -55,6 +72,11 @@ class AutomaticLikeController extends Controller
         return response($auto_like, 200);
     }
 
+
+    /**
+     * 自動いいね情報を変更する
+     * @param int $id
+     */
     public function delete(int $id)
     {
         $twitter_user_id = session()->get('twitter_id');
@@ -68,6 +90,11 @@ class AutomaticLikeController extends Controller
     }
 
 
+    /**
+     * TwitterUserが見つからなかった場合にはNOTFOUND
+     * 権限のないアクセスをした場合にはForbiddenを返す
+     * @param $twitter_user_id
+     */
     public function authCheck($twitter_user_id)
     {
         $user_id = Auth::id();

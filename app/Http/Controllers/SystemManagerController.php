@@ -17,16 +17,16 @@ class SystemManagerController extends Controller
         $this->middleware('auth');
     }
 
-
+    /**
+     * 指定されたサービスを稼働状態に変更する
+     * @param EditSystemManager $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function run(EditSystemManager $request)
     {
-        $user_id = Auth::id();
-        if (is_null($user_id)) {
-            abort(419);
-        }
         $twitter_user_id = session()->get('twitter_id');
         $system_manager = SystemManager::where('twitter_user_id', $twitter_user_id)->first();
-        if (!$system_manager) {
+        if (is_null($system_manager)) {
             abort(404);
         }
         switch ($request->type) {
@@ -47,15 +47,16 @@ class SystemManagerController extends Controller
         return response($system_manager, 200);
     }
 
+    /**
+     * 指定されたサービスを停止する
+     * @param EditSystemManager $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function stop(EditSystemManager $request)
     {
-        $user_id = Auth::id();
-        if (is_null($user_id)) {
-            abort(419);
-        }
         $twitter_user_id = session()->get('twitter_id');
         $system_manager = SystemManager::where('twitter_user_id', $twitter_user_id)->first();
-        if (!$system_manager) {
+        if (is_null($system_manager)) {
             abort(404);
         }
         switch ($request->type) {
@@ -76,15 +77,15 @@ class SystemManagerController extends Controller
         return response($system_manager, 200);
     }
 
+    /**
+     * TwitterUserが利用しているSystemManagerを返す
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function show()
     {
-        $user_id = Auth::id();
-        if (is_null($user_id)) {
-            abort(419);
-        }
         $twitter_user_id = session()->get('twitter_id');
         $system_manager = SystemManager::where('twitter_user_id', $twitter_user_id)->first();
-        if (!$system_manager) {
+        if (is_null($system_manager)) {
             abort(404);
         }
         return response($system_manager, 200);

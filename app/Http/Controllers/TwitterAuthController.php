@@ -85,7 +85,7 @@ class TwitterAuthController extends Controller
 
     /**
      * セッションに登録された現在操作中のTwitterUserIdを取得する
-     * @return mixed|string
+     * @return mixed|string twitter_user_id
      */
     public function getId()
     {
