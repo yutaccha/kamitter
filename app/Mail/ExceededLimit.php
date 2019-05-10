@@ -9,6 +9,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use App\User;
 use App\TwitterUser;
 
+/**
+ * API上限エラー検知時に送信するメールのクラス
+ * Class ExceededLimit
+ * @package App\Mail
+ */
 class ExceededLimit extends Mailable
 {
     use Queueable, SerializesModels;

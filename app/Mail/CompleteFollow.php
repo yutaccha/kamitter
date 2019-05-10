@@ -10,6 +10,11 @@ use App\User;
 use App\TwitterUser;
 
 
+/**
+ * 自動フォロー完了時に送信するメールのクラス
+ * Class CompleteFollow
+ * @package App\Mail
+ */
 class CompleteFollow extends Mailable
 {
     use Queueable, SerializesModels;

@@ -10,7 +10,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Facades\Socialite;
 
-
+/**
+ * TwitterUserの新規追加、削除を行う
+ * Twitterアプリケーション認証を行う
+ * TwitterUserのセッション管理を行う
+ *
+ * Class TwitterAuthController
+ * @package App\Http\Controllers
+ */
 class TwitterAuthController extends Controller
 {
     use AuthenticatesUsers;

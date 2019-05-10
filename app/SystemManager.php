@@ -5,6 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use  App\Http\Requests\EditSystemManager;
 
+/**
+ * 各サービスのサービスステータスを扱うモデル
+ * Class SystemManager
+ * @package App
+ */
 class SystemManager extends Model
 {
     protected $appends = [

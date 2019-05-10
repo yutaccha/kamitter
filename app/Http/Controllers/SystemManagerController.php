@@ -7,6 +7,11 @@ use App\SystemManager;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+/**
+ * 自動サービスのステータス変更、ステータス取得を行う
+ * Class SystemManagerController
+ * @package App\Http\Controllers
+ */
 class SystemManagerController extends Controller
 {
     use AuthenticatesUsers;

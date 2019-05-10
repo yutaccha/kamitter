@@ -9,6 +9,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use App\User;
 use App\TwitterUser;
 
+/**
+ * Twitterアカウント凍結時に送信するメールのクラス
+ * Class SuspendedTwitterAccount
+ * @package App\Mail
+ */
 class SuspendedTwitterAccount extends Mailable
 {
     use Queueable, SerializesModels;

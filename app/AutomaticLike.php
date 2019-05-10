@@ -4,6 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
+/**
+ * 自動いいねに使用するモデル
+ * Class AutomaticLike
+ * @package App
+ */
 class AutomaticLike extends Model
 {
     protected $hidden = [

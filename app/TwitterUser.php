@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * アプリに登録したツイッターユーザー情報を扱うモデル
+ * Class TwitterUser
+ * @package App
+ */
 class TwitterUser extends Model
 {
     protected $table = 'twitter_users';

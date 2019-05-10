@@ -10,7 +10,11 @@ use App\User;
 use App\TwitterUser;
 use App\AutomaticTweet;
 
-
+/**
+ * 自動ツイート完了時に送信するメールのクラス
+ * Class CompleteTweet
+ * @package App\Mail
+ */
 class CompleteTweet extends Mailable
 {
     use Queueable, SerializesModels;

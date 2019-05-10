@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * 検索キーワードに使用するモデル
+ * Class FilterWord
+ * @package App
+ */
 class FilterWord extends Model
 {
     const AND = 1;

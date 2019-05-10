@@ -8,6 +8,11 @@ use App\Http\Requests\AddFollowTarget;
 use Illuminate\Support\Facades\Auth;
 use App\TwitterUser;
 
+/**
+ * 自動フォロー設定に関する操作を行う
+ * Class FollowTargetController
+ * @package App\Http\Controllers
+ */
 class FollowTargetController extends Controller
 {
 

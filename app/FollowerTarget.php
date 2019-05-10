@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * フォロワーターゲットに使用するモデル
+ * Class FollowerTarget
+ * @package App
+ */
 class FollowerTarget extends Model
 {
 

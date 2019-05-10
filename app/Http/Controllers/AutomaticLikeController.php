@@ -9,6 +9,12 @@ use App\Http\Controllers\TwitterAuthController;
 use Illuminate\Support\Facades\Auth;
 use App\TwitterUser;
 
+
+/**
+ * 自動いいね設定に関する操作を行う
+ * Class AutomaticLikeController
+ * @package App\Http\Controllers
+ */
 class AutomaticLikeController extends Controller
 {
 

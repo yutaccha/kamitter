@@ -8,6 +8,11 @@ use App\TwitterUser;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * 自動ツイート設定に関する操作を行う
+ * Class AutomaticTweetController
+ * @package App\Http\Controllers
+ */
 class AutomaticTweetController extends Controller
 {
 

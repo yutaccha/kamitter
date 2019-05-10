@@ -4,6 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
+/**
+ * 自動フォローのターゲットに関するモデル
+ * Class FollowTarget
+ * @package App
+ */
 class FollowTarget extends Model
 {
     const STATUS = [

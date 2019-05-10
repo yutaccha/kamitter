@@ -6,6 +6,11 @@ use App\Http\Components\TwitterApi;
 use App\TwitterUser;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * TwitterUserの情報取得を行う
+ * Class TwitterUserController
+ * @package App\Http\Controllers
+ */
 class TwitterUserController extends Controller
 {
 

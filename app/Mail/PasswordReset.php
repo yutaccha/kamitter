@@ -8,6 +8,11 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\User;
 
+/**
+ * パスワードリセット申請時に送信するメールのクラス
+ * Class PasswordReset
+ * @package App\Mail
+ */
 class PasswordReset extends Mailable
 {
     use Queueable, SerializesModels;

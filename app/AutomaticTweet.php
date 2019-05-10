@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * 自動ツイートに使用するモデル
+ * Class AutomaticTweet
+ * @package App
+ */
 class AutomaticTweet extends Model
 {
     const STATUS = [
