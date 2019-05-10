@@ -6,6 +6,7 @@ export function getCookieValue (searchKey) {
         return ''
     }
 
+
     let val = ''
 
     document.cookie.split(';').forEach(cookie => {

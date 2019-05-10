@@ -9,12 +9,11 @@
   display: inline-block;
   font-family: inherit;
   font-size: 1rem;
-  //line-height: 1;
   outline: none;
   padding: 0.6rem 0.8rem;
   text-decoration: none;
   transition: all 0.2s;
-  filter: drop-shadow(0px 3px 5px $color-default-parent);
+  //filter: drop-shadow(0px 3px 5px $color-default-parent);
   @include mq(){
     padding: 0.5rem 0.7rem;
     font-size: 0.9rem;
@@ -32,8 +31,8 @@
     }
   }
   &--inverse {
-    background: #222;
-    border-color: #222;
+    background: $color-default;
+    border-color: $color-default;
     color: $color-white;
   }
 
