@@ -1,6 +1,6 @@
 const mix = require('laravel-mix')
 
-mix.setPublicPath('.')
+mix.setPublicPath('./kamitter/public')
 
 mix.webpackConfig({
     module: {
