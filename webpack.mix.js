@@ -1,6 +1,6 @@
 const mix = require('laravel-mix')
 
-mix.setPublicPath('./kamitter/public')
+mix.setPublicPath('kamitter/public')
 
 mix.webpackConfig({
     module: {
@@ -13,8 +13,7 @@ mix.webpackConfig({
     }
 })
 
-mix.browserSync('kamitter.test')
-    .js('resources/js/app.js', 'public/js')
+mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .options({
         postCss: [
@@ -22,3 +21,13 @@ mix.browserSync('kamitter.test')
         ]
     })
     .version()
+
+// mix.browserSync('kamitter.test')
+// // //     .js('resources/js/app.js', 'public/js')
+// // //     .sass('resources/sass/app.scss', 'public/css')
+// // //     .options({
+// // //         postCss: [
+// // //             require('postcss-css-variables')()
+// // //         ]
+// // //     })
+// // //     .version()
