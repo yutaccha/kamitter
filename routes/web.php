@@ -24,7 +24,7 @@ Route::group(['prefix' => 'kamitter/public'], function () {
 
 
 // 他のルートに該当しない場合indexを返す
-    Route::get('/{any?}', function () {
+    Route::get('{any?}', function () {
         return view('index');
     })->where('any', '.+');
 
