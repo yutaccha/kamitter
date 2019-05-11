@@ -21,6 +21,10 @@ class TwitterUser extends Model
         'id'
     ];
 
+    protected $casts = [
+      'user_id' => 'integer',
+    ];
+
     /**
      * リレーションシップ -usersテーブル
      */
