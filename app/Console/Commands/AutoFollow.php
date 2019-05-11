@@ -176,6 +176,7 @@ class AutoFollow extends Command
     {
         $system_manager = SystemManager::find($system_manager_id)->with('user')->first();
         $twitter_user = TwitterUser::find($twitter_user_id)->first();
+        info('twiuser', [$twitter_user]);
         $user = $system_manager->user;
         Mail::to($user)->send(new CompleteFollow($user, $twitter_user));
     }
