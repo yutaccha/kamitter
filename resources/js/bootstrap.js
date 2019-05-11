@@ -15,7 +15,7 @@ window.axios.interceptors.request.use(config => {
     return config
 })
 
-window.axios.baseURL = process.env.MIX_BASE_URL
+// window.axios.baseURL = process.env.MIX_BASE_URL
 
 
 /**
