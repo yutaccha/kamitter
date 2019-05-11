@@ -5,7 +5,7 @@
 
 <p>
     Twitterアカウント :
-    {{ $twitter_user->screen }}<br>
+    {{--{{ $twitter_user->screen }}<br>--}}
     にてフォロワーターゲットリストの自動フォローが完了しました。
 </p>
 
