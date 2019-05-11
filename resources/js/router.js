@@ -14,6 +14,8 @@ import store from './store'
 // これによって<RouterView />コンポーネントなどを使うことができる
 Vue.use(VueRouter)
 
+Vue.config.devtools = true
+
 const routes = [
     {
         path: '/password',
