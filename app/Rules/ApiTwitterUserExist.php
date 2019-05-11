@@ -41,8 +41,9 @@ class ApiTwitterUserExist implements Rule
         }
 
         $api_result = TwitterApi::getUsersShow($twitter_user, $value);
+        info('result', [$api_result]);
         $api_error_flg = TwitterApi::handleApiError($api_result, $system_manager_id, $twitter_user_id);
-        if ($api_error_flg === true) {
+        if ($api_error_flg) {
             return false;
         }
         return true;
