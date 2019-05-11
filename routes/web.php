@@ -16,7 +16,7 @@
  */
 info('url', [url()->full()]);
 
-Route::group(['prefix' => 'kamitter/public'], function () {
+Route::group(['prefix' => 'kamitter'], function () {
 
 
 //認証ページにリダイレクトする
