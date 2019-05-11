@@ -12,6 +12,10 @@ use Illuminate\Database\Eloquent\Model;
 class FollowerTarget extends Model
 {
 
+    protected $casts = [
+       'status' => 'integer'
+    ];
+
     /**
      * リレーションシップ - twitter_usersテーブル
      */

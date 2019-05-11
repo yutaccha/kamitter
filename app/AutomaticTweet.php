@@ -16,6 +16,9 @@ class AutomaticTweet extends Model
         2 => ['label' => 'ツイート済'],
     ];
 
+    protected $casts = [
+        'status' => 'integer'
+    ];
 
     protected $appends = [
         'status_label', 'formatted_date', 'japanese_formatted_date'

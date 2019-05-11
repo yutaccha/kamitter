@@ -20,6 +20,13 @@ class SystemManager extends Model
         'created_at', 'updated_at'
     ];
 
+    protected $casts = [
+      'auto_follow_status' => 'integer',
+        'auto_unfollow_status' => 'integer',
+        'auto_like_status' => 'integer',
+        'auto_tweet_status' => 'integer'
+    ];
+
     const TYPE = [
         1 => 'auto_follow',
         2 => 'auto_unfollow',
