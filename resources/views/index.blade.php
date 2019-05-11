@@ -1,3 +1,4 @@
+<?php use Illuminate\Support\Facades\Log; ?>
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -13,7 +14,7 @@
 
 </head>
 <body>
-<p>{{ request()->fullUrl() }}</p>
+<?php Log::info(url()->full()) ?>
 <div id="app"></div>
 {{--<a href="{{ route('twitter.provide') }}">認証リンクはこちら</a>--}}
 </body>
