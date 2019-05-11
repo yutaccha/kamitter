@@ -13,6 +13,7 @@
 
 </head>
 <body>
+<p>{{ request()->fullUrl() }}</p>
 <div id="app"></div>
 {{--<a href="{{ route('twitter.provide') }}">認証リンクはこちら</a>--}}
 </body>
