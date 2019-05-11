@@ -14,7 +14,6 @@
 
 </head>
 <body>
-<?php Log::info(url()->full()) ?>
 <div id="app"></div>
 {{--<a href="{{ route('twitter.provide') }}">認証リンクはこちら</a>--}}
 </body>
