@@ -395,6 +395,7 @@ class AutoFollow extends Command
             }
 
             //ターゲットリストに追加
+            Log::debug('####フォロワーターゲットリストにユーザーを追加');
             $new_follower_target = new FollowerTarget();
             $new_follower_target->twitter_user_id = $twitter_user_id;
             $new_follower_target->twitter_id = $user->id_str;
