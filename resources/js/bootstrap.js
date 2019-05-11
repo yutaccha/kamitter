@@ -15,6 +15,8 @@ window.axios.interceptors.request.use(config => {
     return config
 })
 
+window.axios.baseURL = process.env.MIX_BASE_URL
+
 
 /**
  * エラーが帰ってきた場合は、エラーのレスポンスオブジェクトを取得する
