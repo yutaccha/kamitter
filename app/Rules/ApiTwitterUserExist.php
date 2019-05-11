@@ -35,9 +35,6 @@ class ApiTwitterUserExist implements Rule
          */
         $twitter_user_id = session()->get('twitter_id');
         $twitter_user = TwitterUser::where('id', $twitter_user_id)->with('systemManagers')->first();
-        info('twi', [$twitter_user]);
-        info('sys', [$twitter_user->systemManagers]);
-        info('id', [$twitter_user->systemManagers[0]->id]);
         $system_manager_id = $twitter_user->systemManagers[0]->id;
         if( is_null($twitter_user)){
             return false;

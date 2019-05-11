@@ -117,7 +117,7 @@ class TwitterApi
     {
         $system_manager = SystemManager::find($system_manager_id)->with('user')->first();
         $twitter_user = TwitterUser::find($twitter_user_id)->first();
-        $user = $system_manager->user[0];
+        $user = $system_manager->user;
 
         if ($mail_type === self::ERROR_CODE_SUSPENDED) {
             //凍結の場合のメール送信
