@@ -11,5 +11,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class UnfollowTarget extends Model
 {
+    protected $casts = [
+        'twitter_user_id' => 'integer',
+        'id' => 'integer'
+    ];
     //
 }

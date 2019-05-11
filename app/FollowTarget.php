@@ -26,6 +26,11 @@ class FollowTarget extends Model
         'created_at', 'updated_at'
     ];
 
+    protected $casts = [
+        'twitter_user_id' => 'integer',
+        'id' => 'integer',
+        'status' => 'integer'
+    ];
 
     /**
      * リレーションシップ - usersテーブル

@@ -401,6 +401,7 @@ class AutoFollow extends Command
             $new_follower_target->twitter_id = $user->id_str;
             $new_follower_target->cursor = $api_result->next_cursor_str;
             $new_follower_target->save();
+            Log::debug('####追加したユーザー: ', [$new_follower_target]);
         }
         Log::info('####フォロワーターゲットリスト作成完了');
     }

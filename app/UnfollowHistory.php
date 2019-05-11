@@ -12,4 +12,8 @@ use Illuminate\Database\Eloquent\Model;
 class UnfollowHistory extends Model
 {
     //
+    protected $casts = [
+        'twitter_user_id' => 'integer',
+        'id' => 'integer'
+    ];
 }

@@ -22,6 +22,7 @@ class TwitterUser extends Model
     ];
 
     protected $casts = [
+        'id' => 'ingeter',
       'user_id' => 'integer',
     ];
 

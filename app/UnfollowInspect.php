@@ -15,4 +15,9 @@ class UnfollowInspect extends Model
     protected $fillable = [
       'twitter_user_id', 'twitter_id',
     ];
+
+    protected $casts = [
+        'twitter_user_id' => 'integer',
+        'id' => 'integer'
+    ];
 }

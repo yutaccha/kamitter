@@ -12,4 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 class FollowHistory extends Model
 {
     //
+    protected $casts = [
+        'twitter_user_id' => 'integer',
+    ];
 }
