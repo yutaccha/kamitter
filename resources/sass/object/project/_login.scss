@@ -1,0 +1,14 @@
+// ==================================
+// p-login
+// ==================================
+.p-login {
+  position: relative;
+
+  &__panel {
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+  }
+}

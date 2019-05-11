@@ -1,0 +1,12 @@
+// ==================================
+// c-panel
+// ==================================
+.c-panel {
+  padding: 40px;
+  border: 1px solid $color-default-parent;
+  border-radius: 5px;
+  box-shadow: 0px 5px 3px $color-default-parent;
+  @include mq() {
+    padding: 20px;
+  }
+}

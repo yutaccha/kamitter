@@ -1,0 +1,10 @@
+// ==================================
+// p-dashboard
+// ==================================
+.p-dashboard {
+  &__panel {
+    padding: 40px;
+    border: 1px solid $color-default-parent;
+    border-radius: 5px;
+  }
+}

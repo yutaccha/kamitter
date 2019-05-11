@@ -1,0 +1,23 @@
+// ==================================
+// p-status
+// ==================================
+.p-status {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  @include mq() {
+    margin-bottom: 30px;
+  }
+
+  &__show {
+    font-size: $font-size_xl;
+    margin-right: 40px;
+    @include mq() {
+      font-size: $font-size_l;
+    }
+  }
+
+  &__button {
+    margin-right: 10px;
+  }
+}
