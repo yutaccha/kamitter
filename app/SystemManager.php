@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use  App\Http\Requests\EditSystemManager;
 
 /**
  * 各サービスのサービスステータスを扱うモデル
@@ -21,7 +20,8 @@ class SystemManager extends Model
     ];
 
     protected $casts = [
-      'auto_follow_status' => 'integer',
+        'id' => 'integer',
+        'auto_follow_status' => 'integer',
         'auto_unfollow_status' => 'integer',
         'auto_like_status' => 'integer',
         'auto_tweet_status' => 'integer'
@@ -44,7 +44,6 @@ class SystemManager extends Model
         2 => ['label' => 'サービス稼動中'],
         3 => ['label' => 'API制限中'],
     ];
-
 
 
     /**
@@ -72,8 +71,8 @@ class SystemManager extends Model
     public function getStatusLabelsAttribute()
     {
         $status_labels = [];
-        foreach (self::TYPE as $key => $service_name){
-            $status = $this->attributes[$service_name.'_status'];
+        foreach (self::TYPE as $key => $service_name) {
+            $status = $this->attributes[$service_name . '_status'];
             $label = self::STATUS[$status]['label'];
             $status_labels[$service_name] = $label;
         }
@@ -88,12 +87,13 @@ class SystemManager extends Model
      */
     public static function stopAllServices($id)
     {
+
         $system_manager = SystemManager::where('id', $id)->first();
         info('sysm', [$system_manager]);
-//        $system_manager->auto_follow_status = 1;
-//        $system_manager->auto_unfollow_status = 1;
-//        $system_manager->auto_like_status = 1;
-//        $system_manager->auto_tweet_status = 1;
+        $system_manager->auto_follow_status = 1;
+        $system_manager->auto_unfollow_status = 1;
+        $system_manager->auto_like_status = 1;
+        $system_manager->auto_tweet_status = 1;
         $system_manager->save();
     }
 }
