@@ -49,10 +49,8 @@ const routes = [
         beforeEnter(to, from, next) {
             const auth = store.getters['auth/check']
             if (auth && store.getters['auth/checkTwitterId']) {
-                console.log('tw.dash');
                 next('/dashboard')
             } else if (auth) {
-                console.log('tw.tw');
                 next()
             } else {
                 next('login')
@@ -67,10 +65,8 @@ const routes = [
             const twitterAuth = store.getters['auth/checkTwitterId']
             console.log(twitterAuth);
             if (auth && twitterAuth) {
-                console.log('router.dash');
                 next()
             } else if (auth) {
-                console.log('router.twitter');
                 next('/twitter')
             } else {
                 next('/login')
@@ -83,10 +79,8 @@ const routes = [
         beforeEnter(to, from, next) {
             const auth = store.getters['auth/check']
             if (auth && store.getters['auth/checkTwitterId']) {
-                console.log('/.dash');
                 next('/dashboard')
             } else if (auth) {
-                console.log('/.twi');
                 next('/twitter')
             } else {
                 next('/login')
