@@ -13,8 +13,6 @@
 
 </head>
 <body>
-<p>{{ \Illuminate\Http\Request::url() }}</p>
-<p>{{ \Illuminate\Http\Request::fullUrl() }}</p>
 <div id="app"></div>
 {{--<a href="{{ route('twitter.provide') }}">認証リンクはこちら</a>--}}
 </body>
