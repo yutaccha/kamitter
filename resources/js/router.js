@@ -63,7 +63,6 @@ const routes = [
         beforeEnter(to, from, next) {
             const auth = store.getters['auth/check']
             const twitterAuth = store.getters['auth/checkTwitterId']
-            console.log(twitterAuth);
             if (auth && twitterAuth) {
                 next()
             } else if (auth) {
