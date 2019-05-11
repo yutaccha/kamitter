@@ -15,7 +15,7 @@ window.axios.interceptors.request.use(config => {
     return config
 })
 
-window.axios.defaults.baseURL = process.env.MIX_BASE_URL
+window.axios.defaults.baseURL = 'https://shikapro.xsrv.jp/kamitter/public/'
 
 
 /**
