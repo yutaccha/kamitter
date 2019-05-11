@@ -50,7 +50,6 @@ class TwitterUserController extends Controller
         //他のユーザーのTwitterIdを取得した場合アクセス禁止
         info('user_id', [$user_id]);
         info('$twitter_userid', [$twitter_user->user_id]);
-        info('if', )
         if ($user_id !== $twitter_user->user_id){
             abort(403);
         }
