@@ -471,6 +471,7 @@ class AutoFollow extends Command
         //除外ワードが含まれていればfalseを返す
         $removes = $filter_word->remove;
         if ($this->isIncludeRemove($description, $removes)) {
+            Log::debug('#####除外ワードが含まれています');
             return false;
         }
 
@@ -479,8 +480,10 @@ class AutoFollow extends Command
         $type_or = 2;
         //AND検索かOR検索の条件にマッチしていればtrueを返す
         if ($filter_word->type === $type_and) {
+            Log::debug('#####AND条件を満たしません');
             return $this->isMatchedAndFilter($description, $word);
         } elseif ($filter_word->type === $type_or) {
+            Log::debug('#####OR条件を満たしません');
             return $this->isMatchedOrFilter($description, $word);
         }
 

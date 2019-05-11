@@ -23,7 +23,13 @@ class FilterWord extends Model
     ];
 
     protected $hidden = [
-      'created_at', 'updated_at'
+        'created_at', 'updated_at'
+    ];
+
+    protected $casts = [
+        'id' => 'integer',
+        'user_id' => 'integer',
+        'type' => 'integer',
     ];
 
     /**
@@ -31,7 +37,7 @@ class FilterWord extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\User' ,'user_id');
+        return $this->belongsTo('App\User', 'user_id');
     }
 
     /**
@@ -51,7 +57,7 @@ class FilterWord extends Model
     {
         $type = $this->attributes['type'];
 
-        if(!isset(self::TYPE[$type])){
+        if (!isset(self::TYPE[$type])) {
             return '';
         }
 
@@ -66,7 +72,7 @@ class FilterWord extends Model
     public function getMergedWordAttribute()
     {
         $type = $this->attributes['type'];
-        if(!isset(self::TYPE[$type])){
+        if (!isset(self::TYPE[$type])) {
             return '';
         }
         $type_string = self::TYPE[$type]['label'];
@@ -87,7 +93,7 @@ class FilterWord extends Model
     {
         $type = $this->attributes['type'];
         $word = $this->attributes['word'];
-        $str_word = ($type === self::OR) ? str_replace(" ", " OR ", $word) : $word;
+        $str_word = ($type === self:: OR) ? str_replace(" ", " OR ", $word) : $word;
         $remove = (!empty($remove)) ? $this->generateRemoveString($this->attributes['remove']) : "";
 
         //　OR @存在しないSCREEN で検索文字が含まれているユーザー名のツイートを省く
@@ -105,8 +111,8 @@ class FilterWord extends Model
     {
         $exploded_words = explode(" ", $word);
         $remove_string = '';
-        foreach ($exploded_words as $exploded_word){
-            $remove_string = $remove_string. ' -"'. $exploded_word. '"';
+        foreach ($exploded_words as $exploded_word) {
+            $remove_string = $remove_string . ' -"' . $exploded_word . '"';
         }
         return $remove_string;
     }
