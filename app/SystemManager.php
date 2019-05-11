@@ -88,11 +88,12 @@ class SystemManager extends Model
      */
     public static function stopAllServices($id)
     {
-        $system_manager = self::where('id', $id)->first();
-        $system_manager->auto_follow_status = 1;
-        $system_manager->auto_unfollow_status = 1;
-        $system_manager->auto_like_status = 1;
-        $system_manager->auto_tweet_status = 1;
+        $system_manager = SystemManager::where('id', $id)->first();
+        info('sysm', [$system_manager]);
+//        $system_manager->auto_follow_status = 1;
+//        $system_manager->auto_unfollow_status = 1;
+//        $system_manager->auto_like_status = 1;
+//        $system_manager->auto_tweet_status = 1;
         $system_manager->save();
     }
 }
