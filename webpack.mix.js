@@ -13,7 +13,7 @@ mix.webpackConfig({
     }
 })
 
-mix.setPublicPath('kamitter/public')
+mix.setPublicPath('.')
     .js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .options({
