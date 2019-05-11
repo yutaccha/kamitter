@@ -14,7 +14,6 @@
 /**
  * ツイッター認証でTwitter.comと通信する際のルート
  */
-info('url', [url()->full()]);
 //認証ページにリダイレクトする
 Route::get('auth/twitter/oauth', 'TwitterAuthController@oauth')->name('twitter.oauth');
 //コールバックの処理
