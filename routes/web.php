@@ -28,4 +28,4 @@ Route::group(['prefix' => 'kamitter/public'], function () {
         return view('index');
     })->where('any', '.+');
 
-}));
+});
