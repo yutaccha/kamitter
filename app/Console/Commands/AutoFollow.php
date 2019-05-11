@@ -176,7 +176,6 @@ class AutoFollow extends Command
     {
         $system_manager = SystemManager::find($system_manager_id)->with('user')->first();
         $twitter_user = TwitterUser::find($twitter_user_id)->first();
-        info('twiuser', [$twitter_user]);
         $user = $system_manager->user;
         Mail::to($user)->send(new CompleteFollow($user, $twitter_user));
     }
@@ -304,6 +303,7 @@ class AutoFollow extends Command
             //APIでフォロワーのリストを取得
             $api_result = $this->fetchGetFollowerListApi($twitter_user, $target_screen, $cursor);
             //エラーがあれば検索終了
+            Log::debug('api_result', [$api_result]);
             $flg_skip_to_next_user = TwitterApi::handleApiError($api_result, $system_manager_id, $twitter_user_id);
             if ($flg_skip_to_next_user === true) {
                 return;
