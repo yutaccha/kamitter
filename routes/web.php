@@ -14,6 +14,8 @@
 /**
  * ツイッター認証でTwitter.comと通信する際のルート
  */
+info('url', [url()->full()]);
+
 Route::group(['prefix' => 'kamitter/public'], function () {
 
 
