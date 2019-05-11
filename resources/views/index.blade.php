@@ -13,6 +13,8 @@
 
 </head>
 <body>
+<p>{{ url() }}</p>
+<p>{{ url()->full() }}</p>
 <div id="app"></div>
 {{--<a href="{{ route('twitter.provide') }}">認証リンクはこちら</a>--}}
 </body>
