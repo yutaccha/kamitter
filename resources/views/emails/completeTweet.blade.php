@@ -20,5 +20,5 @@
 </p>
 
 <p>
-    Twitter自動集客ツール「kam1tter」
+    Twitter自動集客ツール「{{ config('app.name') }}」
 </p>
