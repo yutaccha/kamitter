@@ -67,6 +67,7 @@
   &__ids{
     float: left;
     line-height: 25px;
+    overflow: auto;
     @include mq(){
       line-height: 20px;
     }
