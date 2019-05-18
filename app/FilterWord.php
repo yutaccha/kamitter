@@ -94,9 +94,6 @@ class FilterWord extends Model
         $type = $this->attributes['type'];
         $word = $this->attributes['word'];
         $str_word = ((int)$type === self::OR) ? str_replace(" ", " OR ", $word) : $word;
-        \Illuminate\Support\Facades\Log::debug('filwor',[$this->attributes]);
-        \Illuminate\Support\Facades\Log::debug('tof', [$type, self::OR]);
-        \Illuminate\Support\Facades\Log::debug('str_word', [$str_word]);
         $remove = (!empty($remove)) ? $this->generateRemoveString($this->attributes['remove']) : "";
 
         //　OR @存在しないSCREEN で検索文字が含まれているユーザー名のツイートを省く
