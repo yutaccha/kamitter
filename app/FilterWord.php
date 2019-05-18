@@ -29,7 +29,7 @@ class FilterWord extends Model
     protected $casts = [
         'id' => 'integer',
         'user_id' => 'integer',
-        'type' => 'integer',
+        'type' => 'integer'
     ];
 
     /**
