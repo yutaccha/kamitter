@@ -94,6 +94,7 @@ class FilterWord extends Model
         $type = $this->attributes['type'];
         $word = $this->attributes['word'];
         $str_word = ($type === self::OR) ? str_replace(" ", " OR ", $word) : $word;
+        \Illuminate\Support\Facades\Log::debug('filwor',[$this->attributes]);
         \Illuminate\Support\Facades\Log::debug('tof', [$type, self::OR]);
         \Illuminate\Support\Facades\Log::debug('str_word', [$str_word]);
         $remove = (!empty($remove)) ? $this->generateRemoveString($this->attributes['remove']) : "";
