@@ -8,9 +8,9 @@
     <title>{{ config('app.name') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet">
+    <link href="{{ mix('/kamitter/public/css/app.css') }}" rel="stylesheet">
     <!-- Scripts -->
-    <script src="{{ asset(mix('js/app.js')) }}" defer></script>
+    <script src="{{ mix('/kamitter/public/js/app.js') }}" defer></script>
 
 </head>
 <body>
