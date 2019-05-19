@@ -247,7 +247,6 @@
         },
         created() {
             this.fetchFilters();
-            console.log('a')
         },
     }
 </script>
