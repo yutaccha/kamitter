@@ -194,8 +194,11 @@
                     this.$store.commit('error/setCode', response.status)
                     return false
                 }
+
                 this.resetEditForm()
                 this.filters.splice(this.editIndex, 1, response.data)
+                console.table(response.data)
+                console.table(this.filters)
 
                 //自動ツイート、自動いいね機能ではフィルターキーワードを参照しているので、
                 //フィルターキーワードに変更があった際に変更を通知する
