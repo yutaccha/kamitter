@@ -177,6 +177,7 @@
                 this.editForm.word = filter.word
                 this.editForm.remove = filter.remove
                 this.editIndex = index
+                console.log(this.editIndex);
             },
             /**
              * APIを利用してフィルターキーワードの変更を行う
@@ -197,6 +198,7 @@
 
                 this.resetEditForm()
                 this.filters.splice(this.editIndex, 1, response.data)
+                console.log(this.editIndex);
                 console.table(response.data)
                 console.table(this.filters)
 
