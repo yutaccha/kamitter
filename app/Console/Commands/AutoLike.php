@@ -118,8 +118,8 @@ class AutoLike extends Command
         //APIに必要な変数の用意
         $count = self::API_REQUEST_RATE_PER_DAY / self::DO_API_PER_A_DAY / $auto_like_list_quantity;
         $query = $auto_like->filterWord->getMergedWordStringForQuery();
-        Log::debug('##いいねする数: ', [$count]);
-        Log::debug('##検索クエリ: ', [$query]);
+        Log::info('##いいねする数: ', [$count]);
+        Log::info('##検索クエリ: ', [$query]);
 
         $token = $auto_like->twitterUser->token;
         $token_secret = $auto_like->twitterUser->token_secret;
