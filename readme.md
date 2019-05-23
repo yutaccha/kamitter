@@ -40,7 +40,7 @@ nginx, mysql, composer, npm, webpack
 ### フロントエンド
 sass, FLOCSS, Vue.js, Vuex, Vue-router
 
-### ックエンド
+### バックエンド
 Laravel
 
 ## システム概要
