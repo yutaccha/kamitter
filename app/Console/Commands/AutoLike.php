@@ -39,7 +39,7 @@ class AutoLike extends Command
     const API_URL_LIKE = 'favorites/create';
 
     //API側の上限は900/1D
-    const API_REQUEST_RATE_PER_DAY = 700;
+    const API_REQUEST_RATE_PER_DAY = 240;
     const DO_API_PER_A_DAY = 24;
     const INTERVAL_HOURS = 1;
 
