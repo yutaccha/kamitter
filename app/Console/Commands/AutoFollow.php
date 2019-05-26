@@ -54,12 +54,12 @@ class AutoFollow extends Command
     const FOLLOW_RATE_PER_DAY = [
         "100" => 20,
         "500" => 25,
-        "1000" => 40,
-        "1500" => 55,
-        "2000" => 80,
-        "3000" => 120,
+        "1000" => 30,
+        "1500" => 35,
+        "2000" => 40,
+        "3000" => 50,
     ];
-    const FOLLOW_RATE_MAX = 150;
+    const FOLLOW_RATE_MAX = 50;
 
 
     /**
